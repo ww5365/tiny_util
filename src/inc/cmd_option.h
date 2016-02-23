@@ -17,9 +17,11 @@ namespace util {
         CmdOption();
         virtual ~CmdOption();
 
-        int init(int argc, char * const * argv, const char * optstr);
+        int init(int argc, char * const * argv, const char *optstr);
 
         bool has_option(const char *) const;
+
+        const char* operator[](const char *) const;
 
 
     private:

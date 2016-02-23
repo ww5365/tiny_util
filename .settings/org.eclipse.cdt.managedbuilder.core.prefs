@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/CPATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/CPATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/CPLUS_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/CPLUS_INCLUDE_PATH/operation=append
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/CPLUS_INCLUDE_PATH/value=D\:\\Program Files (x86)\\minGW\\mingw64\\include;D\:\\Program Files (x86)\\minGW\\mingw64\\x86_64-w64-mingw32\\include;D\:\\Program Files (x86)\\minGW\\mingw64\\x86_64-w64-mingw32\\include\\c++
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/C_INCLUDE_PATH/operation=replace
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/C_INCLUDE_PATH/value=D\:\\Program Files (x86)\\minGW\\mingw64\\include;D\:\\Program Files (x86)\\minGW\\mingw64\\x86_64-w64-mingw32\\include
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/append=true
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/appendContributed=true
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/LIBRARY_PATH/delimiter=;
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/LIBRARY_PATH/operation=replace
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/LIBRARY_PATH/value=D\:\\Program Files (x86)\\minGW\\mingw64\\lib;D\:\\Program Files (x86)\\minGW\\mingw64\\x86_64-w64-mingw32\\lib
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/append=true
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.758882077/appendContributed=true
