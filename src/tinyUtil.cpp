@@ -8,9 +8,18 @@
 
 #include <iostream>
 #include "cmd_option.h"
+#include "com_use.h"
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
+
+
+    //read_write_demo
+
+    read_write_demo();
+
+
     cout << "!!!Hello World!!!" << endl;
     cout << "args num :" << argc << endl;
     for (int i = 0; i < argc; i++) {
@@ -42,6 +51,12 @@ int main(int argc, char* argv[]) {
     }else{
         cout << "f option not exist" <<endl;
     }
+
+
+
+
+
+
 
 
     return 0;
