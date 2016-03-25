@@ -9,16 +9,17 @@
 #include <iostream>
 #include "cmd_option.h"
 #include "com_use.h"
+#include "macro_study.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
 
+    //test macro
+    macro_study();
 
     //read_write_demo
-
     read_write_demo();
-
 
     cout << "!!!Hello World!!!" << endl;
     cout << "args num :" << argc << endl;
@@ -26,10 +27,7 @@ int main(int argc, char* argv[]) {
         cout << "args:" << i << " value:" << argv[i] << endl;
     }
     cout << "finished!" << endl;
-
     char *p = argv[argc-1];
-
-
     cout << "argv:" << *p <<endl;
 
     util::CmdOption opt;

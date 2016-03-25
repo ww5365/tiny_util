@@ -16,8 +16,6 @@ void read_write_demo(){
     printf("geo str: %s\n",geo);
     printf("the res is: %f,%f,%f,%f \n",x1,y1,x2,y2);
 
-
-
 }
 
 
