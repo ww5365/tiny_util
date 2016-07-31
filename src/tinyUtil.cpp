@@ -15,6 +15,10 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
+    //cpp read write demo
+
+    cpp_r_w_demo();
+
     //test macro
     macro_study();
 
