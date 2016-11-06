@@ -40,8 +40,9 @@ std::vector<std::string> split(std::string str,std::string pattern){
         }
     }//end for
 
-    return res;
+    return res;   //返回一个局部变量？ 可以，返回是会发生拷贝；所以是否有更好效率的设计？
 }
+
 
 
 

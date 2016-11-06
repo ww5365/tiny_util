@@ -43,7 +43,7 @@ static int parse_xy(char *str, point_t* pt)
     if (ptr) {
         *ptr = '\0';
     } else {
-        WARNING("bad request bound  format in request string[%s]", str);
+        //WARNING("bad request bound  format in request string[%s]", str);
         return -1;
     }
     pt->x = atoi(buf);
