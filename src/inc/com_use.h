@@ -1,7 +1,7 @@
 /*
  * com_use.h
  *
- *  Created on: 2016Äê3ÔÂ23ÈÕ
+ *  Created on: 2016ï¿½ï¿½3ï¿½ï¿½23ï¿½ï¿½
  *      Author: wangwei69
  */
 
@@ -13,6 +13,7 @@ void read_write_demo();
 
 void cpp_r_w_demo();
 
+int string_using_test();
 
 
 
