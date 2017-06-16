@@ -11,6 +11,7 @@
 #include "cmd_option.h"
 #include "com_use.h"
 #include "macro_study.h"
+#include  "stl_use.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -32,8 +33,45 @@ typedef struct test_struct{
 
 #define IP_SIZE 2
 
+
+
+template<typename T1,typename T2>struct CustomType
+{
+    typedef T1 RAW;
+    typedef T2 ATOMIC; //必须保证是2*RAW大小,同时放在OdictSnode中必须对齐..
+    //并且这个atomic只在64位下面才有效.....
+
+};
+
 int main(int argc, char* argv[]) {
 
+
+    //test stl
+
+    stl_use();
+
+
+    //CustomType<unsigned int,unsigned long long> Test;
+
+    std::cout << "bytes:" << sizeof(CustomType<unsigned int,unsigned long long>) <<std::endl;
+    std::cout << "bytes2:" << sizeof(CustomType<unsigned int,unsigned long long>::RAW) <<std::endl;
+    std::cout << "bytes3:" << sizeof(CustomType<unsigned int,unsigned long long>::ATOMIC) <<std::endl;
+
+    //CustomType<string,int> test;
+    //test.RAW = "wangwei";
+    //std::cout <<"test.Raw:" <<test.RAW<<std::endl;
+
+    CustomType<string,int>::RAW test_str2;
+    test_str2="weiwang";
+
+    std::cout <<"test_str2.Raw:" <<test_str2<<std::endl;
+
+
+
+
+    static const int MAX_HASH_NUM = (1ULL<<31) -1;
+
+    std::cout << "the hash num:" << MAX_HASH_NUM <<std::endl;
 
     string_using_test();
 
@@ -178,3 +216,4 @@ int main(int argc, char* argv[]) {
     printf("program is over!\n");
     return 0;
 }
+
