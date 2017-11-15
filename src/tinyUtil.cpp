@@ -26,9 +26,8 @@ typedef struct test_struct{
 }test_struct;
 
 
-#define MAMA(x)  x
+#define MAMA(x...)  p_##x;
 
-#define FUN MAMA
 #define QT_LEN 2
 
 #define IP_SIZE 2
@@ -43,9 +42,89 @@ template<typename T1,typename T2>struct CustomType
 
 };
 
+
+#define TEST(fmt,arg...) do{\
+    printf(#fmt,##arg);\
+}while(0)
+
+
+int is_alpha(const char c)
+{
+    if((const unsigned char)c >= 'A' &&  (const unsigned char)c <= 'Z'
+        || (const unsigned char)c >= 'a' && (const unsigned char)c <= 'z')
+        return 1;
+    return 0;
+}
+
 int main(int argc, char* argv[]) {
 
+    printf("test percernt:%% \n");
 
+    string test2 = "wangwei:9";
+
+    int pos_tag = test2.find(":");
+
+    string sep1 = test2.substr(0,pos_tag);
+
+    string sep2 = test2.substr(pos_tag+1);
+
+    int credit;
+    sscanf(sep2.c_str(),"%d",&credit);
+
+    cout <<"pos: " << pos_tag << " sep1: " <<sep1 << " sep2: " <<credit <<endl;
+
+
+
+    char buff[10];
+
+    const char *ptr=test2.c_str();
+    int index2 = 0;
+    while((*ptr) != NULL){
+        buff[index2] = *ptr;
+        ptr++;
+        index2++;
+    }
+
+    buff[index2] = '\0'; //buff已经溢出了，再拷贝到buff2中
+
+    cout <<"test buff overflow:" << buff <<endl;
+    char buff2[10];
+
+    memset(buff2,0,10);
+
+    strncpy(buff2,buff,10);
+
+    cout <<"test overflow:" << buff2 <<endl;
+
+    //stable_sort使用
+
+    cout << "algorithm use: sort and stable_sort" <<endl;
+    algorithm_use();
+
+
+    //特定类型数据的最大，最小值
+    std::cout << "the max int:"  << std::numeric_limits<float>::max() <<std::endl;
+    std::cout << "the max uint:"  << std::numeric_limits<unsigned int>::max() <<std::endl;
+
+    TEST("%s,%d","wangwei",4);
+    int MAMA(x,y);
+
+    string test = "nih王伟";
+
+    const char *ch = test.c_str();
+    while(*ch){
+        if(is_alpha(*ch)){
+            cout << "alpha:" << *ch << std::endl;
+        }else{
+
+            cout << "not alpha:"  << *ch <<std::endl;
+        }
+        ch++;
+    }
+
+
+
+    cout<<endl;
     //test stl
 
     stl_use();
@@ -129,9 +208,6 @@ int main(int argc, char* argv[]) {
     std::cout << "test_str len: " <<qt_num <<std::endl;
 
 
-    //锟斤拷锟斤拷嵌锟阶的宏定锟斤拷
-
-    std::cout << FUN("wangwei macro") <<std::endl;  //通锟斤拷MAMA锟斤拷锟斤拷锟斤拷锟斤拷锟芥换
 
 
     //锟斤拷锟斤拷锟斤拷C锟斤拷锟皆结构锟斤拷母锟街�

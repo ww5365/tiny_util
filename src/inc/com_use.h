@@ -14,5 +14,9 @@ void cpp_r_w_demo();
 int string_using_test();
 
 
+void algorithm_use();
+
+
+
 
 #endif /* INC_COM_USE_H_ */

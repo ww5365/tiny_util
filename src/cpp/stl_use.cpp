@@ -20,7 +20,7 @@ void stl_use(){
 
 void priority_queue_use(){
     //下面是使用优先级队列的常见形式
-    std::priority_queue<Student,std::vector<Student>,CompareFun> qu_test;
+    std::priority_queue<Student,std::deque<Student>,CompareFun> qu_test;
 
     Student s1("wang",60);
     Student s2("wei",60);
@@ -42,6 +42,12 @@ void priority_queue_use(){
 
         qu_test.pop();
     }
+
+    /*
+     * 预期结果：
+     *
+     *
+     */
 }
 
 
