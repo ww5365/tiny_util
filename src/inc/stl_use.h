@@ -9,10 +9,8 @@
 #define SRC_INC_STL_USE_H_
 
 #include <string>
-
 #include <queue>
-void priority_queue_use();
-void stl_use();
+
 
 /*
  * priority_queueÊ¹ÓÃ·¶Àý
@@ -47,6 +45,11 @@ public:
 };
 
 
+class stl_use{
+public:
+    void priority_queue_use();
+    void vector_use();
+};
 
 
 

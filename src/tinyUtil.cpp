@@ -43,9 +43,9 @@ template<typename T1,typename T2>struct CustomType
 };
 
 
-#define TEST(fmt,arg...) do{\
-    printf(#fmt,##arg);\
-}while(0)
+//#define TEST(fmt,arg...) do{\
+//    printf("function:[%s]"fmt,__FUNCTION__,##arg);\
+//}while(0)
 
 
 int is_alpha(const char c)
@@ -56,24 +56,68 @@ int is_alpha(const char c)
     return 0;
 }
 
+
+//去掉字符串中的所有空格,返回字符串的长度
+int trim_all(string &str){
+    if (str.size() <= 0){
+        return 0;
+    }
+    size_t index = 0;
+    for (size_t i = 0; i < str.size(); i++){
+        if (str[i] != ' '){
+            str[index++] = str[i];
+        }
+    }//end for
+    str = str.substr(0, index);
+    return index;
+}
+
+
+
 int main(int argc, char* argv[]) {
 
+
+    //动态分配内存
+
+    int *a_ptr = new int[10](); //分配10个空间，同时赋初值为0
+
+    for(int i = 0 ;i < 10; i++){
+        cout << a_ptr[i] << " ";
+    }
+
+    cout << endl;
+
+
+
+    //字符串截取
+    string test_str_se = "东京$美食";
+
+    string::size_type pos_se =  test_str_se.find("$");
+
+    cout << "pos :"  << pos_se <<endl;
+    cout << "first: " << test_str_se.substr(0,pos_se) << "second:" << test_str_se.substr(pos_se+1) <<endl;
+
+
+
+
+    string trim_str = "王伟 nihao ! ";
+    cout << "before trim_all:" <<trim_str <<endl;
+    int len = trim_all(trim_str);
+    cout << "after trim_all:" <<trim_str << "len:"<< len <<endl;
+    //test stl
+
+    stl_use stlUse;
+    stlUse.vector_use();
+
+    //
     printf("test percernt:%% \n");
-
     string test2 = "wangwei:9";
-
     int pos_tag = test2.find(":");
-
     string sep1 = test2.substr(0,pos_tag);
-
     string sep2 = test2.substr(pos_tag+1);
-
     int credit;
     sscanf(sep2.c_str(),"%d",&credit);
-
     cout <<"pos: " << pos_tag << " sep1: " <<sep1 << " sep2: " <<credit <<endl;
-
-
 
     char buff[10];
 
@@ -106,7 +150,7 @@ int main(int argc, char* argv[]) {
     std::cout << "the max int:"  << std::numeric_limits<float>::max() <<std::endl;
     std::cout << "the max uint:"  << std::numeric_limits<unsigned int>::max() <<std::endl;
 
-    TEST("%s,%d","wangwei",4);
+    //TEST("this is a test name:%s,num:%d\n","wangwei",4);
     int MAMA(x,y);
 
     string test = "nih王伟";
@@ -125,11 +169,6 @@ int main(int argc, char* argv[]) {
 
 
     cout<<endl;
-    //test stl
-
-    stl_use();
-
-
     //CustomType<unsigned int,unsigned long long> Test;
 
     std::cout << "bytes:" << sizeof(CustomType<unsigned int,unsigned long long>) <<std::endl;
