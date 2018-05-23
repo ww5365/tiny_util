@@ -12,8 +12,7 @@ using namespace std;
 
 
 /*
- * @date:20170731
- * @desc: 排序接口的使用：sort，stable_sort
+ * @biref 排序接口的使用：sort，stable_sort
  *
  *
  */
@@ -71,7 +70,28 @@ void sort_algorithm_use(){
     }
 
     std::cout << std::endl;
+}
 
+
+/*
+ * @brief 想把字符串中的某个字符都替换成另一个字符？
+ * 头文件：
+ * #include <algorithm>
+ * 原型：
+ * template <class ForwardIterator, class T>
+ * void replace (ForwardIterator first, ForwardIterator last,
+                const T& old_value, const T& new_value);
+
+ *参考：http://www.cplusplus.com/reference/algorithm/replace/?kw=replace
+ */
+
+
+void replace_str_use() {
+
+    //替换字符串中所有的逗号-》$
+    string test_replace_str = "王伟,test,n";
+    std::replace(test_replace_str.begin(), test_replace_str.end(), ',', '$');
+    cout << "test replace str: " << test_replace_str << endl;
 
 }
 
@@ -79,4 +99,5 @@ void sort_algorithm_use(){
 void algorithm_use(){
 
     sort_algorithm_use();
+    replace_str_use();
 }

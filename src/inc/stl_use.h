@@ -10,7 +10,8 @@
 
 #include <string>
 #include <queue>
-
+#include <map>
+#include <set>
 
 /*
  * priority_queueÊ¹ÓÃ·¶Àý
@@ -49,6 +50,12 @@ class stl_use{
 public:
     void priority_queue_use();
     void vector_use();
+
+    static void map_use();
+
+    static void set_use();
+
+
 };
 
 

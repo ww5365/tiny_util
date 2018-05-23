@@ -14,8 +14,13 @@ using namespace std;
 
 bool verify_unicode(const char *str);
 int string_unicode_utf8(const char *src,string &des);
+int is_chinese_english();
+
 
 int string_using_test(){
+
+    //判断中英文
+    is_chinese_english();
 
     //测试函数：string_unicode_utf8
 
@@ -45,6 +50,49 @@ int string_using_test(){
    cout << "swap capacity:size: " <<vec1.capacity() <<" :" <<vec1.size()<<endl;
 
 }
+
+
+/*
+ * @brief 判断gbk编码的字符串，包含中文字符，还是英文字符，还是中英文混合的字符；
+ * 中文：0
+ * 英文：1
+ * 中英文：2
+ *
+ * 详细参考：《字符编码问题--gbk,utf8》
+ */
+
+int is_chinese_english() {
+    //gbk
+    string str_gbk = "王伟2a";
+    char* p_ch = const_cast<char*>(str_gbk.c_str());
+    uint16_t label = 0; //中文gbk编码使用两个字节表示
+    bool ch_flag = false;
+    bool en_flag = false;
+    while (*p_ch) {
+        if (*p_ch < 0) { //为什么小余0？gbk码位：8140~FEFE p_ch：是有符号的，能标识的范围：-128~+127
+            label = *((uint16_t*) p_ch); //标识1个汉字
+            printf("*p_ch:%d\t%c\n", *p_ch, label);
+            cout << *p_ch << " : " << label << endl;
+            p_ch += 2;
+            ch_flag = true;
+        } else {
+            label = *p_ch;
+            cout << *p_ch << " : " << label << endl;
+            p_ch++;
+            en_flag = true;
+        }
+    }//end while
+
+    //返回结果
+    if (ch_flag&&en_flag){
+        return 2;
+    }else if(ch_flag){
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
 
 /*
  *功能：将字符串（\u23ab unicode编码），转为utf8的中文。同时把源字符串的结果拷贝至目标字符串。
