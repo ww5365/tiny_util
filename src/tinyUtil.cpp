@@ -86,8 +86,39 @@ struct cmp{
     }
 };
 
+struct link_acc_traffic_t {
+    uint64_t       linkid;
+    float           orispeed;
+    float           speed;
+    int   status;
+    time_t          update_time;
+    uint8_t         rewrite_info;
+    uint8_t         confidence_status;
+};
+
+
 
 int main(int argc, char* argv[]) {
+
+    //文件读写
+
+    cpp_r_w_demo();
+
+    //类型转换
+
+    data_type_convert_test();
+
+    //
+    cout << "sizeof:" << sizeof(struct link_acc_traffic_t) << endl;
+    std::string str1 = "7.8962";
+    float f_test = 0;
+    sscanf(str1.c_str(), "%f", &f_test);
+
+    cout << "sscanf float test : " << f_test << endl;
+
+    //时间的测试
+
+    time_use_test();
 
     //直接delete null指针，会不会core？
     char *ptr = NULL;

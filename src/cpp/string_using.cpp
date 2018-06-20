@@ -8,16 +8,29 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <unordered_map>
+#include <regex>  //c11正则表达式
 #include "./com_use.h"
 
 using namespace std;
+using std::string;
 
+void string_com_use();
+void string_match_way();
 bool verify_unicode(const char *str);
 int string_unicode_utf8(const char *src,string &des);
 int is_chinese_english();
+void prd_two_dimesion();
 
 
 int string_using_test(){
+    //常见的string使用方式
+    string_com_use();
+
+    //模式匹配
+    string_match_way();
 
     //判断中英文
     is_chinese_english();
@@ -48,6 +61,140 @@ int string_using_test(){
     //消除臃肿技巧swap
    vector<string>(vec1).swap(vec1);
    cout << "swap capacity:size: " <<vec1.capacity() <<" :" <<vec1.size()<<endl;
+
+}
+
+
+/*
+ * @breif string 标准库 常见使用
+ */
+
+void string_com_use(){
+
+    //string初始化方式
+    string str1{"wangwei1"};  //直接初始化；c++11对花括号初始化全面支持。
+    string str2("wang_wei-2,nihao + tahao");  //传统的直接初始化操作
+    string str3(10,'w'); //使用10个w字符初始化
+    string str4 = str3; //使用=的拷贝构造
+    cout << str1 <<" "<<str2 <<" " << str3 << " " << str4 << endl;
+
+    //读入标准输入上数据，放入str4；遇到空白符结束
+    cout << "please input string value:" << endl;
+    //cin >> str4;
+    cout << "standard input stream str:" << str4 <<endl;
+
+    //读入文件中的一行数据，以换行符结束
+    std::ifstream ifs("/Users/wangwei69/workspace/github/tiny_util/test.txt");
+    uint32_t line_num = 1;
+    if (ifs.is_open()){
+        while (getline(ifs,str4)){ //string类库提供的getline函数,一行数据放入string；返回istream&;
+            cout << "line" << line_num << ": " <<str4;
+            line_num++;
+        }
+    }else{
+        cout << "file not open!" <<endl;
+    }
+
+    //将字符串中的字符换成大写；标点符号换成空格；数字保持不变
+    for (auto &e : str2){ //使用范围for来便利strig
+        if (isalpha(e)){ //判断是否为字母,包含在字符处理头文件：cctype 中
+            e = toupper(e);
+        }else if (ispunct(e)){ //判断是否为标点符号（+-_等等）
+            e =' ';
+        }
+    }
+
+    cout << "str2 transfer to: " << str2 << endl;
+
+     //查找并截取字符串中字符子串；取出仅是数字部分的子串；
+
+    std::string str5 = "123344F";
+
+    //rfind从后往前查找，返回指定字符的位置；值为正数，从0开始下标和find一样；
+    string::size_type pos = (str5.rfind('F') != std::string::npos) ? str5.rfind('F') : str5.rfind('T');
+    string str6 = "";
+    if (pos != std::string::npos){
+        str5 = str5.substr(0,pos);
+    }
+
+    //字符串转转换成unsigned long值
+    unsigned long linkid = 0;
+    sscanf(str6.c_str(),"%lu", &linkid);
+
+
+    cout << "replace test: " << str5  << " pos:" << pos << endl;
+
+    cout << "linkid test: " << linkid << endl;
+
+
+    unordered_map<unsigned long, std::vector<std::string> > maptest = {
+            {123,{"s1","s2","s3"}},
+            {124,{"ss1","ss2","ss3"}}
+
+    };
+
+    auto it = maptest.find(123);
+
+    it ->second[0] = "sss1";
+    it ->second[1] = "sss2";
+    it ->second[2] = "sss3";
+
+
+    cout << "map test : " << maptest.find(123) ->second[2] << endl;
+
+    //prd_two_dimesion();
+
+}
+
+
+/*
+ * @产出二维数组数据
+ */
+
+void prd_two_dimesion(){
+
+    int cnt = 9;
+
+    for (uint32_t x = 3374 ;x <= 3382; x++){
+        for(uint32_t y = 742; y<= 746;y++){
+            std::cout << "meshcode" << cnt << " : "<< x << "0" << y <<std::endl;
+            cnt++;
+        }
+    }
+
+
+
+}
+
+
+
+/*
+ * @字符串的模式匹配
+ * 1、正则表达式：匹配所有以beijing开头的字符串；
+ */
+
+void string_match_way(){
+
+    std::vector<string> test;
+    test.push_back("bei hai1");
+    test.push_back("beijing university");
+    test.push_back("beijing人民");
+    std::regex pattern("beijing.*");//.匹配任意字符；*匹配之前出现的>=0个字符
+    std::regex pattern2("[A-Za-z0-9 ]+");//字母，数字，空格
+    for (auto it = test.begin();it != test.end(); it++){
+
+        if (std::regex_match(*it, pattern)){//参数1：要匹配的字符串 参数2：通配模式
+            std::cout << "match pattern: " << *it << std::endl;
+        }
+        if (std::regex_match(*it, pattern2)){
+            std::cout << "match pattern2: " << *it << std::endl;
+        }
+        //模式匹配成功，将匹配成功的字符串全部替换成replace，并返回新串;未成功，直接返回待匹配的字符串；
+        std::string replace_str = "good person";
+        string new_str = std::regex_replace( *it, pattern, replace_str);
+        std::cout << "repalce: " << new_str << std::endl;
+    }//end for
+
 
 }
 

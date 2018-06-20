@@ -17,6 +17,10 @@ void algorithm_use();
 
 void thread_use_test();
 
+void time_use_test();
+void data_type_convert_test();
+
+
 
 
 #endif /* INC_COM_USE_H_ */

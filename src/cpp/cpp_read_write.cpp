@@ -48,7 +48,35 @@ std::vector<std::string> split(std::string str,std::string pattern){
 
 void cpp_r_w_demo(){
 
-    std::ifstream in("D:\\workspace\\github\\tinyUtil\\src\\test.txt");  //定义输入流对象时，关联test.txt文件；默认调用open函数；
+    std::ifstream in;  //定义输入流对象时，关联test.txt文件；默认调用open函数；
+
+    in.open("/Users/wangwei69/workspace/github/tiny_util/test.txt");
+    if (!in.good()){
+        std::cout << "stream's state flags are set (badbit, eofbit or failbit)." << std::endl;
+    }
+
+    uint32_t linkid;
+    std::string ebc;
+    std::string tableid;
+    std::string direction;
+    std::string pc;
+    while(true){
+        if (!in.good()){
+            //检查流的状态位：如果出现bad，eof，fail等异常，返回false；
+            std::cout << "bad or end!" << std::endl;
+            break;
+        }else{
+            std::cout << "file is good!" << std::endl;
+        }
+
+        //连续读入，以空白符(tab，空格)分割；直接进行数据类型转换。
+        in>> linkid >> ebc >> tableid >> direction >> pc;
+
+        std::cout << linkid << ":" <<sizeof(linkid)<< ":" << ebc << ":" <<tableid << std::endl;
+    }
+
+
+    return;
 
     if(!in.is_open()){
         std::cout << "file not open !" <<std::endl;
