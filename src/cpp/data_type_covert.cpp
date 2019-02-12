@@ -20,7 +20,7 @@ void add_flag_bit(uint64_t val);
 
 void data_type_convert_test(){
 
-    std::string mesh_code = "33740742";
+    std::string mesh_code = "22681097";
 
     float x = 0,y = 0;
     get_left_bottomXY(mesh_code.c_str(), x, y);

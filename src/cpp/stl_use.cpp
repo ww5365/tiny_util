@@ -34,6 +34,68 @@ typedef struct DistrictInfo
 
 }DistrictInfo;
 
+class Compare{
+public:
+    bool operator()(const int left, const int right){
+        return (left <= right) ? true : false; //true 是位置已经排好，不用交换了(升序)；
+    }
+};
+
+vector<int>::iterator bin_search(vector<int> &vec, int val){
+
+    sort(vec.begin(), vec.end(), Compare());//先排序，升序
+    vector<int>::iterator start = vec.begin();
+    vector<int>::iterator end = vec.end();
+    while(start != end){//为空的情况也考虑进来了；
+        vector<int>::iterator mid = start + (end - start)/2;//迭代器运算
+        cout << "mid val: " << *mid << endl;
+        if ( *mid == val){
+            return mid;
+        }else if(*mid > val){
+            end = mid;
+        }else{
+            start = mid + 1;
+        }
+    }
+    return vec.end();
+}
+
+void stl_use::iterator_use(){
+
+    std::vector<int> vec = {1,2,3,4,5,6,7,8};
+    std::vector<int>::iterator it = vec.begin();
+    std::vector<int>::iterator it2 = vec.end();
+    std::cout << "iterator + n :" << *(it + 3) << " distance: "<< distance(it2,it)<<std::endl; //4
+    std::vector<int>::reverse_iterator rit = vec.rbegin();
+    std::cout << "next rit: " << *(next(rit)) << endl; //7
+
+    //迭代器典型应用实例：二分查找
+
+    int val = 2;
+    vector<int>::iterator pos = bin_search(vec, val);
+
+    if (pos != vec.end()){
+
+        std::cout << "binary find: " << *pos << std::endl;
+     }else{
+         std::cout << "binary not find!" << std::endl;
+     }
+
+
+}
+
+
+void stl_use::list_use(){
+
+    //test splice
+    std::list<int> li_t{3,4,5,6,9};
+    list<int>::iterator itor = li_t.begin();
+    std::advance(itor, 2); //point to 5
+    li_t.splice(li_t.end(), li_t, itor); //cut 5 to the end of list
+    //itor is valid? yes
+    std::cout << "itor is valid?" << *itor << std::endl;
+
+}
 
 void stl_use::set_use() {
 

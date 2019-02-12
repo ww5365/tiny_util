@@ -22,6 +22,8 @@
 #include <queue>
 #include <deque>
 
+#include <algorithm>
+
 using namespace std;
 
 typedef struct test_struct{
@@ -97,15 +99,51 @@ struct link_acc_traffic_t {
 };
 
 
+class Comp{
+public:
+    bool operator()(const int left, const int right){
+
+        if (left >= right){
+            return true;//返回true，前面的大，说明已经位置正确，不用交换了。
+        }else{
+            return false;
+        }
+    }
+};
+
+int *g_int_ptr = nullptr;
+
 
 int main(int argc, char* argv[]) {
 
-    //文件读写
+    //多线程相关
+    thread_use_test();
 
+    //
+    ml_use_test();
+
+
+    //c11新特性测试
+
+    new_feature_c11_use_test();
+
+
+    //模板使用
+
+    template_use_test();
+
+    cout << "begin to test!" << endl;
+
+    //数学计算
+     math_use_test();
+
+    //com 使用
+    com_use_test();
+
+    //文件读写
     cpp_r_w_demo();
 
     //类型转换
-
     data_type_convert_test();
 
     //
@@ -124,15 +162,26 @@ int main(int argc, char* argv[]) {
     char *ptr = NULL;
     delete ptr;
 
-    //多线程相关
-    thread_use_test();
-
     //set使用测试
     stl_use::set_use();
+    stl_use::list_use();
+    stl_use::iterator_use();
 
     //字符串测试
     string_using_test();
 
+    //测试排序使用的比较函数,返回true/false的对排序结果的影响
+
+    std::vector<int> test_vec = {12,3,4,67,29};
+
+    std::sort(test_vec.begin(), test_vec.end(), Comp());
+
+    for (size_t idx = 0;idx < test_vec.size(); idx++){
+
+        std::cout << test_vec[idx] << " " ;
+    }
+
+    std::cout << std::endl;
 
 //
 //    char buff_2[256];

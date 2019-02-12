@@ -25,9 +25,9 @@ void accurate_time();
 void time_use_test(){
 
     //
-    //get_current_idx(1, 24);
-
-    get_next_time();
+    get_current_idx(4, 20);
+    //get_current_idx(4, 120);
+    //get_next_time();
     utc_to_localtime();
 
     accurate_time();

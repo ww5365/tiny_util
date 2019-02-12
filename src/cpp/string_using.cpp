@@ -5,6 +5,7 @@
  *      Author: wangwei69
  */
 
+#include <cctype>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -22,10 +23,46 @@ void string_match_way();
 bool verify_unicode(const char *str);
 int string_unicode_utf8(const char *src,string &des);
 int is_chinese_english();
-void prd_two_dimesion();
+size_t split_string(const std::string& src,
+                    const std::string& delimiter,
+                    std::vector<std::string> &fields);
 
+void split_string2();
+
+void first_charactor_upper(char *str);
+
+/*
+ * @desc 字符串是否全部是数字
+ */
+bool is_pure_digits(const char *str, unsigned int len);
 
 int string_using_test(){
+
+    //是否全部是字符串
+    string str_d = "12345678990 ";
+
+
+    if (is_pure_digits(str_d.c_str(), str_d.size()))
+        cout << "this is all digitals string :"  << str_d << endl;
+    else
+        cout << "this is not all digitals string :"  << str_d << endl;
+
+
+    //tag字符串的分割
+    split_string2();
+
+    //字符串分割
+
+    string string_src = "wang\twei\t";
+    std::vector<std::string> res;
+    res.clear();
+    size_t res_size = split_string(string_src,"\t",res);
+
+    cout << "size: " << res_size << " " << "res[0]:" << res[0] << endl;
+    if (res[res_size -1] == ""){
+        cout << "empty string!" << endl;
+    }
+
     //常见的string使用方式
     string_com_use();
 
@@ -59,10 +96,74 @@ int string_using_test(){
     cout << "clear capacity:size: " <<vec1.capacity() <<" :" <<vec1.size()<<endl;
 
     //消除臃肿技巧swap
-   vector<string>(vec1).swap(vec1);
+   vector<string>(vec1).swap(vec1);//前半部分相当于tmp变量；函数结束，也就随之析构；
    cout << "swap capacity:size: " <<vec1.capacity() <<" :" <<vec1.size()<<endl;
 
 }
+
+bool  is_pure_digits(const char *str, unsigned int len){
+    unsigned int index = 0;
+    for(const char *ptr = str; (*ptr) && index < len; ++index, ++ptr){
+        if (!isdigit(*ptr)){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+/*
+ * 解析tag字符串：Traffic facilities:10 Gas station:10 Gas station:10
+ *
+ * 把其中英文tag解析出来？
+ *
+ * 使用冒号分割；去除字符串中数字字符
+ *
+ */
+
+void split_string2(){
+
+    string test_str = "Traffic facilities:10 Gas station:10 Gas station:10";
+
+    std::vector<string> res;
+    res.clear();
+    split_string(test_str,":",res);
+
+    for (size_t idx = 0; idx < res.size();idx++){
+
+        string tmp = res[idx];
+        string tag;
+        tag.clear();
+
+        size_t pos = 0;
+        for (; pos < tmp.size(); pos++){
+            if(!std::isdigit(tmp[pos])){
+                tag.push_back(tmp[pos]);
+            }
+        }
+
+        for (pos = 0; pos < tmp.size(); pos++){
+            if(!std::isspace(tag[pos])){
+                break;
+            }
+        }
+
+        string tag_res = tag.substr(pos);
+
+        cout << "tag split: " << tag_res << "pos:"<< pos << std::endl;
+
+        if(tag.empty()){
+
+        }
+
+
+    }
+
+
+
+
+}
+
 
 
 /*
@@ -148,24 +249,78 @@ void string_com_use(){
 
 
 /*
- * @产出二维数组数据
+ * @brief 字符串分割  比如，123\twang\twei\tni   每行以tab键分割
+ * 主要涉及string的操作：？
+ *
+ * 1、字符串的查找：find
+ *    find(substr,pos):从某个位置开始查找子串substr；返回第一个出现位置的下标；否则返回npos；
+ * 2、字符串取子串：substr
+ *    substr(pos,len):从某个位置开始取子串，长度为len；返回子串；或nullptr
  */
+size_t split_string(const std::string& src,
+                    const std::string& delimiter,
+                    std::vector<std::string>& fields){
 
-void prd_two_dimesion(){
-
-    int cnt = 9;
-
-    for (uint32_t x = 3374 ;x <= 3382; x++){
-        for(uint32_t y = 742; y<= 746;y++){
-            std::cout << "meshcode" << cnt << " : "<< x << "0" << y <<std::endl;
-            cnt++;
-        }
+    fields.clear();
+    size_t previous_pos = 0;
+    size_t current_pos = 0;
+    while ((current_pos = src.find(delimiter, previous_pos)) != std::string::npos) {
+        fields.push_back(src.substr(previous_pos, current_pos - previous_pos));
+        previous_pos = current_pos + delimiter.length();
     }
 
+    // Add the last string
+    // If the last string is delimiter, add emyty string to fields too.
+    if (previous_pos <= src.length()) {
+        fields.push_back(src.substr(previous_pos));
+    }
+
+    return fields.size();
 
 
 }
 
+/*
+ * brief ： gbrank代码中提供的一版本，行分割的代码实现
+ *
+ * items:是string指针，保存的分割出来的每行数据；传入vector<string> vec; &vec[0]是可以的；
+ * 分隔符:sep1 sep2是或的关系
+ *
+ * 返回：分割出来的字符串行数
+ *
+ */
+
+int splitline(string line, string* items, int items_num, const char separator1,
+        const char separator2)
+{
+    if (items == NULL || items_num <= 0)
+    {
+        return -1;
+    }
+
+    int n = line.length();
+    int j = 0;
+    int start = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (line[i] == separator1 || line[i] == separator2)
+        {
+            if (j < items_num && start < n)
+            {
+                items[j++] = line.substr(start, i - start);
+                start = ++i;
+            }
+        }
+    }
+
+    if (j < items_num && start < n)
+    {
+        items[j++] = line.substr(start, n - start);
+    }
+
+    return j;
+}
 
 
 /*
@@ -216,7 +371,7 @@ int is_chinese_english() {
     bool ch_flag = false;
     bool en_flag = false;
     while (*p_ch) {
-        if (*p_ch < 0) { //为什么小余0？gbk码位：8140~FEFE p_ch：是有符号的，能标识的范围：-128~+127
+        if (*p_ch < 0) { //为什么小余0？gbk汉字码位：8140~FEFE p_ch：是有符号的，能标识的范围：-128~+127
             label = *((uint16_t*) p_ch); //标识1个汉字
             printf("*p_ch:%d\t%c\n", *p_ch, label);
             cout << *p_ch << " : " << label << endl;
@@ -349,4 +504,10 @@ bool verify_unicode(const char *str){
 
     return (first&second&third&fourth);
 }
+
+
+}
+
+
+
 

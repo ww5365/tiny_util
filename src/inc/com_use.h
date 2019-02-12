@@ -8,6 +8,8 @@
 #ifndef INC_COM_USE_H_
 #define INC_COM_USE_H_
 
+#include <iostream>
+
 
 void read_write_demo();
 void cpp_r_w_demo();
@@ -20,7 +22,15 @@ void thread_use_test();
 void time_use_test();
 void data_type_convert_test();
 
+void com_use_test();
 
+void math_use_test();
 
+void template_use_test();
+
+void mem_use_test();
+void new_feature_c11_use_test();
+
+void ml_use_test();
 
 #endif /* INC_COM_USE_H_ */
