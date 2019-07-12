@@ -7,6 +7,9 @@
 
 #include <vector>
 #include <algorithm>
+
+#include <map>
+
 #include <iostream>
 using namespace std;
 
@@ -95,9 +98,29 @@ void replace_str_use() {
 
 }
 
+/*
+ * 容器、迭代器种 配合算法使用
+ *
+ */
+void test_container_algorithm_use(){
+
+    //将vector中字符串，尾插的方法拷贝到map对应的某个key中
+    std::map<uint32_t, std::vector<std::string>> test_map;
+    std::vector<std::string> vec = {"wang", "wei", "ni", "hao"};
+
+    std::copy(vec.begin(), vec.end(), std::back_inserter(test_map[1]));
+
+    std::cout << "copy back_inserter: " << test_map[1].size() << std::endl;
+
+
+
+
+}
 
 void algorithm_use(){
 
     sort_algorithm_use();
     replace_str_use();
+
+    test_container_algorithm_use();
 }

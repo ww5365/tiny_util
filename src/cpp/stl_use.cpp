@@ -24,6 +24,21 @@ typedef struct DistrictInfo
     DistrictInfo(uint32_t cid_, uint32_t level_):
         cid(cid_), level(level_){}
 
+    /*
+     * 要实现自定的结构体的能插入set；
+     * 直接结构体内重载: <
+     *      定义严格弱序关系：记住一点：相等关系返回false；
+     *      内部会，f(x,y) f(y,x) 来判断弱序大小
+     *
+     * 也可以定义比较类，并重载() 运算：
+     *
+     *   struct cmp{
+     *      bool operator()(const T &l, const T &r);
+     *    }
+     *      使用的时候： set<T, cmp>
+     *
+     */
+
     bool operator<(const DistrictInfo &right)const{
         if ((this->cid==right.cid)&&(this->level==right.level)){
             return false; //让比较函数对相同元素返回false
@@ -31,6 +46,7 @@ typedef struct DistrictInfo
             return true;
         }
     }
+
 
 }DistrictInfo;
 
@@ -95,6 +111,55 @@ void stl_use::list_use(){
     //itor is valid? yes
     std::cout << "itor is valid?" << *itor << std::endl;
 
+
+    li_t.push_back(10);
+    li_t.push_back(11);
+
+    auto it_last = li_t.end();
+
+    std::map<std::string, std::list<int>::const_iterator> lmap;
+    std::string key("wang");
+    lmap.insert(std::make_pair(key, --it_last));
+
+    li_t.push_back(12);
+
+
+    if (lmap.count(key)){
+        auto it = lmap[key];
+        cout << "lmap key: " << key << " list value: " << *it << endl;
+    }
+
+    //插入其它容器中的多个元素
+
+    vector<int> other = {1000,1001,1002};
+
+    li_t.insert(li_t.begin(), other.begin(), other.end());
+
+
+
+
+    //再现有list的基础上，插入任意位置元素
+
+    list<int> li_t2 = {3,4,5,6};
+
+    auto itor2 = li_t2.begin();
+
+    std::advance(itor2, 1);
+
+    li_t2.insert(itor2, 10000);
+    li_t2.insert(itor2, 100);
+    li_t2.insert(itor2, 10);  //itor2没有变动，一直指向元素4 此时结果是：3,10000,100,10,4,5,6
+
+
+
+
+
+    for (auto e: li_t2){
+
+        cout << "list content: " << e << endl;
+    }
+
+
 }
 
 void stl_use::set_use() {
@@ -124,6 +189,36 @@ void stl_use::set_use() {
 
     cout << "test set element: " << (*it).cid << " elem count: " << elem_count<< endl;
 
+    //multiset 两个集合求交集
+
+    multiset<int> left = {1,2,2,3,4,7,8,9};
+    multiset<int> right = {2,4,5,8,9,9};
+    multiset<int> result;
+
+    set_intersection(left.begin(), left.end(),
+                     right.begin(), right.end(),
+                     inserter(result, result.begin()));
+
+    cout << "test set intersection res size: "  << result.size() << endl;
+
+
+    for(auto it = result.begin(); it != result.end(); ++it){
+
+        auto range = result.equal_range(*it);
+        auto first_elem = range.first;
+
+        while (first_elem != range.second){
+            cout << "test set intersection elem: " << *first_elem <<  endl;
+            ++first_elem;
+        }
+    }
+
+
+
+
+
+
+
 }
 
 
@@ -147,6 +242,94 @@ void stl_use::map_use() {
     for (auto e : ma) {
         cout << e.first << ":" << e.second << endl;
     }
+
+
+    //multimap
+
+    multimap<int, string> mm1;
+    mm1.insert(make_pair(1,"test1"));
+    mm1.insert(make_pair(1,"test11"));
+    mm1.insert(make_pair(2, "test2"));
+    mm1.insert(make_pair(2, "test22"));
+    mm1.insert(make_pair(2, "test222"));
+    mm1.insert(make_pair(3, "test3"));
+
+
+    auto it = mm1.find(1);
+
+    cout << "key: test1 -> " << it->second << endl;
+
+
+    for(auto it = mm1.lower_bound(2); it != mm1.upper_bound(2); ++it){
+
+        cout << "key range: test1 -> " << it->second << endl;
+    }
+
+    /*
+     * multimap的遍历
+     *
+     * 第一层循环：it->first it->second 分别是map每一条元素:key value
+     *
+     * 第二层循环：range: 某个key对应的所有元素；
+     * range.first是第一个元素的迭代器；range.second是最后一个元素的迭代器；
+     *
+     * range.first->first 第一个元素的key
+     * range.first->second 第一个元素的value
+     *
+     */
+
+    cout << "multi map tranverse ---" << endl;
+
+
+    list<string> l_in;
+    l_in.push_back("wang");
+    l_in.push_back("wei");
+    l_in.push_back("ni");
+    l_in.push_back("a");
+
+
+    auto l_it = l_in.begin();
+    int last_pos = 0;
+    int pos = 0;
+    int l_len = l_in.size();
+
+    /*
+     * key 是要插入list中位置；value是要插入的值
+     * 要实现的是：保持原有list中的位置顺序，在任意位置插入multimap中的value值；
+     *
+     * 1、基于mutimap的遍历
+     * 2、基于list的任意位置插入
+     *
+     */
+
+
+    for (auto it = mm1.begin(); it != mm1.end(); it = mm1.upper_bound(it->first)){
+
+        auto range = mm1.equal_range(it->first);
+
+        if (it->first <= (l_len + 1)) {
+            pos = (it->first - 1);
+            int diff_pos = pos - last_pos;
+            std::advance(l_it, diff_pos);
+            cout << "mm1 first: " << it->first << " second: " << it->second << endl;
+        } else {
+            l_it = l_in.end();
+        }
+
+        while (range.first != range.second) {
+            cout << "range first: " << range.first->first
+                    << " range second: " << range.first->second << endl;
+            l_in.insert(l_it, range.first->second);
+            ++range.first;
+        }
+
+        last_pos = pos;
+    }
+
+    for (auto e: l_in){
+        cout << "l_in list: "  << e << endl;
+    }
+
 }
 
 

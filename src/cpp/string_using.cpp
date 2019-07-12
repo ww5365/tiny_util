@@ -14,22 +14,18 @@
 #include <unordered_map>
 #include <regex>  //c11正则表达式
 #include "./com_use.h"
+#include "string_using.h"
 
 using namespace std;
 using std::string;
 
-void string_com_use();
-void string_match_way();
-bool verify_unicode(const char *str);
-int string_unicode_utf8(const char *src,string &des);
-int is_chinese_english();
-size_t split_string(const std::string& src,
-                    const std::string& delimiter,
-                    std::vector<std::string> &fields);
+
 
 void split_string2();
 
 void first_charactor_upper(char *str);
+
+
 
 /*
  * @desc 字符串是否全部是数字
@@ -37,6 +33,36 @@ void first_charactor_upper(char *str);
 bool is_pure_digits(const char *str, unsigned int len);
 
 int string_using_test(){
+
+    string upper_str("AbCADDD1234");
+    transform(upper_str.begin(), upper_str.end(), upper_str.begin(), ::tolower);
+    cout << "transform result: " << upper_str << endl;
+
+    const string str("dir/test.txt");
+
+    //长度不足的情况下，起始地址过长，直接substr，会抛出out of range异常
+    try{
+    string sub_str = str.substr(5,3);
+    }catch(std::exception const &e){
+        cout << "err: " << e.what() << endl;
+    }catch (...){
+        cout << "unknown err!" << endl;
+    }
+
+    //find 和 rfind的用法: 截取目录名和文件文名
+    /*
+     * rfind(string match, pos)
+     * 第2个参数代表：从某个位置开始，从后往前查找; 如果pos>=len(string)，npos 相当于整个字符串；
+     * 返回值： 第一次出现的位置,正着字符串数；pos+strlen(match)-1;
+     *
+     */
+    string::size_type sz = str.rfind('/', string::npos);
+
+
+    cout << "size type: " << sz << " dir: " << str.substr(0,sz) << " file: " << str.substr(sz+1) << endl;
+
+
+
 
     //是否全部是字符串
     string str_d = "12345678990 ";
@@ -53,12 +79,12 @@ int string_using_test(){
 
     //字符串分割
 
-    string string_src = "wang\twei\t";
+    string string_src = "wangwei\t\tnihao\t";
     std::vector<std::string> res;
     res.clear();
     size_t res_size = split_string(string_src,"\t",res);
 
-    cout << "size: " << res_size << " " << "res[0]:" << res[0] << endl;
+    cout << "string use test size: " << res_size << " " << "res[0]:" << res[0] << endl;
     if (res[res_size -1] == ""){
         cout << "empty string!" << endl;
     }
@@ -505,8 +531,6 @@ bool verify_unicode(const char *str){
     return (first&second&third&fourth);
 }
 
-
-}
 
 
 

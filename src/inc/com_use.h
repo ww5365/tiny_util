@@ -33,4 +33,8 @@ void new_feature_c11_use_test();
 
 void ml_use_test();
 
+void test_design_pattern();
+
+void cmpare_file_use_test();
+
 #endif /* INC_COM_USE_H_ */

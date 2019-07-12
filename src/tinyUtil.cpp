@@ -12,6 +12,8 @@
 #include "com_use.h"
 #include "macro_study.h"
 #include  "stl_use.h"
+//#include  "design_pattern.h"
+
 
 #include <cstdlib>
 #include <ctime>
@@ -113,14 +115,108 @@ public:
 
 int *g_int_ptr = nullptr;
 
+struct DisplayItem {
+    //多少人访问过
+    //uint32_t pv;
+    //星级评分
+    //uint8_t rating;
+
+    //char ch[3];
+    char *data;
+    char data2[0]; //这个占多少空间？验证
+
+};
+
+//const std::string BOOK_GBK_STR {0xD4, 0xA4, 0xB6, 0xA9};
+
+
+
 
 int main(int argc, char* argv[]) {
 
+    class Base{
+    private:
+        int a;
+        virtual int get_value() = 0;
+    public:
+        Base(int x): a(x){}
+        virtual ~Base(){}
+    };
+
+    class Derived: public Base{
+    private:
+        int b;
+        int get_value(){
+            return b;
+        }
+    public:
+        Derived(int x = 0, int y = 0): Base(x),b(y){}
+
+    };
+
+
+    shared_ptr<vector<string>> content;
+    cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
+    content = make_shared<vector<string>>(10,"test string");
+    //content = shared_ptr<vector<string>> (new vector<string>(10, "test"));
+    cout << "test shared_ptr use cnt2: " << content.use_count() << endl;
+
+    //测试文件处理:compare
+    //cmpare_file_use_test();
+
+
+    bool test_stoi = stoi("1.5");
+    cout << "test_stoi" << test_stoi << endl;
+
+    bool test_priority_logic = false || true && false;  //先与后或；结果是false
+
+    cout << "logic priority res: " << test_priority_logic << endl;
+
+
+    //assign: 1、不同容器相互赋值；2、清空原容器中内容
+
+    vector<string> vec_str;
+    vec_str.reserve(5);
+    vec_str.push_back("test");
+    list<string> l_str = {"wang", "wei", "nihao"};
+    vec_str.assign(l_str.begin(), l_str.end());
+    for_each(vec_str.begin(), vec_str.end(), [](const string &s){cout << s << endl;});
+
+
+
+    size_t test = 1.4;
+
+    cout << "test size_t: " << test << endl;
+
+    cout << "11<<1: " << (1<<11) << endl;
+
+
+
+    const char *str_test = "abc";
+
+    str_test = "abcd";
+
+    cout << "str_test: " << str_test << endl;
+
+
+    //gbk c++11
+
+    //cout << "gbk 内码: " << BOOK_GBK_STR.c_str() << std::endl;
+
+    //设计模式相关疑问点的验证
+
+    test_design_pattern();
+
+    //algorithm_use();
+
+    //size 大小计算
+
+    cout << "size struct: " << sizeof(DisplayItem) << endl;
     //多线程相关
     thread_use_test();
 
     //
-    ml_use_test();
+    //ml_use_test();
 
 
     //c11新特性测试
@@ -166,6 +262,7 @@ int main(int argc, char* argv[]) {
     stl_use::set_use();
     stl_use::list_use();
     stl_use::iterator_use();
+    stl_use::map_use();
 
     //字符串测试
     string_using_test();
