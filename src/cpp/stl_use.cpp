@@ -150,10 +150,6 @@ void stl_use::list_use(){
     li_t2.insert(itor2, 100);
     li_t2.insert(itor2, 10);  //itor2没有变动，一直指向元素4 此时结果是：3,10000,100,10,4,5,6
 
-
-
-
-
     for (auto e: li_t2){
 
         cout << "list content: " << e << endl;
@@ -201,7 +197,7 @@ void stl_use::set_use() {
 
     cout << "test set intersection res size: "  << result.size() << endl;
 
-
+    //遍历multiset集合： 同一元素可能有多个情况
     for(auto it = result.begin(); it != result.end(); ++it){
 
         auto range = result.equal_range(*it);
@@ -212,8 +208,26 @@ void stl_use::set_use() {
             ++first_elem;
         }
     }
+}
 
 
+void stl_use::unordered_set_use(){
+
+    //关键字是pair<int, int> 如何判断key是否是重复？无序set的key经过hash的，传递一个hash类（重载（））
+
+
+    std::unordered_set<int> test_set;
+
+    //插入和删除 集合的操作
+    test_set.insert(3);
+    test_set.insert(2);
+
+    test_set.insert(4);
+
+    test_set.erase(2);
+
+    cout << "unorder_set size: " << test_set.size() << endl;
+    cout << "unorder_set content: " << *test_set.begin()<< endl;
 
 
 
@@ -373,6 +387,7 @@ void stl_use::vector_use(){
     test2.emplace_back(5);
     test2.emplace_back(6);
     vector<int> res;
+    res.reserve(test1.size() + test2.size());
 
     //使用insert插入多个元素
     res.insert(res.end(),test1.begin(),test1.end());
@@ -398,6 +413,52 @@ void stl_use::vector_use(){
     }
 
     cout << endl;
+
+
+    std::vector<int> vec_int;
+    vec_int.push_back(1);
+    vec_int.push_back(2);
+    vec_int.push_back(3);
+    vec_int.push_back(4);
+
+    //std::remove(vec_int.begin(), vec_int.end(), 2);
+
+//    for (auto elem : vec_int){
+//        cout << "remove: " << elem << endl;
+//    }
+
+
+    /*
+     * 删除vector特定value
+     */
+
+    //iterator  remove(iter1, iter2, value) 移走元素value，并将值顺序迁移；返回最后一个元素迭代器；remove后，大小不变，最后一个元素有两个
+    // erase(iter1, iter2) 删除[iter1,iter2)之间的元素
+    vec_int.erase(std::remove(vec_int.begin(), vec_int.end(), 2), vec_int.end());
+
+    for (auto elem : vec_int){
+        cout << "elem erase: " << elem << endl;
+    }
+
+    vec_int.push_back(2);
+
+    for (auto elem : vec_int){
+        cout << "elem push: " << elem << endl;
+    }
+
+    std::vector<int> small_int = {8,9};
+
+    /*
+     *  用一个小的vector，覆盖一个大的vector的部分元素
+     */
+
+    std::copy(std::begin(small_int),std::end(small_int), std::begin(vec_int)+1);
+
+    for (auto elem : vec_int){
+        cout << "elem copy: " << elem << endl;
+    }
+
+
 
 }
 

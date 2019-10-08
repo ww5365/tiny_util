@@ -13,6 +13,7 @@
 #include <map>
 #include <set>
 #include <list>
+#include <unordered_set>
 
 /*
  * priority_queueÊ¹ÓÃ·¶Àý
@@ -52,9 +53,11 @@ public:
 
 
     void priority_queue_use();
-    void vector_use();
+    static void vector_use();
 
     static void map_use();
+
+    static void unordered_set_use();
 
     static void set_use();
 

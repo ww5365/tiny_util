@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 #include <map>
 
@@ -73,6 +74,22 @@ void sort_algorithm_use(){
     }
 
     std::cout << std::endl;
+
+
+    //sort中使用默认的比较函数，从大到校降序排列
+
+    vector<int> test2 = {1,2,4,5,9};
+
+    std::sort(test2.begin(), test2.end(), std::greater<int>());
+
+    for (auto e : test2){
+        cout << "test2: " << e << " ";
+    }
+
+    cout << endl;
+
+
+
 }
 
 
@@ -111,6 +128,15 @@ void test_container_algorithm_use(){
     std::copy(vec.begin(), vec.end(), std::back_inserter(test_map[1]));
 
     std::cout << "copy back_inserter: " << test_map[1].size() << std::endl;
+
+
+    //求和
+
+    vector<int> test_vec_int = {1, 5, 3, 6};
+
+    int sum = accumulate(test_vec_int.begin(), test_vec_int.end(), 2);
+
+    cout << "accumulate test: " << sum << endl;
 
 
 

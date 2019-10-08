@@ -134,6 +134,25 @@ struct DisplayItem {
 
 int main(int argc, char* argv[]) {
 
+    double feature[4];
+    fill_n(feature, 4, 19);//快速赋初始值
+    feature[0] = 20;
+    std::swap(feature[0], feature[1]); //可以直接交换两个数组元素的值
+
+    for (auto elem: feature){
+        cout << "fill_n: " << elem << endl;
+    }
+
+
+    //unsigned short
+
+    string cid_str = "80500";
+
+    unsigned short  test_cid = (unsigned short)atoi(cid_str.c_str());
+
+    cout << "test test cid: " << test_cid << endl;
+
+
     class Base{
     private:
         int a;
@@ -155,11 +174,31 @@ int main(int argc, char* argv[]) {
     };
 
 
+    stl_use::vector_use();
+
+    //测试中文的长度
+    std::string chinese_str = "王伟";
+    int query_len = 0;
+    for (size_t ix = 0; ix < chinese_str.size(); ++ix) {
+        if (chinese_str[ix] == ' ') {
+            continue;
+        }
+        query_len++;
+    }
+
+    cout << "chinese str size: " << query_len << endl;
+
     shared_ptr<vector<string>> content;
     cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
     content = make_shared<vector<string>>(10,"test string");
+    //content = make_shared<vector<string>>();
     //content = shared_ptr<vector<string>> (new vector<string>(10, "test"));
-    cout << "test shared_ptr use cnt2: " << content.use_count() << endl;
+    cout << "test shared_ptr use cnt2: " << content.use_count()  << " size: " <<content->size()<< endl;
+
+    for (auto it = content->begin(); it != content->end(); ++it){
+
+        cout << "content: " << *it << endl;
+    }
 
     //测试文件处理:compare
     //cmpare_file_use_test();
@@ -207,7 +246,7 @@ int main(int argc, char* argv[]) {
 
     test_design_pattern();
 
-    //algorithm_use();
+    algorithm_use();
 
     //size 大小计算
 
@@ -263,6 +302,7 @@ int main(int argc, char* argv[]) {
     stl_use::list_use();
     stl_use::iterator_use();
     stl_use::map_use();
+    stl_use::unordered_set_use();
 
     //字符串测试
     string_using_test();
