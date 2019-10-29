@@ -8,11 +8,13 @@
  */
 
 #include "com_use.h"
+#include "time_cal.h"
 #include <ctime>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 #include <sys/time.h>
+#include <unistd.h>
 
 using std::cout;
 
@@ -31,6 +33,12 @@ void time_use_test(){
     utc_to_localtime();
 
     accurate_time();
+
+    Timer timer;
+
+    sleep(1);
+
+    cout << "the program run time: " << timer.elapse() << " us "<<std::endl;
 
 }
 

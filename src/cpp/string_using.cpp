@@ -53,13 +53,20 @@ int string_using_test(){
     /*
      * rfind(string match, pos)
      * 第2个参数代表：从某个位置开始，从后往前查找; 如果pos>=len(string)，npos 相当于整个字符串；
-     * 返回值： 第一次出现的位置,正着字符串数；pos+strlen(match)-1;
+     * 返回值：
+     * 第一次出现的下标位置,正着字符串数； 如果没找到？
+     * pos+strlen(match)-1;
      *
      */
-    string::size_type sz = str.rfind('/', string::npos);
+    string sub_str = "/t";
+    string::size_type sz = str.rfind(sub_str, string::npos);
 
+    if (sz != string::npos){
+        cout << "size type: " << sz << " dir: " << str.substr(0,sz) << " file: " << str.substr(sz + sub_str.size()) << endl;
+    }else{
+        cout << "not find size type: " << sz << endl;
+    }
 
-    cout << "size type: " << sz << " dir: " << str.substr(0,sz) << " file: " << str.substr(sz+1) << endl;
 
 
 
