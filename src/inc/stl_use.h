@@ -14,6 +14,7 @@
 #include <set>
 #include <list>
 #include <unordered_set>
+#include <unordered_map>
 
 /*
  * priority_queueÊ¹ÓÃ·¶Àı

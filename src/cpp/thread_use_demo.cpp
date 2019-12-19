@@ -81,7 +81,6 @@ public:
 };
 
 
-
 static void* stub3(void* args){
 
     CallBackHandle* handle = reinterpret_cast<CallBackHandle*>(args);
@@ -91,6 +90,22 @@ static void* stub3(void* args){
     return (void*)nullptr;
 
 }
+
+
+/*
+ * 线程池的简单设计和实现：？
+ *
+ * 参考：sudata 建库中SimpleThreadPool设计和实现。。
+ *
+ *
+ *
+ */
+
+
+
+
+
+
 
 
 

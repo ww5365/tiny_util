@@ -22,13 +22,28 @@
  */
 
 
+// ## 宏可变变量(原值)形成参数列表
 
-//#define LOG(fmt, arg...) do \
-//{\
-//    printf("[%s] [%d] : "fmt, __FILE__, __LINE__, ##arg); \
-//} while(0);
+#define LOG(fmt, name, arg...) do \
+{\
+    printf("[%s] [%d] :" fmt, __FILE__, __LINE__, ##arg); \
+} while(0);
 
 
+//## 宏变量(原值)连接在一起
+#define FACTORY(seg1, seg2) do \
+{\
+   int seg1##seg2 = 10; \
+}while(0);
+
+
+/*
+ * 宏定义：实现常用的位运算
+ */
+#define  BIT_MSK(bit)     (1 << (bit))
+#define  BIT_SET(x, bit)  ((x) |= BIT_MSK(bit))
+#define  BIT_CLR(x, bit)  ((x) &= ~BIT_MSK(bit))
+#define  BIT_TST(x, bit)  ((x) >> (bit) & 1)   //判断某个bit 位是否为1
 
 
 void macro_study();

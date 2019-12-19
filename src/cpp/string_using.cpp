@@ -34,6 +34,62 @@ bool is_pure_digits(const char *str, unsigned int len);
 
 int string_using_test(){
 
+    //复杂门址数据格式解析
+    string address = "[北京市(110000)|CITY|1|][东城区(110101)|AREA|1|][故宫东门外()|ROAD|0|]景山前街4号故宫博物院[宁寿宫(10275688963131648896)|POI_PARENT|1|]内";
+
+    parse_address_norm(address);
+
+    cout << "normal address: " << address << endl;
+
+    //判断第一个数字字符出现的位置
+
+    //string str_dig = "王伟12";
+    string str_dig(address);
+    int pos_digital = get_first_digit_pos(str_dig.c_str());
+    cout << "first digital pos: " << pos_digital << endl;
+
+
+
+    //判断一行数据是否为空行
+    string line = " ";
+    size_t pos1 = line.find_first_not_of(" \t\r\n");  //寻找第1个不是" \t\r\n"子串中任一字符的下标位置；如果空行，一直到行尾；
+    if (pos1 == string::npos){
+        //一直到最后都是" \t\r\n"，说明是空行
+        cout << "line is empty string "  << line  << endl;
+    }
+
+    /*
+     * 测试中文处理：unsinged short  两个字节标识一个中文？
+     *
+     * 与源码文件的编码有关：
+     * 源码：gbk     标识两个字节的 gbk 码值
+     * 源码 utf8    会有问题，只能打印出两个字节的码值
+     *
+     */
+
+    const char *ch_num[12] = {"零","一","二","三","四","五","六","七","八","九","十","百"};
+
+    unsigned short value = 0;
+    cout << "chinese charactors encoding value: " << endl;
+    for (int i = 0; i < 12; ++i){
+        value = *(unsigned short*)ch_num[i];
+        cout << hex << value << " ";
+    }
+
+    cout << endl;
+
+    //测试中文的长度
+    std::string chinese_str = "王伟";
+    int query_len = 0;
+    for (size_t ix = 0; ix < chinese_str.size(); ++ix) {
+        if (chinese_str[ix] == ' ') {
+            continue;
+        }
+        query_len++;
+    }
+
+    cout << "chinese str size: " << query_len << endl;
+
     string upper_str("AbCADDD1234");
     transform(upper_str.begin(), upper_str.end(), upper_str.begin(), ::tolower);
     cout << "transform result: " << upper_str << endl;
@@ -67,7 +123,16 @@ int string_using_test(){
         cout << "not find size type: " << sz << endl;
     }
 
+    string brand_name{"肯德基(test)"};
+    string query{"肯德"};
 
+    int pos = 0;
+    if ((pos = brand_name.find_last_of('(')) != string::npos){
+        brand_name.assign(brand_name, 0, pos);
+    }
+
+
+    cout << "brand name: " << brand_name << endl;
 
 
 
@@ -132,7 +197,184 @@ int string_using_test(){
    vector<string>(vec1).swap(vec1);//前半部分相当于tmp变量；函数结束，也就随之析构；
    cout << "swap capacity:size: " <<vec1.capacity() <<" :" <<vec1.size()<<endl;
 
+   return 1;
 }
+
+
+
+// 是否是双字节字符, 只针对GBK/GB18030编码进行判断
+bool is_gb18030_double_bytes(const char* src, size_t len) {
+    if (len < 2) {
+        return false;
+    }
+    unsigned char ch_1 = src[0];
+    unsigned char ch_2 = src[1];
+    if (ch_1 >= 0x81 && ch_1 <= 0xFE
+            && ((ch_2 >= 0x40 && ch_2 <= 0x7E) ||
+                (ch_2 >= 0x80 && ch_2 <= 0xFE))) {
+        return true;
+    }
+    return false;
+}
+
+// 是否是四字节字符, 只针对GB18030编码进行判断
+bool is_gb18030_four_bytes(const char* src, size_t len) {
+    if (len < 4) {
+        return false;
+    }
+
+    unsigned char ch_1 = src[0];
+    unsigned char ch_2 = src[1];
+    unsigned char ch_3 = src[2];
+    unsigned char ch_4 = src[3];
+    if (ch_1 >= 0x81 && ch_1 <= 0xFE
+            && ch_2 >= 0x30 && ch_2 <= 0x39
+            && ch_3 >= 0x81 && ch_3 <= 0xFE
+            && ch_4 >= 0x30 && ch_4 <= 0x39) {
+        return true;
+    }
+
+    return false;
+}
+
+
+/*
+ * 复杂门址字符串的解析
+ */
+
+void parse_address_norm(std::string &address_norm) {
+    /* 大概有以下几种格式
+    "[北京市(110000)|CITY|1|][东城区(110101)|AREA|1|][故宫东门外()|ROAD|0|]景山前街4号故宫博物院[宁寿宫(10275688963131648896)|POI_PARENT|1|]内";
+    "[新疆维吾尔自治区(650000)|PROV|1|][石河子市(659001)|CITY|1|]银燕路"
+    "[广东省(440000)|PROV|0|][东莞市(441900)|CITY|0|][新竹路()|ROAD|0|]康河路东200米"
+    "[北京市(110000)|CITY|1|][东城区(110101)|AREA|1|]天坛东路甲1号[天坛公园(11168662261122746086)|POI_PARENT|1|]附近"
+    "[云南省(530000)|PROV|0|][曲靖市(530300)|CITY|1|][麒麟区(530302)|AREA|1|][麒麟南路()|ROAD|1|][中天购物中心(8022519126727589108)|POI_PARENT|1|1层$]"
+    "[广东省(440000)|PROV|0|][中山市(442000)|CITY|0|][中山四路()|ROAD|1|63号$][华凯商务大厦(18010431063507075071)|POI_PARENT|1|3层307$]"
+    "[广东省(440000)|PROV|0|][东莞市(441900)|CITY|1|]厚街镇汀山村[村前路()|ROAD|1|77号$](博览大道旁)"
+    */
+    int start = 0;
+    int end = 0;
+
+    std::vector<std::string> items;
+    bool is_in_item = false; //是否在[]内的标记位
+    int len = address_norm.length();
+    const char* ptr = address_norm.c_str();
+    int offset = 0;
+    for (int i = 0; i < len; i += offset) {
+        if (is_gb18030_double_bytes(ptr + i, len - i)) {
+            offset = 2;
+        } else if (is_gb18030_four_bytes(ptr + i, len - i)) {
+            offset = 4;
+        } else {
+            offset = 1;
+        }
+        if (address_norm[i] == '[') {
+            if (is_in_item) {
+                end = i;
+                std::string item = address_norm.substr(start, end - start);
+                items.push_back(item);
+                //start = i + 1  ;
+                //is_in_item = false;
+            }
+            start = i;
+            is_in_item = true;
+            continue;
+        }
+        if (address_norm[i] == ']') {
+            end = i;
+            std::string item = address_norm.substr(start + 1, end - start - 1);
+            items.push_back(item);
+            start = end;
+            is_in_item = false;
+            continue;
+        }
+        if (address_norm[i] != '[' && address_norm[i] != ']' && !is_in_item) {
+            start = i;
+            is_in_item = true;
+            //continue;
+        }
+        if (i == len - offset) {    // 以中文结束,i不会走到len - 1的位置
+            end = i + offset;       // end == len
+            std::string item = address_norm.substr(start, end - start);
+            items.push_back(item);
+        }
+    }
+    std::string address = "";
+    for (int i = 0; i < items.size(); ++i) {
+        std::string item = items[i];
+        int prov_index = item.find("PROV");
+        int city_index = item.find("CITY");
+        int area_index = item.find("AREA");
+        int road_index = item.find("ROAD");
+        int parent_index = item.find("POI_PARENT");
+        if (prov_index != std::string::npos || city_index != std::string::npos ||
+                area_index != std::string::npos) {
+            continue;
+        }
+
+        std::vector<std::string> infos;
+
+        //boost::split(infos, item, boost::is_any_of("|"));  //按照字符"|"来切分字符串，结果保存在 infos 中
+
+
+        split_string(item, "|", infos);
+
+        if (infos.size() == 1) {
+            address = address + item;
+        }
+        if (infos.size() != 4) {
+            continue;
+        }
+        //此处只剩下 ROAD 和 POI_PARENT，以及游离的没切出来的
+        //[信息路()|ROAD|1|甲9号$]  （道路中增加了门牌号）
+        //[中天购物中心(8022519126727589108)|POI_PARENT|1|1层$]  （增加了父点POI分段）
+        if (road_index != std::string::npos ||
+                parent_index != std::string::npos) {
+            int left_parenthesis = infos[0].find("(");
+            int dollar_symbol = infos[3].find("$");
+            int flag = atoi(infos[2].c_str()); //标志位，标记该片段在地址中是否存在，0不存在，1存在
+            if (flag == 0) {
+                continue;
+            }
+            if (left_parenthesis != std::string::npos) {
+                address = address + infos[0].substr(0, left_parenthesis);
+            }
+            if (dollar_symbol != std::string::npos) {
+                address = address + infos[3].substr(0, dollar_symbol);
+            }
+            continue;
+        }
+    }
+    address_norm = address;
+}
+
+
+/*
+ * 识别第1个是数字的字符的位置
+ */
+bool is_digit(const char ch){
+
+    if ((const unsigned char)ch >= '0' && (const unsigned char)ch <= '9'){
+        return true;
+    }
+    return false;
+}
+
+int get_first_digit_pos(const char *str){
+    const char *p = str;
+    int pos = 0;
+    while (*p){
+        if (is_digit(*p)){
+            return pos;
+        }
+        cout << "digital str ch: " << *p << endl;
+        p++;
+        pos++;
+
+    }
+    return -1;
+}
+
 
 bool  is_pure_digits(const char *str, unsigned int len){
     unsigned int index = 0;
@@ -289,6 +531,7 @@ void string_com_use(){
  *    find(substr,pos):从某个位置开始查找子串substr；返回第一个出现位置的下标；否则返回npos；
  * 2、字符串取子串：substr
  *    substr(pos,len):从某个位置开始取子串，长度为len；返回子串；或nullptr
+ *
  */
 size_t split_string(const std::string& src,
                     const std::string& delimiter,
@@ -355,36 +598,6 @@ int splitline(string line, string* items, int items_num, const char separator1,
     return j;
 }
 
-
-/*
- * @字符串的模式匹配
- * 1、正则表达式：匹配所有以beijing开头的字符串；
- */
-
-void string_match_way(){
-
-    std::vector<string> test;
-    test.push_back("bei hai1");
-    test.push_back("beijing university");
-    test.push_back("beijing人民");
-    std::regex pattern("beijing.*");//.匹配任意字符；*匹配之前出现的>=0个字符
-    std::regex pattern2("[A-Za-z0-9 ]+");//字母，数字，空格
-    for (auto it = test.begin();it != test.end(); it++){
-
-        if (std::regex_match(*it, pattern)){//参数1：要匹配的字符串 参数2：通配模式
-            std::cout << "match pattern: " << *it << std::endl;
-        }
-        if (std::regex_match(*it, pattern2)){
-            std::cout << "match pattern2: " << *it << std::endl;
-        }
-        //模式匹配成功，将匹配成功的字符串全部替换成replace，并返回新串;未成功，直接返回待匹配的字符串；
-        std::string replace_str = "good person";
-        string new_str = std::regex_replace( *it, pattern, replace_str);
-        std::cout << "repalce: " << new_str << std::endl;
-    }//end for
-
-
-}
 
 
 /*

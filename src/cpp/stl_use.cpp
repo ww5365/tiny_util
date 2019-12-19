@@ -230,6 +230,20 @@ void stl_use::unordered_set_use(){
     cout << "unorder_set content: " << *test_set.begin()<< endl;
 
 
+    //迭代器是否支持加法运算
+
+    test_set.insert(1);
+    test_set.insert(5); //现在 set 中：3，4，1，5
+    auto it = test_set.begin();
+    it++;  //指向 value 1
+
+    cout << "unordered_set it point to: " << *it << endl;
+
+    for (auto it = test_set.begin(); it != test_set.end(); ++it){
+
+        cout << "unorder_set all content: " << *it << endl;
+    }
+
 
 
 
@@ -238,6 +252,8 @@ void stl_use::unordered_set_use(){
 
 
 void stl_use::map_use() {
+
+
 
     //pair make_pair map
     pair<int, string> pa(1, "wang"); //直接初始化
@@ -257,6 +273,25 @@ void stl_use::map_use() {
         cout << e.first << ":" << e.second << endl;
     }
 
+    //unoreder_map
+
+    std::unordered_map<uint32_t, int> brand_cnt;
+
+    vector<uint32_t> vec{123,123,124};
+
+    for (auto e : vec){
+        auto it = brand_cnt.find(e);
+        if (it == brand_cnt.end()){
+            brand_cnt.insert(std::make_pair(e, 1));
+        }else{
+            it->second ++;
+        }
+    }
+
+    for (auto itor = brand_cnt.begin(); itor != brand_cnt.end(); ++itor){
+
+        cout << "unordered_map count: " << itor->first << " : " << itor->second << endl;
+    }
 
     //multimap
 
@@ -446,18 +481,40 @@ void stl_use::vector_use(){
         cout << "elem push: " << elem << endl;
     }
 
-    std::vector<int> small_int = {8,9};
+    std::vector<int> small_int = {8,9, 10};
 
     /*
      *  用一个小的vector，覆盖一个大的vector的部分元素
+     *  {8,9} 覆盖 vec_int={1,2,3,4,}
      */
 
-    std::copy(std::begin(small_int),std::end(small_int), std::begin(vec_int)+1);
+    std::vector<int> vec1 = {1,2,3,4};
+    std::copy(std::begin(small_int),std::end(small_int), std::begin(vec1)+2);
 
-    for (auto elem : vec_int){
-        cout << "elem copy: " << elem << endl;
+    for (auto elem : vec1){
+        cout << "elem copy: " << elem <<  " " ;
     }
 
+    cout << endl;
+
+
+
+
+
+    auto it = std::find(small_int.begin(), small_int.end(), 8);
+
+    cout << "vector find: " << *it << endl;
+
+
+    vector<string> tags{"atm", "银行", "金融"};
+    string tag("atm");
+    auto it2 = std::find(tags.begin(), tags.end(), tag);
+
+    if (it2 != tags.end()){
+        cout << "use std::find vector string: " << *it2 << endl;
+    } else {
+        cout << "use std::find vector string not find" << endl;
+    }
 
 
 }

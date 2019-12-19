@@ -8,10 +8,10 @@
 
 #include <iostream>
 #include <sstream>
-#include "cmd_option.h"
-#include "com_use.h"
-#include "macro_study.h"
-#include  "stl_use.h"
+#include "./inc/cmd_option.h"
+#include "./inc/com_use.h"
+#include "./inc/macro_study.h"
+#include  "./inc/stl_use.h"
 //#include  "design_pattern.h"
 
 
@@ -40,7 +40,7 @@ typedef struct test_struct{
 
 #define IP_SIZE 2
 
-//½ûÖ¹¿½±´µÄ¹¹Ôìº¯Êı£»·ÅÔÚprivateÖĞ
+//ç¦æ­¢æ‹·è´çš„æ„é€ å‡½æ•°ï¼›æ”¾åœ¨privateä¸­
 #define DISABALE(C)\
     C(const C&);\
     C& operator=(const C&);
@@ -86,7 +86,7 @@ int trim_all(string &str){
 
 struct cmp{
     bool operator() (const int left, const int right){
-        return left < right; //ºó½øÀ´µÄ£¨right£©Ô½´ó£¬·µ»Øtrue£¬ÓÅÏÈ¼¶Ô½¸ß£»
+        return left < right; //åè¿›æ¥çš„ï¼ˆrightï¼‰è¶Šå¤§ï¼Œè¿”å›trueï¼Œä¼˜å…ˆçº§è¶Šé«˜ï¼›
     }
 };
 
@@ -106,7 +106,7 @@ public:
     bool operator()(const int left, const int right){
 
         if (left >= right){
-            return true;//·µ»Øtrue£¬Ç°ÃæµÄ´ó£¬ËµÃ÷ÒÑ¾­Î»ÖÃÕıÈ·£¬²»ÓÃ½»»»ÁË¡£
+            return true;//è¿”å›trueï¼Œå‰é¢çš„å¤§ï¼Œè¯´æ˜å·²ç»ä½ç½®æ­£ç¡®ï¼Œä¸ç”¨äº¤æ¢äº†ã€‚
         }else{
             return false;
         }
@@ -116,28 +116,25 @@ public:
 int *g_int_ptr = nullptr;
 
 struct DisplayItem {
-    //¶àÉÙÈË·ÃÎÊ¹ı
+    //å¤šå°‘äººè®¿é—®è¿‡
     //uint32_t pv;
-    //ĞÇ¼¶ÆÀ·Ö
+    //æ˜Ÿçº§è¯„åˆ†
     //uint8_t rating;
 
     //char ch[3];
     char *data;
-    char data2[0]; //Õâ¸öÕ¼¶àÉÙ¿Õ¼ä£¿ÑéÖ¤
+    char data2[0]; //è¿™ä¸ªå å¤šå°‘ç©ºé—´ï¼ŸéªŒè¯
 
 };
 
 //const std::string BOOK_GBK_STR {0xD4, 0xA4, 0xB6, 0xA9};
 
-
-
-
 int main(int argc, char* argv[]) {
 
     double feature[4];
-    fill_n(feature, 4, 19);//¿ìËÙ¸³³õÊ¼Öµ
+    fill_n(feature, 4, 19);//å¿«é€Ÿèµ‹åˆå§‹å€¼
     feature[0] = 20;
-    std::swap(feature[0], feature[1]); //¿ÉÒÔÖ±½Ó½»»»Á½¸öÊı×éÔªËØµÄÖµ
+    std::swap(feature[0], feature[1]); //å¯ä»¥ç›´æ¥äº¤æ¢ä¸¤ä¸ªæ•°ç»„å…ƒç´ çš„å€¼
 
     for (auto elem: feature){
         cout << "fill_n: " << elem << endl;
@@ -176,21 +173,11 @@ int main(int argc, char* argv[]) {
 
     stl_use::vector_use();
 
-    //²âÊÔÖĞÎÄµÄ³¤¶È
-    std::string chinese_str = "ÍõÎ°";
-    int query_len = 0;
-    for (size_t ix = 0; ix < chinese_str.size(); ++ix) {
-        if (chinese_str[ix] == ' ') {
-            continue;
-        }
-        query_len++;
-    }
 
-    cout << "chinese str size: " << query_len << endl;
 
-    shared_ptr<vector<string>> content;
+    shared_ptr<vector<string> > content;
     cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
-    content = make_shared<vector<string>>(10,"test string");
+    content = std::make_shared<vector<string> >(10,"test string");
     //content = make_shared<vector<string>>();
     //content = shared_ptr<vector<string>> (new vector<string>(10, "test"));
     cout << "test shared_ptr use cnt2: " << content.use_count()  << " size: " <<content->size()<< endl;
@@ -200,19 +187,17 @@ int main(int argc, char* argv[]) {
         cout << "content: " << *it << endl;
     }
 
-    //²âÊÔÎÄ¼ş´¦Àí:compare
+    //æµ‹è¯•æ–‡ä»¶å¤„ç†:compare
     //cmpare_file_use_test();
 
 
     bool test_stoi = stoi("1.5");
     cout << "test_stoi" << test_stoi << endl;
 
-    bool test_priority_logic = false || true && false;  //ÏÈÓëºó»ò£»½á¹ûÊÇfalse
+    bool test_priority_logic = false || true && false;  //å…ˆä¸åæˆ–ï¼›ç»“æœæ˜¯false
 
     cout << "logic priority res: " << test_priority_logic << endl;
-
-
-    //assign: 1¡¢²»Í¬ÈİÆ÷Ïà»¥¸³Öµ£»2¡¢Çå¿ÕÔ­ÈİÆ÷ÖĞÄÚÈİ
+    //assign: 1ã€ä¸åŒå®¹å™¨ç›¸äº’èµ‹å€¼ï¼›2ã€æ¸…ç©ºåŸå®¹å™¨ä¸­å†…å®¹
 
     vector<string> vec_str;
     vec_str.reserve(5);
@@ -221,15 +206,11 @@ int main(int argc, char* argv[]) {
     vec_str.assign(l_str.begin(), l_str.end());
     for_each(vec_str.begin(), vec_str.end(), [](const string &s){cout << s << endl;});
 
-
-
     size_t test = 1.4;
 
     cout << "test size_t: " << test << endl;
 
     cout << "11<<1: " << (1<<11) << endl;
-
-
 
     const char *str_test = "abc";
 
@@ -240,45 +221,45 @@ int main(int argc, char* argv[]) {
 
     //gbk c++11
 
-    //cout << "gbk ÄÚÂë: " << BOOK_GBK_STR.c_str() << std::endl;
+    //cout << "gbk å†…ç : " << BOOK_GBK_STR.c_str() << std::endl;
 
-    //Éè¼ÆÄ£Ê½Ïà¹ØÒÉÎÊµãµÄÑéÖ¤
+    //è®¾è®¡æ¨¡å¼ç›¸å…³ç–‘é—®ç‚¹çš„éªŒè¯
 
     test_design_pattern();
 
     algorithm_use();
 
-    //size ´óĞ¡¼ÆËã
+    //size å¤§å°è®¡ç®—
 
     cout << "size struct: " << sizeof(DisplayItem) << endl;
-    //¶àÏß³ÌÏà¹Ø
+    //å¤šçº¿ç¨‹ç›¸å…³
     thread_use_test();
 
     //
     //ml_use_test();
 
 
-    //c11ĞÂÌØĞÔ²âÊÔ
+    //c11æ–°ç‰¹æ€§æµ‹è¯•
 
     new_feature_c11_use_test();
 
 
-    //Ä£°åÊ¹ÓÃ
+    //æ¨¡æ¿ä½¿ç”¨
 
     template_use_test();
 
     cout << "begin to test!" << endl;
-
-    //ÊıÑ§¼ÆËã
+    
+    //æ•°å­¦è®¡ç®—
      math_use_test();
 
-    //com Ê¹ÓÃ
+    //com ä½¿ç”¨
     com_use_test();
 
-    //ÎÄ¼ş¶ÁĞ´
+    //æ–‡ä»¶è¯»å†™
     cpp_r_w_demo();
 
-    //ÀàĞÍ×ª»»
+    //ç±»å‹è½¬æ¢
     data_type_convert_test();
 
     //
@@ -289,25 +270,30 @@ int main(int argc, char* argv[]) {
 
     cout << "sscanf float test : " << f_test << endl;
 
-    //Ê±¼äµÄ²âÊÔ
+    //æ—¶é—´çš„æµ‹è¯•
 
     time_use_test();
 
-    //Ö±½Ódelete nullÖ¸Õë£¬»á²»»ácore£¿
+    //ç›´æ¥delete nullæŒ‡é’ˆï¼Œä¼šä¸ä¼šcoreï¼Ÿ
     char *ptr = NULL;
     delete ptr;
 
-    //setÊ¹ÓÃ²âÊÔ
+    //setä½¿ç”¨æµ‹è¯•
     stl_use::set_use();
     stl_use::list_use();
     stl_use::iterator_use();
     stl_use::map_use();
     stl_use::unordered_set_use();
 
-    //×Ö·û´®²âÊÔ
+    //å­—ç¬¦ä¸²æµ‹è¯•
     string_using_test();
 
-    //²âÊÔÅÅĞòÊ¹ÓÃµÄ±È½Ïº¯Êı,·µ»Øtrue/falseµÄ¶ÔÅÅĞò½á¹ûµÄÓ°Ïì
+    //æ­£åˆ™è¡¨è¾¾å¼
+
+    regex_test();
+
+
+    //æµ‹è¯•æ’åºä½¿ç”¨çš„æ¯”è¾ƒå‡½æ•°,è¿”å›true/falseçš„å¯¹æ’åºç»“æœçš„å½±å“
 
     std::vector<int> test_vec = {12,3,4,67,29};
 
@@ -351,7 +337,7 @@ int main(int argc, char* argv[]) {
 //
 //
 //
-//    string trim_str = "ç‹ä¼Ÿ nihao ! ";
+//    string trim_str = "éœå¬©ç´µ nihao ! ";
 //    cout << "before trim_all:" <<trim_str <<endl;
 //    int len = trim_all(trim_str);
 //    cout << "after trim_all:" <<trim_str << "len:"<< len <<endl;
@@ -405,7 +391,7 @@ int main(int argc, char* argv[]) {
 //    //TEST("this is a test name:%s,num:%d\n","wangwei",4);
 //    int MAMA(x,y);
 //
-//    string test = "nihç‹ä¼Ÿ";
+//    string test = "nihéœå¬©ç´µ";
 //
 //    const char *ch = test.c_str();
 //    while(*ch){
@@ -441,7 +427,7 @@ int main(int argc, char* argv[]) {
 ////
 ////    string_using_test();
 ////
-////	string query = "ÖĞ¹ú";
+////	string query = "ä¸­å›½";
 ////	string sub = "";
 ////	string sub2 = "";
 ////	string sub3 = "";
@@ -542,7 +528,7 @@ int main(int argc, char* argv[]) {
 //    cpp_r_w_demo();
 //
 //    //test macro
-//    macro_study();
+    macro_study();
 //
 //    //c read_write_demo
 //    read_write_demo();

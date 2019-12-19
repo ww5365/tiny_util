@@ -21,7 +21,10 @@ size_t split_string(const std::string& src,
                     const std::string& delimiter,
                     std::vector<std::string> &fields);
 
-
+int get_first_digit_pos(const char *str);
+bool is_gb18030_four_bytes(const char* src, size_t len);
+bool is_gb18030_double_bytes(const char* src, size_t len);
+void parse_address_norm(std::string &address_norm);
 
 
 #endif /* SRC_INC_STRING_USING_H_ */

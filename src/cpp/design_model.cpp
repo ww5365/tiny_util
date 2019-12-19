@@ -19,7 +19,6 @@ void test_design_pattern(){
     //Singlton::instance().printTest();
     //Singlton::instance().printTest();
 
-
     //重新写了一个singlton
 
     _Singlton &sgl1 = _Singlton::get_instance();

@@ -37,4 +37,8 @@ void test_design_pattern();
 
 void cmpare_file_use_test();
 
+void similarity_test();
+
+void regex_test();
+
 #endif /* INC_COM_USE_H_ */
