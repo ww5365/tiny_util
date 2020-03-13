@@ -16,14 +16,14 @@ using namespace std;
 
 
 /*
- * @biref ÅÅĞò½Ó¿ÚµÄÊ¹ÓÃ£ºsort£¬stable_sort
+ * @biref æ’åºæ¥å£çš„ä½¿ç”¨ï¼šsortï¼Œstable_sort
  *
  *
  */
 
 /*
- * ±È½Ïº¯Êı£¬×¢Òâ²ÎÊıÊÇ£ºconst ÀàĞÍµÄÒıÓÃ
- * ±È½Ïº¯Êı£º¿ÉÒÔÉè¼Æ³É
+ * æ¯”è¾ƒå‡½æ•°ï¼Œæ³¨æ„å‚æ•°æ˜¯ï¼šconst ç±»å‹çš„å¼•ç”¨
+ * æ¯”è¾ƒå‡½æ•°ï¼šå¯ä»¥è®¾è®¡æˆ
  */
 
 template <class Type>
@@ -35,7 +35,7 @@ bool cmp_fun(const Type&t1,const Type &t2){
 
 void sort_algorithm_use(){
 
-    //°´ÕÕ×Ö·û´®µÄ³¤¶È,´ÓĞ¡µ½´óÅÅĞò
+    //æŒ‰ç…§å­—ç¬¦ä¸²çš„é•¿åº¦,ä»å°åˆ°å¤§æ’åº
     vector<std::string> test;
 
     test.push_back("wang");
@@ -45,7 +45,7 @@ void sort_algorithm_use(){
     test.push_back("hao");
     test.push_back("hello");
 
-    //ÎÈ¶¨ÅÅĞò£º³¤¶ÈÏàÍ¬µÄ×Ö·û´®£¬±£³ÖÔ­À´µÄÎ»ÖÃ²»±ä
+    //ç¨³å®šæ’åºï¼šé•¿åº¦ç›¸åŒçš„å­—ç¬¦ä¸²ï¼Œä¿æŒåŸæ¥çš„ä½ç½®ä¸å˜
     std::stable_sort(test.begin(),test.end(),cmp_fun<string>);
     vector<string>::iterator it = test.begin();
     for (;it != test.end();it++){
@@ -54,7 +54,7 @@ void sort_algorithm_use(){
 
     std::cout << std::endl;
     /*
-     * Ô¤ÆÚ½á¹û£ºni  wei  hao  wang  test  hello
+     * é¢„æœŸç»“æœï¼šni  wei  hao  wang  test  hello
      */
 
 
@@ -66,7 +66,7 @@ void sort_algorithm_use(){
     test.push_back("haoo");
     test.push_back("hello");
 
-    //²»ÎÈ¶¨ÅÅĞò£º³¤¶ÈÏàÍ¬µÄ×Ö·û´®£¬Î»ÖÃ¿ÉÄÜ±ä
+    //ä¸ç¨³å®šæ’åºï¼šé•¿åº¦ç›¸åŒçš„å­—ç¬¦ä¸²ï¼Œä½ç½®å¯èƒ½å˜
     std::sort(test.begin(),test.end(),cmp_fun<string>);
     it = test.begin();
     for (;it != test.end();it++){
@@ -76,7 +76,7 @@ void sort_algorithm_use(){
     std::cout << std::endl;
 
 
-    //sortÖĞÊ¹ÓÃÄ¬ÈÏµÄ±È½Ïº¯Êı£¬´Ó´óµ½Ğ£½µĞòÅÅÁĞ
+    //sortä¸­ä½¿ç”¨é»˜è®¤çš„æ¯”è¾ƒå‡½æ•°ï¼Œä»å¤§åˆ°æ ¡é™åºæ’åˆ—
 
     vector<int> test2 = {1,2,4,5,9};
 
@@ -94,34 +94,34 @@ void sort_algorithm_use(){
 
 
 /*
- * @brief Ïë°Ñ×Ö·û´®ÖĞµÄÄ³¸ö×Ö·û¶¼Ìæ»»³ÉÁíÒ»¸ö×Ö·û£¿
- * Í·ÎÄ¼ş£º
+ * @brief æƒ³æŠŠå­—ç¬¦ä¸²ä¸­çš„æŸä¸ªå­—ç¬¦éƒ½æ›¿æ¢æˆå¦ä¸€ä¸ªå­—ç¬¦ï¼Ÿ
+ * å¤´æ–‡ä»¶ï¼š
  * #include <algorithm>
- * Ô­ĞÍ£º
+ * åŸå‹ï¼š
  * template <class ForwardIterator, class T>
  * void replace (ForwardIterator first, ForwardIterator last,
                 const T& old_value, const T& new_value);
 
- *²Î¿¼£ºhttp://www.cplusplus.com/reference/algorithm/replace/?kw=replace
+ *å‚è€ƒï¼šhttp://www.cplusplus.com/reference/algorithm/replace/?kw=replace
  */
 
 
 void replace_str_use() {
 
-    //Ìæ»»×Ö·û´®ÖĞËùÓĞµÄ¶ººÅ-¡·$
-    string test_replace_str = "ÍõÎ°,test,n";
+    //æ›¿æ¢å­—ç¬¦ä¸²ä¸­æ‰€æœ‰çš„é€—å·-ã€‹$
+    string test_replace_str = "ç‹ä¼Ÿ,test,n";
     std::replace(test_replace_str.begin(), test_replace_str.end(), ',', '$');
     cout << "test replace str: " << test_replace_str << endl;
 
 }
 
 /*
- * ÈİÆ÷¡¢µü´úÆ÷ÖÖ ÅäºÏËã·¨Ê¹ÓÃ
+ * å®¹å™¨ã€è¿­ä»£å™¨ç§ é…åˆç®—æ³•ä½¿ç”¨
  *
  */
 void test_container_algorithm_use(){
 
-    //½«vectorÖĞ×Ö·û´®£¬Î²²åµÄ·½·¨¿½±´µ½map¶ÔÓ¦µÄÄ³¸ökeyÖĞ
+    //å°†vectorä¸­å­—ç¬¦ä¸²ï¼Œå°¾æ’çš„æ–¹æ³•æ‹·è´åˆ°mapå¯¹åº”çš„æŸä¸ªkeyä¸­
     std::map<uint32_t, std::vector<std::string>> test_map;
     std::vector<std::string> vec = {"wang", "wei", "ni", "hao"};
 
@@ -130,7 +130,7 @@ void test_container_algorithm_use(){
     std::cout << "copy back_inserter: " << test_map[1].size() << std::endl;
 
 
-    //ÇóºÍ
+    //æ±‚å’Œ
 
     vector<int> test_vec_int = {1, 5, 3, 6};
 

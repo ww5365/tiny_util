@@ -4,7 +4,7 @@
  *  Created on: Aug 10, 2018
  *      Author: wangwei69
  *  @breif
- *  ÊýÑ§¼ÆËãÏà¹ØµÄº¯ÊýÊµÏÖ
+ *  æ•°å­¦è®¡ç®—ç›¸å…³çš„å‡½æ•°å®žçŽ°
  *
  */
 
@@ -18,7 +18,7 @@ float sum_square(vector<float> &);
 
 void math_use_test(){
 
-    //Æ½·½ºÍ
+    //å¹³æ–¹å’Œ
     cout << "begin to cal square of vec " << endl;
     vector<float> vec = {-0.68, -0.54, -0.33, 0.16, 0.56, 0.81, -0.01, -0.21, 0.09, 0.14};
     cout << "square of vec: " << sum_square(vec) << endl;
@@ -33,7 +33,7 @@ void math_use_test(){
 
 
 /*
- * ¼ÆËãÏòÁ¿¸÷¸öÔªËØµÄÆ½·½ºÍ£ºvec ={x1£¬x2,...}
+ * è®¡ç®—å‘é‡å„ä¸ªå…ƒç´ çš„å¹³æ–¹å’Œï¼švec ={x1ï¼Œx2,...}
  *
  * sum = x1^2 + x2^2 + ...
  *

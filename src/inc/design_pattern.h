@@ -13,7 +13,7 @@ using namespace std;
 
 
 
-//验证一下单例设计中的疑问点
+//楠岃瘉涓�涓嬪崟渚嬭璁′腑鐨勭枒闂偣
 
 
 
@@ -45,8 +45,8 @@ public:
     static Singlton& instance(){
         static Singlton sgl;
         return sgl;
-        //这种设计方式，会不会每次调用instance,都会生成一个sgl的对象？
-        // 结论:不会，每次调用instance都是同一个静态局部变量sgl,不会再生成一个对象；
+        //杩欑璁捐鏂瑰紡锛屼細涓嶄細姣忔璋冪敤instance,閮戒細鐢熸垚涓�涓猻gl鐨勫璞★紵
+        // 缁撹:涓嶄細锛屾瘡娆¤皟鐢╥nstance閮芥槸鍚屼竴涓潤鎬佸眬閮ㄥ彉閲弒gl,涓嶄細鍐嶇敓鎴愪竴涓璞★紱
     }
 
 };

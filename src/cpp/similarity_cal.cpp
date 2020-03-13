@@ -1,7 +1,7 @@
 /*
  * similarity_cal.cpp
  *
- *  Created on: 2019Äê10ÔÂ30ÈÕ
+ *  Created on: 2019å¹´10æœˆ30æ—¥
  *      Author: wangwei69
  */
 #include "com_use.h"
@@ -13,9 +13,9 @@
 using namespace std;
 
 /*
- * ¼ÆËãÁ½¸ö¼¯ºÏ£ºjaccrd ¾àÀë
+ * è®¡ç®—ä¸¤ä¸ªé›†åˆï¼šjaccrd è·ç¦»
  *
- * dist(A,B) = 1 - (|A ½» B|/|A ²¢ B|)
+ * dist(A,B) = 1 - (|A äº¤ B|/|A å¹¶ B|)
  *
  */
 
@@ -51,16 +51,16 @@ void similarity_test(){
 
 
     set<string> s1;
-    s1.insert("ÍõÎ°");
-    s1.insert("Äã");
-    s1.insert("ºÃ");
+    s1.insert("ç‹ä¼Ÿ");
+    s1.insert("ä½ ");
+    s1.insert("å¥½");
     s1.insert("test");
 
     set<string> s2;
-    s2.insert("Íõ");
-    s2.insert("Äã");
-    s2.insert("ºÃ");
-    s2.insert("°¡");
+    s2.insert("ç‹");
+    s2.insert("ä½ ");
+    s2.insert("å¥½");
+    s2.insert("å•Š");
 
 
 

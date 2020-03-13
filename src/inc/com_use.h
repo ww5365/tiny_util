@@ -1,7 +1,6 @@
 /*
  * com_use.h
  *
- *  Created on: 2016��3��23��
  *      Author: wangwei69
  */
 
@@ -31,7 +30,7 @@ void template_use_test();
 void mem_use_test();
 void new_feature_c11_use_test();
 
-void ml_use_test();
+void vector_use_test();
 
 void test_design_pattern();
 
@@ -40,5 +39,7 @@ void cmpare_file_use_test();
 void similarity_test();
 
 void regex_test();
+
+void string_use_test2();
 
 #endif /* INC_COM_USE_H_ */

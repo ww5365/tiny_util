@@ -1,7 +1,7 @@
 /*
  * mbr_judge.c
  *
- *  Created on: 2016Äê7ÔÂ18ÈÕ
+ *  Created on: 2016å¹´7æœˆ18æ—¥
  *      Author: wangwei69
  */
 
@@ -54,7 +54,7 @@ static int parse_xy(char *str, point_t* pt)
 static int parse_request_bound(char *str, point_t *pt)
 {
     //buffer sample(12109378.4,3606455.5;13397570.4,5390263.5)
-    //½âÎöbound£¬¸ñÊ½ÈçÏÂ£¬µÃµ½boundµÄÖĞĞÄµã
+    //è§£æboundï¼Œæ ¼å¼å¦‚ä¸‹ï¼Œå¾—åˆ°boundçš„ä¸­å¿ƒç‚¹
     if (!str || !pt) {
         return -1;
     }
@@ -140,7 +140,7 @@ int mod_rewrite_country_load(const char *filename, country_t *ct)
         return -1;
     }
     while (fgets(buf, sizeof(buf), fp)) {
-        if (strchr("\n\r#", *buf)) {//ÅĞ¶ÏÊÇ·ñÎª¿ÕĞĞµÄ
+        if (strchr("\n\r#", *buf)) {//åˆ¤æ–­æ˜¯å¦ä¸ºç©ºè¡Œçš„
             continue;
         }
 
@@ -207,7 +207,7 @@ int mod_rewrite_point_in_country(country_t *ct, point_t center)
         ymax = mt.ymax;
         if (center.x <= xmax && center.x >= xmin && center.y <= ymax && center.y >= ymin) {
             printf("target: find mbr:%d \n",idx);
-            return mt.sugto;    //ÖĞĞÄµãÂäÔÚmbrµÄ·¶Î§ÄÚ
+            return mt.sugto;    //ä¸­å¿ƒç‚¹è½åœ¨mbrçš„èŒƒå›´å†…
         }
     }
 
@@ -218,7 +218,7 @@ int mod_rewrite_point_in_country(country_t *ct, point_t center)
 
 int main_process(int argv, char *args[]){
 
-    //¶ÁÈë¸÷¸ö¹ú¼ÒµÄmbrÖµ
+    //è¯»å…¥å„ä¸ªå›½å®¶çš„mbrå€¼
     country_t *country_mbr = mod_rewrite_country_init(MAX_POINTS_NUM);
     char *file_name = "mbrlist";
     mod_rewrite_country_load(file_name,country_mbr);

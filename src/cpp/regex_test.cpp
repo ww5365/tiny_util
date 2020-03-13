@@ -1,7 +1,7 @@
 /*
  * regex_test.cpp
  *
- *  Created on: 2019Äê12ÔÂ18ÈÕ
+ *  Created on: 2019å¹´12æœˆ18æ—¥
  *      Author: wangwei69
  */
 
@@ -16,10 +16,10 @@ using namespace std;
 
 
 /*
- * @×Ö·û´®µÄÄ£Ê½Æ¥Åä
- * std::regex  pattern("Ä£Ê½×Ó´®´®", std::regex_constraints::icase);  //Ä£Ê½´®¿ÉÒÔºöÂÔ´óĞ¡Ğ´
+ * @å­—ç¬¦ä¸²çš„æ¨¡å¼åŒ¹é…
+ * std::regex  pattern("æ¨¡å¼å­ä¸²ä¸²", std::regex_constraints::icase);  //æ¨¡å¼ä¸²å¯ä»¥å¿½ç•¥å¤§å°å†™
  *
- * std::regex_match(str, pattern);  //strÊÇ·ñ·ûºÏÄ£Ê½Æ¥Åä pattern£¬·µ»Ø true/false;
+ * std::regex_match(str, pattern);  //stræ˜¯å¦ç¬¦åˆæ¨¡å¼åŒ¹é… patternï¼Œè¿”å› true/false;
  *
  */
 
@@ -28,29 +28,29 @@ void string_match_way(){
     std::vector<string> test;
     test.push_back("bei hai1");
     test.push_back("beijing university");
-    test.push_back("beijingÈËÃñ");
-    std::regex pattern("beijing.*");//.Æ¥ÅäÈÎÒâ×Ö·û£»*Æ¥ÅäÖ®Ç°³öÏÖµÄ>=0¸ö×Ö·û
-    std::regex pattern2("[A-Za-z0-9 ]+");//×ÖÄ¸£¬Êı×Ö£¬¿Õ¸ñ
+    test.push_back("beijingäººæ°‘");
+    std::regex pattern("beijing.*");//.åŒ¹é…ä»»æ„å­—ç¬¦ï¼›*åŒ¹é…ä¹‹å‰å‡ºç°çš„>=0ä¸ªå­—ç¬¦
+    std::regex pattern2("[A-Za-z0-9 ]+");//å­—æ¯ï¼Œæ•°å­—ï¼Œç©ºæ ¼
     for (auto it = test.begin();it != test.end(); it++){
 
-        if (std::regex_match(*it, pattern)){//²ÎÊı1£ºÒªÆ¥ÅäµÄ×Ö·û´® ²ÎÊı2£ºÍ¨ÅäÄ£Ê½
+        if (std::regex_match(*it, pattern)){//å‚æ•°1ï¼šè¦åŒ¹é…çš„å­—ç¬¦ä¸² å‚æ•°2ï¼šé€šé…æ¨¡å¼
             std::cout << "match pattern: " << *it << std::endl;
         }
         if (std::regex_match(*it, pattern2)){
             std::cout << "match pattern2: " << *it << std::endl;
         }
-        //Ä£Ê½Æ¥Åä³É¹¦£¬½«Æ¥Åä³É¹¦µÄ×Ö·û´®È«²¿Ìæ»»³Éreplace£¬²¢·µ»ØĞÂ´®;Î´³É¹¦£¬Ö±½Ó·µ»Ø´ıÆ¥ÅäµÄ×Ö·û´®£»
+        //æ¨¡å¼åŒ¹é…æˆåŠŸï¼Œå°†åŒ¹é…æˆåŠŸçš„å­—ç¬¦ä¸²å…¨éƒ¨æ›¿æ¢æˆreplaceï¼Œå¹¶è¿”å›æ–°ä¸²;æœªæˆåŠŸï¼Œç›´æ¥è¿”å›å¾…åŒ¹é…çš„å­—ç¬¦ä¸²ï¼›
         std::string replace_str = "good person";
         string new_str = std::regex_replace( *it, pattern, replace_str);
         std::cout << "repalce: " << new_str << std::endl;
     }//end for
 
 
-    //Æ¥Åä£º×ÔÖúÒøĞĞ »ò ATM
+    //åŒ¹é…ï¼šè‡ªåŠ©é“¶è¡Œ æˆ– ATM
 
-    std::string str("ÕĞÉÌÒøĞĞATM(ÉÏº£ĞÂÌï360¹ã³¡»ªÇÈ³Çµê)");
+    std::string str("æ‹›å•†é“¶è¡ŒATM(ä¸Šæµ·æ–°ç”°360å¹¿åœºåä¾¨åŸåº—)");
 
-    string substr("×ÔÖúÒøĞĞ");
+    string substr("è‡ªåŠ©é“¶è¡Œ");
     string::size_type idx = str.find(substr);
 
     if (idx != string::npos){
@@ -60,7 +60,7 @@ void string_match_way(){
         cout << "self bank not match! " << str << " : " <<  substr << endl;
     }
 
-    string  pat_str = ".*×ÔÖúÒøĞĞ.*|.*ATM.*";
+    string  pat_str = ".*è‡ªåŠ©é“¶è¡Œ.*|.*ATM.*";
     std::regex pat(pat_str, std::regex_constants::icase);
 
     bool res = std::regex_match(str, pat);
@@ -71,7 +71,7 @@ void string_match_way(){
         cout << "self bank regex not match" << endl;
     }
 
-    const char *str_ch = "ÕĞÉÌÒøĞĞatm(ÉÏº£)";
+    const char *str_ch = "æ‹›å•†é“¶è¡Œatm(ä¸Šæµ·)";
 
     res = std::regex_match(str_ch, pat);
 

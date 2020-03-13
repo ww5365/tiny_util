@@ -27,14 +27,14 @@ private:
     static bool s_create;
     static _Singlton *s_instance;
     string str;
-    unique_ptr<DataProcess> dp; //µ¥ÀıÖĞÕæÕı½øĞĞÊı¾İ´¦ÀíµÄÀà(ÖÇÄÜÖ¸Õë);¶ÀÕ¼·½Ê½£»
+    unique_ptr<DataProcess> dp; //å•ä¾‹ä¸­çœŸæ­£è¿›è¡Œæ•°æ®å¤„ç†çš„ç±»(æ™ºèƒ½æŒ‡é’ˆ);ç‹¬å æ–¹å¼ï¼›
 
-    //copy¹¹Ôìº¯ÊıÊÇË½ÓĞµÄ£¬ÀàÓÃ»§£¨Àà¶¨ÒåÕâ£©¿ÉÓÃ£»ÆÕÍ¨ÓÃ»§£¨ÀàÊ¹ÓÃÕß£©²»¿ÉÓÃ;
+    //copyæ„é€ å‡½æ•°æ˜¯ç§æœ‰çš„ï¼Œç±»ç”¨æˆ·ï¼ˆç±»å®šä¹‰è¿™ï¼‰å¯ç”¨ï¼›æ™®é€šç”¨æˆ·ï¼ˆç±»ä½¿ç”¨è€…ï¼‰ä¸å¯ç”¨;
     explicit _Singlton(string s = ""):str(s), dp(new DataProcess){
         cout << "constructor: " << str << endl;
     }
 
-    //¿½±´ºÍ¸³Öµ
+    //æ‹·è´å’Œèµ‹å€¼
     _Singlton(const _Singlton &cp) = delete;
     _Singlton& operator=(const _Singlton &cp) = delete;
 
@@ -43,19 +43,19 @@ public:
 
 
     /*
-     * ÀÁºº·½Ê½ÊµÏÖµ¥ÀıÄ£Ê½
+     * æ‡’æ±‰æ–¹å¼å®ç°å•ä¾‹æ¨¡å¼
      */
 
-    //·½Ê½1: c++11 ×î¼ò½àÊµÏÖ·½Ê½£¬staticÊÇÏß³Ì°²È«µÄ
+    //æ–¹å¼1: c++11 æœ€ç®€æ´å®ç°æ–¹å¼ï¼Œstaticæ˜¯çº¿ç¨‹å®‰å…¨çš„
     static _Singlton& get_instance(){
-        static _Singlton obj("_Singlton test"); //ÀàÄÚ²¿£ºË½ÓĞ¹¹Ôìº¯Êı¿É¼û
+        static _Singlton obj("_Singlton test"); //ç±»å†…éƒ¨ï¼šç§æœ‰æ„é€ å‡½æ•°å¯è§
         return obj;
     }
 
-    //·½Ê½2£º ³£ÓÃ: ¶àÏß³Ì + double chcek
+    //æ–¹å¼2ï¼š å¸¸ç”¨: å¤šçº¿ç¨‹ + double chcek
     static _Singlton& get_instance2(){
         if (!s_create){
-            Lock lock; //±£Ö¤¶àÏß³ÌµÄÇé¿öÏÂÏß³Ì°²È«
+            Lock lock; //ä¿è¯å¤šçº¿ç¨‹çš„æƒ…å†µä¸‹çº¿ç¨‹å®‰å…¨
             if (!s_create){
                 static _Singlton obj("_Singlton test2");
                 s_instance = &obj;
@@ -71,11 +71,11 @@ public:
 
 };
 
-//ÀàÖĞ¾²Ì¬³ÉÔ±£¬±ØĞëÒª³õÊ¼»¯
+//ç±»ä¸­é™æ€æˆå‘˜ï¼Œå¿…é¡»è¦åˆå§‹åŒ–
 bool _Singlton::s_create = false;
 _Singlton* _Singlton::s_instance = nullptr;
 
-//ÔÚĞ´Ò»´Î
+//åœ¨å†™ä¸€æ¬¡
 
 class Singlton{
 private:

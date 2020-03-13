@@ -25,14 +25,36 @@ void split_string2();
 
 void first_charactor_upper(char *str);
 
-
-
 /*
  * @desc 字符串是否全部是数字
  */
 bool is_pure_digits(const char *str, unsigned int len);
 
 int string_using_test(){
+
+    //前缀截取
+
+    string str_j1 = "北京大学";
+    string str_j2 = "北京";
+    str_j1 = str_j1.substr(str_j2.size());
+
+    cout << "string jiequ: " << str_j1 << endl;
+
+
+    //18/12 Tryon Rd, Lindfield NSW 2070澳大利亚
+
+    string address_str = "18/12 Tryon Rd, Lindfield NSW 2070, 澳大利亚";
+
+    size_t pos2 = address_str.find_last_of(",");
+
+    string address_str2 = address_str.substr(0, pos2);
+
+    std::transform(address_str2.begin(), address_str2.end(), address_str2.begin(), ::tolower);
+
+    std::replace(address_str2.begin(), address_str2.end(), ',', ' ');
+
+    cout << "last sep pos: " << pos2 << " str: " << address_str2 << endl;
+
 
     //复杂门址数据格式解析
     string address = "[北京市(110000)|CITY|1|][东城区(110101)|AREA|1|][故宫东门外()|ROAD|0|]景山前街4号故宫博物院[宁寿宫(10275688963131648896)|POI_PARENT|1|]内";

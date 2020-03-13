@@ -19,7 +19,7 @@ void test_design_pattern(){
     //Singlton::instance().printTest();
     //Singlton::instance().printTest();
 
-    //重新写了一个singlton
+    //閲嶆柊鍐欎簡涓�涓猻inglton
 
     _Singlton &sgl1 = _Singlton::get_instance();
 

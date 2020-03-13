@@ -5,38 +5,38 @@
  *      Author: wangwei69
  */
 
-#include "com_use.h"
+#include "../inc/com_use.h"
 #include <cstddef>
 #include <iterator>
 
-extern int *g_int_ptr; //±ğµÄÎÄ¼ş¶¨ÒåµÄ£»ÔÚ±¾ÎÄ¼şÉùÃ÷¼´¿ÉÓÃ£»
+extern int *g_int_ptr; //åˆ«çš„æ–‡ä»¶å®šä¹‰çš„ï¼›åœ¨æœ¬æ–‡ä»¶å£°æ˜å³å¯ç”¨ï¼›
 
 /*
  * @brief
- * 1.²»Í¬µÄÀàĞÍµÄÊı×éµÄ¶¨Òå
- * 2.¶àÎ¬Êı×éµÄ¶¯Ì¬ÄÚ´æ·ÖÅäºÍ»ØÊÕ
+ * 1.ä¸åŒçš„ç±»å‹çš„æ•°ç»„çš„å®šä¹‰
+ * 2.å¤šç»´æ•°ç»„çš„åŠ¨æ€å†…å­˜åˆ†é…å’Œå›æ”¶
  */
 
 void array_use_test(){
     const size_t LEN = 10;
     int arr1[LEN] = {1,2,3,4,5};
-    int *arr2[LEN];    //¶¨ÒåÖ¸ÕëÊı×é£ºÊı×éÖĞµÄÔªËØ¶¼ÊÇÖ¸ÏòÕûĞÍÖ¸Õë£»
-    int (*ptr)[LEN];  //¶¨ÒåÊı×éÖ¸Õë£ºptrÊÇÖ¸Õë£»Ö¸ÏòÒ»¸öÓĞLEN¸öÕûĞÍÔªËØµÄÊı×é£»
-    int (&ref)[LEN] = arr1;  //¶¨ÒåÊı×éµÄÒıÓÃ£º refÊÇÒ»¸öÒıÓÃ£»ÒıÓÃÁËÓĞLEN¸öÕûĞÍÔªËØµÄÊı×é£»
+    int *arr2[LEN];    //å®šä¹‰æŒ‡é’ˆæ•°ç»„ï¼šæ•°ç»„ä¸­çš„å…ƒç´ éƒ½æ˜¯æŒ‡å‘æ•´å‹æŒ‡é’ˆï¼›
+    int (*ptr)[LEN];  //å®šä¹‰æ•°ç»„æŒ‡é’ˆï¼šptræ˜¯æŒ‡é’ˆï¼›æŒ‡å‘ä¸€ä¸ªæœ‰LENä¸ªæ•´å‹å…ƒç´ çš„æ•°ç»„ï¼›
+    int (&ref)[LEN] = arr1;  //å®šä¹‰æ•°ç»„çš„å¼•ç”¨ï¼š refæ˜¯ä¸€ä¸ªå¼•ç”¨ï¼›å¼•ç”¨äº†æœ‰LENä¸ªæ•´å‹å…ƒç´ çš„æ•°ç»„ï¼›
     //ref = arr1;
-    int *(&ref2)[LEN] = arr2; //ÒıÓÃĞèÒª³õÊ¼»¯
-    int *ptr_end = &arr1[LEN];   //Î²ºóÖ¸Õë£¬ÕâÑù²»Ì«°²È«£¬c++11Ìá¹©ÁËº¯Êı
-    int *ptr_head = std::begin(arr1); //Êı×éÍ·Ö¸Õë
-    int *ptr_post_tail = std::end(arr1); //Êı×éÎ²ºóÖ¸Õë
+    int *(&ref2)[LEN] = arr2; //å¼•ç”¨éœ€è¦åˆå§‹åŒ–
+    int *ptr_end = &arr1[LEN];   //å°¾åæŒ‡é’ˆï¼Œè¿™æ ·ä¸å¤ªå®‰å…¨ï¼Œc++11æä¾›äº†å‡½æ•°
+    int *ptr_head = std::begin(arr1); //æ•°ç»„å¤´æŒ‡é’ˆ
+    int *ptr_post_tail = std::end(arr1); //æ•°ç»„å°¾åæŒ‡é’ˆ
 
-    ptrdiff_t len = ptr_post_tail - ptr_head; //ÀàĞÍ£ºptrdiff_t; Á½¸öÎ»ÖÃ³¤¶È£»
+    ptrdiff_t len = ptr_post_tail - ptr_head; //ç±»å‹ï¼šptrdiff_t; ä¸¤ä¸ªä½ç½®é•¿åº¦ï¼›
 
 
-    //¶àÎ¬Êı×éµÄÄÚ´æµÄ¶¯Ì¬·ÖÅäºÍ»ØÊÕ
+    //å¤šç»´æ•°ç»„çš„å†…å­˜çš„åŠ¨æ€åˆ†é…å’Œå›æ”¶
     constexpr size_t ROW = 3;
     constexpr size_t COL = 4;
 
-    //·ÖÅä
+    //åˆ†é…
     int **arr3 = nullptr;
     arr3 = new int*[ROW];
     for (size_t i = 0;i < ROW; i++){
@@ -51,15 +51,15 @@ void array_use_test(){
         std::cout << std::endl;
     }
 
-    //»ØÊÕ
+    //å›æ”¶
     for (size_t i = 0;i < ROW; i++){
-        delete []arr3[i];//Ã¿ĞĞÖ¸ÏòµÄ¶àÁĞ»ØÊÕ
+        delete []arr3[i];//æ¯è¡ŒæŒ‡å‘çš„å¤šåˆ—å›æ”¶
     }
 
-    delete []arr3; //»ØÊÕ±£´æĞĞÊı×é
+    delete []arr3; //å›æ”¶ä¿å­˜è¡Œæ•°ç»„
 
 
-    //È«¾Ö±äÁ¿
+    //å…¨å±€å˜é‡
 
     g_int_ptr = arr1;
 
@@ -78,29 +78,29 @@ void array_use_test(){
 
 /*
  * @brief
- * const constexpr  Çø±ğ
- * constexpr Ê²Ã´Ê¹ÓÃ±È½ÏºÏ?
- * Êı×é³¤¶È£¬Ã¶¾Ù³õÊ¼»¯
+ * const constexpr  åŒºåˆ«
+ * constexpr ä»€ä¹ˆä½¿ç”¨æ¯”è¾ƒåˆ?
+ * æ•°ç»„é•¿åº¦ï¼Œæšä¸¾åˆå§‹åŒ–
  */
 
 struct A{
     int x,y;
-    constexpr A(int xx, int yy):x(xx),y(xx){}//ĞèÒªÎª¿Õ£¬Ò²¾ÍÊÇ±ØĞëÔÚ³õÊ¼»¯ÁĞ±íÖĞ³õÊ¼»¯£»
+    constexpr A(int xx, int yy):x(xx),y(xx){}//éœ€è¦ä¸ºç©ºï¼Œä¹Ÿå°±æ˜¯å¿…é¡»åœ¨åˆå§‹åŒ–åˆ—è¡¨ä¸­åˆå§‹åŒ–ï¼›
 };
 
-constexpr A a(1,2); //³£Á¿±í´ïÊ½¶ÔÏó
+constexpr A a(1,2); //å¸¸é‡è¡¨è¾¾å¼å¯¹è±¡
 
 enum Test{
-  XX = a.x, //Ö±½ÓÊ¹ÓÃ³£Á¿±í´ïÊ½
+  XX = a.x, //ç›´æ¥ä½¿ç”¨å¸¸é‡è¡¨è¾¾å¼
   YY = a.y
 };
 
-constexpr int LEN = 32; //ÕâµãÀàËÆ£ºconst int LEN = 32..
+constexpr int LEN = 32; //è¿™ç‚¹ç±»ä¼¼ï¼šconst int LEN = 32..
 
 void const_use_test(){
 
-    std::bitset<LEN> bs; //bitsetµÄ³¤¶ÈÊÇ±àÒëÆÚ¼ä±ØĞëÒªÖªµÀµÄ
-    bs.flip(9); //µÚ10bitµÄÊı¾İÈ¡·´: bs.set(9,~bs[9]);
+    std::bitset<LEN> bs; //bitsetçš„é•¿åº¦æ˜¯ç¼–è¯‘æœŸé—´å¿…é¡»è¦çŸ¥é“çš„
+    bs.flip(9); //ç¬¬10bitçš„æ•°æ®å–å: bs.set(9,~bs[9]);
     std::cout << "the value of pos 10: " << bs[9] << std::endl;
 
 

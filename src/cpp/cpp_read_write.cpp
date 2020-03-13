@@ -1,7 +1,7 @@
 /*
  * cpp_read_write.cpp
  *
- *  Created on: 2016Äê5ÔÂ18ÈÕ
+ *  Created on: 2016å¹´5æœˆ18æ—¥
  *      Author: wangwei69
  */
 
@@ -12,7 +12,7 @@
 #include <vector>
 
 /*
- * ½âÎö×Ö·û´®£¬Ê¹ÓÃ·Ö¸ô·û£¬½«×Ö·û´®½âÎöµ½vectorÖĞ
+ * è§£æå­—ç¬¦ä¸²ï¼Œä½¿ç”¨åˆ†éš”ç¬¦ï¼Œå°†å­—ç¬¦ä¸²è§£æåˆ°vectorä¸­
  *
  */
 
@@ -23,32 +23,32 @@ std::vector<std::string> split(std::string str,std::string pattern){
     std::string::size_type pos;
     //std::string::npos;
 
-    str +=pattern;//´¦ÀíºÜÓĞ¼¼ÇÉ£¬±£Ö¤×îºóÒ»¸ö·Ö¸î´®ÄÜ±»È¡µ½
+    str +=pattern;//å¤„ç†å¾ˆæœ‰æŠ€å·§ï¼Œä¿è¯æœ€åä¸€ä¸ªåˆ†å‰²ä¸²èƒ½è¢«å–åˆ°
 
     unsigned int str_size = str.size();
 
     for(unsigned int i=0;i<str.size();i++){
-        pos = str.find(pattern,i);  //´Ói¿ªÊ¼ÕÒ£¬ÕÒµ½pattern£¬·µ»ØÎ»ÖÃ´ÓÏÂ±ê0¿ªÊ¼£»
+        pos = str.find(pattern,i);  //ä»iå¼€å§‹æ‰¾ï¼Œæ‰¾åˆ°patternï¼Œè¿”å›ä½ç½®ä»ä¸‹æ ‡0å¼€å§‹ï¼›
         int find_len = 0;
-        if(pos < str_size && pos != std::string::npos){  //¶¨Î»µ½µÄÎ»ÖÃ
+        if(pos < str_size && pos != std::string::npos){  //å®šä½åˆ°çš„ä½ç½®
             find_len = pos - i;
             if(find_len >0){
-                std::string s = str.substr(i,find_len);  //iË÷ÒıÆğÊ¼Î»ÖÃ£¬´Ó0¿ªÊ¼
+                std::string s = str.substr(i,find_len);  //iç´¢å¼•èµ·å§‹ä½ç½®ï¼Œä»0å¼€å§‹
                 res.push_back(s);
             }
-            i = pos + pattern.size() - 1;  //ÏÂÒ»´ÎËÑË÷¿ªÊ¼Î»ÖÃ¡£ÎªÊ²Ã´-1£¬ÒòÎªÏÂÒ»´ÎÑ­»·i++À²
+            i = pos + pattern.size() - 1;  //ä¸‹ä¸€æ¬¡æœç´¢å¼€å§‹ä½ç½®ã€‚ä¸ºä»€ä¹ˆ-1ï¼Œå› ä¸ºä¸‹ä¸€æ¬¡å¾ªç¯i++å•¦
         }
     }//end for
 
-    return res;   //·µ»ØÒ»¸ö¾Ö²¿±äÁ¿£¿ ¿ÉÒÔ£¬·µ»ØÊÇ»á·¢Éú¿½±´£»ËùÒÔÊÇ·ñÓĞ¸üºÃĞ§ÂÊµÄÉè¼Æ£¿
+    return res;   //è¿”å›ä¸€ä¸ªå±€éƒ¨å˜é‡ï¼Ÿ å¯ä»¥ï¼Œè¿”å›æ˜¯ä¼šå‘ç”Ÿæ‹·è´ï¼›æ‰€ä»¥æ˜¯å¦æœ‰æ›´å¥½æ•ˆç‡çš„è®¾è®¡ï¼Ÿ
 }
 
 
 /*
- * ´ÓÎÄ¼şÖĞ¶ÁÈ¡ÄÚÈİ,·Åµ½ÄÚ´æ(±äÁ¿)
+ * ä»æ–‡ä»¶ä¸­è¯»å–å†…å®¹,æ”¾åˆ°å†…å­˜(å˜é‡)
  */
 void read_file() {
-    std::ifstream in;  //¶¨ÒåÊäÈëÁ÷¶ÔÏóÊ±£¬¹ØÁªtest.txtÎÄ¼ş£»Ä¬ÈÏµ÷ÓÃopenº¯Êı£»
+    std::ifstream in;  //å®šä¹‰è¾“å…¥æµå¯¹è±¡æ—¶ï¼Œå…³è”test.txtæ–‡ä»¶ï¼›é»˜è®¤è°ƒç”¨openå‡½æ•°ï¼›
 
     in.open("/Users/wangwei69/workspace/github/tiny_util/test.txt");
     if (!in.good()) {
@@ -63,14 +63,14 @@ void read_file() {
     std::string pc;
     while (true) {
         if (!in.good()) {
-            //¼ì²éÁ÷µÄ×´Ì¬Î»£ºÈç¹û³öÏÖbad£¬eof£¬failµÈÒì³££¬·µ»Øfalse£»
+            //æ£€æŸ¥æµçš„çŠ¶æ€ä½ï¼šå¦‚æœå‡ºç°badï¼Œeofï¼Œfailç­‰å¼‚å¸¸ï¼Œè¿”å›falseï¼›
             std::cout << "bad or end!" << std::endl;
             break;
         } else {
             std::cout << "file is good!" << std::endl;
         }
 
-        //Á¬Ğø¶ÁÈë£¬ÒÔ¿Õ°×·û(tab£¬¿Õ¸ñ)·Ö¸î£»Ö±½Ó½øĞĞÊı¾İÀàĞÍ×ª»»¡£
+        //è¿ç»­è¯»å…¥ï¼Œä»¥ç©ºç™½ç¬¦(tabï¼Œç©ºæ ¼)åˆ†å‰²ï¼›ç›´æ¥è¿›è¡Œæ•°æ®ç±»å‹è½¬æ¢ã€‚
         in >> linkid >> ebc >> tableid >> direction >> pc;
 
         std::cout << linkid << ":" << sizeof(linkid) << ":" << ebc << ":"
@@ -81,10 +81,10 @@ void read_file() {
         std::cout << "file not open !" << std::endl;
     }
 
-    //C++ÖĞ»¹¶¨ÒåÁËÒ»¸öÔÚstdÃû×Ö¿Õ¼äµÄÈ«¾Öº¯Êıgetline£¬ÒòÎªÕâ¸öº¯ÊıµÄ²ÎÊıÊ¹ÓÃÁËstring×Ö·û´®£¬ËùÒÔÉùÃ÷ÔÚÁË<string>Í·ÎÄ¼şÖĞÁË¡£
+    //C++ä¸­è¿˜å®šä¹‰äº†ä¸€ä¸ªåœ¨stdåå­—ç©ºé—´çš„å…¨å±€å‡½æ•°getlineï¼Œå› ä¸ºè¿™ä¸ªå‡½æ•°çš„å‚æ•°ä½¿ç”¨äº†stringå­—ç¬¦ä¸²ï¼Œæ‰€ä»¥å£°æ˜åœ¨äº†<string>å¤´æ–‡ä»¶ä¸­äº†ã€‚
     std::string str;
     unsigned int line_no = 1;
-    while (getline(in, str)) {  //½«ÎÄ¼şÖĞµÄÒ»ĞĞ¶ÁÈëµ½×Ö·û´®str
+    while (getline(in, str)) {  //å°†æ–‡ä»¶ä¸­çš„ä¸€è¡Œè¯»å…¥åˆ°å­—ç¬¦ä¸²str
         std::cout << "line " << line_no << ": " << str << std::endl;
         std::vector<std::string> res = split(str, "\t");
         for (unsigned int i = 0; i < res.size(); i++) {
@@ -97,13 +97,13 @@ void read_file() {
 
 
 /*
- * ½«ÄÚ´æ(±äÁ¿)ÖĞÊı¾İ£¬Ğ´Èëµ½ÎÄ¼ş£»
+ * å°†å†…å­˜(å˜é‡)ä¸­æ•°æ®ï¼Œå†™å…¥åˆ°æ–‡ä»¶ï¼›
  *
  */
 
 void write_file(){
 
-    //ÍùÎÄ¼şÖĞĞ´ÈëÊı¾İ£»²¢ÇÒÎÄ¼ş²»´æÔÚ£»
+    //å¾€æ–‡ä»¶ä¸­å†™å…¥æ•°æ®ï¼›å¹¶ä¸”æ–‡ä»¶ä¸å­˜åœ¨ï¼›
 
     std::ofstream ofs;
     ofs.open("./output.txt", std::ios::out|std::ios::app);
@@ -130,7 +130,7 @@ void write_file(){
 
 void cpp_r_w_demo(){
 
-    write_file();//ÎÄ¼şĞ´Èë²âÊÔ
+    write_file();//æ–‡ä»¶å†™å…¥æµ‹è¯•
 
 }
 

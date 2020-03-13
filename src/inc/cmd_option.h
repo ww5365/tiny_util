@@ -1,7 +1,7 @@
 /*
  * CmdOption.h
  *
- *  Created on: 2016Äê2ÔÂ19ÈÕ
+ *  Created on: 2016å¹´2æœˆ19æ—¥
  *      Author: wangwei69
  */
 
@@ -28,7 +28,7 @@ namespace util {
         const static int CHAR_TABLE_SIZE = 256;
         char _ch[CHAR_TABLE_SIZE];
 
-        int set_opt_string(const char *); //Ê¹ÓÃoptstr³õÊ¼»¯×Ö·û±í
+        int set_opt_string(const char *); //ä½¿ç”¨optstråˆå§‹åŒ–å­—ç¬¦è¡¨
 
         std::multimap<std::string,std::string> _args;
 

@@ -1,7 +1,7 @@
 /*
  * cmdOption.cpp
  *
- *  Created on: 2016Äê2ÔÂ19ÈÕ
+ *  Created on: 2016å¹´2æœˆ19æ—¥
  *      Author: wangwei69
  */
 
@@ -28,13 +28,13 @@ namespace util{
         const char *p=optstr;
 
         while (*p!='\0'){
-            if (*p == ':'){  //Ö®Ç°µÄ×Ö·ûÑ¡Ïî£¬±Ø¶¨ÓĞÒ»¸ö²ÎÊı
+            if (*p == ':'){  //ä¹‹å‰çš„å­—ç¬¦é€‰é¡¹ï¼Œå¿…å®šæœ‰ä¸€ä¸ªå‚æ•°
                 if (_ch[(unsigned int)(*pre)]==0 || _ch[(unsigned char)(*pre)]==3){
                     std::cout<< "option error" << std::endl;
                     ret = -1;
                     break;
                 }
-                _ch[(unsigned int)(*pre)]++;  //ÓĞÒ»¸ö²ÎÊıÖµÊÇ2 Ã»ÓĞ²ÎÊıÖµÊÇ1
+                _ch[(unsigned int)(*pre)]++;  //æœ‰ä¸€ä¸ªå‚æ•°å€¼æ˜¯2 æ²¡æœ‰å‚æ•°å€¼æ˜¯1
             }else{
                 if(_ch[(unsigned int)(*p)] == 1){
                     ret = -1;
@@ -67,34 +67,34 @@ namespace util{
             string key,value;
 
             if (*p == '-'){
-                if (*(p+1) == '-'){  //³¤Ñ¡ÏîÄ£Ê½ --c=./conf  --h
+                if (*(p+1) == '-'){  //é•¿é€‰é¡¹æ¨¡å¼ --c=./conf  --h
                     string tmp(p+2);
                     cout << "tmp string: " <<tmp<<endl;
                     key = tmp.substr(0,1);
                     unsigned int pos = tmp.find("=");
-                    if(_ch[(unsigned int)(*(p+2))] == 1){//Ñ¡ÏîÃ»ÓĞ²ÎÊı
+                    if(_ch[(unsigned int)(*(p+2))] == 1){//é€‰é¡¹æ²¡æœ‰å‚æ•°
                         value =  "true";
-                    }else if (_ch[(unsigned int)(*(p+2))] == 2){ //Ñ¡ÏîĞèÒªÓĞ²ÎÊı
+                    }else if (_ch[(unsigned int)(*(p+2))] == 2){ //é€‰é¡¹éœ€è¦æœ‰å‚æ•°
                         if(pos == string::npos || pos == (tmp.length()-1)){
                             cout <<"args error:" <<p <<endl;
                             continue;
                         }
                         value = tmp.substr(pos+1);
                         cout<<"key:value: " <<key <<"\t"<< value <<endl;
-                    }else{  //optstr Ã»ÓĞ´ËÑ¡ÏîµÄÇé¿ö´¦Àí
+                    }else{  //optstr æ²¡æœ‰æ­¤é€‰é¡¹çš„æƒ…å†µå¤„ç†
                         cout <<"option error:" <<key <<endl;
                         continue;
                     }
                     _args.insert(pair<string,string>(key,value));
-                }else{              //Ä£Ê½£º -c ./conf/
-                    key = *(p+1); //×Ö·û¸³¸østring
-                    if (_ch[(unsigned int)(*(p+1))] == 2){//Ñ¡ÏîÓĞ²ÎÊıµÄ
+                }else{              //æ¨¡å¼ï¼š -c ./conf/
+                    key = *(p+1); //å­—ç¬¦èµ‹ç»™string
+                    if (_ch[(unsigned int)(*(p+1))] == 2){//é€‰é¡¹æœ‰å‚æ•°çš„
 
-                        if(st.empty()){ //Õ»ÖĞÃ»ÓĞ²ÎÊıºÍ´ËÑ¡ÏîÆ¥Åä
+                        if(st.empty()){ //æ ˆä¸­æ²¡æœ‰å‚æ•°å’Œæ­¤é€‰é¡¹åŒ¹é…
                             cout <<"option's args not exist :" <<key <<endl;
                             continue;
                         }
-                        value = st.top(); //×Ö·û´®¸³¸østring
+                        value = st.top(); //å­—ç¬¦ä¸²èµ‹ç»™string
                         st.pop();
                     }else if (_ch[(unsigned int)(*(p+1))] == 1){
                         value = "true";

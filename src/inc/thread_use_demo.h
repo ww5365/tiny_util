@@ -14,9 +14,9 @@
 void print_msg(const char* msg, int error);
 
 /*
- * ÀàÊµÏÖ¹¦ÄÜ£º£¿
+ * ç±»å®ç°åŠŸèƒ½ï¼šï¼Ÿ
  *
- * 1¡¢Àà¶¨ÒåµÄ¶ÔÏó¿ÉÒÔ×Ô¶¯¶Ô£ºÁÙ½çÇø½øĞĞ¼ÓËø£»Í¬Ê±£¬³¬¹ıÀà¶ÔÏóµÄ×÷ÓÃÓòºó£¬ÀûÓÃ×Ô¶¯Îö¹¹µÄ¹¦ÄÜ£¬°Ñ¼ÓµÄËøÊÍ·Åµô£»
+ * 1ã€ç±»å®šä¹‰çš„å¯¹è±¡å¯ä»¥è‡ªåŠ¨å¯¹ï¼šä¸´ç•ŒåŒºè¿›è¡ŒåŠ é”ï¼›åŒæ—¶ï¼Œè¶…è¿‡ç±»å¯¹è±¡çš„ä½œç”¨åŸŸåï¼Œåˆ©ç”¨è‡ªåŠ¨ææ„çš„åŠŸèƒ½ï¼ŒæŠŠåŠ çš„é”é‡Šæ”¾æ‰ï¼›
  *
  */
 
@@ -25,7 +25,7 @@ class Lock{
 public:
     Lock(){
         int ret = pthread_mutex_init(&mutex, nullptr);
-        fprintf(stderr, "init mutex!ret:[%d][%s]\n", ret, strerror(ret));//³éÏñ³öÀ´£¬ÕâÖÖÖØ¸´µÄ´úÂë
+        fprintf(stderr, "init mutex!ret:[%d][%s]\n", ret, strerror(ret));//æŠ½åƒå‡ºæ¥ï¼Œè¿™ç§é‡å¤çš„ä»£ç 
 
         print_msg("mutxt_lock", pthread_mutex_lock(&mutex));
     }

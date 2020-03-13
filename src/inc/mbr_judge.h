@@ -1,7 +1,6 @@
 /*
  * mbr_judge.h
  *
- *  Created on: 2016Äê7ÔÂ18ÈÕ
  *      Author: wangwei69
  */
 

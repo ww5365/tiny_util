@@ -1,7 +1,7 @@
 /*
  * read_write.cpp
  *
- *  Created on: 2016Äê3ÔÂ23ÈÕ
+ *  Created on: 2016å¹´3æœˆ23æ—¥
  *      Author: wangwei69
  */
 
@@ -18,10 +18,10 @@ using namespace std;
 
 void read_write_demo(){
 
-    //sscanf¶ÁÈë¸ñÊ½»¯µÄÊı×Ö×Ö·û´®µ½±äÁ¿ÖĞ
+    //sscanfè¯»å…¥æ ¼å¼åŒ–çš„æ•°å­—å­—ç¬¦ä¸²åˆ°å˜é‡ä¸­
     const char *geo = "(123.22,456.33;234.11,567.22)";
     double x1=0,y1=0,x2=0,y2=0;
-    sscanf(geo,"(%lf,%lf;%lf,%lf)",&x1,&y1,&x2,&y2);  //¶ÁÈëĞÎÈç£º(1,2;1,2)  ÕâÑùµÄÊı×Ö×Ö·û´®µ½±äÁ¿ÖĞ
+    sscanf(geo,"(%lf,%lf;%lf,%lf)",&x1,&y1,&x2,&y2);  //è¯»å…¥å½¢å¦‚ï¼š(1,2;1,2)  è¿™æ ·çš„æ•°å­—å­—ç¬¦ä¸²åˆ°å˜é‡ä¸­
     printf("geo str: %s\n",geo);
     printf("the res is: %f,%f,%f,%f \n",x1,y1,x2,y2);
 
@@ -29,10 +29,10 @@ void read_write_demo(){
 
 
 /*
- * Ê¹ÓÃ STL µÄcopyÊµÏÖÊäÈëÊä³ö£¿£¿
- * ¿¿£º¡£¡£ ÀÏ×Ó¶¼¿´²»¶®¡£¡£
+ * ä½¿ç”¨ STL çš„copyå®ç°è¾“å…¥è¾“å‡ºï¼Ÿï¼Ÿ
+ * é ï¼šã€‚ã€‚ è€å­éƒ½çœ‹ä¸æ‡‚ã€‚ã€‚
  *
- * ÕÏ°­µã£º ²»Í¬µÄ iterator £¿£¿
+ * éšœç¢ç‚¹ï¼š ä¸åŒçš„ iterator ï¼Ÿï¼Ÿ
  *
  */
 
@@ -45,12 +45,12 @@ int copy_read_write_demo()
 
      IntVector myvector;
 
-     // ´Ó±ê×¼ÊäÈëÉè±¸¶ÁÈëÕûÊı
-     // Ö±µ½ÊäÈëµÄÊÇ·ÇÕûĞÍÊı¾İÎªÖ¹ ÇëÊäÈëÕûÊıĞòÁĞ£¬°´ÈÎÒâ·ÇÊı×Ö¼ü²¢»Ø³µ½áÊøÊäÈë
-     cout << "Please input element£º" << endl;
+     // ä»æ ‡å‡†è¾“å…¥è®¾å¤‡è¯»å…¥æ•´æ•°
+     // ç›´åˆ°è¾“å…¥çš„æ˜¯éæ•´å‹æ•°æ®ä¸ºæ­¢ è¯·è¾“å…¥æ•´æ•°åºåˆ—ï¼ŒæŒ‰ä»»æ„éæ•°å­—é”®å¹¶å›è½¦ç»“æŸè¾“å…¥
+     cout << "Please input elementï¼š" << endl;
      copy(IstreamItr(cin), IstreamItr(), BackInsItr(myvector));
 
-     //Êä³öÈİÆ÷ÀïµÄËùÓĞÔªËØ£¬ÔªËØÖ®¼äÓÃ¿Õ¸ñ¸ô¿ª
+     //è¾“å‡ºå®¹å™¨é‡Œçš„æ‰€æœ‰å…ƒç´ ï¼Œå…ƒç´ ä¹‹é—´ç”¨ç©ºæ ¼éš”å¼€
      cout << "Output : " << endl;
      copy(myvector.begin(), myvector.end(), OstreamItr(cout, " "));
      cout << endl;
@@ -60,7 +60,7 @@ int copy_read_write_demo()
 
 
 /*
- * Ê¹ÓÃ c ÎÄ¼ş·ç¸ñ½øĞĞ¶ş½øÖÆÎÄ¼şµÄ¶ÁĞ´
+ * ä½¿ç”¨ c æ–‡ä»¶é£æ ¼è¿›è¡ŒäºŒè¿›åˆ¶æ–‡ä»¶çš„è¯»å†™
  *
  * fopen fclose
  * fwrite
@@ -82,19 +82,19 @@ public:
     }
 
     void Rewind() {
-        fseek(fp, 0, SEEK_END); //Ïà¶ÔÓÚµÚ3¸ö²ÎÊıµÄÆ«ÒÆÁ¿ SEEK_SET, SEEK_CUR
-        m_file_left_byte = ftell(fp);  //·µ»Øµ±Ç°ÎÄ¼şÖ¸ÕëµÄÎ»ÖÃ
-        rewind(fp);  //»Ö¸´ÎÄ¼şÖ¸ÕëµÄÎ»ÖÃµ½¿ªÊ¼
+        fseek(fp, 0, SEEK_END); //ç›¸å¯¹äºç¬¬3ä¸ªå‚æ•°çš„åç§»é‡ SEEK_SET, SEEK_CUR
+        m_file_left_byte = ftell(fp);  //è¿”å›å½“å‰æ–‡ä»¶æŒ‡é’ˆçš„ä½ç½®
+        rewind(fp);  //æ¢å¤æ–‡ä»¶æŒ‡é’ˆçš„ä½ç½®åˆ°å¼€å§‹
     }
 
-    //¶ÁÈë¶ş½øÖÆÎÄ¼ş
+    //è¯»å…¥äºŒè¿›åˆ¶æ–‡ä»¶
     int WriteMessage(){
 
 
 
     }
 
-    //¶ÁÈë¶ş½øÖÆÎÄ¼ş
+    //è¯»å…¥äºŒè¿›åˆ¶æ–‡ä»¶
     int ReadMessag(){
 
         // Check End of File

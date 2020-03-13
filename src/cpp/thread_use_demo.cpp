@@ -25,12 +25,12 @@ void print_msg(const char* msg, int error){
 
 void* thread_stub(void *args){
 
-    pthread_detach(pthread_self());//ÔÚstubÖĞdetach×ÓÏß³Ì£¬ÕâÑùÖ÷Ïß³Ì²»»á×èÈû£»¼´Ê¹ÔÙµ÷joinÒ²²»»áÉúĞ§£¬Ö÷Ïß³Ì¼ÌĞøÖ´ĞĞ£»
+    pthread_detach(pthread_self());//åœ¨stubä¸­detachå­çº¿ç¨‹ï¼Œè¿™æ ·ä¸»çº¿ç¨‹ä¸ä¼šé˜»å¡ï¼›å³ä½¿å†è°ƒjoinä¹Ÿä¸ä¼šç”Ÿæ•ˆï¼Œä¸»çº¿ç¨‹ç»§ç»­æ‰§è¡Œï¼›
     //cout << "this is thread num: " << *(int*)args <<endl;
 
     int pa = *(int*)args;
     while(1){
-        //cout << "thread num: " << *(int*)args << endl; //ÓĞÎÊÌâ£¬ÔËĞĞÆ½ÎÈºó£¬Êä³öÈ«²¿Îª£ºthread num : 2 ?ÏëÏëÎªÊ²Ã´£¿ÒòÎª Ö÷½øĞĞÖĞ²ÎÊıi±äÎª2£¬*(int*)argsÏàµ±ÓÚÒıÓÃ·½Ê½Ê¹ÓÃ°¡¡£
+        //cout << "thread num: " << *(int*)args << endl; //æœ‰é—®é¢˜ï¼Œè¿è¡Œå¹³ç¨³åï¼Œè¾“å‡ºå…¨éƒ¨ä¸ºï¼šthread num : 2 ?æƒ³æƒ³ä¸ºä»€ä¹ˆï¼Ÿå› ä¸º ä¸»è¿›è¡Œä¸­å‚æ•°iå˜ä¸º2ï¼Œ*(int*)argsç›¸å½“äºå¼•ç”¨æ–¹å¼ä½¿ç”¨å•Šã€‚
         cout << "this is thread num: " << pa << endl;
         usleep(1000000);
     }
@@ -47,7 +47,7 @@ class CallBackHandle{
 public:
     //typedef int(*CallBackFun)(string &name);
 
-    typedef function <int(string)> CallBackFun;  //»Øµ÷º¯Êı£ºº¯ÊıÖ¸ÕëÀàĞÍ
+    typedef function <int(string)> CallBackFun;  //å›è°ƒå‡½æ•°ï¼šå‡½æ•°æŒ‡é’ˆç±»å‹
 
     CallBackHandle(CallBackFun f, string name):_fun(f), _name(name){}
     ~CallBackHandle(){}
@@ -93,9 +93,9 @@ static void* stub3(void* args){
 
 
 /*
- * Ïß³Ì³ØµÄ¼òµ¥Éè¼ÆºÍÊµÏÖ£º£¿
+ * çº¿ç¨‹æ± çš„ç®€å•è®¾è®¡å’Œå®ç°ï¼šï¼Ÿ
  *
- * ²Î¿¼£ºsudata ½¨¿âÖĞSimpleThreadPoolÉè¼ÆºÍÊµÏÖ¡£¡£
+ * å‚è€ƒï¼šsudata å»ºåº“ä¸­SimpleThreadPoolè®¾è®¡å’Œå®ç°ã€‚ã€‚
  *
  *
  *
@@ -110,31 +110,31 @@ static void* stub3(void* args){
 
 
 /*
- * 1¡¢ÏÈ²âÊÔÈçºÎ²»°ÑÖ÷Ïß³Ì×èÈû£¿
+ * 1ã€å…ˆæµ‹è¯•å¦‚ä½•ä¸æŠŠä¸»çº¿ç¨‹é˜»å¡ï¼Ÿ
  *
  */
 
 void thread_use_test(){
 
-    //ÑéÖ¤×Ô¶¯¼ÓËø£¬½âËøÀà
+    //éªŒè¯è‡ªåŠ¨åŠ é”ï¼Œè§£é”ç±»
 
     {
         Lock lock_obj;
     }
 
-    //Ö»²âÊÔÉÏÃæÄÚÈİ
+    //åªæµ‹è¯•ä¸Šé¢å†…å®¹
     return ;
 
     /*
-     * ÑéÖ¤£º×ÓÏß³Ì´ÓÖ÷Ïß³ÌÖĞdetach³öÀ´£¬¼´Ê¹join£¬Ò²²»ÔÙ×èÈûÖ÷Ïß³ÌµÄÔËĞĞ£»
+     * éªŒè¯ï¼šå­çº¿ç¨‹ä»ä¸»çº¿ç¨‹ä¸­detachå‡ºæ¥ï¼Œå³ä½¿joinï¼Œä¹Ÿä¸å†é˜»å¡ä¸»çº¿ç¨‹çš„è¿è¡Œï¼›
      */
 
-    //´´½¨2¸öÏß³Ì
+    //åˆ›å»º2ä¸ªçº¿ç¨‹
     static const int THREAD_NUM = 2;
-    pthread_t *tid;//Ïß³ÌidµÄÊı×é
-    tid = (pthread_t*)malloc(sizeof(pthread_t) * THREAD_NUM);//·ÖÅäÏß³ÌidÊı×é¿Õ¼ä
+    pthread_t *tid;//çº¿ç¨‹idçš„æ•°ç»„
+    tid = (pthread_t*)malloc(sizeof(pthread_t) * THREAD_NUM);//åˆ†é…çº¿ç¨‹idæ•°ç»„ç©ºé—´
     for(int i = 0;i < THREAD_NUM;i++){
-        //pthread_create²ÎÊıÈ«²¿ÊÇÖ¸Õë
+        //pthread_createå‚æ•°å…¨éƒ¨æ˜¯æŒ‡é’ˆ
         pthread_create(&tid[i],NULL,thread_stub,(void*)(&i));
         usleep(1000);
     }
@@ -146,17 +146,17 @@ void thread_use_test(){
     pthread_create(&tid2, NULL, thread_stub2, NULL);
 
     for (int i = 0; i < THREAD_NUM; i++){
-        pthread_join(tid[i],NULL); //ÒòÎªÔÚ×ÓÏß³ÌÖĞÒÑ¾­detachÁË£¬ËùÒÔÕâÀï¼´Ê¹join£¬Ò²²»»áÔÙ×èÈûÖ÷Ïß³ÌÁË
+        pthread_join(tid[i],NULL); //å› ä¸ºåœ¨å­çº¿ç¨‹ä¸­å·²ç»detachäº†ï¼Œæ‰€ä»¥è¿™é‡Œå³ä½¿joinï¼Œä¹Ÿä¸ä¼šå†é˜»å¡ä¸»çº¿ç¨‹äº†
     }
 
-    //pthread_join(tid2, NULL); //ÕâÀï»á°ÑÖ÷Ïß³Ì×è; Èç¹ûÕâÀï²»×èÈû£¬Ö÷Ïß³Ì»á¼ÌĞøÖ´ĞĞ£¬²¢½áÊø£»
+    //pthread_join(tid2, NULL); //è¿™é‡Œä¼šæŠŠä¸»çº¿ç¨‹é˜»; å¦‚æœè¿™é‡Œä¸é˜»å¡ï¼Œä¸»çº¿ç¨‹ä¼šç»§ç»­æ‰§è¡Œï¼Œå¹¶ç»“æŸï¼›
     cout << "this is main thread222!" << endl;
 
 
     /*
-     * ÑéÖ¤£ºÉè¼Æ·½Ê½£º callbackhandle¶ÔÏóÖ¸Õë×÷Îª²ÎÊı£¬´«µİ¸ø×®º¯Êı,Êµ¼ÊÊ¹ÓÃ¶ÔÏóÖĞ¶¨ÒåµÄº¯Êırun£»
-     *               Í¬Ê±ÔÚ£¬Ö÷Ïß³ÌÖĞÊµÏÖ¶ÔcallbackhandleµÄÉèÖÃ¡£
-     *               Ö÷ÒªµÄÄ¿µÄÊÇ£ºÍ¨¹ıº¯Êı»Øµ÷»úÖÆ£¬À´Ê¹ÓÃ×Ô¶¨ÒåµÄº¯Êı;
+     * éªŒè¯ï¼šè®¾è®¡æ–¹å¼ï¼š callbackhandleå¯¹è±¡æŒ‡é’ˆä½œä¸ºå‚æ•°ï¼Œä¼ é€’ç»™æ¡©å‡½æ•°,å®é™…ä½¿ç”¨å¯¹è±¡ä¸­å®šä¹‰çš„å‡½æ•°runï¼›
+     *               åŒæ—¶åœ¨ï¼Œä¸»çº¿ç¨‹ä¸­å®ç°å¯¹callbackhandleçš„è®¾ç½®ã€‚
+     *               ä¸»è¦çš„ç›®çš„æ˜¯ï¼šé€šè¿‡å‡½æ•°å›è°ƒæœºåˆ¶ï¼Œæ¥ä½¿ç”¨è‡ªå®šä¹‰çš„å‡½æ•°;
      *
      */
 
@@ -165,10 +165,10 @@ void thread_use_test(){
     Process pro("test", seqid);
     CallBackHandle::CallBackFun fun = std::bind(&Process::handle, &pro,std::placeholders::_1, seqid); //fun(str) <=> pro.handle(str,seqid)
 
-    //Ê¹ÓÃ×Ô¶¨ÒåµÄ»Øµ÷º¯ÊıÀ´´¦ÀíÊÂÎñ
-    CallBackHandle cbh(fun, "Process::handle"); //Í¨¹ıhandler¶ÔÏó£¬ÉèÖÃÁË»Øµ÷º¯Êı£»Ò²¾ÍÊÇ°Ñ»Øµ÷º¯Êı·â×°µ½Ò»¸ö¶ÔÏóÀïÃæÁË
+    //ä½¿ç”¨è‡ªå®šä¹‰çš„å›è°ƒå‡½æ•°æ¥å¤„ç†äº‹åŠ¡
+    CallBackHandle cbh(fun, "Process::handle"); //é€šè¿‡handlerå¯¹è±¡ï¼Œè®¾ç½®äº†å›è°ƒå‡½æ•°ï¼›ä¹Ÿå°±æ˜¯æŠŠå›è°ƒå‡½æ•°å°è£…åˆ°ä¸€ä¸ªå¯¹è±¡é‡Œé¢äº†
     pthread_t tid3;
-    pthread_create(&tid3, nullptr, stub3, &cbh); //½«cbh×÷Îª²ÎÊı£¬´«µ½×®º¯ÊıÖĞ£»×®º¯ÊıÍ¨¹ıcbhÀ´µ÷ÓÃ»Øµ÷º¯Êı£»
+    pthread_create(&tid3, nullptr, stub3, &cbh); //å°†cbhä½œä¸ºå‚æ•°ï¼Œä¼ åˆ°æ¡©å‡½æ•°ä¸­ï¼›æ¡©å‡½æ•°é€šè¿‡cbhæ¥è°ƒç”¨å›è°ƒå‡½æ•°ï¼›
 
 
 

@@ -85,7 +85,7 @@ void cmpare_file_use_test(){
 
     }
 
-    //以mf1的key为纬度，来merge两个文件
+    //浠f1鐨刱ey涓虹含搴︼紝鏉erge涓や釜鏂囦欢
 
     for (auto it = mf1.begin(); it != mf1.end(); it = mf1.upper_bound(it->first)){
 

@@ -4,7 +4,7 @@
  *  Created on: May 25, 2018
  *      Author: wangwei69
  *
- * @ ´¦ÀíÊ±¼ä£¬ÈÕÆÚÏà¹ØµÄc/c++ ½Ó¿Ú
+ * @ å¤„ç†æ—¶é—´ï¼Œæ—¥æœŸç›¸å…³çš„c/c++ æ¥å£
  */
 
 #include "com_use.h"
@@ -70,24 +70,24 @@ time_t get_next_time(){
 int get_current_idx(int period, int delay){
 
 
-    time_t now = time(NULL);//´Ó1970µ½ÏÖÔÚÃëÊı£»long int
+    time_t now = time(NULL);//ä»1970åˆ°ç°åœ¨ç§’æ•°ï¼›long int
 
     cout << "now: " << now << std::endl;
     struct tm ptm;
     /*
-     * ½á¹¹Ìå£ºstruct tm
-     int tm_sec;   Ãë ¨C È¡ÖµÇø¼äÎª[0,59]
-     int tm_min;        ·Ö - È¡ÖµÇø¼äÎª[0,59]
-     int tm_hour;       Ê± - È¡ÖµÇø¼äÎª[0,23]
-     int tm_mday;      Ò»¸öÔÂÖĞµÄÈÕÆÚ - È¡ÖµÇø¼äÎª[1,31]
-     int tm_mon;       ÔÂ·İ£¨´ÓÒ»ÔÂ¿ªÊ¼£¬0´ú±íÒ»ÔÂ£© - È¡ÖµÇø¼äÎª[0,11]
-     int tm_year;       Äê·İ£¬ÆäÖµµÈÓÚÊµ¼ÊÄê·İ¼õÈ¥1900
-     int tm_wday;      ĞÇÆÚ ¨C È¡ÖµÇø¼äÎª[0,6]£¬ÆäÖĞ0´ú±íĞÇÆÚÌì£¬1´ú±íĞÇÆÚÒ»£¬ÒÔ´ËÀàÍÆ
-     int tm_yday;      ´ÓÃ¿ÄêµÄ1ÔÂ1ÈÕ¿ªÊ¼µÄÌìÊı ¨C È¡ÖµÇø¼äÎª[0,365]£¬ÆäÖĞ0´ú±í1ÔÂ1ÈÕ£¬1´ú±í1ÔÂ2ÈÕ£¬ÒÔ´ËÀàÍÆ
-     int tm_isdst;      ÏÄÁîÊ±±êÊ¶·û£¬ÊµĞĞÏÄÁîÊ±µÄÊ±ºò£¬tm_isdstÎªÕı¡£²»ÊµĞĞÏÄÁîÊ±Îª0£»²»ÁË½âÇé¿öÊ±£¬tm_isdst()Îª¸º¡£
+     * ç»“æ„ä½“ï¼šstruct tm
+     int tm_sec;   ç§’ â€“ å–å€¼åŒºé—´ä¸º[0,59]
+     int tm_min;        åˆ† - å–å€¼åŒºé—´ä¸º[0,59]
+     int tm_hour;       æ—¶ - å–å€¼åŒºé—´ä¸º[0,23]
+     int tm_mday;      ä¸€ä¸ªæœˆä¸­çš„æ—¥æœŸ - å–å€¼åŒºé—´ä¸º[1,31]
+     int tm_mon;       æœˆä»½ï¼ˆä»ä¸€æœˆå¼€å§‹ï¼Œ0ä»£è¡¨ä¸€æœˆï¼‰ - å–å€¼åŒºé—´ä¸º[0,11]
+     int tm_year;       å¹´ä»½ï¼Œå…¶å€¼ç­‰äºå®é™…å¹´ä»½å‡å»1900
+     int tm_wday;      æ˜ŸæœŸ â€“ å–å€¼åŒºé—´ä¸º[0,6]ï¼Œå…¶ä¸­0ä»£è¡¨æ˜ŸæœŸå¤©ï¼Œ1ä»£è¡¨æ˜ŸæœŸä¸€ï¼Œä»¥æ­¤ç±»æ¨
+     int tm_yday;      ä»æ¯å¹´çš„1æœˆ1æ—¥å¼€å§‹çš„å¤©æ•° â€“ å–å€¼åŒºé—´ä¸º[0,365]ï¼Œå…¶ä¸­0ä»£è¡¨1æœˆ1æ—¥ï¼Œ1ä»£è¡¨1æœˆ2æ—¥ï¼Œä»¥æ­¤ç±»æ¨
+     int tm_isdst;      å¤ä»¤æ—¶æ ‡è¯†ç¬¦ï¼Œå®è¡Œå¤ä»¤æ—¶çš„æ—¶å€™ï¼Œtm_isdstä¸ºæ­£ã€‚ä¸å®è¡Œå¤ä»¤æ—¶ä¸º0ï¼›ä¸äº†è§£æƒ…å†µæ—¶ï¼Œtm_isdst()ä¸ºè´Ÿã€‚
      *
      */
-    localtime_r(&now, &ptm);//»ñÈ¡µ±Ç°Ê±¼änow£¨ÈÕÆÚ£©
+    localtime_r(&now, &ptm);//è·å–å½“å‰æ—¶é—´nowï¼ˆæ—¥æœŸï¼‰
 
     cout << "sec: " << ptm.tm_sec << " "
          << "min: " << ptm.tm_min << " "
@@ -111,13 +111,13 @@ int get_current_idx(int period, int delay){
 }
 
 /*
- * @brief ½«iso8601Ê±¼ä£º2018-06-04T07:13:31Z ×ª»»³É±¾µØÊ±¼ä
+ * @brief å°†iso8601æ—¶é—´ï¼š2018-06-04T07:13:31Z è½¬æ¢æˆæœ¬åœ°æ—¶é—´
  *
- * ISO8601µÄÊ±¼ä£¬ÆäÊµ¾ÍÊÇUTCÊ±¼äµÄ±íÊ¾·½Ê½£»
+ * ISO8601çš„æ—¶é—´ï¼Œå…¶å®å°±æ˜¯UTCæ—¶é—´çš„è¡¨ç¤ºæ–¹å¼ï¼›
  *
  */
 
-//Õâ¸ödiff_tm¼ÆËãÊÇÊ²Ã´ÒâË¼£¿Á½¸ötmÏà²îµÄÃëÊı£¿
+//è¿™ä¸ªdiff_tmè®¡ç®—æ˜¯ä»€ä¹ˆæ„æ€ï¼Ÿä¸¤ä¸ªtmç›¸å·®çš„ç§’æ•°ï¼Ÿ
 
 long long diff_tm(struct tm *a, struct tm *b) {
  return a->tm_sec - b->tm_sec
@@ -136,10 +136,10 @@ long long diff_tm(struct tm *a, struct tm *b) {
 
 void utc_to_localtime(){
 
-    std::string iso_time = "2018-06-04T07:13:31Z"; //iso8601±ê×¼µÄutcÊ±¼ä±íÊ¾
+    std::string iso_time = "2018-06-04T07:13:31Z"; //iso8601æ ‡å‡†çš„utcæ—¶é—´è¡¨ç¤º
     struct tm tm_v;
     //std::istringstream is(iso_time);
-    //is >> std::get_time(&tm_v,"%Y-%m-%dT%H:%M:%SZ"); //c++11Ö§³Ö£¬¶ÁÈëutcÌØ¶¨¸ñÊ½µÄÊ±¼äµ½tmÖĞ£»±ØĞëÓĞÊäÈëÁ÷£»
+    //is >> std::get_time(&tm_v,"%Y-%m-%dT%H:%M:%SZ"); //c++11æ”¯æŒï¼Œè¯»å…¥utcç‰¹å®šæ ¼å¼çš„æ—¶é—´åˆ°tmä¸­ï¼›å¿…é¡»æœ‰è¾“å…¥æµï¼›
 
     int year,month,day;
     int hour,min,second;
@@ -162,14 +162,14 @@ void utc_to_localtime(){
          << "days from yuandan:" << tm_v.tm_yday << " "
          << "xialing: " << tm_v.tm_isdst << std::endl;
 
-    //»ñÈ¡tm½á¹¹Êı¾İ£¬¶ÔÓ¦µÄutcµÄÊ±¼ä´Á£ºtime_t
+    //è·å–tmç»“æ„æ•°æ®ï¼Œå¯¹åº”çš„utcçš„æ—¶é—´æˆ³ï¼štime_t
     time_t utc = std::mktime(&tm_v);
 
     struct tm tm_tmp0 = { .tm_year = tm_v.tm_year,
                      .tm_mday = tm_v.tm_mday,
                      .tm_mon = tm_v.tm_mon,
                      .tm_hour = tm_v.tm_hour,
-                     .tm_isdst = -1 }; //sec ºÍ min ÕâÁ½¸öÊı¾İ¶¼ÊÇ0
+                     .tm_isdst = -1 }; //sec å’Œ min è¿™ä¸¤ä¸ªæ•°æ®éƒ½æ˜¯0
 
     cout << "sec: " << tm_tmp0.tm_sec << " "
          << "min: " << tm_tmp0.tm_min << " "
@@ -181,15 +181,15 @@ void utc_to_localtime(){
          << "xialing: " << tm_tmp0.tm_isdst << std::endl;
 
 
-    //»ñÈ¡±¾µØÊ±¼ä´Á£¿
+    //è·å–æœ¬åœ°æ—¶é—´æˆ³ï¼Ÿ
     time_t pseudo = mktime(&tm_tmp0);
 
-    //»ñÈ¡utcÊ±ÇøµÄtm½á¹¹
+    //è·å–utcæ—¶åŒºçš„tmç»“æ„
     struct tm tm_tmp1 = *gmtime(&pseudo);
 
     tm_tmp0.tm_sec += utc - diff_tm(&tm_tmp1, &tm_tmp0);
     time_t local = tm_tmp0.tm_sec;
-    struct tm tm_local = *localtime(&local); //Í¨¹ıtime_t»ñÈ¡±¾µØÊ±¼ä
+    struct tm tm_local = *localtime(&local); //é€šè¿‡time_tè·å–æœ¬åœ°æ—¶é—´
     char local_time[32];
     strftime(local_time, sizeof(local_time), "%Y-%m-%d %H:%M:%S", &tm_local);
 
@@ -198,23 +198,23 @@ void utc_to_localtime(){
 }
 
 /*
- * @brief ¾«È·µÄÊ±¼ä´¦Àí£»¾«È·µ½ºÁÃë
+ * @brief ç²¾ç¡®çš„æ—¶é—´å¤„ç†ï¼›ç²¾ç¡®åˆ°æ¯«ç§’
  */
 
 
 void accurate_time(){
 
-    /* Á½¸öÊı¾İ½á¹¹£º
+    /* ä¸¤ä¸ªæ•°æ®ç»“æ„ï¼š
 
-     //Ê±¼ä´Á
+     //æ—¶é—´æˆ³
     struct  timeval{
-        long  tv_sec;  //Ãë
-        long  tv_usec; //Î¢Ãî
+        long  tv_sec;  //ç§’
+        long  tv_usec; //å¾®å¦™
     };
 
-    //Ê±Çø
+    //æ—¶åŒº
     struct  timezone{
-        int tz_minuteswest;  //ºÍgreenwich Ê±¼ä²îÁË¶àÉÙ·ÖÖÓ
+        int tz_minuteswest;  //å’Œgreenwich æ—¶é—´å·®äº†å¤šå°‘åˆ†é’Ÿ
         int tz_dsttime; //type of DST correction
     };
 
@@ -223,14 +223,14 @@ void accurate_time(){
     struct timeval tv;
     struct timezone tz;
 
-    //»ñÈ¡µ±Ç°ÏµÍ³µÄÊ±¼ä´Á(´Ó1970¿ªÊ¼)ºÍÊ±Çø
+    //è·å–å½“å‰ç³»ç»Ÿçš„æ—¶é—´æˆ³(ä»1970å¼€å§‹)å’Œæ—¶åŒº
     gettimeofday(&tv,&tz);
 
     cout << "timeval: " << tv.tv_sec << " : " << tv.tv_usec << std::endl;
 
     cout << "timezone: " << tz.tz_dsttime << " : " << tz.tz_minuteswest << std::endl;
 
-    //´Ó1970µ½ÏÖÔÚÎªÖ¹µÄºÁÃëÊı
+    //ä»1970åˆ°ç°åœ¨ä¸ºæ­¢çš„æ¯«ç§’æ•°
 
     uint64_t m_seconds = (uint64_t)tv.tv_sec* 1000 + tv.tv_usec/1000;
 

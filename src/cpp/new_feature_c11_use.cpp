@@ -12,9 +12,9 @@
 
 
 /*
- * ÓÒÖµÒýÓÃ£¿
+ * å³å€¼å¼•ç”¨ï¼Ÿ
  * T &&
- * ×÷ÓÃ£º£¿½â¾öc++Ð§ÂÊÎÊÌâ¡£Éî¿½±´¹¹ÔìÉú³ÉÁÙÊ±±äÁ¿£»
+ * ä½œç”¨ï¼šï¼Ÿè§£å†³c++æ•ˆçŽ‡é—®é¢˜ã€‚æ·±æ‹·è´æž„é€ ç”Ÿæˆä¸´æ—¶å˜é‡ï¼›
  */
 
 struct A{
@@ -54,7 +54,7 @@ void rvalue_referenct_use(){
     A a("wangwei", 30);
 
     std::vector<A> vec;
-    vec.reserve(10);//Ô¤ÏÈ·ÖÅäºÏÊÊ´óÐ¡µÄvector£¬Ò²ÄÜÌá¸ßÐ§ÂÊ£»
+    vec.reserve(10);//é¢„å…ˆåˆ†é…åˆé€‚å¤§å°çš„vectorï¼Œä¹Ÿèƒ½æé«˜æ•ˆçŽ‡ï¼›
     vec.push_back(a);
     std::cout << "-----" << std::endl;
     vec.push_back(a);
@@ -63,7 +63,7 @@ void rvalue_referenct_use(){
     vec.push_back(a);
 
     std::cout << "-----" << std::endl;
-    vec.emplace_back(a);//a²»ÊÇÓÒÖµ£¬ËùÒÔÕâ¸öÐ§¹ûºÍpush_backÀàËÆ
+    vec.emplace_back(a);//aä¸æ˜¯å³å€¼ï¼Œæ‰€ä»¥è¿™ä¸ªæ•ˆæžœå’Œpush_backç±»ä¼¼
 
     std::cout << "a.x: " << a.x << " size: " << vec.size()<<std::endl;
 

@@ -129,7 +129,42 @@ struct DisplayItem {
 
 //const std::string BOOK_GBK_STR {0xD4, 0xA4, 0xB6, 0xA9};
 
+#define TEST_MACRO(TYPE)  \
+do{\
+    cout << "TEST MACRO para name: " << #TYPE << endl;  \
+    cout << "TEST MACRO Para content: " << TYPE << endl; \
+}while(0)
+
 int main(int argc, char* argv[]) {
+
+    //double大小比较和与0比较
+
+    double a = 1e-10;
+    double b = 1e-11;
+    const double EPSION = 1e-13;
+
+    if (a > 0){
+        cout << "a greater than b" << endl;
+    } else {
+        cout << "a smaller than b" << endl;
+    }
+
+    if (fabs(a - b) < EPSION){
+        cout << "a is equal b" << endl;
+    }
+
+
+    string test_macro = "wangwei";
+    TEST_MACRO(test_macro);
+
+    //vector的使用测试
+
+    vector_use_test();
+
+
+    //字符串相关的测试使用
+
+    string_use_test2();
 
     double feature[4];
     fill_n(feature, 4, 19);//快速赋初始值

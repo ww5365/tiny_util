@@ -3,7 +3,7 @@
  *
  *  Created on: Sep 3, 2018
  *      Author: wangwei69
- *  @brief ÃèÊöÁËÓëÄÚ´æÊ¹ÓÃµÄ¹¦ÄÜ
+ *  @brief æè¿°äº†ä¸å†…å­˜ä½¿ç”¨çš„åŠŸèƒ½
  */
 
 #include "com_use.h"
@@ -12,7 +12,7 @@
 
 
 /*
- * ÈçºÎÊÍ·ÅÈİÆ÷ÖĞ£¬new³öÀ´µÄÊı¾İ£¿
+ * å¦‚ä½•é‡Šæ”¾å®¹å™¨ä¸­ï¼Œnewå‡ºæ¥çš„æ•°æ®ï¼Ÿ
  */
 
 void del_new_data_container(){
@@ -21,7 +21,7 @@ void del_new_data_container(){
     std::string *str = new std::string("wang");
     map_test.insert(std::make_pair(1,str));
 
-    //ÈçºÎÊÍ·ÅstrÖ¸Ïò
+    //å¦‚ä½•é‡Šæ”¾stræŒ‡å‘
 
 
 

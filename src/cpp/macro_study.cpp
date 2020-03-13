@@ -1,7 +1,7 @@
 /*
  * study_case.cpp
  *
- *  Created on: 2016Äê3ÔÂ23ÈÕ
+ *  Created on: 2016å¹´3æœˆ23æ—¥
  *      Author: wangwei69
  */
 
@@ -13,7 +13,7 @@
 using namespace std;
 void macro_study(){
 
-    //¿É±ä²ÎÊıµÄºê¶¨Òå
+    //å¯å˜å‚æ•°çš„å®å®šä¹‰
 //    LOG("this is a test macro\n");
     int t = 10 ;
 

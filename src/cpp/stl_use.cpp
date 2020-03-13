@@ -4,17 +4,18 @@
  *  Created on: Jun 16, 2017
  *      Author: wangwei69
  *
- *  Ö÷ÒªÕ¹ÏÖstl¿âÖĞ¸÷¸öÈİÆ÷µÄÊ¹ÓÃ·½·¨
+ *  ä¸»è¦å±•ç°stlåº“ä¸­å„ä¸ªå®¹å™¨çš„ä½¿ç”¨æ–¹æ³•
  *
  */
 
 #include <iostream>
 #include <vector>
-#include "stl_use.h"
+#include <algorithm>
+#include "../inc/stl_use.h"
 using namespace std;
 
 /*
- * @brief ¶¨Òå½á¹¹Ìå£¬²âÊÔsetÓÃ·¨
+ * @brief å®šä¹‰ç»“æ„ä½“ï¼Œæµ‹è¯•setç”¨æ³•
  */
 
 typedef struct DistrictInfo
@@ -25,23 +26,23 @@ typedef struct DistrictInfo
         cid(cid_), level(level_){}
 
     /*
-     * ÒªÊµÏÖ×Ô¶¨µÄ½á¹¹ÌåµÄÄÜ²åÈëset£»
-     * Ö±½Ó½á¹¹ÌåÄÚÖØÔØ: <
-     *      ¶¨ÒåÑÏ¸ñÈõĞò¹ØÏµ£º¼Ç×¡Ò»µã£ºÏàµÈ¹ØÏµ·µ»Øfalse£»
-     *      ÄÚ²¿»á£¬f(x,y) f(y,x) À´ÅĞ¶ÏÈõĞò´óĞ¡
+     * è¦å®ç°è‡ªå®šçš„ç»“æ„ä½“çš„èƒ½æ’å…¥setï¼›
+     * ç›´æ¥ç»“æ„ä½“å†…é‡è½½: <
+     *      å®šä¹‰ä¸¥æ ¼å¼±åºå…³ç³»ï¼šè®°ä½ä¸€ç‚¹ï¼šç›¸ç­‰å…³ç³»è¿”å›falseï¼›
+     *      å†…éƒ¨ä¼šï¼Œf(x,y) f(y,x) æ¥åˆ¤æ–­å¼±åºå¤§å°
      *
-     * Ò²¿ÉÒÔ¶¨Òå±È½ÏÀà£¬²¢ÖØÔØ() ÔËËã£º
+     * ä¹Ÿå¯ä»¥å®šä¹‰æ¯”è¾ƒç±»ï¼Œå¹¶é‡è½½() è¿ç®—ï¼š
      *
      *   struct cmp{
      *      bool operator()(const T &l, const T &r);
      *    }
-     *      Ê¹ÓÃµÄÊ±ºò£º set<T, cmp>
+     *      ä½¿ç”¨çš„æ—¶å€™ï¼š set<T, cmp>
      *
      */
 
     bool operator<(const DistrictInfo &right)const{
         if ((this->cid==right.cid)&&(this->level==right.level)){
-            return false; //ÈÃ±È½Ïº¯Êı¶ÔÏàÍ¬ÔªËØ·µ»Øfalse
+            return false; //è®©æ¯”è¾ƒå‡½æ•°å¯¹ç›¸åŒå…ƒç´ è¿”å›false
         }else{
             return true;
         }
@@ -53,17 +54,17 @@ typedef struct DistrictInfo
 class Compare{
 public:
     bool operator()(const int left, const int right){
-        return (left <= right) ? true : false; //true ÊÇÎ»ÖÃÒÑ¾­ÅÅºÃ£¬²»ÓÃ½»»»ÁË(ÉıĞò)£»
+        return (left <= right) ? true : false; //true æ˜¯ä½ç½®å·²ç»æ’å¥½ï¼Œä¸ç”¨äº¤æ¢äº†(å‡åº)ï¼›
     }
 };
 
 vector<int>::iterator bin_search(vector<int> &vec, int val){
 
-    sort(vec.begin(), vec.end(), Compare());//ÏÈÅÅĞò£¬ÉıĞò
+    sort(vec.begin(), vec.end(), Compare());//å…ˆæ’åºï¼Œå‡åº
     vector<int>::iterator start = vec.begin();
     vector<int>::iterator end = vec.end();
-    while(start != end){//Îª¿ÕµÄÇé¿öÒ²¿¼ÂÇ½øÀ´ÁË£»
-        vector<int>::iterator mid = start + (end - start)/2;//µü´úÆ÷ÔËËã
+    while(start != end){//ä¸ºç©ºçš„æƒ…å†µä¹Ÿè€ƒè™‘è¿›æ¥äº†ï¼›
+        vector<int>::iterator mid = start + (end - start)/2;//è¿­ä»£å™¨è¿ç®—
         cout << "mid val: " << *mid << endl;
         if ( *mid == val){
             return mid;
@@ -85,7 +86,7 @@ void stl_use::iterator_use(){
     std::vector<int>::reverse_iterator rit = vec.rbegin();
     std::cout << "next rit: " << *(next(rit)) << endl; //7
 
-    //µü´úÆ÷µäĞÍÓ¦ÓÃÊµÀı£º¶ş·Ö²éÕÒ
+    //è¿­ä»£å™¨å…¸å‹åº”ç”¨å®ä¾‹ï¼šäºŒåˆ†æŸ¥æ‰¾
 
     int val = 2;
     vector<int>::iterator pos = bin_search(vec, val);
@@ -129,7 +130,7 @@ void stl_use::list_use(){
         cout << "lmap key: " << key << " list value: " << *it << endl;
     }
 
-    //²åÈëÆäËüÈİÆ÷ÖĞµÄ¶à¸öÔªËØ
+    //æ’å…¥å…¶å®ƒå®¹å™¨ä¸­çš„å¤šä¸ªå…ƒç´ 
 
     vector<int> other = {1000,1001,1002};
 
@@ -138,7 +139,7 @@ void stl_use::list_use(){
 
 
 
-    //ÔÙÏÖÓĞlistµÄ»ù´¡ÉÏ£¬²åÈëÈÎÒâÎ»ÖÃÔªËØ
+    //å†ç°æœ‰listçš„åŸºç¡€ä¸Šï¼Œæ’å…¥ä»»æ„ä½ç½®å…ƒç´ 
 
     list<int> li_t2 = {3,4,5,6};
 
@@ -146,13 +147,19 @@ void stl_use::list_use(){
 
     std::advance(itor2, 1);
 
-    li_t2.insert(itor2, 10000);
-    li_t2.insert(itor2, 100);
-    li_t2.insert(itor2, 10);  //itor2Ã»ÓĞ±ä¶¯£¬Ò»Ö±Ö¸ÏòÔªËØ4 ´ËÊ±½á¹ûÊÇ£º3,10000,100,10,4,5,6
+    itor2 = li_t2.insert(itor2, 10000);  // 3, 10000, 4,5,6  itor2ç”±4æŒ‡å‘10000
+    li_t2.insert(itor2, 100);  // 3, 100ï¼Œ10000, 4ï¼Œ5ï¼Œ6  ç”±äºitor2æŒ‡å‘10000ï¼Œæ‰€ä»¥100æ’å…¥å…¶ä¹‹å‰
+    li_t2.insert(itor2, 10);  //itor2æ²¡æœ‰å˜åŠ¨ï¼Œè¿˜æ˜¯æŒ‡å‘10000ï¼Œæ­¤æ—¶ç»“æœæ˜¯ï¼š3,100ï¼Œ10ï¼Œ10000, 4,5,6
 
     for (auto e: li_t2){
 
         cout << "list content: " << e << endl;
+    }
+
+    for (; itor2 != li_t2.end(); ++itor2){
+
+        cout << "list content from itor2: " << *itor2 << endl;
+
     }
 
 
@@ -160,8 +167,8 @@ void stl_use::list_use(){
 
 void stl_use::set_use() {
 
-    //²âÊÔset´æÏàÍ¬½á¹¹µÄÇé¿ö,ÈçºÎÈ¥ÖØstructÀàĞÍµÄÊı¾İ£¿
-    // ÖØÔØ operater<
+    //æµ‹è¯•setå­˜ç›¸åŒç»“æ„çš„æƒ…å†µ,å¦‚ä½•å»é‡structç±»å‹çš„æ•°æ®ï¼Ÿ
+    // é‡è½½ operater<
 
 
     std::set<DistrictInfo> test_set;
@@ -171,7 +178,7 @@ void stl_use::set_use() {
         DistrictInfo test_d2(131, 3);
         DistrictInfo test_d3(0, 0);
         test_set.insert(test_d1);
-        test_set.insert(test_d2);  //»á±»È¥ÖØµÄ
+        test_set.insert(test_d2);  //ä¼šè¢«å»é‡çš„
         test_set.insert(test_d3);
         test_set.insert(test_d3);
     }
@@ -185,7 +192,7 @@ void stl_use::set_use() {
 
     cout << "test set element: " << (*it).cid << " elem count: " << elem_count<< endl;
 
-    //multiset Á½¸ö¼¯ºÏÇó½»¼¯
+    //multiset ä¸¤ä¸ªé›†åˆæ±‚äº¤é›†
 
     multiset<int> left = {1,2,2,3,4,7,8,9};
     multiset<int> right = {2,4,5,8,9,9};
@@ -197,7 +204,7 @@ void stl_use::set_use() {
 
     cout << "test set intersection res size: "  << result.size() << endl;
 
-    //±éÀúmultiset¼¯ºÏ£º Í¬Ò»ÔªËØ¿ÉÄÜÓĞ¶à¸öÇé¿ö
+    //éå†multiseté›†åˆï¼š åŒä¸€å…ƒç´ å¯èƒ½æœ‰å¤šä¸ªæƒ…å†µ
     for(auto it = result.begin(); it != result.end(); ++it){
 
         auto range = result.equal_range(*it);
@@ -213,12 +220,12 @@ void stl_use::set_use() {
 
 void stl_use::unordered_set_use(){
 
-    //¹Ø¼ü×ÖÊÇpair<int, int> ÈçºÎÅĞ¶ÏkeyÊÇ·ñÊÇÖØ¸´£¿ÎŞĞòsetµÄkey¾­¹ıhashµÄ£¬´«µİÒ»¸öhashÀà£¨ÖØÔØ£¨£©£©
+    //å…³é”®å­—æ˜¯pair<int, int> å¦‚ä½•åˆ¤æ–­keyæ˜¯å¦æ˜¯é‡å¤ï¼Ÿæ— åºsetçš„keyç»è¿‡hashçš„ï¼Œä¼ é€’ä¸€ä¸ªhashç±»ï¼ˆé‡è½½ï¼ˆï¼‰ï¼‰
 
 
     std::unordered_set<int> test_set;
 
-    //²åÈëºÍÉ¾³ı ¼¯ºÏµÄ²Ù×÷
+    //æ’å…¥å’Œåˆ é™¤ é›†åˆçš„æ“ä½œ
     test_set.insert(3);
     test_set.insert(2);
 
@@ -230,12 +237,12 @@ void stl_use::unordered_set_use(){
     cout << "unorder_set content: " << *test_set.begin()<< endl;
 
 
-    //µü´úÆ÷ÊÇ·ñÖ§³Ö¼Ó·¨ÔËËã
+    //è¿­ä»£å™¨æ˜¯å¦æ”¯æŒåŠ æ³•è¿ç®—
 
     test_set.insert(1);
-    test_set.insert(5); //ÏÖÔÚ set ÖĞ£º3£¬4£¬1£¬5
+    test_set.insert(5); //ç°åœ¨ set ä¸­ï¼š3ï¼Œ4ï¼Œ1ï¼Œ5
     auto it = test_set.begin();
-    it++;  //Ö¸Ïò value 1
+    it++;  //æŒ‡å‘ value 1
 
     cout << "unordered_set it point to: " << *it << endl;
 
@@ -256,11 +263,11 @@ void stl_use::map_use() {
 
 
     //pair make_pair map
-    pair<int, string> pa(1, "wang"); //Ö±½Ó³õÊ¼»¯
+    pair<int, string> pa(1, "wang"); //ç›´æ¥åˆå§‹åŒ–
     pair<int, string> pb;
     pb = make_pair(2, "wei");
     pair<int, string> pc;
-    pc = make_pair(4, "ni");  //Ê¹ÓÃmake_pair³õÊ¼»¯:pair
+    pc = make_pair(4, "ni");  //ä½¿ç”¨make_pairåˆå§‹åŒ–:pair
     pc.first = 3;
 
     map<int, string> ma;
@@ -315,15 +322,15 @@ void stl_use::map_use() {
     }
 
     /*
-     * multimapµÄ±éÀú
+     * multimapçš„éå†
      *
-     * µÚÒ»²ãÑ­»·£ºit->first it->second ·Ö±ğÊÇmapÃ¿Ò»ÌõÔªËØ:key value
+     * ç¬¬ä¸€å±‚å¾ªç¯ï¼šit->first it->second åˆ†åˆ«æ˜¯mapæ¯ä¸€æ¡å…ƒç´ :key value
      *
-     * µÚ¶ş²ãÑ­»·£ºrange: Ä³¸ökey¶ÔÓ¦µÄËùÓĞÔªËØ£»
-     * range.firstÊÇµÚÒ»¸öÔªËØµÄµü´úÆ÷£»range.secondÊÇ×îºóÒ»¸öÔªËØµÄµü´úÆ÷£»
+     * ç¬¬äºŒå±‚å¾ªç¯ï¼šrange: æŸä¸ªkeyå¯¹åº”çš„æ‰€æœ‰å…ƒç´ ï¼›
+     * range.firstæ˜¯ç¬¬ä¸€ä¸ªå…ƒç´ çš„è¿­ä»£å™¨ï¼›range.secondæ˜¯æœ€åä¸€ä¸ªå…ƒç´ çš„è¿­ä»£å™¨ï¼›
      *
-     * range.first->first µÚÒ»¸öÔªËØµÄkey
-     * range.first->second µÚÒ»¸öÔªËØµÄvalue
+     * range.first->first ç¬¬ä¸€ä¸ªå…ƒç´ çš„key
+     * range.first->second ç¬¬ä¸€ä¸ªå…ƒç´ çš„value
      *
      */
 
@@ -343,11 +350,11 @@ void stl_use::map_use() {
     int l_len = l_in.size();
 
     /*
-     * key ÊÇÒª²åÈëlistÖĞÎ»ÖÃ£»valueÊÇÒª²åÈëµÄÖµ
-     * ÒªÊµÏÖµÄÊÇ£º±£³ÖÔ­ÓĞlistÖĞµÄÎ»ÖÃË³Ğò£¬ÔÚÈÎÒâÎ»ÖÃ²åÈëmultimapÖĞµÄvalueÖµ£»
+     * key æ˜¯è¦æ’å…¥listä¸­ä½ç½®ï¼›valueæ˜¯è¦æ’å…¥çš„å€¼
+     * è¦å®ç°çš„æ˜¯ï¼šä¿æŒåŸæœ‰listä¸­çš„ä½ç½®é¡ºåºï¼Œåœ¨ä»»æ„ä½ç½®æ’å…¥multimapä¸­çš„valueå€¼ï¼›
      *
-     * 1¡¢»ùÓÚmutimapµÄ±éÀú
-     * 2¡¢»ùÓÚlistµÄÈÎÒâÎ»ÖÃ²åÈë
+     * 1ã€åŸºäºmutimapçš„éå†
+     * 2ã€åŸºäºlistçš„ä»»æ„ä½ç½®æ’å…¥
      *
      */
 
@@ -383,7 +390,7 @@ void stl_use::map_use() {
 
 
 void stl_use::priority_queue_use(){
-    //ÏÂÃæÊÇÊ¹ÓÃÓÅÏÈ¼¶¶ÓÁĞµÄ³£¼ûĞÎÊ½£»dequeÖĞÊı¾İÊÇ°´ÕÕ·ÖÊı´ÓĞ¡µ½´óÅÅĞò
+    //ä¸‹é¢æ˜¯ä½¿ç”¨ä¼˜å…ˆçº§é˜Ÿåˆ—çš„å¸¸è§å½¢å¼ï¼›dequeä¸­æ•°æ®æ˜¯æŒ‰ç…§åˆ†æ•°ä»å°åˆ°å¤§æ’åº
     std::priority_queue<Student,std::deque<Student>,CompareFun> qu_test;
 
     Student s1("wang",60);
@@ -415,7 +422,7 @@ void stl_use::vector_use(){
     vector<int> test1;
     vector<int> test2;
 
-    test1.emplace_back(1);//Ö±½Ó¹¹Ôì
+    test1.emplace_back(1);//ç›´æ¥æ„é€ 
     test1.emplace_back(2);
     test1.emplace_back(3);
     test2.emplace_back(4);
@@ -424,7 +431,7 @@ void stl_use::vector_use(){
     vector<int> res;
     res.reserve(test1.size() + test2.size());
 
-    //Ê¹ÓÃinsert²åÈë¶à¸öÔªËØ
+    //ä½¿ç”¨insertæ’å…¥å¤šä¸ªå…ƒç´ 
     res.insert(res.end(),test1.begin(),test1.end());
     res.insert(res.end(),test2.begin(),test2.end());
 
@@ -433,7 +440,7 @@ void stl_use::vector_use(){
     }
 
     res.clear();
-    //emplace²åÈë¶à¸öÔªËØ£¿
+    //emplaceæ’å…¥å¤šä¸ªå…ƒç´ ï¼Ÿ
 
     for(auto e:test1){
         res.emplace_back(e);
@@ -456,19 +463,13 @@ void stl_use::vector_use(){
     vec_int.push_back(3);
     vec_int.push_back(4);
 
-    //std::remove(vec_int.begin(), vec_int.end(), 2);
-
-//    for (auto elem : vec_int){
-//        cout << "remove: " << elem << endl;
-//    }
-
 
     /*
-     * É¾³ıvectorÌØ¶¨value
+     * åˆ é™¤vectorç‰¹å®švalue
      */
 
-    //iterator  remove(iter1, iter2, value) ÒÆ×ßÔªËØvalue£¬²¢½«ÖµË³ĞòÇ¨ÒÆ£»·µ»Ø×îºóÒ»¸öÔªËØµü´úÆ÷£»removeºó£¬´óĞ¡²»±ä£¬×îºóÒ»¸öÔªËØÓĞÁ½¸ö
-    // erase(iter1, iter2) É¾³ı[iter1,iter2)Ö®¼äµÄÔªËØ
+    //iterator  remove(iter1, iter2, value) ç§»èµ°å…ƒç´ valueï¼Œå¹¶å°†å€¼é¡ºåºè¿ç§»ï¼›è¿”å›æœ€åä¸€ä¸ªå…ƒç´ è¿­ä»£å™¨ï¼›removeåï¼Œå¤§å°ä¸å˜ï¼Œæœ€åä¸€ä¸ªå…ƒç´ æœ‰ä¸¤ä¸ª
+    // erase(iter1, iter2) åˆ é™¤[iter1,iter2)ä¹‹é—´çš„å…ƒç´ 
     vec_int.erase(std::remove(vec_int.begin(), vec_int.end(), 2), vec_int.end());
 
     for (auto elem : vec_int){
@@ -481,11 +482,36 @@ void stl_use::vector_use(){
         cout << "elem push: " << elem << endl;
     }
 
+
+    /*
+     * åˆ é™¤ vectorä¸­ç‰¹å®šä½ç½®çš„å…ƒç´ 
+     *
+     */
+
+    int pos = 1;
+    auto it_erase = vec_int.begin() + pos;
+
+    try {
+        vec_int.erase(it_erase);
+    } catch (std::exception e){
+        cout << "exception info: " << e.what() << endl;
+    }
+
+    for (auto elem : vec_int){
+
+        cout << "erase element on position: " << elem << "  size: " << vec_int.size() <<  endl;
+
+    }
+
+
+
+
+
     std::vector<int> small_int = {8,9, 10};
 
     /*
-     *  ÓÃÒ»¸öĞ¡µÄvector£¬¸²¸ÇÒ»¸ö´óµÄvectorµÄ²¿·ÖÔªËØ
-     *  {8,9} ¸²¸Ç vec_int={1,2,3,4,}
+     *  ç”¨ä¸€ä¸ªå°çš„vectorï¼Œè¦†ç›–ä¸€ä¸ªå¤§çš„vectorçš„éƒ¨åˆ†å…ƒç´ 
+     *  {8,9} è¦†ç›– vec_int={1,2,3,4,}
      */
 
     std::vector<int> vec1 = {1,2,3,4};
@@ -497,16 +523,11 @@ void stl_use::vector_use(){
 
     cout << endl;
 
-
-
-
-
     auto it = std::find(small_int.begin(), small_int.end(), 8);
 
     cout << "vector find: " << *it << endl;
-
-
-    vector<string> tags{"atm", "ÒøĞĞ", "½ğÈÚ"};
+    //vector<string> tags{"atm", "é“¶è¡Œ", "é‡‘è"};
+    vector<string> tags{"atm"};
     string tag("atm");
     auto it2 = std::find(tags.begin(), tags.end(), tag);
 

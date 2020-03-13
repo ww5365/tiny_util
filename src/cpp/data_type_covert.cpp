@@ -33,7 +33,7 @@ void data_type_convert_test(){
 }
 
 /*
- * ÎŞ·ûºÅµÄÊı£¬ºóÃæ¼ÓÉÏ0»ò1£¬eg£º123 -¡· 1230 12341
+ * æ— ç¬¦å·çš„æ•°ï¼Œåé¢åŠ ä¸Š0æˆ–1ï¼Œegï¼š123 -ã€‹ 1230 12341
  *
  */
 
@@ -48,15 +48,15 @@ void add_flag_bit(uint64_t val){
 
 
 /*
- * @brief stringºÍnumberÖ®¼ä×ª»»
+ * @brief stringå’Œnumberä¹‹é—´è½¬æ¢
  */
 
 void string_to_number(){
 
     /*
-     * @brief string×ª»»³Énumber;²¢±£ÁôÁ½Î»Ğ¡Êı£»
+     * @brief stringè½¬æ¢æˆnumber;å¹¶ä¿ç•™ä¸¤ä½å°æ•°ï¼›
      *
-     * IO ·½Ê½ÊµÏÖ£ºc++ c
+     * IO æ–¹å¼å®ç°ï¼šc++ c
      *
      * eg:   str1     -> value
      *     "12.3456"  -> 12.35
@@ -67,36 +67,36 @@ void string_to_number(){
 
     //C++ IO: sstream
     std::stringstream ss;
-    ss << str1; //½«str±äÁ¿µÄÖµÉèÖÃ½ø×Ö·û´®ÊäÈëÁ÷ÖĞ£»
-    ss >> value; //Íê³É×Ö·û´®×ª»»³Éfloat£»
+    ss << str1; //å°†strå˜é‡çš„å€¼è®¾ç½®è¿›å­—ç¬¦ä¸²è¾“å…¥æµä¸­ï¼›
+    ss >> value; //å®Œæˆå­—ç¬¦ä¸²è½¬æ¢æˆfloatï¼›
 
-    // ´¦ÀíĞ¡ÊıµãµÄ¾«¶È
+    // å¤„ç†å°æ•°ç‚¹çš„ç²¾åº¦
     //ss.str("");
     ss.clear();
     ss.precision(2);
-    ss.setf(std::ios::fixed); //¹Ì¶¨Ğ¡ÊıÏÔÊ¾£»2Î»Ğ¡Êı£»²»ÉèÖÃµÄ»°£¬ÊÇ2¸öÓĞĞ§Êı×Ö£»
-    ss << value;  //valueÊÇfloatÀàĞÍ£¬ËùÒÔ°´ÕÕÉèÖÃµÄ¾«¶È¶ÁÈë£»
-    ss >> value;   //°Ñ±£ÁôÁ½Î»Ğ¡ÊıµÄ×Ö·ûÁ÷£¬ÔÙÊä³öµ½float±äÁ¿
+    ss.setf(std::ios::fixed); //å›ºå®šå°æ•°æ˜¾ç¤ºï¼›2ä½å°æ•°ï¼›ä¸è®¾ç½®çš„è¯ï¼Œæ˜¯2ä¸ªæœ‰æ•ˆæ•°å­—ï¼›
+    ss << value;  //valueæ˜¯floatç±»å‹ï¼Œæ‰€ä»¥æŒ‰ç…§è®¾ç½®çš„ç²¾åº¦è¯»å…¥ï¼›
+    ss >> value;   //æŠŠä¿ç•™ä¸¤ä½å°æ•°çš„å­—ç¬¦æµï¼Œå†è¾“å‡ºåˆ°floatå˜é‡
 
     std::cout << "str to float: " << value << std::endl;
 
-    //C IO: snprintf sscanf   ***ÍÆ¼ö***
+    //C IO: snprintf sscanf   ***æ¨è***
     value = 0;
-    sscanf(str1.c_str(), "%f", &value); //½«str¸ñÊ½»¯¶ÁÈë±äÁ¿value = 12.3456
+    sscanf(str1.c_str(), "%f", &value); //å°†stræ ¼å¼åŒ–è¯»å…¥å˜é‡value = 12.3456
     char *buff = new char[str1.size() + 1];
-    snprintf (buff, sizeof(buff), "%.2f", value); //½«±äÁ¿¸ñÊ½»¯¶ÁÈëbuff
-    sscanf(buff, "%f", &value); //ÔÙ´Î¶ÁÈëµ½value=12.35
+    snprintf (buff, sizeof(buff), "%.2f", value); //å°†å˜é‡æ ¼å¼åŒ–è¯»å…¥buff
+    sscanf(buff, "%f", &value); //å†æ¬¡è¯»å…¥åˆ°value=12.35
     printf("str to float: %f\n", value);
     delete []buff;
     buff = nullptr;
 
 
     /*
-     * @brief Ê¹ÓÃ¿âº¯ÊıµÄ·½Ê½ÊµÏÖ
+     * @brief ä½¿ç”¨åº“å‡½æ•°çš„æ–¹å¼å®ç°
      *
      * C++ 11: <string>
      *
-     * float stof(const string &str, size_t *idx=0); //½«str×ª³Éfloat£¬µÚÒ»¸ö²»ºÏ·¨×Ö·ûµÄÏÂÒ»¸öÎ»ÖÃidx·µ»Ø£¬Í¬Ê±·µ»Øfloat£»
+     * float stof(const string &str, size_t *idx=0); //å°†strè½¬æˆfloatï¼Œç¬¬ä¸€ä¸ªä¸åˆæ³•å­—ç¬¦çš„ä¸‹ä¸€ä¸ªä½ç½®idxè¿”å›ï¼ŒåŒæ—¶è¿”å›floatï¼›
      * stoi
      * stol
      * stod
@@ -105,15 +105,15 @@ void string_to_number(){
      *
      * C : <stdlib.h>
      *
-     * atoi£¬atol, atof,atod,atoll;
+     * atoiï¼Œatol, atof,atod,atoll;
      *
-     * long strtol(const char*, char** end, int base); //baseÊÇ½øÖÆ10,16,8£» end·µ»ØµÚÒ»¸ö²»ºÏ·¨×Ö·ûÏÂÒ»¸öÎ»ÖÃ£»
+     * long strtol(const char*, char** end, int base); //baseæ˜¯è¿›åˆ¶10,16,8ï¼› endè¿”å›ç¬¬ä¸€ä¸ªä¸åˆæ³•å­—ç¬¦ä¸‹ä¸€ä¸ªä½ç½®ï¼›
      * strtod
      * strtoll
      *
      */
 
-    value = std::stof(str1); //½¨ÒéÊ¹ÓÃc++;µ«c++11²ÅÖ§³Ö
+    value = std::stof(str1); //å»ºè®®ä½¿ç”¨c++;ä½†c++11æ‰æ”¯æŒ
     std::cout << "c++ string stof: " << value << std::endl;
 
     value = std::atof(str1.c_str()); //c
@@ -121,9 +121,9 @@ void string_to_number(){
 
 
     /*
-     * ½áÂÛ£º
-     * Ö§³Öc++11µÄÇé¿ö£º1¡¢ÏÈÊ¹ÓÃstofµÃµ½floatÖµ£»2¡¢ÔÙÊ¹ÓÃsstringstream£¬ÉèÖÃ¾«¶È¶ÁÈë£¬Ğ´³ö£»
-     * ²»Ö§³ÖC++11£º Ê¹ÓÃCÄ£Ê½
+     * ç»“è®ºï¼š
+     * æ”¯æŒc++11çš„æƒ…å†µï¼š1ã€å…ˆä½¿ç”¨stofå¾—åˆ°floatå€¼ï¼›2ã€å†ä½¿ç”¨sstringstreamï¼Œè®¾ç½®ç²¾åº¦è¯»å…¥ï¼Œå†™å‡ºï¼›
+     * ä¸æ”¯æŒC++11ï¼š ä½¿ç”¨Cæ¨¡å¼
     */
 
 }
@@ -132,32 +132,32 @@ void string_to_number(){
 void number_to_string(){
     float value = 12.3456;
     std::string str2;
-    //C++ IO ·½Ê½
+    //C++ IO æ–¹å¼
     std::stringstream ss;
     ss << value;
-    str2 = ss.str(); //½«×Ö·ûÁ÷ÖĞµÄstring¸³Öµ¸østr2£»
+    str2 = ss.str(); //å°†å­—ç¬¦æµä¸­çš„stringèµ‹å€¼ç»™str2ï¼›
     std::cout << "number to str C++ IO: " << str2 << std::endl;
     str2.clear();
 
-    //C IO·½Ê½
+    //C IOæ–¹å¼
     char buff[32];
-    memset(buff, 0 , 32);//Ö§³Ö×î³¤×ª»»³É×î³¤31Î»
+    memset(buff, 0 , 32);//æ”¯æŒæœ€é•¿è½¬æ¢æˆæœ€é•¿31ä½
     snprintf(buff, sizeof(buff), "%f", value);
     str2 = buff;
     std::cout << "number to str C IO: " << str2 << std::endl;
     str2.clear();
 
-    //C++¿âº¯Êı: to_string(),¿ÉÒÔ°Ñ¸÷ÖÖÀàĞÍ×ª»»³Éstring
+    //C++åº“å‡½æ•°: to_string(),å¯ä»¥æŠŠå„ç§ç±»å‹è½¬æ¢æˆstring
     str2 = std::to_string(value);
     std::cout << "number to str C++ lib: " << str2 << std::endl;
     str2.clear();
 
-    //C¿âº¯Êı£ºitoa ²»½¨ÒéÊ¹ÓÃÁË
+    //Cåº“å‡½æ•°ï¼šitoa ä¸å»ºè®®ä½¿ç”¨äº†
 
     /*
      * tips:
-     * 1¡¢Ö§³Ö£ºc++11  to_str() Ò»¸öº¯Êı¸ã¶¨
-     * 2¡¢²»Ö§³ÖµÄ»°£ºÊ¹ÓÃC/C++µÄIO·½Ê½
+     * 1ã€æ”¯æŒï¼šc++11  to_str() ä¸€ä¸ªå‡½æ•°æå®š
+     * 2ã€ä¸æ”¯æŒçš„è¯ï¼šä½¿ç”¨C/C++çš„IOæ–¹å¼
      */
 
 }
@@ -166,8 +166,8 @@ void number_to_string(){
 
 /*
  * @brief
- * meshcodeÍ¼·ùºÅ×ª³ÉmbrµÄ×óÏÂ½Ç×ø±ê£»
- * wgs84×ø±ê£»
+ * meshcodeå›¾å¹…å·è½¬æˆmbrçš„å·¦ä¸‹è§’åæ ‡ï¼›
+ * wgs84åæ ‡ï¼›
  *
  */
 
@@ -178,13 +178,13 @@ void get_left_bottomXY(const std::string map_id, float &lb_x, float &lb_y)
     lb_x = std::stof(map_id.substr(0, 4));
     lb_y = std::stof(map_id.substr(4, 4));
 
-    //¼ÆËã×ø±êÖµ
+    //è®¡ç®—åæ ‡å€¼
     lb_x /= 12.0;
     lb_y /= 8.0;
     lb_x = (lb_x - 180.0);
     lb_y = (lb_y - 90.0);
 
-    //±£Áô4Î»Ğ¡Êı
+    //ä¿ç•™4ä½å°æ•°
     std::stringstream ss;
     ss.precision(4);
     ss.setf(std::ios::fixed);
