@@ -151,8 +151,9 @@ int main(int argc, char* argv[]) {
 
     if (fabs(a - b) < EPSION){
         cout << "a is equal b" << endl;
+    } else {
+        cout << "a not equal b !" << endl;
     }
-
 
     string test_macro = "wangwei";
     TEST_MACRO(test_macro);
