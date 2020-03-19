@@ -42,4 +42,8 @@ void regex_test();
 
 void string_use_test2();
 
+void charaters_use_test();
+
+
+
 #endif /* INC_COM_USE_H_ */

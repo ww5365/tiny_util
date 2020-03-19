@@ -30,10 +30,15 @@
 } while(0);
 
 
-//## 宏变量(原值)连接在一起
+/*
+* ## 宏定义的参数名称连接在一起
+* # 宏定义的参数名承载的值，加上引号，形成字符串
+*/
+
 #define FACTORY(seg1, seg2) do \
 {\
    int seg1##seg2 = 10; \
+   string name_##seg1_##seg2_(#seg1);\
 }while(0);
 
 

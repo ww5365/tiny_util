@@ -137,6 +137,10 @@ do{\
 
 int main(int argc, char* argv[]) {
 
+    //c类型子串的使用
+
+    charaters_use_test();
+
     //double大小比较和与0比较
 
     double a = 1e-10;
