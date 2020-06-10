@@ -7,8 +7,19 @@
 
 #include "com_use.h"
 #include <string>
+#include <vector>
+#include <map>
 
 using namespace std;
+
+//参数是vector的常量引用，可以往里面添加数据？
+
+int fun(vector<string> &str){
+
+    str.push_back("wang");
+    str.push_back("wei");
+
+}
 
 void string_use_test2(){
 
@@ -34,16 +45,22 @@ void string_use_test2(){
     cout << endl;
     const string str = "正常字符";
     cout << "string size:" << str.size() << endl;
-    cout << endl;
 
+    //wstring 保存英文是什么情况？
+
+    wstring wstr2 = L"ni hao";
+
+    for (size_t i = 0; i < wstr2.size(); ++i){
+        cout << "wstr2: " << wstr2[i] << endl;
+    }
 
     /*
      * 部分匹配是否能用find()匹配到，并返回部分匹配的第一个下标？
      *
      */
 
-    wstring poi_name = L"王伟你好";
-    wstring query = L"伟";
+    wstring poi_name = L"王伟你好伟大";
+    wstring query = L"王伟";
 
     size_t pos = poi_name.find(query);
 
@@ -53,8 +70,31 @@ void string_use_test2(){
         cout << "not find the match  " << endl;
     }
 
+    std::map<wchar_t, int> w_map;
+    for (wchar_t word: poi_name){
+        auto it = w_map.find(word);
+        if (it == w_map.end()){
+            w_map.insert(make_pair(word, 1));
+            cout <<"w_word: "<< word << endl; 
+        } else {
+            it->second ++ ;
+            cout <<"w_word2: "<< word << " val: " << it->second << endl; 
+        }
+    }
 
+    cout <<"w_map size: " << w_map.size() << endl;
+
+
+
+
+
+    //test
+
+
+    std::vector<std::string> vec_str;
+
+    fun(vec_str);
+
+    cout << "const str len: " << vec_str.size() << endl;
 
 }
-
-

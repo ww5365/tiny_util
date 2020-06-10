@@ -53,7 +53,7 @@ class stl_use{
 public:
 
 
-    void priority_queue_use();
+    static void priority_queue_use();
     static void vector_use();
 
     static void map_use();

@@ -137,48 +137,60 @@ do{\
 
 int main(int argc, char* argv[]) {
 
+    std::string str = "abcde";
+
+    cout << "substr: " << str.substr(1, 3) << endl;
+
+    //predicate : 谓词
+
+    //predicate_use_test();
+
+    //rtti : run time type info
+
+    //rtti_use_test();
+
     //c类型子串的使用
 
-    charaters_use_test();
+    //charaters_use_test();
 
     //double大小比较和与0比较
 
-    double a = 1e-10;
-    double b = 1e-11;
-    const double EPSION = 1e-13;
+    //double a = 1e-10;
+    //double b = 1e-11;
+    //const double EPSION = 1e-13;
 
-    if (a > 0){
-        cout << "a greater than b" << endl;
-    } else {
-        cout << "a smaller than b" << endl;
-    }
+    //if (a > 0){
+    //    cout << "a greater than b" << endl;
+    //} else {
+    //    cout << "a smaller than b" << endl;
+    //}
 
-    if (fabs(a - b) < EPSION){
-        cout << "a is equal b" << endl;
-    } else {
-        cout << "a not equal b !" << endl;
-    }
+    //if (fabs(a - b) < EPSION){
+    //    cout << "a is equal b" << endl;
+    //} else {
+    //    cout << "a not equal b !" << endl;
+    //}
 
-    string test_macro = "wangwei";
-    TEST_MACRO(test_macro);
+    //string test_macro = "wangwei";
+    //TEST_MACRO(test_macro);
 
     //vector的使用测试
 
-    vector_use_test();
+    //vector_use_test();
 
 
     //字符串相关的测试使用
 
-    string_use_test2();
+    //string_use_test2();
 
-    double feature[4];
-    fill_n(feature, 4, 19);//快速赋初始值
-    feature[0] = 20;
-    std::swap(feature[0], feature[1]); //可以直接交换两个数组元素的值
+    //double feature[4];
+    //fill_n(feature, 4, 19);//快速赋初始值
+    //feature[0] = 20;
+    //std::swap(feature[0], feature[1]); //可以直接交换两个数组元素的值
 
-    for (auto elem: feature){
-        cout << "fill_n: " << elem << endl;
-    }
+    //for (auto elem: feature){
+    //    cout << "fill_n: " << elem << endl;
+    //}
 
 
     //unsigned short
@@ -212,6 +224,8 @@ int main(int argc, char* argv[]) {
 
 
     stl_use::vector_use();
+
+    stl_use::priority_queue_use();
 
 
 

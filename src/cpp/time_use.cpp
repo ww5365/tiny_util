@@ -7,8 +7,8 @@
  * @ 处理时间，日期相关的c/c++ 接口
  */
 
-#include "com_use.h"
-#include "time_cal.h"
+#include "../inc/com_use.h"
+#include "../inc/time_cal.h"
 #include <ctime>
 #include <iostream>
 #include <iomanip>
@@ -21,8 +21,8 @@ using std::cout;
 int get_current_idx(int, int);
 time_t get_next_time();
 void utc_to_localtime();
-
 void accurate_time();
+void sleep_time();
 
 void time_use_test(){
 
@@ -36,11 +36,25 @@ void time_use_test(){
 
     Timer timer;
 
-    sleep(1);
+    sleep_time();
 
     cout << "the program run time: " << timer.elapse() << " us "<<std::endl;
 
 }
+
+/*
+*  time_t:
+*  获取文件的时间？ stat
+
+*  线程sleep特定时间？ nanosleep  timespec
+
+*  获取本地时间，月，日 ？：local
+
+*  获取精确到微妙时间，计算程序运行时长？
+
+* 
+*/
+
 
 
 time_t get_next_time(){
@@ -235,6 +249,22 @@ void accurate_time(){
     uint64_t m_seconds = (uint64_t)tv.tv_sec* 1000 + tv.tv_usec/1000;
 
     cout << "mill seconds form 1970: " << m_seconds << std::endl;
+
+}
+
+
+
+void sleep_time(){
+
+    //让进程sleep一定的时间
+
+    struct timespec tp;
+    tp.tv_sec = 2; //2s
+    tp.tv_nsec =  1000; //1000ns
+
+    cout << "I will sleep 2s!!" << std::endl;
+    nanosleep(&tp, nullptr);
+    cout << "nanosleep over!!" << std::endl;
 
 }
 

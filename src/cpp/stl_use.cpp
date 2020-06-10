@@ -413,6 +413,22 @@ void stl_use::priority_queue_use(){
 
         qu_test.pop();
     }
+
+    priority_queue<int, deque<int>> que2;
+
+    que2.push(8);
+    que2.push(4);
+    que2.push(5);
+    que2.push(9);
+
+    while (!que2.empty()){
+
+        std::cout << "priority que2: " << que2.top() << std::endl;//小顶堆，队头最小;默认大顶堆，队头最大；
+
+        que2.pop();
+    }
+
+
 }
 
 void stl_use::vector_use(){

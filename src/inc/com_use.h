@@ -44,6 +44,9 @@ void string_use_test2();
 
 void charaters_use_test();
 
+void rtti_use_test();
+
+void predicate_use_test();
 
 
 #endif /* INC_COM_USE_H_ */
