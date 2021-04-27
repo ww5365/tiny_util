@@ -8,6 +8,7 @@
 #include "../inc/com_use.h"
 #include <cstddef>
 #include <iterator>
+#include <bitset>
 
 extern int *g_int_ptr; //别的文件定义的；在本文件声明即可用；
 

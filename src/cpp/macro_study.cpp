@@ -17,18 +17,18 @@ void macro_study(){
 //    LOG("this is a test macro\n");
     int t = 10 ;
 
-    LOG("this is another test macro:%d\n",t);
-    LOG("this is another test macro:%d,%d\n",t, 30)
-
-    FACTORY(te, st);
-
-
-    uint32_t prefix = (1 << 10);
-
-    if (BIT_TST(prefix, 10) == 1){
-        cout << "bit_tst res: " << prefix << " : " << BIT_TST(prefix, 10) << endl;
-    }
-
+    // LOG("this is another test macro:%d\n",t);
+    // LOG("this is another test macro:%d,%d\n",t, 30)
+// 
+    // FACTORY(te, st);
+// 
+// 
+    // uint32_t prefix = (1 << 10);
+// 
+    // if (BIT_TST(prefix, 10) == 1){
+        // cout << "bit_tst res: " << prefix << " : " << BIT_TST(prefix, 10) << endl;
+    // }
+// 
 
 
 }

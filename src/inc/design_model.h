@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <memory>
 using namespace std;
 
 class DataProcess{

@@ -177,37 +177,39 @@ void utc_to_localtime(){
          << "xialing: " << tm_v.tm_isdst << std::endl;
 
     //获取tm结构数据，对应的utc的时间戳：time_t
-    time_t utc = std::mktime(&tm_v);
+    //time_t utc = std::mktime(&tm_v);
 
-    struct tm tm_tmp0 = { .tm_year = tm_v.tm_year,
-                     .tm_mday = tm_v.tm_mday,
-                     .tm_mon = tm_v.tm_mon,
-                     .tm_hour = tm_v.tm_hour,
-                     .tm_isdst = -1 }; //sec 和 min 这两个数据都是0
+    //struct tm tm_tmp0 = {
+    //                .tm_hour = tm_v.tm_hour,
+    //                .tm_mday = tm_v.tm_mday,
+    //                .tm_mon = tm_v.tm_mon,
+    //                .tm_year = tm_v.tm_year
+    //                }; //sec 和 min 这两个数据都是0
+    //
 
-    cout << "sec: " << tm_tmp0.tm_sec << " "
-         << "min: " << tm_tmp0.tm_min << " "
-         << "hour: " << tm_tmp0.tm_hour << " "
-         << "year:" << 1900+tm_tmp0.tm_year << " "
-         << "month: " << tm_tmp0.tm_mon + 1 << " "
-         << "day: " << tm_tmp0.tm_mday << " "
-         << "days from yuandan:" << tm_tmp0.tm_yday << " "
-         << "xialing: " << tm_tmp0.tm_isdst << std::endl;
+    //cout << "sec: " << tm_tmp0.tm_sec << " "
+    //     << "min: " << tm_tmp0.tm_min << " "
+    //     << "hour: " << tm_tmp0.tm_hour << " "
+    //     << "year:" << 1900+tm_tmp0.tm_year << " "
+    //     << "month: " << tm_tmp0.tm_mon + 1 << " "
+    //     << "day: " << tm_tmp0.tm_mday << " "
+    //     << "days from yuandan:" << tm_tmp0.tm_yday << " "
+    //     << "xialing: " << tm_tmp0.tm_isdst << std::endl;
 
 
-    //获取本地时间戳？
-    time_t pseudo = mktime(&tm_tmp0);
+    ////获取本地时间戳？
+    //time_t pseudo = mktime(&tm_tmp0);
 
-    //获取utc时区的tm结构
-    struct tm tm_tmp1 = *gmtime(&pseudo);
+    ////获取utc时区的tm结构
+    //struct tm tm_tmp1 = *gmtime(&pseudo);
 
-    tm_tmp0.tm_sec += utc - diff_tm(&tm_tmp1, &tm_tmp0);
-    time_t local = tm_tmp0.tm_sec;
-    struct tm tm_local = *localtime(&local); //通过time_t获取本地时间
-    char local_time[32];
-    strftime(local_time, sizeof(local_time), "%Y-%m-%d %H:%M:%S", &tm_local);
+    //tm_tmp0.tm_sec += utc - diff_tm(&tm_tmp1, &tm_tmp0);
+    //time_t local = tm_tmp0.tm_sec;
+    //struct tm tm_local = *localtime(&local); //通过time_t获取本地时间
+    //char local_time[32];
+    //strftime(local_time, sizeof(local_time), "%Y-%m-%d %H:%M:%S", &tm_local);
 
-    cout << "time res:"  << local_time << std::endl;
+    //cout << "time res:"  << local_time << std::endl;
 
 }
 

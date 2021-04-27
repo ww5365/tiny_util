@@ -12,7 +12,7 @@
 #include "./inc/com_use.h"
 #include "./inc/macro_study.h"
 #include  "./inc/stl_use.h"
-//#include  "design_pattern.h"
+#include  "./inc/design_pattern.h"
 
 
 #include <cstdlib>
@@ -25,6 +25,7 @@
 #include <deque>
 
 #include <algorithm>
+#include <memory>
 
 using namespace std;
 
@@ -143,11 +144,11 @@ int main(int argc, char* argv[]) {
 
     //predicate : 谓词
 
-    //predicate_use_test();
+    predicate_use_test();
 
     //rtti : run time type info
 
-    //rtti_use_test();
+    rtti_use_test();
 
     //c类型子串的使用
 
@@ -193,172 +194,172 @@ int main(int argc, char* argv[]) {
     //}
 
 
-    //unsigned short
+    // //unsigned short
 
-    string cid_str = "80500";
+    // string cid_str = "80500";
 
-    unsigned short  test_cid = (unsigned short)atoi(cid_str.c_str());
+    // unsigned short  test_cid = (unsigned short)atoi(cid_str.c_str());
 
-    cout << "test test cid: " << test_cid << endl;
-
-
-    class Base{
-    private:
-        int a;
-        virtual int get_value() = 0;
-    public:
-        Base(int x): a(x){}
-        virtual ~Base(){}
-    };
-
-    class Derived: public Base{
-    private:
-        int b;
-        int get_value(){
-            return b;
-        }
-    public:
-        Derived(int x = 0, int y = 0): Base(x),b(y){}
-
-    };
+    // cout << "test test cid: " << test_cid << endl;
 
 
-    stl_use::vector_use();
+    // class Base{
+    // private:
+    //     int a;
+    //     virtual int get_value() = 0;
+    // public:
+    //     Base(int x): a(x){}
+    //     virtual ~Base(){}
+    // };
 
-    stl_use::priority_queue_use();
+    // class Derived: public Base{
+    // private:
+    //     int b;
+    //     int get_value(){
+    //         return b;
+    //     }
+    // public:
+    //     Derived(int x = 0, int y = 0): Base(x),b(y){}
 
-
-
-    shared_ptr<vector<string> > content;
-    cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
-    content = std::make_shared<vector<string> >(10,"test string");
-    //content = make_shared<vector<string>>();
-    //content = shared_ptr<vector<string>> (new vector<string>(10, "test"));
-    cout << "test shared_ptr use cnt2: " << content.use_count()  << " size: " <<content->size()<< endl;
-
-    for (auto it = content->begin(); it != content->end(); ++it){
-
-        cout << "content: " << *it << endl;
-    }
-
-    //测试文件处理:compare
-    //cmpare_file_use_test();
-
-
-    bool test_stoi = stoi("1.5");
-    cout << "test_stoi" << test_stoi << endl;
-
-    bool test_priority_logic = false || true && false;  //先与后或；结果是false
-
-    cout << "logic priority res: " << test_priority_logic << endl;
-    //assign: 1、不同容器相互赋值；2、清空原容器中内容
-
-    vector<string> vec_str;
-    vec_str.reserve(5);
-    vec_str.push_back("test");
-    list<string> l_str = {"wang", "wei", "nihao"};
-    vec_str.assign(l_str.begin(), l_str.end());
-    for_each(vec_str.begin(), vec_str.end(), [](const string &s){cout << s << endl;});
-
-    size_t test = 1.4;
-
-    cout << "test size_t: " << test << endl;
-
-    cout << "11<<1: " << (1<<11) << endl;
-
-    const char *str_test = "abc";
-
-    str_test = "abcd";
-
-    cout << "str_test: " << str_test << endl;
+    // };
 
 
-    //gbk c++11
+    // stl_use::vector_use();
 
-    //cout << "gbk 内码: " << BOOK_GBK_STR.c_str() << std::endl;
-
-    //设计模式相关疑问点的验证
-
-    test_design_pattern();
-
-    algorithm_use();
-
-    //size 大小计算
-
-    cout << "size struct: " << sizeof(DisplayItem) << endl;
-    //多线程相关
-    thread_use_test();
-
-    //
-    //ml_use_test();
+    // stl_use::priority_queue_use();
 
 
-    //c11新特性测试
 
-    new_feature_c11_use_test();
+    // std::shared_ptr<vector<string> > content;
+    // cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
+    // content = std::make_shared<vector<string> >(10,"test string");
+    // //content = make_shared<vector<string>>();
+    // //content = shared_ptr<vector<string>> (new vector<string>(10, "test"));
+    // cout << "test shared_ptr use cnt2: " << content.use_count()  << " size: " <<content->size()<< endl;
+
+    // for (auto it = content->begin(); it != content->end(); ++it){
+
+    //     cout << "content: " << *it << endl;
+    // }
+
+    // //测试文件处理:compare
+    // //cmpare_file_use_test();
 
 
-    //模板使用
+    // bool test_stoi = stoi("1.5");
+    // cout << "test_stoi" << test_stoi << endl;
 
-    template_use_test();
+    // bool test_priority_logic = false || true && false;  //先与后或；结果是false
 
-    cout << "begin to test!" << endl;
+    // cout << "logic priority res: " << test_priority_logic << endl;
+    // //assign: 1、不同容器相互赋值；2、清空原容器中内容
+
+    // vector<string> vec_str;
+    // vec_str.reserve(5);
+    // vec_str.push_back("test");
+    // list<string> l_str = {"wang", "wei", "nihao"};
+    // vec_str.assign(l_str.begin(), l_str.end());
+    // for_each(vec_str.begin(), vec_str.end(), [](const string &s){cout << s << endl;});
+
+    // size_t test = 1.4;
+
+    // cout << "test size_t: " << test << endl;
+
+    // cout << "11<<1: " << (1<<11) << endl;
+
+    // const char *str_test = "abc";
+
+    // str_test = "abcd";
+
+    // cout << "str_test: " << str_test << endl;
+
+
+    // //gbk c++11
+
+    // //cout << "gbk 内码: " << BOOK_GBK_STR.c_str() << std::endl;
+
+    // //设计模式相关疑问点的验证
+
+    // test_design_pattern();
+
+    // algorithm_use();
+
+    // //size 大小计算
+
+    // cout << "size struct: " << sizeof(DisplayItem) << endl;
+    // //多线程相关
+    // thread_use_test();
+
+    // //
+    // //ml_use_test();
+
+
+    // //c11新特性测试
+
+    // new_feature_c11_use_test();
+
+
+    // //模板使用
+
+    // template_use_test();
+
+    // cout << "begin to test!" << endl;
     
-    //数学计算
-     math_use_test();
+    // //数学计算
+    //  math_use_test();
 
-    //com 使用
-    com_use_test();
+    // //com 使用
+    // com_use_test();
 
-    //文件读写
-    cpp_r_w_demo();
+    // //文件读写
+    // cpp_r_w_demo();
 
-    //类型转换
-    data_type_convert_test();
+    // //类型转换
+    // data_type_convert_test();
 
-    //
-    cout << "sizeof:" << sizeof(struct link_acc_traffic_t) << endl;
-    std::string str1 = "7.8962";
-    float f_test = 0;
-    sscanf(str1.c_str(), "%f", &f_test);
+    // //
+    // cout << "sizeof:" << sizeof(struct link_acc_traffic_t) << endl;
+    // std::string str1 = "7.8962";
+    // float f_test = 0;
+    // sscanf(str1.c_str(), "%f", &f_test);
 
-    cout << "sscanf float test : " << f_test << endl;
+    // cout << "sscanf float test : " << f_test << endl;
 
-    //时间的测试
+    // //时间的测试
 
-    time_use_test();
+    // time_use_test();
 
-    //直接delete null指针，会不会core？
-    char *ptr = NULL;
-    delete ptr;
+    // //直接delete null指针，会不会core？
+    // char *ptr = NULL;
+    // delete ptr;
 
-    //set使用测试
-    stl_use::set_use();
-    stl_use::list_use();
-    stl_use::iterator_use();
-    stl_use::map_use();
-    stl_use::unordered_set_use();
+    // //set使用测试
+    // stl_use::set_use();
+    // stl_use::list_use();
+    // stl_use::iterator_use();
+    // stl_use::map_use();
+    // stl_use::unordered_set_use();
 
-    //字符串测试
-    string_using_test();
+    // //字符串测试
+    // string_using_test();
 
-    //正则表达式
+    // //正则表达式
 
-    regex_test();
+    // regex_test();
 
 
-    //测试排序使用的比较函数,返回true/false的对排序结果的影响
+    // //测试排序使用的比较函数,返回true/false的对排序结果的影响
 
-    std::vector<int> test_vec = {12,3,4,67,29};
+    // std::vector<int> test_vec = {12,3,4,67,29};
 
-    std::sort(test_vec.begin(), test_vec.end(), Comp());
+    // std::sort(test_vec.begin(), test_vec.end(), Comp());
 
-    for (size_t idx = 0;idx < test_vec.size(); idx++){
+    // for (size_t idx = 0;idx < test_vec.size(); idx++){
 
-        std::cout << test_vec[idx] << " " ;
-    }
+    //     std::cout << test_vec[idx] << " " ;
+    // }
 
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
 //
 //    char buff_2[256];
@@ -582,7 +583,7 @@ int main(int argc, char* argv[]) {
 //    cpp_r_w_demo();
 //
 //    //test macro
-    macro_study();
+    // macro_study();
 //
 //    //c read_write_demo
 //    read_write_demo();

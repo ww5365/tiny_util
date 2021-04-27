@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include <limits>
 
 void get_left_bottomXY(std::string map_id, float &x, float &y);

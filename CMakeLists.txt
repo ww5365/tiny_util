@@ -1,11 +1,15 @@
+## Minimum version of CMake required to build this project
 cmake_minimum_required(VERSION 3.0.0)
+
+# Name of the project，可以任意指定
 project(tinyUtil VERSION 0.1.0)
 
 include(CTest)
 enable_testing()
 
-##支持c++11
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
+##支持c++11 
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++11")
 
 ##特定目录头文件
 include_directories(${PROJECT_SOURCE_DIR}/src/inc)
@@ -15,7 +19,9 @@ aux_source_directory(./src/cpp DIR_SRCS)
 
 
 add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
+# add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp)
 
+## cpack生成安装包?
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)

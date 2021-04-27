@@ -25,7 +25,7 @@ class Lock{
 public:
     Lock(){
         int ret = pthread_mutex_init(&mutex, nullptr);
-        fprintf(stderr, "init mutex!ret:[%d][%s]\n", ret, strerror(ret));//抽像出来，这种重复的代码
+        // fprintf(stderr, "init mutex!ret:[%d][%s]\n", ret, strerror(ret));//抽像出来，这种重复的代码
 
         print_msg("mutxt_lock", pthread_mutex_lock(&mutex));
     }
@@ -34,7 +34,7 @@ public:
         print_msg("mutex_unlock", pthread_mutex_unlock(&mutex));
 
         int ret = pthread_mutex_destroy(&mutex);
-        fprintf(stderr, "mutex destory! ret:[%d][%s]\n", ret, strerror(ret));
+        // fprintf(stderr, "mutex destory! ret:[%d][%s]\n", ret, strerror(ret));
     }
 private:
     pthread_mutex_t mutex;
