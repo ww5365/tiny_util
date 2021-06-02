@@ -9,17 +9,21 @@ enable_testing()
 
 ##支持c++11 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++17")
 
 ##特定目录头文件
 include_directories(${PROJECT_SOURCE_DIR}/src/inc)
+include_directories(${PROJECT_SOURCE_DIR}/src/leetcode/inc)
 
 ## 扫描 ./src/cpp 下的所有源文件，并将文件名存入DIR_SRCS中
 aux_source_directory(./src/cpp DIR_SRCS)
+aux_source_directory(./src/leetcode/cpp LEETCODE_DIR_SRCS)
 
 
-add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
+add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS} ${LEETCODE_DIR_SRCS})
 # add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp)
+# add_library("tiny_util" STATIC ${DIR_SRCS})
+
 
 ## cpack生成安装包?
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

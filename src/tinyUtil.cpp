@@ -13,6 +13,9 @@
 #include "./inc/macro_study.h"
 #include  "./inc/stl_use.h"
 #include  "./inc/design_pattern.h"
+#include "./leetcode/inc/01_all.h"
+
+
 
 
 #include <cstdlib>
@@ -138,24 +141,34 @@ do{\
 
 int main(int argc, char* argv[]) {
 
-    std::string str = "abcde";
+    // std::string str = "abcde";
+    // cout << "substr: " << str.substr(1, 3) << endl;
+    // cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
 
-    cout << "substr: " << str.substr(1, 3) << endl;
+    // std::pair<int, string> pa = {1, "wangwei"};
+
+    // std::cout << "pair initilize: " << pa.first << " " << pa.second << std::endl;
+
+    
+
+    //jaccard距离
+    testJaccardDistance();
+
+    //计算lcs
+    testLcs();
+    // editdistance : 编辑距离的计算
+    testEditDistance();
 
     //predicate : 谓词
-
-    predicate_use_test();
+    // predicate_use_test();
 
     //rtti : run time type info
-
-    rtti_use_test();
+    // rtti_use_test();
 
     //c类型子串的使用
 
     //charaters_use_test();
-
     //double大小比较和与0比较
-
     //double a = 1e-10;
     //double b = 1e-11;
     //const double EPSION = 1e-13;
@@ -172,8 +185,8 @@ int main(int argc, char* argv[]) {
     //    cout << "a not equal b !" << endl;
     //}
 
-    //string test_macro = "wangwei";
-    //TEST_MACRO(test_macro);
+    // string test_macro = "wangwei";
+    // TEST_MACRO(test_macro);
 
     //vector的使用测试
 
@@ -182,7 +195,7 @@ int main(int argc, char* argv[]) {
 
     //字符串相关的测试使用
 
-    //string_use_test2();
+    // string_use_test2();
 
     //double feature[4];
     //fill_n(feature, 4, 19);//快速赋初始值
@@ -334,7 +347,7 @@ int main(int argc, char* argv[]) {
     // delete ptr;
 
     // //set使用测试
-    // stl_use::set_use();
+    stl_use::set_use();
     // stl_use::list_use();
     // stl_use::iterator_use();
     // stl_use::map_use();
@@ -583,7 +596,7 @@ int main(int argc, char* argv[]) {
 //    cpp_r_w_demo();
 //
 //    //test macro
-    // macro_study();
+    macro_study();
 //
 //    //c read_write_demo
 //    read_write_demo();

@@ -167,9 +167,25 @@ void stl_use::list_use(){
 
 void stl_use::set_use() {
 
+    //将set作为heap来使用
+    std::vector<size_t> vec1 = {1,7,2,9};
+    std::set<size_t> heap;
+
+    for (auto e : vec1){
+        heap.insert(e);
+    }
+
+    for (auto e : heap){
+        std::cout << "set mock heap : " << e << std::endl;
+    }
+
+    for (auto iter = heap.rbegin(); iter != heap.rend(); ++iter){
+        std::cout << "set mock heap reverse order: " << *iter << std::endl;
+    }
+
+
     //测试set存相同结构的情况,如何去重struct类型的数据？
     // 重载 operater<
-
 
     std::set<DistrictInfo> test_set;
 
@@ -184,14 +200,10 @@ void stl_use::set_use() {
     }
 
     cout << "test set size: " << test_set.size() << endl;
-
     DistrictInfo test_d3(131, 3);
-
     auto it = test_set.find(test_d3);
     std::size_t elem_count = test_set.count(test_d3);
-
     cout << "test set element: " << (*it).cid << " elem count: " << elem_count<< endl;
-
     //multiset 两个集合求交集
 
     multiset<int> left = {1,2,2,3,4,7,8,9};

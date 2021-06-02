@@ -38,7 +38,8 @@
 #define FACTORY(seg1, seg2) do \
 {\
    int seg1##seg2 = 10; \
-   string name_##seg1_##seg2_(#seg1);\
+   string name(#seg1);\
+   std::cout << "name : " << name << std::endl; \
 }while(0);
 
 

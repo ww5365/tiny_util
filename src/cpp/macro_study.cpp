@@ -20,7 +20,7 @@ void macro_study(){
     // LOG("this is another test macro:%d\n",t);
     // LOG("this is another test macro:%d,%d\n",t, 30)
 // 
-    // FACTORY(te, st);
+    FACTORY(te, st);
 // 
 // 
     // uint32_t prefix = (1 << 10);

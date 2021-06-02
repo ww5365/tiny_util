@@ -18,7 +18,14 @@ int fun(vector<string> &str){
 
     str.push_back("wang");
     str.push_back("wei");
-
+    return 0;
+}
+std::string VecToStr(const std::vector<std::int32_t> &vec){
+    std::string res = "";
+    for(auto e : vec){
+        res += (std::to_string(e) + ",");
+    }
+    return res;
 }
 
 void string_use_test2(){
@@ -33,7 +40,7 @@ void string_use_test2(){
      *             如果用string，处理长度，就是实际占用字节长度：9 (utf-8 ：使用3个字节)
      */
     const wstring wstr= L"宽字符";
-    wcout << "wstring size : " << wstr.size(); //大小是3
+    wcout << "wstring size : " << wstr.size() << std::endl; //大小是3
 
     for (wchar_t e : wstr){
         wcout << "wchar_t: " << e << endl;  //mac wcout没有输出
@@ -45,6 +52,7 @@ void string_use_test2(){
     cout << endl;
     const string str = "正常字符";
     cout << "string size:" << str.size() << endl;
+
 
     //wstring 保存英文是什么情况？
 
@@ -84,17 +92,22 @@ void string_use_test2(){
 
     cout <<"w_map size: " << w_map.size() << endl;
 
+    //hashcode 转64bit的base64编码
+    int64_t res = 0;
+    for (auto e :  str){
+        //循环12次，每次一个字节
+        res = 31 * (0xFFFFFFFF & res) + e;
+    }
+    std::cout << "chinese base64: " << static_cast<int32_t>(res) << std::endl; 
 
-
+    //整数vec<int>转成字符串
+    std::vector<int32_t> vec = {1,2,3,4,112};
+    std::cout <<VecToStr(vec) << std::endl;
 
 
     //test
-
-
     std::vector<std::string> vec_str;
-
     fun(vec_str);
-
     cout << "const str len: " << vec_str.size() << endl;
 
 }
