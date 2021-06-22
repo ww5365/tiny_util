@@ -144,12 +144,14 @@ int main(int argc, char* argv[]) {
     // std::string str = "abcde";
     // cout << "substr: " << str.substr(1, 3) << endl;
     // cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
-
+ 
     // std::pair<int, string> pa = {1, "wangwei"};
 
     // std::cout << "pair initilize: " << pa.first << " " << pa.second << std::endl;
 
-    
+    //nlohmann使用
+
+    json_test();
 
     //jaccard距离
     testJaccardDistance();

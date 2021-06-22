@@ -170,8 +170,7 @@ cmake --no-warn-unused-cli \
   add_library(hello SHARED ${SOURCE_1}) #生成一个动态链接库libhello.so, 使用#{SOURCE_1}知识的代码
   add_library(common STATIC util.cpp) # 生成静态库，libcommon.a为名字
   
-  ## 设置文件搜索规则
-  
+  ## 设置源码文件搜索规则
   aux_source_directory(src/ DIR_SRCS) ## 扫描 src/ 下的所有源文件，并将文件名存入DIR_SRCS中
   add_executable(main ${DIR_SRCS}) ## ${DIR_SRCS}所有源文件 main将生成的可执行文件名
   FILE(GLOB SOURCE_1 "${CMAKE_SOURCE_DIR}/src/*.cpp")  ##自定义的文件搜索规则
@@ -203,8 +202,7 @@ cmake --no-warn-unused-cli \
   ## 几个target命令
 
   target_include_directories()：指定目标包含的头文件路径target_link_libraries()：指定目标链接的库
-  target_compile_options()：指定目标的编译选项
-  目标 由 add_library() 或 add_executable() 生成
+  target_compile_options()：指定目标的编译选项 目标由 add_library() 或 add_executable() 生成
 
   target_link_libraries(hello-world PRIVATE/INTERFACE/PUBLIC hello)
   target_include_directories(hello-world PRIVATE/INTERFACE/PUBLIC hello)
