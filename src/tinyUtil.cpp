@@ -25,7 +25,6 @@
 #include <algorithm>
 #include <memory>
 
-using namespace std;
 
 typedef struct test_struct{
     int a;

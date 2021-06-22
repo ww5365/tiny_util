@@ -1,6 +1,25 @@
 # 项目开发小工具
 
 
+## 使用cmake进行编译
+
+
+1、安装cmake 及 插件
+
+cmake tools
+cmake
+
+2、配置cmake编译
+
+* 链接的快捷键 : ctrl + k ctrl + s -> 搜： clean all project -> ctrl + shift + del 清空cmake项目并编译
+* 配置编译选项： Edit cmake cache 
+
+
+
+
+
+
+
 可以直接在命令行运行如下命令产出makefile文件
 
 ``` shell

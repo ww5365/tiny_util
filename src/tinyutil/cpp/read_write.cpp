@@ -6,7 +6,7 @@
  */
 
 #include<stdio.h>
-#include "com_use.h"
+#include "../inc/com_use.h"
 
 #include <iostream>
 #include <algorithm>

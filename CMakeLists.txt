@@ -7,9 +7,11 @@ project(tinyUtil VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
-##支持c++11 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
+##支持c++11  c++17
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++17")
+#set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 message(STATUS "cxx_flags: " ${CMAKE_CXX_FLAGS})
 
@@ -25,7 +27,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/leetcode/inc)
 include_directories(${PROJECT_SOURCE_DIR}/third-party/json/single_include)
 
 ## 扫描 ./src/cpp 下的所有源文件，并将文件名存入DIR_SRCS中
-aux_source_directory(.tinyutil/src/cpp DIR_SRCS)
+aux_source_directory(./src/tinyUtil/cpp DIR_SRCS)
 
 #aux_source_directory(./src/leetcode/cpp LEETCODE_DIR_SRCS)
 add_subdirectory(./src/leetcode)
@@ -37,6 +39,7 @@ add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
 
 #target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/third-party/json/single_include)
 
+# 配置了子目录，子目录中的文件打成了库文件
 target_link_libraries(${PROJECT_NAME} LeetCode)
 
 ## cpack生成安装包?
