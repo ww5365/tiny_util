@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cmath>
 #include <memory>
+#include <algorithm>
 #include "test_main.h"
 
 using namespace std;
@@ -173,12 +174,12 @@ void combination_test(){
 
 
     //先集合进行排序,去重
-    sort(test.begin(), test.end(), std::less<int>());
+    std::sort(test.begin(), test.end(), std::less<int>());
 
-    auto it = unique(test.begin(), test.end());  //去重后，返回的结果，是最后一个元素之后迭代器，但容器的大小没变，需要把it之后的元素删除
+    auto it = std::unique(test.begin(), test.end());  //去重后，返回的结果，是最后一个元素之后迭代器，但容器的大小没变，需要把it之后的元素删除
     test.erase(it, test.end());
 
-    for_each(test.begin(), test.end(), [](const int elem){cout <<  "unique res:" << elem << endl;});
+    std::for_each(test.begin(), test.end(), [](const int elem){cout <<  "unique res:" << elem << endl;});
 
 
     vector<vector<int>> res = s.combination(test);

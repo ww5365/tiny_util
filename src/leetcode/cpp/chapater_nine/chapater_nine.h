@@ -14,6 +14,8 @@
 #include <stack>
 #include <unordered_set>
 #include <queue>
+#include <algorithm>
+#include <memory>
 
 using namespace std;
 

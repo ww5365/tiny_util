@@ -63,6 +63,9 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+ #include "ds_common.h"
+
 class Solution {
 public:
     bool hasCycle(ListNode *head) {

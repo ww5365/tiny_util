@@ -65,6 +65,7 @@
  * };
  */
 
+#include "ds_common.h"
 
 class Solution {
 public:

@@ -13,6 +13,7 @@
 #include <stack>
 #include <queue>
 #include <utility>
+#include <algorithm>
 using namespace std;
 
 /*
@@ -257,7 +258,7 @@ TreeNode* Solution::build(vector<int>::iterator pre_first, vector<int>::iterator
 
     TreeNode *root = new TreeNode(*pre_first);
     //使用迭代器访查找某个范围内[in_first,in_last)值；返回找到值的迭代器值，否则返回in_last
-    auto it = find(in_first,in_last, *pre_first); //algorithm
+    auto it = std::find(in_first,in_last, *pre_first); //algorithm
     int left_size = distance(in_first, it);
 
     root->left = build(next(pre_first), next(pre_first,left_size+1),
@@ -287,8 +288,8 @@ TreeNode* Solution::build_post(vector<int>::iterator in_first, vector<int>::iter
     //构造节点
     TreeNode *root = new TreeNode(*post_rfirst);
 
-    auto it = find(in_first,in_last, *post_rfirst);//在in序列中查找元素
-    int right_len = distance(it,in_last) - 1;
+    auto it = std::find(in_first,in_last, *post_rfirst);//在in序列中查找元素
+    int right_len = std::distance(it,in_last) - 1;
 
     root->left = build_post(in_first,it,post_rfirst+right_len+1,post_rlast);
     root->right = build_post(it+1,in_last,post_rfirst+1,post_rfirst+right_len+1);

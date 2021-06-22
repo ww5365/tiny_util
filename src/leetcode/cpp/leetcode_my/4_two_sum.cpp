@@ -16,6 +16,7 @@
 #include <vector>
 #include  <iostream>
 #include <unordered_map>
+#include <algorithm>
 using namespace std;
 
 class Solution{
@@ -76,7 +77,7 @@ public:
             tmp.emplace_back(e);
         }
 
-        sort(tmp.begin(), tmp.end());
+        std::sort(tmp.begin(), tmp.end());
         int i = 0, j = tmp.size() - 1;
         while (i < j){
             if (tmp[i].val + tmp[j].val < target){

@@ -62,14 +62,14 @@ public:
 
     //divide and conquer : 分治方法来实现前序遍历
 
-    shared_ptr<vector<int>> preOrderTraverse_new(TreeNode *root){
+    std::shared_ptr<vector<int>> preOrderTraverse_new(TreeNode *root){
 
-        shared_ptr<vector<int>> res = shared_ptr<vector<int>>(new vector<int>());
+        std::shared_ptr<vector<int>> res = std::shared_ptr<vector<int>>(new vector<int>());
         if (!root){
             return res;
         }
-        shared_ptr<vector<int>> left = preOrderTraverse_new(root->left);
-        shared_ptr<vector<int>> right = preOrderTraverse_new(root->right);
+        std::shared_ptr<vector<int>> left = preOrderTraverse_new(root->left);
+        std::shared_ptr<vector<int>> right = preOrderTraverse_new(root->right);
         res->push_back(root->value);
 
         /*
@@ -308,14 +308,6 @@ public:
  *
  *
  */
-
-
-
-
-
-
-
-
 void test_basic_3_binary_tree_divide_conquer(){
 
     /*
@@ -345,7 +337,7 @@ void test_basic_3_binary_tree_divide_conquer(){
 
     PreOrderTree pre;
     //用分治思想实现：前序遍历
-    shared_ptr<vector<int>> res = pre.preOrderTraverse_new(tree);
+    std::shared_ptr<vector<int>> res = pre.preOrderTraverse_new(tree);
     cout << "preorder traverse: " << res.use_count() << endl;
     for (auto ele: *res){
         cout << ele << "  ";
@@ -378,13 +370,6 @@ void test_basic_3_binary_tree_divide_conquer(){
         cout <<  elem << " " ;
     }
     cout << endl;
-
-
-
-
-
-
-
 
 
 }

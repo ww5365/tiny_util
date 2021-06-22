@@ -86,38 +86,37 @@ public:
 };
 */
 
-#include <unordered_map>
-
-
-
-class Solution {
-public:
-    Node* copyRandomList(Node* head) {
-
-        if (!head) return nullptr;
-
-        Node* ori_node = head;
-        Node* dummy = new Node(0);
-        Node* cur = dummy;
-
-        std::unordered_map<Node*, Node*> map_node;
-        while (ori_node){
-            Node* new_node = new Node(ori_node->val); 
-            map_node.insert(std::make_pair(ori_node, new_node)); //旧-》新节点映射
-            cur->next = new_node;
-            cur = new_node;
-            ori_node = ori_node->next;
-        }
-
-        cur = dummy->next;
-        ori_node = head;
-        while (ori_node){
-            cur = map_node[ori_node];
-            cur->random = map_node[ori_node->random];
-            ori_node = ori_node->next;
-        }
-        return dummy->next;
-    }
-};
-// @lc code=end
+// #include <unordered_map>
+// 
+// 
+// 
+// class Solution {
+// public:
+    // Node* copyRandomList(Node* head) {
+// 
+        // if (!head) return nullptr;
+// 
+        // Node* ori_node = head;
+        // Node* dummy = new Node(0);
+        // Node* cur = dummy;
+// 
+        // std::unordered_map<Node*, Node*> map_node;
+        // while (ori_node){
+            // Node* new_node = new Node(ori_node->val); 
+            // map_node.insert(std::make_pair(ori_node, new_node)); //旧-》新节点映射
+            // cur->next = new_node;
+            // cur = new_node;
+            // ori_node = ori_node->next;
+        // }
+// 
+        // cur = dummy->next;
+        // ori_node = head;
+        // while (ori_node){
+            // cur = map_node[ori_node];
+            // cur->random = map_node[ori_node->random];
+            // ori_node = ori_node->next;
+        // }
+        // return dummy->next;
+    // }
+// };
 

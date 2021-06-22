@@ -8,22 +8,17 @@
 
 #include <iostream>
 #include <sstream>
-#include "./inc/cmd_option.h"
-#include "./inc/com_use.h"
-#include "./inc/macro_study.h"
-#include  "./inc/stl_use.h"
-#include  "./inc/design_pattern.h"
+#include "./tinyutil/inc/cmd_option.h"
+#include "./tinyutil/inc/com_use.h"
+#include "./tinyutil/inc/macro_study.h"
+#include  "./tinyutil/inc/stl_use.h"
+#include  "./tinyutil/inc/design_pattern.h"
 #include "./leetcode/inc/01_all.h"
-
-
-
 
 #include <cstdlib>
 #include <ctime>
-
 #include <string>
 #include <set>
-
 #include <queue>
 #include <deque>
 
@@ -149,17 +144,12 @@ int main(int argc, char* argv[]) {
 
     // std::cout << "pair initilize: " << pa.first << " " << pa.second << std::endl;
 
+
+    //leetcode 目录下testcase
+    leetcode_all_test();
+
     //nlohmann使用
-
     json_test();
-
-    //jaccard距离
-    testJaccardDistance();
-
-    //计算lcs
-    testLcs();
-    // editdistance : 编辑距离的计算
-    testEditDistance();
 
     //predicate : 谓词
     // predicate_use_test();

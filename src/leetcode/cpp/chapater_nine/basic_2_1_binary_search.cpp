@@ -55,7 +55,7 @@ int BinarySearch(vector<int> &vec, int target){
 void base_2_binary_search(){
 
     vector<int> vec = {3,1,5,9,10,13,2,10};
-    stable_sort(vec.begin(), vec.end());
+    std::stable_sort(vec.begin(), vec.end());
 
     int target = 10;
     int pos1 = BinarySearch(vec, target);
