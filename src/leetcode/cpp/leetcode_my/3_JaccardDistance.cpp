@@ -59,7 +59,7 @@ class Solution{
 void testJaccardDistance(){
 
     Solution s;
-    std::vector<int32_t> vec1 = {1,2,3,5};
+    std::vector<int32_t> vec1 = {-607224780,-891990013,3541955,50673,3594628,-710537653,1136629407,2000059364};
     std::vector<int32_t> vec2 = {2,4,3};
     float lcs = s.jaccardDistance(vec1.data(), 
                                      vec1.data() + vec1.size(),

@@ -9,4 +9,8 @@ void rtti_use_test(){
     std::string name = elem->get_name();
 
     std::cout << "rtti name: " << name << std::endl;
+
+
+
+
 }

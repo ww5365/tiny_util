@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Technologies Co., Ltd. 2021-2021. All rights reserved.
+ * Description: 文件功能描述
+ */
 
 #include "01_all.h"
 
@@ -48,8 +52,8 @@ class Solution{
 void testEditDistance(){
 
     Solution s;
-    std::vector<int32_t> vec1 = {1,2,3,4};
-    std::vector<int32_t> vec2 = {2,4};
+    std::vector<int32_t> vec1 = {1607,-607224780,-891990013,1136629407,2000059364,3541955,50673,3594628,-710537653};
+    std::vector<int32_t> vec2 = {1607,-607224780,-891990013,-913068578,1567039,-913068578,464059829, 464059829,1136629407,933923200};
     float editDist = s.minEditDistance(vec1.data(), 
                                      vec1.data() + vec1.size(),
                                      vec2.data(),
