@@ -79,6 +79,26 @@
 			"vector": "cpp"
 		},
 		"C_Cpp.autocomplete": "Disabled",
-		"C_Cpp.intelliSenseEngine": "Disabled"
+		"C_Cpp.intelliSenseEngine": "Disabled",
+		"wecode-cpp.clangd.arguments": [
+			"--pch-storage=memory",
+			"--preambles-limit=30",
+			"--background-index",
+			"--prefer-index-without-ast=always",
+			"--limit-results=30",
+			"--header-insertion=never",
+			"--cross-file-rename=true",
+			"--fallback-style=Huawei",
+			"--missing-headers-out-file=${workspaceFolder}/.vscode/missingHeaderFiles.txt",
+			"--compile-commands-dir=${workspaceFolder}/.vscode"
+		],
+		"C_Cpp.formatting": "Disabled",
+		"C_Cpp.errorSquiggles": "Disabled",
+		"files.watcherExclude": {
+			"**/.cache/clangd/**": true
+		},
+		"search.exclude": {
+			"**/.cache/clangd/**": true
+		}
 	}
 }

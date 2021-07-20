@@ -5,10 +5,11 @@
 #include <vector>
 #include <set>
 
+
+void testMaxQueue();
 void testEditDistance();
 void testLcs();
 void testJaccardDistance();
-
 
 void leetcode_all_test();
 

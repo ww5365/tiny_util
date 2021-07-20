@@ -9,7 +9,7 @@
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++17")
 
 ##特定目录头文件
-message("${PROJECT_SOURCE_DIR}" ${PROJECT_SOURCE_DIR})
+message("test for ww source dir: ${PROJECT_SOURCE_DIR}" ${PROJECT_SOURCE_DIR})
 
 #include_directories(${PROJECT_SOURCE_DIR}/src/*.h ${PROJECT_SOURCE_DIR}/src/chapater_nine/*.h ${PROJECT_SOURCE_DIR}/src/leetcode_my/*.h)
 

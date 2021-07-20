@@ -586,3 +586,10 @@ Wecode的跳转完全是基于Clangd的，我们用wecode打开项目时，会�
 
 如果生成的compile_commands.json不能满足我们的要求，可以人工编辑该文件，修复好编译命令后，重启wecode，代码就可以正常的跳转.另外CMake也支持直接生成`compile_commands.json`文件
 具体参考[http://wecode.huawei.com/Docs/74](http://wecode.huawei.com/Docs/74)
+
+本地不跳转,不提示的解决方案：
+
+导入本地头文件：
+    设置→用户→拓展→WeCode C/C++→Codebase › Generator: Search Paths 包含头文件路径列表，可以是src根目录
+包含头文件找到include路径：
+    Ctrl + Shift + P执行命令→wecode c++: generate compile_commands.json file→弹窗让选择文件夹

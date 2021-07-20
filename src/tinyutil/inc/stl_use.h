@@ -42,9 +42,9 @@ class CompareFun{
 public:
     bool operator() (const Student &lf,const Student &rg) const {
         if (lf.get_score() == rg.get_score()){
-            return lf.get_name() < rg.get_name(); //返回1的时机？后面的大，返回1，进行调整；把大的调整到前面
+            return lf.get_name() > rg.get_name(); //返回1的时机？后面的大，返回1，进行调整；把大的调整到前面  小顶堆 小的在前面
         }
-        return lf.get_score() > rg.get_score();//左边大于右边，返回1；入队时，之前入队的元素大于后入队的，返回1，进行调整；
+        return lf.get_score() < rg.get_score();//左边大于右边，返回1；入队时，之前入队的元素大于后入队的，返回1，进行调整； 大顶堆 大的在前面
     }
 };
 
@@ -54,6 +54,7 @@ public:
 
 
     static void priority_queue_use();
+    static void deque_use();
     static void vector_use();
 
     static void map_use();

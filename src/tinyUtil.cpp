@@ -229,10 +229,8 @@ int main(int argc, char* argv[]) {
 
 
     // stl_use::vector_use();
-
+    // stl_use::deque_use();
     // stl_use::priority_queue_use();
-
-
 
     // std::shared_ptr<vector<string> > content;
     // cout << "test shared_ptr use cnt1: " << content.use_count() << endl;

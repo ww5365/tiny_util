@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 #include <algorithm>
 #include "../inc/stl_use.h"
 using namespace std;
@@ -101,7 +102,9 @@ void stl_use::iterator_use(){
 
 }
 
-
+/*
+* list 使用  顺序容器
+*/
 void stl_use::list_use(){
 
     //test splice
@@ -164,6 +167,10 @@ void stl_use::list_use(){
 
 
 }
+
+/*
+* set 使用  
+*/
 
 void stl_use::set_use() {
 
@@ -230,6 +237,9 @@ void stl_use::set_use() {
 }
 
 
+/*
+* unordered_set 使用  
+*/
 void stl_use::unordered_set_use(){
 
     //关键字是pair<int, int> 如何判断key是否是重复？无序set的key经过hash的，传递一个hash类（重载（））
@@ -263,17 +273,13 @@ void stl_use::unordered_set_use(){
         cout << "unorder_set all content: " << *it << endl;
     }
 
-
-
-
 }
 
 
-
+/*
+*  map 使用
+*/
 void stl_use::map_use() {
-
-
-
     //pair make_pair map
     pair<int, string> pa(1, "wang"); //直接初始化
     pair<int, string> pb;
@@ -400,49 +406,9 @@ void stl_use::map_use() {
 
 }
 
-
-void stl_use::priority_queue_use(){
-    //下面是使用优先级队列的常见形式；deque中数据是按照分数从小到大排序
-    std::priority_queue<Student,std::deque<Student>,CompareFun> qu_test;
-
-    Student s1("wang",60);
-    Student s2("wei",60);
-    Student s3("song",54);
-    Student s4("ni",76);
-    Student s5("havy",80);
-
-    qu_test.push(s1);
-    qu_test.push(s2);
-    qu_test.push(s3);
-    qu_test.push(s4);
-    qu_test.push(s5);
-
-    std::cout << "score \t name " <<std::endl;
-
-    while(!qu_test.empty()){
-        std::cout << qu_test.top().get_score() << "\t"
-                <<qu_test.top().get_name() <<std::endl;
-
-        qu_test.pop();
-    }
-
-    priority_queue<int, deque<int>> que2;
-
-    que2.push(8);
-    que2.push(4);
-    que2.push(5);
-    que2.push(9);
-
-    while (!que2.empty()){
-
-        std::cout << "priority que2: " << que2.top() << std::endl;//小顶堆，队头最小;默认大顶堆，队头最大；
-
-        que2.pop();
-    }
-
-
-}
-
+/*
+* vector 使用  顺序容器
+*/
 void stl_use::vector_use(){
 
     //test emplace
@@ -526,14 +492,8 @@ void stl_use::vector_use(){
     }
 
     for (auto elem : vec_int){
-
         cout << "erase element on position: " << elem << "  size: " << vec_int.size() <<  endl;
-
     }
-
-
-
-
 
     std::vector<int> small_int = {8,9, 10};
 
@@ -563,6 +523,84 @@ void stl_use::vector_use(){
         cout << "use std::find vector string: " << *it2 << endl;
     } else {
         cout << "use std::find vector string not find" << endl;
+    }
+}
+
+
+/*
+* deque 使用  顺序容器
+* 双端队列：
+  deque支持push_front、pop_front、push_back、pop_back
+  queue支持push_back、pop_front  容器适配器
+
+* 
+*/
+void stl_use::deque_use(){
+
+    std::deque<int> deq;
+    deq.push_back(4);
+    deq.push_back(2);
+    deq.push_back(3);
+    //遍历
+    for (int i = 0; i < deq.size(); ++i){
+        std::cout << "deq content " << i << " element: " << deq[i] << std::endl; // 4 2 3 
+    }
+    //排序 默认从小到大
+    std::sort(deq.begin(), deq.end());
+    for (auto e : deq){
+        std::cout << "deq content2 " << e  << std::endl; // 2 3 4 
+    }
+
+    //出队 入队
+    deq.pop_back();  //队尾出队
+    deq.push_front(7);  //队头入队
+    for (auto e : deq){
+        std::cout << "deq content3 " << e  << std::endl; // 7 2 3 
+    }
+
+}
+
+
+///顺序的容器适配器： stack queue priority_queue
+
+/*
+*  priorrity_queue 队列使用
+*  模拟大小顶堆的实现
+*/
+void stl_use::priority_queue_use(){
+    //下面是使用优先级队列的常见形式；deque中数据是按照分数从小到大排序
+    // priority_queue <类名, 底层容器, 比较类名>
+    std::priority_queue<Student,std::deque<Student>,CompareFun> qu_test;
+
+    Student s1("wang",60);
+    Student s2("wei",60);
+    Student s3("song",54);
+    Student s4("ni",76);
+    Student s5("havy",80);
+
+    qu_test.push(s1);
+    qu_test.push(s2);
+    qu_test.push(s3);
+    qu_test.push(s4);
+    qu_test.push(s5);
+
+    std::cout << "priority que1 score \t name " <<std::endl;
+
+    while(!qu_test.empty()){
+        std::cout << qu_test.top().get_score() << "\t"
+                <<qu_test.top().get_name() <<std::endl;
+
+        qu_test.pop();
+    }
+
+    priority_queue<int, deque<int>> que2;
+    que2.push(8);
+    que2.push(4);
+    que2.push(5);
+    que2.push(9);
+    while (!que2.empty()){
+        std::cout << "priority que2: " << que2.top() << std::endl;//小顶堆，队头最小;默认大顶堆，队头最大；
+        que2.pop();
     }
 
 

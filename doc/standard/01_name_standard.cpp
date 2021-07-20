@@ -43,8 +43,7 @@ c++ 编程标准示例 : 命名规范
     enum class UrlTableErrors {}; //枚举，大驼峰； 元素是全大写；
     typedef std::map<std::string, UrlTableProperties*> PropertiesMap;  //类型别名，大驼峰命名
 
-    //函数命名：动宾结构  大驼峰
-
+    //函数命名：动宾结构  大驼峰  包括类中成员函数，普通函数
     class List {
     public:
         void AddElement(const Foo& element); //大驼峰，类成员函数名

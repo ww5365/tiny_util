@@ -3,11 +3,14 @@
 
 void leetcode_all_test(){
 
+    //队列最大值
+    testMaxQueue();
+
     //jaccard距离
-    testJaccardDistance();
+    // testJaccardDistance();
     //计算lcs
-    testLcs();
+    // testLcs();
     // editdistance : 编辑距离的计算
-    testEditDistance();
+    // testEditDistance();
 
 }
