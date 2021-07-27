@@ -89,8 +89,8 @@
 			"--header-insertion=never",
 			"--cross-file-rename=true",
 			"--fallback-style=Huawei",
-			"--missing-headers-out-file=${workspaceFolder}/.vscode/missingHeaderFiles.txt",
-			"--compile-commands-dir=${workspaceFolder}/.vscode"
+			"--missing-headers-out-file=D:/workspace/gitlab/tiny_util/.vscode/missingHeaderFiles.txt",
+			"--compile-commands-dir=D:/workspace/gitlab/tiny_util/.vscode"
 		],
 		"C_Cpp.formatting": "Disabled",
 		"C_Cpp.errorSquiggles": "Disabled",

@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
     leetcode_all_test();
 
     //nlohmann使用
-    json_test();
+    // json_test();
 
     //predicate : 谓词
     // predicate_use_test();
@@ -336,7 +336,7 @@ int main(int argc, char* argv[]) {
     // delete ptr;
 
     // //set使用测试
-    stl_use::set_use();
+    // stl_use::set_use();
     // stl_use::list_use();
     // stl_use::iterator_use();
     // stl_use::map_use();
@@ -585,7 +585,7 @@ int main(int argc, char* argv[]) {
 //    cpp_r_w_demo();
 //
 //    //test macro
-    macro_study();
+    // macro_study();
 //
 //    //c read_write_demo
 //    read_write_demo();

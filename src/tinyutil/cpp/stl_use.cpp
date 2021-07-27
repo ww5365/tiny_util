@@ -532,7 +532,6 @@ void stl_use::vector_use(){
 * 双端队列：
   deque支持push_front、pop_front、push_back、pop_back
   queue支持push_back、pop_front  容器适配器
-
 * 
 */
 void stl_use::deque_use(){
@@ -570,7 +569,7 @@ void stl_use::deque_use(){
 void stl_use::priority_queue_use(){
     //下面是使用优先级队列的常见形式；deque中数据是按照分数从小到大排序
     // priority_queue <类名, 底层容器, 比较类名>
-    std::priority_queue<Student,std::deque<Student>,CompareFun> qu_test;
+    std::priority_queue<Student,std::deque<Student>,CompareClass> qu_test;
 
     Student s1("wang",60);
     Student s2("wei",60);

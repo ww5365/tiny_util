@@ -1,10 +1,19 @@
-#include <iostream>
 #include "./inc/01_all.h"
+#include <iostream>
 
 void leetcode_all_test(){
 
-    //队列最大值
-    testMaxQueue();
+    // 每日温度计算 
+    testEveryDayTemprature();
+
+    // 最小单调栈
+    // testMinStack();
+
+    // 滑动窗口最大值
+    // testMaxSlideWindow();
+
+    // 队列最大值
+    // testMaxQueue();
 
     //jaccard距离
     // testJaccardDistance();

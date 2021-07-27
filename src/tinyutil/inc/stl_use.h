@@ -38,7 +38,7 @@ public:
 
 };
 
-class CompareFun{
+class CompareClass{
 public:
     bool operator() (const Student &lf,const Student &rg) const {
         if (lf.get_score() == rg.get_score()){

@@ -9,6 +9,8 @@
  * [[],[1],[2],[],[],[]]
  * 输出: [null,null,null,2,1,2]
  * ref: https://mp.weixin.qq.com/s/Y2QZZ-coEYZ6ItDRyrdwVw
+ * 解法：单调队列
+ * 如何保持一个队列的队头是最大值且是单调的？是解决这个问题的关键
  */
 
 #include "01_all.h"

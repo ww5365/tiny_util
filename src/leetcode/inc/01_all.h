@@ -6,6 +6,9 @@
 #include <set>
 
 
+void testEveryDayTemprature();
+void testMinStack();
+void testMaxSlideWindow();
 void testMaxQueue();
 void testEditDistance();
 void testLcs();
