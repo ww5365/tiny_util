@@ -6,6 +6,7 @@
 #include <set>
 
 
+void testLargestRectangleArea();
 void testEveryDayTemprature();
 void testMinStack();
 void testMaxSlideWindow();

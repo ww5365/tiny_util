@@ -27,41 +27,22 @@
 #include <vector>
 #include <iostream>
 
-struct Element {
-    int data;
-    std::size_t pos;
-};
 class Solution {
 
 public:
-    std::vector<int> dailyTemprature(std::vector<int> &data)
+    int largestRectangleArea(std::vector<int> &data)
     {
-        std::size_t len = data.size();
-        std::vector<int> result(len, 0);
-        // std::stack<Element> st;
-        std::stack<std::size_t> st;
-
-        for (std::size_t i = 0; i < len; ++i) {
-            // 出栈，计算栈内元素的相隔当前val的间隔天数
-            while (!st.empty() && data[i] > data[st.top()]) {
-                result[st.top()] = (i - st.top());
-                st.pop();
-            }
-            st.push(i);
-        }
-
+        int result = 0;
         return result;
     }
 
 };
 
-void testEveryDayTemprature()
+void testLargestRectangleArea()
 {
-    std::vector<int> vec = {73, 74, 75, 71, 69, 72, 76, 73};
+    std::vector<int> vec = {2, 1, 5, 6, 2, 3};
     Solution s;
-    std::vector<int> result =  s.dailyTemprature(vec);
-    for (auto e : result) {
-        std::cout << "daily temprature: " << e << std::endl;
-    }
+
+    std::cout <<"largest rectangle area: " << s.largestRectangleArea(vec) << std::endl;
 
 }
