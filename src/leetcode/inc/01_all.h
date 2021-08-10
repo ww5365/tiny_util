@@ -14,7 +14,7 @@ void testMaxQueue();
 void testEditDistance();
 void testLcs();
 void testJaccardDistance();
-
+void testLargestRectangleArea();
 void leetcode_all_test();
 
 #endif
