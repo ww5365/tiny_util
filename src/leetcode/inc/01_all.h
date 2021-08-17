@@ -7,6 +7,7 @@
 
 
 void testLargestRectangleArea();
+void testLargestRectangleArea2();
 void testEveryDayTemprature();
 void testMinStack();
 void testMaxSlideWindow();

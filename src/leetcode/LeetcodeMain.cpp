@@ -2,12 +2,14 @@
 #include <iostream>
 
 void leetcode_all_test(){
+    // 最大面积2
+    testLargestRectangleArea2();
 
     // 最大面积
-    testLargestRectangleArea();
+    // testLargestRectangleArea();
 
     // 每日温度计算 
-    testEveryDayTemprature();
+    // testEveryDayTemprature();
 
     // 最小单调栈
     // testMinStack();

@@ -77,6 +77,7 @@ public:
     }
 };
 
+
 void testLargestRectangleArea()
 {
     std::vector<int> vec = {2, 1, 5, 6, 2, 3};
