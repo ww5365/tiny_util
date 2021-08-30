@@ -2,8 +2,12 @@
 #include <iostream>
 
 void leetcode_all_test(){
+    //最大子矩阵中可能最大的K值
+
+    testMaxSumSubmatrix();
+
     // 最大面积2
-    testLargestRectangleArea2();
+    // testLargestRectangleArea2();
 
     // 最大面积
     // testLargestRectangleArea();
