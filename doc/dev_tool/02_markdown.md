@@ -17,10 +17,70 @@
 
 ## LaTex 插入公式
 
+### 基本语法
 
 
 
+#### 希腊字母
 
+$$
+\alpha
+$$
+
+
+常用希腊字母表
+
+![image-20210830220611065](img/image-20210830220611065.png)
+
+
+
+* 基本公式
+  $$
+  x_i \\
+  x^{2*i} \\
+  \sqrt{5} \\
+  \dots  \\
+  \cdots \\
+  求和：\sum_1^n \\
+  积分：\int_1^n  \\
+  lim_{x \to \infty}  \\
+  \frac{3}{5} \\
+  $$
+  
+  
+* 常用公式
+
+  1. 矩阵 matrix
+
+     说明:& 同行分隔; 换行，反斜杠
+
+  $$
+  \begin{matrix}
+  1&x&x^2\\
+  1&y&y^2\\
+  \end{matrix}2
+  $$
+
+  ​	2. 分段函数 cases
+  $$
+  f(n)=
+  	\begin{cases}
+  		n/2, & \text{if $n$ is even}\\
+  		3n+1,& \text{if $n$ is odd}
+  	\end{cases}
+  	分段函数：$...$ 正文插入数学公式
+  $$
+  ​	3. 均方误差
+
+  $$
+  J(\theta) = \frac{1}{2m}\sum_{i=0}^m(y^i - h_\theta(x^i))^2
+  $$
+
+  4. 批量梯度下降
+     $$
+     \frac{\partial J(\theta)}{\partial\theta_j} = -\frac1m\sum_{i=0}^m(y^i - 	h_\theta(x^i))x^i_j
+     $$
+     
 
 
 
