@@ -226,4 +226,3 @@ cmake --no-warn-unused-cli \
   TARGET_LINK_LIBRARIES(sayhello ${hello}) ##将libhello.so链接到可执行文件
   
   ```
-  

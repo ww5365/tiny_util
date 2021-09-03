@@ -42,15 +42,15 @@ wecode配置： ctrl+shift+p -> 首选项：打开设置(json)，新增如下配
 
 注意`"files.eol": "\n"`表示换行符是LF，同时建议git config设置`core.autocrlf=false`，方便windows与linux文件同步
 
-## 2. 使用cmake编译项目
+## 2. cmake编译项目
 
 ### 2.1 cmake介绍
-CMake主要是编写CMakeLists.txt文件，然后用cmake命令将CMakeLists.txt文件转化为make所需要的makefile文件，最后用make命令编译源码生成可执行程序或共享库（so(shared object)）。
+cmake命令将CMakeLists.txt文件转化为make所需要的makefile文件，最后用make命令编译源码生成可执行程序或共享库（so(shared object)）。
 
 cmake  指向CMakeLists.txt所在的目录，例如cmake .. 表示CMakeLists.txt在当前目录的上一级目录。
 cmake后会生成很多编译的中间文件以及makefile文件，所以一般建议新建一个新的目录，专门用来编译，例如
 
-```
+``` shell
 mkdir build
 cd build
 cmake ..
@@ -59,20 +59,23 @@ make  //根据生成makefile文件，编译程序。
 
 ### 2.2 cmake的配置及编译
 
-* 设置Makefile类型：
+* VsCode设置Makefile类型：
   文件>首选项>设置>搜索cmake: generator
   设置为”MinGw Makefiles”或者” Unix Makefiles”，这相当于运行cmake –G “MinGw Makefiles” .
 
-* vs中cmake全部配置：
+* VsCode中cmake全部配置：
   ctrl + shift + p -> cmake -> edit cmake cache 也可以修改cmake配置,运行环境
 
-* cmake 命令：
+* cmake 命令：关键编译时生成complie_command.json文件，用来进行代码的跳转
+
+  > 修改项目路径下：./scripts/build.sh
+  >
+  > 产出文件目录：
 
 
 ``` shell
-
 # configure the project and generate a native build system: 
-cmake    "-GNinja" \   # 配置使用Ninja来进行构建和编译；指定构建系统生成器
+cmake    "-GNinja" \   # 配置使用Ninja来进行构建和编译；指定构建系统生成器,生成build.ninja文件
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \  #  指定生成的Makefile的编译模式：Debug /Release
         -DENABLE_COVERAGE=OFF \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \  # 其生成的文件compile_commands.json，包含所有编译单元所执行的指令; 同：cmakelist.txt中set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -89,7 +92,6 @@ cmake    "-GNinja" \   # 配置使用Ninja来进行构建和编译；指定构�
 # Then call that build system to actually compile/link the project
 cmake --build . --target  rankengine_all  
 # --build是指定CMakeCache.txt（或CMakeFiles文件夹）所在的路径;在此目录中构建二进制树
-
 
 cmake --no-warn-unused-cli \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
@@ -111,7 +113,7 @@ cmake --no-warn-unused-cli \
   -T <toolset-name>            = Specify toolset name if supported by
 
 ```
-  
+
 
 ### 2.3 task.json配置及运行
 
@@ -134,7 +136,7 @@ cmake --no-warn-unused-cli \
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceFolder}", //显示vs预定义变量
-
+  
         },
         {
             "label": "Build-all",
@@ -195,7 +197,7 @@ cmake --no-warn-unused-cli \
         }
      ]
     }
-
+  
   ```
 
 ctrl + shift + b : 选择不同的task任务执行
