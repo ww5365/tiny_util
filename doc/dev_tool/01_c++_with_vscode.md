@@ -66,7 +66,7 @@ make  //根据生成makefile文件，编译程序。
 * VsCode中cmake全部配置：
   ctrl + shift + p -> cmake -> edit cmake cache 也可以修改cmake配置,运行环境
 
-* cmake 命令：关键编译时生成complie_command.json文件，用来进行代码的跳转
+* cmake 命令：关键编译时生成complie_commands.json文件，用来进行代码的跳转
 
   > 修改项目路径下：./scripts/build.sh
   >

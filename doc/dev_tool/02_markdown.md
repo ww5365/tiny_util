@@ -47,7 +47,6 @@ $$
   \frac{3}{5} \\
   $$
   
-  
 * 常用公式
 
   1. 矩阵 matrix
@@ -82,6 +81,23 @@ $$
      $$
      
 
+  $$
+  f(x,y)=
+  	\begin{cases}
+  		a1*x + b1*y, & \text{if $意图$ is A}\\
+  		a2*x + b2*y, & \text{if $意图$ is B}
+  	\end{cases}
+  $$
+  
+* 
+
+
+​					
+​				
+
+
+​	
+
 
 
 
@@ -95,6 +111,10 @@ $$
 [typora](https://www.typora.io/#windows)
 
 [pandoc](https://github.com/jgm/pandoc/releases/tag/2.14.2) window下载.msi文件安装即可，主要是可以使用导入功能
+
+
+
+
 
 
 
