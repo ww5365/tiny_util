@@ -60,27 +60,47 @@ $$
   \end{matrix}2
   $$
 
-  ​	2. 分段函数 cases
+  2. 分段函数 cases
+  
+  
+  
+  分段函数的大括号： \begin{cases} ... \end {cases}  ，类似分支的方式
+  
+  示例1：
+  
   $$
   f(n)=
   	\begin{cases}
   		n/2, & \text{if $n$ is even}\\
   		3n+1,& \text{if $n$ is odd}
   	\end{cases}
-  	分段函数：$...$ 正文插入数学公式
+  	分段函数：$...$ 表示正文插入数学公式
   $$
-  ​	3. 均方误差
+  
+  示例2：
+  
+  $$
+  f(distance)=    \begin{cases}        
+  2 * const\_weight, & \text{if $ditance$ <= 5km}\\        
+  1 * const\_weight, & \text{if $ditance$ <= 10km}\\
+  0.5 * const\_weight, & \text{if $ditance$ <= 50km}\\
+  0.1 * const\_weight, & \text{if $ditance$ <= 100km}\\
+  0.01 * const\_weight, & \text{if else $ditance$}\\  
+  \end{cases}
+  $$
+  
+  3. 均方误差
 
   $$
   J(\theta) = \frac{1}{2m}\sum_{i=0}^m(y^i - h_\theta(x^i))^2
   $$
-
+  
   4. 批量梯度下降
      $$
      \frac{\partial J(\theta)}{\partial\theta_j} = -\frac1m\sum_{i=0}^m(y^i - 	h_\theta(x^i))x^i_j
      $$
      
-
+  
   $$
   f(x,y)=
   	\begin{cases}
@@ -89,14 +109,24 @@ $$
   	\end{cases}
   $$
   
-* 
+  
+  
+  $$
+  f(x) = 
+  \begin{cases}
+  x + 1 &\text{if x > 0} \\
+  2 * x &\text{if x < 0}
+  \end{cases}
+  $$
 
 
-​					
-​				
 
 
-​	
+
+$$
+\frac {\partial J(\theta)}{\partial {\theta_j}} = -\frac{1}{m}\sum_{i=0}^{m}(y^i - h_\theta(x^i))
+$$
+
 
 
 
