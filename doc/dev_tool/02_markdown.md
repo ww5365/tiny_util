@@ -30,7 +30,7 @@ $$
 
 常用希腊字母表
 
-![image-20210830220611065](img/image-20210830220611065.png)
+![image-20210830220611065](http://image.huawei.com/tiny-lts/v1/images/a2f54677b06f42aae68263724515c47f_500x285.png@900-0-90-f.png)
 
 
 
