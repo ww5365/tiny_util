@@ -59,8 +59,7 @@ public:
 void testLargestRectangleArea()
 {
     std::vector<int> vec = {2, 1, 5, 6, 2, 3};
-    Solution s;
-
-    std::cout <<"largest rectangle area: " << s.largestRectangleArea(vec) << std::endl;
+    // Solution s;
+    // std::cout <<"largest rectangle area: " << s.largestRectangleArea(vec) << std::endl;
 
 }
