@@ -1,10 +1,10 @@
-## 1.1  单调栈介绍
+## 1 单调栈介绍
 
 （https://zhuanlan.zhihu.com/p/26465701）
 
 单调栈是一种理解起来很容易，但是运用起来并不那么简单的数据结构。一句话解释单调栈，就是一个堆栈，里面的元素的大小按照他们所在栈内的位置，满足一定的单调性，说直白点，就是递增存储元素或者递减存储元素，当该单调性（递增性或者递减性）被打破时要进行适当出栈，这是该算法的关键。那么到底什么时候用这个单调栈，怎么用单调栈呢。下面我们来看几个例子。
 
-### 1.1.1  开胃菜-谷歌面试题
+### 1.1  开胃菜-谷歌面试题
 
 先来分享一道非常简单的谷歌面试题目：
 
@@ -85,7 +85,7 @@ public static int[] nextExceed(int[] input) {
 
  
 
-### **1.1.2** **单调栈的性质**
+### 1.2 单调栈的性质
 
 1.单调栈里的元素具有单调性，栈中元素只能是单调递增或者单调递减
 
@@ -121,29 +121,43 @@ public static int[] nextExceed(int[] input) {
 
  
 
-## 1.1   代表题目：
+## 2 代表题目
 
-### **1.1.1** **[柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)([#84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/))**
-
-https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
+### 2.1 [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)([#84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/))
 
 ![image-20211007154226981](../img/image-20211007154226981.png)
 
-​                               
-
 方法一、暴力求解法
-
 首先，我们可以想到，两个柱子间矩形的高由它们之间最矮的柱子决定。如下图所示：
 
- 
+![image-04-2](../img/04_2.png)
+
 
 因此，我们可以考虑所有两两柱子之间形成的矩形面积，该矩形的高为它们之间最矮柱子的高度，宽为它们之间的距离，这样可以找到所要求的最大面积的矩形。代码参考如下：
 
-​        
+ ```java
+ //暴力求解：超时，94 / 96 个通过测试用例
+ public    int largestRectangleArea(int[]    heights) {       
+     if(heights.length == 0) {         
+         return 0;       
+     }       
+     int maxArea =    Integer.*MIN_VALUE*;       
+     for(int i = 0; i < heights.length; i++) {         
+         for(int j = i; j < heights.length; j++) {           
+             int minHeight    = Integer.*MAX_VALUE*;           
+             for(int k = i; k <= j; k++) {             
+                 minHeight = Math.*min*(heights[k],minHeight);           
+             }           
+             maxArea = Math.*max*(maxArea,(j-i+1) * minHeight);         
+         }       
+     }       
+     return maxArea;     
+ }             
+ ```
 
-​        //暴力求解：超时，94    / 96 个通过测试用例     public    int largestRectangleArea(int[]    heights) {       if(heights.length == 0) {         return 0;       }       int maxArea =    Integer.*MIN_VALUE*;       for(int i = 0; i < heights.length; i++) {         for(int j = i; j < heights.length; j++) {           int minHeight    = Integer.*MAX_VALUE*;           for(int k = i; k <= j; k++) {             minHeight = Math.*min*(heights[k],minHeight);           }           maxArea = Math.*max*(maxArea,(j-i+1) * minHeight);         }       }       return maxArea;     }             
 
 
+   
 
 
 
