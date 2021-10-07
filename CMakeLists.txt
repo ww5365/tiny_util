@@ -44,7 +44,7 @@ add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
 
 #target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/third-party/json/single_include)
 
-# 配置了子目录，子目录中的文件打成了库文件
+# 配置了子目录，子目录中的文件打成了库文件 子目录leetcode中代码都打包到库：libLeetCode.a 中
 target_link_libraries(${PROJECT_NAME} LeetCode)
 
 
