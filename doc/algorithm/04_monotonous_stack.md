@@ -229,7 +229,7 @@ public:
 };
 ```
 
-这个解法的关键点：
+[代码可参考](https://github.com/ww5365/tiny_util/blob/master/src/leetcode/cpp/leetcode_my/004_84_largest_rectangle_area.cpp)这个解法的关键点：
 
 * 使用了大顶栈
 * 出栈时，计算width是理解的难点和关键点；每次出栈时，自下而上的看构成的矩形；以i-1元素为上边界构成的矩形；轮询结束后，是以len-1为上边界构成的矩形；
