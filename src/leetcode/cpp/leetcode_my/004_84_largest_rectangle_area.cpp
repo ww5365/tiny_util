@@ -54,12 +54,14 @@ public:
 
         for (std::size_t i = 0; i < len; ++i) {
 
-            while (st.top() != -1 && heights[i] < heights[st.top()]){
+            while (st.top() != -1 && heights[i] < heights[st.top()]) {
                 // 保持单调递增的栈
                 int top_elem = heights[st.top()];
+                int top_idx = st.top();
                 st.pop();
                 // 计算面积
-                int width = i - st.top() - 1;  // 上限i 下限紧邻元素
+                int width = i - st.top() - 1;  //以i-1为上限构成的矩形；每个出栈的元素到上限i-1，构成的矩形是可能形成的最大矩形；因为单调递增，同时由较短元素决定了面积；
+                // int width = top_idx - st.top();  // 不能用top_idx,因为值是发生变化的，上限顶，是i-1不动
                 result = std::max(result , width * top_elem);
             }
             st.push(i); //所有元素入栈

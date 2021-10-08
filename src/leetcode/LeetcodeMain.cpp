@@ -10,7 +10,7 @@ void leetcode_all_test(){
     // testLargestRectangleArea2();
 
     // 最大面积
-    // testLargestRectangleArea();
+    testLargestRectangleArea();
 
     // 每日温度计算 
     // testEveryDayTemprature();

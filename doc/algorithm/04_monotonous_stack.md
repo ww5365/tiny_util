@@ -127,7 +127,7 @@ public static int[] nextExceed(int[] input) {
 
 ![image-20211007154226981](../img/image-20211007154226981.png)
 
-方法一、暴力求解法
+#### 方法一、暴力求解法
 首先，我们可以想到，两个柱子间矩形的高由它们之间最矮的柱子决定。如下图所示：
 
 ![image-04-2](../img/04_2.png)
@@ -135,63 +135,128 @@ public static int[] nextExceed(int[] input) {
 
 因此，我们可以考虑所有两两柱子之间形成的矩形面积，该矩形的高为它们之间最矮柱子的高度，宽为它们之间的距离，这样可以找到所要求的最大面积的矩形。代码参考如下：
 
- ```java
- //暴力求解：超时，94 / 96 个通过测试用例
- public    int largestRectangleArea(int[]    heights) {       
-     if(heights.length == 0) {         
-         return 0;       
-     }       
-     int maxArea =    Integer.*MIN_VALUE*;       
-     for(int i = 0; i < heights.length; i++) {         
-         for(int j = i; j < heights.length; j++) {           
-             int minHeight    = Integer.*MAX_VALUE*;           
-             for(int k = i; k <= j; k++) {             
-                 minHeight = Math.*min*(heights[k],minHeight);           
-             }           
-             maxArea = Math.*max*(maxArea,(j-i+1) * minHeight);         
-         }       
-     }       
-     return maxArea;     
- }             
- ```
+```java
+//暴力求解：超时，94 / 96 个通过测试用例
+public    int largestRectangleArea(int[]    heights) {       
+    if(heights.length == 0) {         
+        return 0;       
+    }       
+    int maxArea =    Integer.MIN_VALUE;       
+    for(int i = 0; i < heights.length; i++) {         
+        for(int j = i; j < heights.length; j++) {           
+            int minHeight    = Integer.MAX_VALUE;           
+            for(int k = i; k <= j; k++) {             
+                minHeight = Math.min(heights[k],minHeight); //查找[i,j]之间最小高度          
+            }           
+            maxArea = Math.max(maxArea,(j-i+1) * minHeight);         
+        }       
+    }       
+    return maxArea;     
+}             
+```
 
-
-
-   
-
-
-
-
-
-
-
- 
-
- 
+#### 方法二、单调栈的解法
 
 单调栈是本次算法说明的重点，先看单调栈的代码实现：
 
-​     
+``` java
+//Java 单调栈实现方法    
+public int largestRectangleArea(int[] heights) {   
+    if (heights.length == 0) {     
+        return 0;   
+    }   
+    int maxArea = Integer.MIN_VALUE;   
+    Deque<Integer> stack = new ArrayDeque<>();   //放置一个冗余元素方便计算   
+    stack.push(-1);   
+    for (int i = 0; i < heights.length; i++) {     
+        while (stack.peek() != -1 && heights[i] < heights[stack.peek()]) {       
+            int top = stack.pop();       
+            int width = i - stack.peek() - 1;       
+            maxArea = Math.max(maxArea, heights[top] * width);     
+        }     
+        stack.push(i);   
+    }   
+    while (stack.peek() != -1) {    
+        int area = heights[stack.pop()] * (heights.length - stack.peek() - 1);        
+        maxArea = Math.*max*(maxArea, area);      
+    }       
+    return maxArea;     
+}             
+```
 
-​        //Java 单调栈实现方法    `public int largestRectangleArea(int[] heights) {   if (heights.length == 0) {     return 0;   }   int maxArea = Integer.*MIN_VALUE*;   Deque<Integer> stack = new ArrayDeque<>();   //放置一个冗余元素方便计算   stack.push(-1);   for (int i = 0; i < heights.length; i++) {     while (stack.peek() != -1 && heights[i] < heights[stack.peek()]) {       int top = stack.pop();       int width = i - stack.peek() - 1;       maxArea = Math.*max*(maxArea, heights[top] * width);     }     stack.push(i);   }   while (stack.peek() != -1) {    int area = heights[stack.pop()] * (heights.length - stack.peek() - 1);        maxArea = Math.*max*(maxArea, area);`      }       return maxArea;     }             
+
+
+``` c++
+// c++ 版本实现
+class Solution {
+
+public:
+    int largestRectangleArea(std::vector<int> &heights)
+    {
+        int result = 0;
+        std::size_t len = heights.size();
+        if (len <= 0) {
+            return result;
+        }
+        std::stack<int> st;
+        st.push(-1); // 下限，哨兵
+
+        for (std::size_t i = 0; i < len; ++i) {
+
+            while (st.top() != -1 && heights[i] < heights[st.top()]) {
+                // 保持单调递增的栈
+                int top_elem = heights[st.top()];
+                int top_idx = st.top();
+                st.pop();
+                // 计算面积
+                int width = i - st.top() - 1;  // 以i-1为上限构成的矩形；每个出栈的元素到上限i-1，构成的矩形是可能形成的最大矩形；因为单调递增，同时由较短元素决定了面积；
+                // int width = top_idx - st.top();  // 不能用top_idx,因为值是发生变化的，上限顶，是i-1不动
+                result = std::max(result , width * top_elem);
+            }
+            st.push(i); // 所有元素入栈
+        }
+
+        // 处理栈内剩余元素, 上限是len
+        while (st.top() != -1) {
+
+            int top_elem = heights[st.top()];
+            st.pop();
+            int width = len - st.top() - 1;
+            result = std::max(result, top_elem * width);
+        }
+        return result;
+    }
+};
+```
+
+这个解法的关键点：
+
+* 使用了大顶栈
+* 出栈时，计算width是理解的难点和关键点；每次出栈时，自下而上的看构成的矩形；以i-1元素为上边界构成的矩形；轮询结束后，是以len-1为上边界构成的矩形；
 
 
 
+### 2.2 最大矩形面积([#85](https://leetcode-cn.com/problems/maximal-rectangle/))
+
+给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
+
+示例:
+
+输入:
+
+[
+
+ ["1","0","1","0","0"],
+
+ ["1","0","1","1","1"],
+
+ ["1","1","1","1","1"],
+
+ ["1","0","0","1","0"]
+
+]
+
+输出: 6
 
 
-
-
-
-
-一开始，把 -1 放进栈的顶部来表示开始。初始化时，按照从左到右的顺序，不断将柱子的序号放进栈中，直到遇到相邻柱子呈下降关系，也就是 a[i−1]>a[i] ，该解法维护了一个单调递增的栈。现在，开始将栈中的序号j弹出，直到遇到 stack[j] 满足a[stack[j]]≤a[i] 。每次弹出下标时，用弹出元素作为高，形成的最大面积矩形的宽是当前元素与stack[top-1]之间的那些柱子。
-
- 
-
-​         
-
-到底为什么可以这么做？我们需要分析一下，每一个元素都要入栈一次，出栈一次。入栈的时候是for loop的iteration走到它的时候，那出栈的时候意味着什么呢。想清楚了这一点，我们也就理解了上面的答案。在开胃菜的谷歌面试题中，每个元素出栈，是说明它找到了它在原数组中的next greater element。那这道题呢？元素出栈，意味着，**我们已经计算了以它的顶为上边框的最大矩形（先出栈再计算也算计算过了）。** 
-
-本题目中栈顶元素作为上边框很容易理解，宽度的计算比较难理解stack.size()=3时，i = 2, 出栈后stack.size()=2; 包含[6,-1]两个元素，stack.peek() = 0，width = 2-1-0= 1宽度为1个，也就是只计算了高度为7的一个柱子的面积。再次出栈之后，stack.size()=0，peek()=-1，width = 2-1- (-1) =2，宽度就变成2个，6和7两个柱子再乘以高度即可算出以6为顶的面积。 
-
-因为i时for循环的指针，永远比stack的top指针大于1，所以i-1表示堆栈当前的最大索引，pop1个以后，再减去peek是中间间隔的矩形个数。
 
