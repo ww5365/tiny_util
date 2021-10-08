@@ -258,5 +258,80 @@ public:
 
 输出: 6
 
+**解题思路**
 
+![image-20211008163755153](../img/image-20211008163755153.png)
+
+
+
+ row= 0~3
+
+ histogram[0]=[1,0,1,0,0];
+
+ histogram [1]=[2,0,2,1,1];
+
+histogram [2]=[3,1,3,2,2];
+
+histogram [3]=[4,0,0,3,0];
+
+这道题可以轻松地转化成上一题,求柱状图形成的最大矩形的面积，如上图1.2.2.1所示。对于每一行，我们都可以构建一个直方图(histogram)，然后计算。在构建新的直方图(histogram)的时候，我们不需要全部遍历，只需要对已有的直方图(histogram)进行略微的修改（运用DP的思想）。为了在视觉上更加清晰，可以直接调用上一题中的函数。思路还是异常简单的。
+
+
+
+```c++
+// c ++ 实现代码
+class Solution {
+public:
+    int MaximalRectangle(vector<vector<char>>& matrix)
+    {
+        if (matrix.size() <= 0) {
+            return 0;
+        }
+        std::vector<int> height(matrix[0].size(), 0);
+        int max_area = 0;
+        for (size_t i = 0; i < matrix.size(); ++i) {
+            for (size_t j = 0; j < matrix[i].size(); ++j) {
+                if (matrix[i][j] == '1') {
+                    height[j] += 1; //形成当前行的柱状图
+                } else {
+                    height[j] = 0;
+                }
+            }
+            max_area = std::max(max_area, LargestRectangleArea(height));
+        }
+        return max_area;
+    }
+private:
+    int LargestRectangleArea(vector<int>& heights) //求柱状图形成的最大面积
+    {
+        if (heights.size() <= 0) {
+            return 0;
+        }
+
+        stack<int> st;
+        st.push(-1); // 栈底作为-1，哨兵
+        int result = 0;
+        for (int i = 0; i < heights.size(); ++i) {
+            while (st.top() != -1 && heights[i] < heights[st.top()]) {
+                // 大顶栈，递增的；比栈顶元素小，不能直接入栈了
+                int top_idx = st.top();
+                st.pop();
+                int width = i - st.top() - 1; // 难
+                result = std::max(result, width * heights[top_idx]); // 计算了以i-1为顶的构成的矩形的面积
+            }
+            st.push(i);
+        }
+        // 剩余的站内元素，是一个大顶栈
+        int len = heights.size();
+        while (st.top() != -1) {
+            int top_idx = st.top();
+            st.pop();
+            int width = len - 1  - st.top(); // 以最后一个元素为顶
+            result = std::max(result, width * heights[top_idx]);
+        }
+
+        return result;
+    }
+};
+```
 
