@@ -51,6 +51,32 @@ public:
         return result;
     }
 
+    std::vector<int> DailyTemperature2(std::vector<int>& temperatures)
+    {   
+        if (temperatures.size() <= 0) {
+            return std::vector<int>(); 
+        }
+        std::vector<int> res(temperatures.size(), 0); 
+        std::stack<int> st;
+        for (int i = 0; i < temperatures.size(); ++i) {
+            while (!st.empty() && temperatures[i] > temperatures[st.top()]) {
+                // 破坏了小顶栈的规则，出栈，计算栈顶元素与当前元素距离
+                int top_idx = st.top();
+                st.pop();
+                int dist = i - top_idx;
+                res[top_idx] = dist;
+            }
+            st.push(i);
+        }
+
+        //下面这段可以不要，应为初始化已经搞定
+        //while (!st.empty()) {
+        //    res[st.top()] = 0;
+        //    st.pop();
+        //}
+        return res;
+    }
+
 };
 
 void testEveryDayTemprature()

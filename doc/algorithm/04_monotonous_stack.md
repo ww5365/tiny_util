@@ -276,7 +276,7 @@ histogram [3]=[4,0,0,3,0];
 
 这道题可以轻松地转化成上一题,求柱状图形成的最大矩形的面积，如上图1.2.2.1所示。对于每一行，我们都可以构建一个直方图(histogram)，然后计算。在构建新的直方图(histogram)的时候，我们不需要全部遍历，只需要对已有的直方图(histogram)进行略微的修改（运用DP的思想）。为了在视觉上更加清晰，可以直接调用上一题中的函数。思路还是异常简单的。
 
-
+[代码可参考](https://github.com/ww5365/tiny_util/blob/master/src/leetcode/cpp/leetcode_my/004_85_largest_rectangle_area_v2.cpp)：
 
 ```c++
 // c ++ 实现代码
@@ -335,3 +335,66 @@ private:
 };
 ```
 
+## 3 触类旁通
+
+### 3.1 [每日温度](https://leetcode-cn.com/problems/daily-temperatures/)([#739](https://leetcode-cn.com/problems/daily-temperatures/))
+
+* 题目描述：
+请根据每日*气温*列表temperatures ，请计算在每一天需要等几天才会有更高的温度。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+示例 1:
+输入: temperatures = [73,74,75,71,69,72,76,73]
+输出: [1,1,4,2,1,1,0,0]
+* 解题思路：
+  1. 每个元素依次入栈，构建：小顶栈
+  2. 比栈顶元素小，正常入栈；如果比栈顶元素大，是栈顶元素向右看，第一个比它大的值，计算索引距离，就是栈顶元素要等待几天后才有的更高温度。
+  3. 遍历结束后，栈内剩余元素，就是后面没有比自身大的温度值了，相应位置置为0;
+* 代码如下：
+  [代码可参考]()
+  
+  ``` c++
+  class Solution {
+  public:
+    vector<int> DailyTemperatures(vector<int>& temperatures)
+    {
+        if (temperatures.size() <= 0) {
+            return std::vector<int> (); 
+        }
+        std::vector<int> res (temperatures.size(), 0); 
+        std::stack<int> st;
+        for (int i = 0; i < temperatures.size(); ++i) {
+            while (!st.empty() && temperatures[i] > temperatures[st.top()]) {
+                // 破坏了小顶栈的规则，出栈，计算栈顶元素与当前元素距离
+                int top_idx = st.top();
+                st.pop();
+                int dist = i - top_idx;
+                res[top_idx] = dist;
+            }
+            st.push(i);
+        }
+        while (!st.empty()) {
+            res[st.top()] = 0;
+            st.pop();
+        }
+        return res;
+    }
+  };
+  ```
+  
+  
+### 3.2	下一个更大元素II([#503](https://leetcode-cn.com/problems/next-greater-element-ii/))
+* 题目描述：
+
+  给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。
+  示例 1:
+  输入: [1,2,1]
+  输出: [2,-1,2]
+  解释: 第一个 1 的下一个更大的数是 2；
+  数字 2 找不到下一个更大的数； 
+  第二个 1 的下一个最大的数需要循环搜索，结果也是 2。
+  注意: 输入数组的长度不会超过 10000。
+
+* 解题思路：
+  （1）	考虑如何解决数组最后一个元素的下一个更大元素问题
+  （2）	可以考虑把数组当成一个循环队列的存储题
+  （3）	循环队列的下标计算公式：(right-left+M) % M，由此直接把数组变成两倍，即可解决末尾元素求下一个最大元素问题。
+  （4）	统计结算数据结构示例:[1,2,3,4] -> [1,2,3,4,1,2,3,4]，然后再启用单调栈计算
