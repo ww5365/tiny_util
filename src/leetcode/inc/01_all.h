@@ -6,6 +6,7 @@
 #include <set>
 
 
+void TestNextGreaterElements();
 void testMaxSumSubmatrix();
 void testLargestRectangleArea();
 void testLargestRectangleArea2();

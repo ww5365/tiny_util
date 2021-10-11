@@ -2,6 +2,8 @@
 #include <iostream>
 
 void leetcode_all_test(){
+
+    TestNextGreaterElements();
     
     //最大子矩阵中可能最大的K值
     testMaxSumSubmatrix();
