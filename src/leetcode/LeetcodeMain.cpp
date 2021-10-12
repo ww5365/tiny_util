@@ -2,8 +2,9 @@
 #include <iostream>
 
 void leetcode_all_test(){
-
-
+    
+    // 接雨水 
+    TestRainTrap();
 
     // 下一个最大元素
     TestNextGreaterElements();

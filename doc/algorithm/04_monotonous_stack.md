@@ -397,7 +397,8 @@ private:
   （3）第二轮循环数组：(也可以考虑使用循环数组来实现)主要的目的是把栈内的元素，出栈，并找到下一个最大元素；这个过程中，不再进行入栈操作；如果大于栈顶元素，出栈，得到下一个最大元素结果；
   （4）最后，栈内只剩最大元素，对应的输出下一个最大值为-1。
 * 参考代码：
-  [代码连接]()  
+  [代码连接](https://github.com/ww5365/tiny_util/blob/master/src/leetcode/cpp/leetcode_my/004_503_next_greater_elem.cpp)  
+  
   ``` c++
     vector<int> NextGreaterElements2(vector<int>& nums)
     {
@@ -415,7 +416,7 @@ private:
             }
             st.push(i);
         } // 第一轮计算可以确定的元素的下一个最大元素
-
+  
         for (int i = 0; i < nums.size(); ++i) { // 以数组为维度
             while (!st.empty() && nums[st.top()] < nums[i]) {
                 res[st.top()] = nums[i];
@@ -424,9 +425,9 @@ private:
             // 不再入栈了，栈内剩余元素的下一个最大元素都是-1， 初始化的时，已经搞定
         } 
         return res;
-
+  
     }
-
+  
     vector<int> NextGreaterElements3(vector<int>& nums)
     {
         if (nums.size() <= 0) {
@@ -446,5 +447,115 @@ private:
         } 
         return res;
     }
-
+  
   ```
+
+### 3.3 接雨水 ([#42](https://leetcode-cn.com/problems/trapping-rain-water/))
+
+* 题目描述:
+  给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+  上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+  ![04_3_3](../img/04_3_3.png) 
+  
+  示例:
+  输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+  输出: 6
+
+* 解题思路
+  * 单调栈
+    1) 每个元素构建，小顶栈
+    2) 循环遍历数组：如果当前元素大于栈顶元素，且栈内元素>=2情况下，可以形成"凹"槽；此时出栈，计算栈顶元素(最小)可以装的水；宽度 = i - 栈顶元素下一个索引位置 - 1；  高度 = min(栈顶元素下一个元素 - 栈顶元素， 当前元素 - 栈顶元素);这样，当前元素 + 左/右元素形成凹槽，能装的水，可以计算出来(但并不是最终可装的水，只是其中的一段)
+    3) 继续出栈，计算剩余段位可以装的水； 
+  * 双向指针 ： 感觉更偏向于全局的思维去理解可以装的水 
+    1) 首先确定，左，右 两边的最高挡板
+    2) 如果左边的最高挡板小于等于右边的，刷新左边最大高度；同时计算当前元素可以装的水 = 左边最高挡板高度 - 当前元素高度; 指针右移；
+    3) 否则，刷新右边的最大挡板高度； 同时计算当前元素可以装的水 = 右边最高挡板高度 - 当前元素高度； 指针左移；
+    4) 直到i=j之后结束；
+* 参考代码
+  [代码示例](https://github.com/ww5365/tiny_util/blob/master/src/leetcode/cpp/leetcode_my/004_42_rain_trap.cpp)
+  
+  ``` c++
+  class Solution {
+  public:
+    // 单调栈解法:  时间 o(n) 空间 o(n)
+    int rainTrap(std::vector<int> &data)
+    {
+        std::size_t len = data.size();
+        int result = 0;
+  
+        if (len < 3) {
+            return result;
+        }
+        // std::vector<int> result(len, 0);
+        // std::stack<Element> st;
+        std::stack<std::size_t> st; //只需要保存元素的下标的位置
+        for (std::size_t i = 0; i < len; ++i) {
+            // if ( !st.empty() && data[i] == data[st.top()]) {
+                // 当前元素和栈顶元素相等
+            //     continue;
+            // }
+            while (!st.empty() && data[i] > data[st.top()]) {
+                std::size_t minPos = st.top();
+                st.pop();
+                if (!st.empty()) {
+                    // 至少有1个元素才可以形成盛水的凹形
+                    int height = std::min(data[st.top()] - data[minPos], data[i] - data[minPos]);
+                    int width = i - st.top() - 1;
+                    result += (height * width);
+                }
+            }
+            st.push(i);
+        }
+        return result;
+    }
+    
+    // 双向指针的解法
+    int rainTrap2(std::vector<int> &data) 
+    {
+        int maxLeft = 0;
+        int maxRight = 0; // 当前为止，左边 或 右边 墙，最高的那个墙
+        int result = 0;
+        std::size_t i = 0, j = data.size() - 1; // 下标
+        while (i <= j) {
+            if (maxLeft <= maxRight) {
+                // 左边的最高墙，小于 右边的最高墙  盛水由短板决定,左边的更短些
+                maxLeft = std::max(maxLeft, data[i]);
+                result += (maxLeft - data[i++]);
+            } else {
+                // 右边墙更短些; 左边最高墙已经保证；
+                maxRight = std::max(maxRight, data[j]);
+                result += (maxRight - data[j--]);
+            }
+        }
+        return result;
+    }
+  
+  };
+  
+  ```
+
+
+### 3.4	股票价格跨度( [#901](https://leetcode-cn.com/problems/online-stock-span/))
+* 题目描述
+编写一个 StockSpanner 类，它收集某些股票的每日报价，并返回该股票当日价格的跨度。
+今天股票价格的跨度被定义为股票价格小于或等于今天价格的最大连续日数（从今天开始往回数，包括今天）。
+例如，如果未来7天股票的价格是 [100, 80, 60, 70, 60, 75, 85]，那么股票跨度将是 [1, 1, 1, 2, 1, 4, 6]。
+示例：
+输入：["StockSpanner","next","next","next","next","next","next","next"], [[],[100],[80],[60],[70],[60],[75],[85]]
+输出：[null,1,1,1,2,1,4,6]
+解释：
+首先，初始化 S = StockSpanner()，然后：
+S.next(100) 被调用并返回 1，
+S.next(80) 被调用并返回 1，
+S.next(60) 被调用并返回 1，
+S.next(70) 被调用并返回 2，
+S.next(60) 被调用并返回 1，
+S.next(75) 被调用并返回 4，
+S.next(85) 被调用并返回 6。
+注意 (例如) S.next(75) 返回 4，因为截至今天的最后 4 个价格
+(包括今天的价格 75) 小于或等于今天的价格。
+
+* 解题思路
+此问题判断堆栈很容易，出栈也可以思考到，但是出栈之后上次权重怎么保留是最关键的。本题设计提供一种记录堆栈元素权重的结对栈，用来记录被删除元素的股票跨度。在计算跨度是要将之前的跨度一起计算在内。
+* 参考代码
+

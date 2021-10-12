@@ -83,7 +83,7 @@ public:
 
 };
 
-void testEveryDayTemprature()
+void TestRainTrap()
 {
     std::vector<int> vec = {4, 2, 0, 3, 2, 5};
     Solution s;
