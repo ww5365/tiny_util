@@ -45,7 +45,7 @@ public:
             st.push(i);
         } // 第一轮计算可以确定的元素的下一个最大元素
         int idx = 0;
-        while (!st.empty()) {
+        while (!st.empty()) {  //以栈的维度去理解
             int idx_elem = st.top();
             while (idx < nums.size() && nums[idx] <= nums[idx_elem]) {
                 ++idx; //当前元素<= 栈顶元素, 那么肯定也是<=栈下面的元素；放心的到数组后面去找；
@@ -62,29 +62,68 @@ public:
                 st.pop();
             }
         }
-        
         return res;
     }
+    vector<int> NextGreaterElements2(vector<int>& nums)
+    {
+        if (nums.size() <= 0) {
+            return std::vector<int> (); 
+        }
+        std::vector<int> res (nums.size(), -1); 
+        std::stack<int> st;
+        for (int i = 0; i < nums.size(); ++i) {
+            while (!st.empty() && nums[i] > nums[st.top()]) {
+                // 破坏了小顶栈的规则，出栈，计算栈顶元素与当前元素距离
+                int top_idx = st.top();
+                st.pop();
+                res[top_idx] = nums[i];
+            }
+            st.push(i);
+        } // 第一轮计算可以确定的元素的下一个最大元素
+
+        for (int i = 0; i < nums.size(); ++i) { // 以数组为维度
+            while (!st.empty() && nums[st.top()] < nums[i]) {
+                res[st.top()] = nums[i];
+                st.pop();
+            } 
+            // 不再入栈了，栈内剩余元素的下一个最大元素都是-1， 初始化的时，已经搞定
+        } 
+        return res;
+
+    }
+
+    vector<int> NextGreaterElements3(vector<int>& nums)
+    {
+        if (nums.size() <= 0) {
+            return std::vector<int> (); 
+        }
+        std::vector<int> res (nums.size(), -1); 
+        std::stack<int> st;
+        for (int i = 0; i < 2 * nums.size(); ++i) {
+            int num = nums[i % nums.size()];
+            while (!st.empty() && num > nums[st.top()]) {
+                // 使用另外一种思路: 更加简练
+                int top_idx = st.top();
+                st.pop();
+               res[top_idx] = num;
+            }
+            if (i < nums.size()) st.push(i);
+        } 
+        return res;
+    }
+
 };
 
 void TestNextGreaterElements()
 {
-    std::vector<int> vec = {1, 2, 1};
+
+    std::vector<int> vec = {1, 1, 1};
     Solution s;
-    std::vector<int> result (vec.size(), 0);
-    result = s.NextGreaterElements(vec);
+    std::vector<int> result (vec.size(), -1);
+    result = s.NextGreaterElements3(vec);
     std::cout <<"test next greater elements: " << std::endl;
     for (int i = 0; i < result.size(); ++i) {
         std::cout << result[i] << " "; 
-    }
-    std::cout << std::endl;
-
-    std::vector<int> vec2 = {1, 1, 1, 1};
-    std::vector<int> result2 (vec2.size(), 0);
-    result2 = s.NextGreaterElements(vec2);
-    std::cout <<"test next greater elements 2: " << std::endl;
-    for (int i = 0; i < result2.size(); ++i) {
-        std::cout << result2[i] << " "; 
     }
     std::cout << std::endl;
 }
