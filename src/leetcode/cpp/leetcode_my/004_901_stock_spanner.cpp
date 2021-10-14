@@ -17,6 +17,9 @@
 
  * 输入：["StockSpanner","next","next","next","next","next","next","next"], [[],[100],[80],[60],[70],[60],[75],[85]]
  * 输出：[null,1,1,1,2,1,4,6]
+
+ * 输入：[100, 80, 60, 70, 60, 75, 85]
+ * 输出：[1, 1, 1, 2, 1, 4, 6]
  * 解释：
  * 首先，初始化 S = StockSpanner()，然后：
  * S.next(100) 被调用并返回 1，
@@ -27,7 +30,12 @@
  * S.next(75) 被调用并返回 4，
  * S.next(85) 被调用并返回 6* 
  * 注意 (例如) S.next(75) 返回 4，因为截至今天的最后4个连续价格(包括今天的价格 75) 小于或等于今天的价格。
-
+ * 
+ * 核心算法的解决思路：
+ * 使用小顶栈，并且哨兵-1作为栈底；
+ * 如果栈顶元素大于当前元素，那么当前元素的跨度为1； 否则，出栈并记录首位出栈元素的idx，最终跨度为：idx - st.top() + 1
+ * 难点：
+ * 具体工程化落地，如何实现StockSpanner类，并能进行初始化？
  *    
  *
  */
@@ -56,10 +64,13 @@ public:
 
 
 
-void testLargestRectangleArea()
+void TestStockSpanner()
 {
     std::vector<int> vec = {2, 1, 5, 6, 2, 3};
+    std::vector<int> prices = {100, 80, 60, 70, 60, 75, 85};
     // Solution s;
     // std::cout <<"largest rectangle area: " << s.largestRectangleArea(vec) << std::endl;
+
+
 
 }

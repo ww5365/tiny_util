@@ -1,5 +1,27 @@
-# linux 常用命令学习
+# linux shell常用命令学习
 
+
+## 文件
+
+### readlink
+
+Linux中的readlink命令用于打印解析的符号链接或规范文件名。用简单的话来说，有符号链接，想知道它代表什么路径。然后，在这种情况下，将使用readlink命令显示符号链接的实际路径。
+
+readlink -f：通过递归跟随给定名称的每个组件中的每个符号链接，此选项可以规范化；除最后一个组件外，所有组件都必须存在。
+
+```shell
+readlink -f "$0"  # $0 代表当前运行的shell(命令)的名称；这句得到当前运行脚本的全路径
+```
+### dirname
+
+用法：dirname 名称 或：dirname 选项
+输出：已经去除了尾部的"/"字符部分的名称；如果名称中不包含"/"，则显示"."(表示当前目录)。
+
+``` shell
+dirname $(readlink -f "$0")  # 得到正在执行shell(命令)的目录
+dirname /usr/bin/sort  # 输出"/usr/bin"
+dirname stdio.h      # 输出"."
+```
 
 
 ## 信号量
