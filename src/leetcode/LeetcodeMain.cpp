@@ -2,6 +2,9 @@
 #include <iostream>
 
 void leetcode_all_test(){
+
+    // 股票跨度
+    TestStockSpanner();
     
     // 接雨水 
     TestRainTrap();

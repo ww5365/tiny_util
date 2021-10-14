@@ -582,17 +582,118 @@ S.next(85) 被调用并返回 6。
     如下图所示：
     ![image-20211014145506659](../img/image-20211014145506659.png)
   
-
-
-
 * 参考代码
 
-  ```c++
+  [示例代码]()
   
-  siterank
-      
-      
+  ```c++
+  class StockSpanner {
+  public:
+    StockSpanner() 
+    {
+        st = new std::stack<Elem>();
+    }
+    
+    int next(int price) 
+    {   
+        Elem elem;
+        elem.result = 1;
+        while (!st->empty() && st->top().price <= price) {
+            Elem tmp = st->top();
+            st->pop();
+            elem.result += tmp.result;  //单调栈最关键的变形点：怎么计算连续的天数？已经初始化为1了
+        }
+        elem.price = price;
+        st->push(elem);
+        return elem.result;
+  
+    }
+  private:
+  struct Elem {
+        int price; //记录输入元素的数值
+        int result; //记录小于等于该元素连续天数
+    };
+    std::stack<Elem> *st;
+  };   
+    
   ```
 
-  
+### 3.5	滑动窗口最大值（[#239](https://leetcode-cn.com/problems/sliding-window-maximum/)）
 
+#### 3.5.1 题目描述
+给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的k个数字。滑动窗口每次只向右移动一位。
+返回滑动窗口中的最大值。
+
+示例 1：
+输入：nums = [1,3,-1,-3,5,3,6,7], k = 3
+输出：[3,3,5,5,6,7]
+解释：
+滑动窗口的位置                   最大值
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+
+#### 3.5.2 解题思路
+方案一、暴力
+时间复杂度：o(n^2)
+
+两层循环，计算每个窗口内的最大元素 
+
+方案二、单调队列
+
+参考如下链接：
+https://leetcode-cn.com/problems/sliding-window-maximum/solution/shuang-xiang-dui-lie-jie-jue-hua-dong-chuang-kou-z/
+https://mp.weixin.qq.com/s/Y1QZZ-coEYZ6ItDRyrdwV
+
+1. 滑动窗口内前K个元素的构建单调递减的单调队列(类似单调栈)；
+2. 从第len-k个元素开始，进行入队和出队的操作：
+   入队：按照单调栈的规则进行入队：大于栈顶，栈顶元素出栈； 
+   出队：关键如何进行出队操作？难点！需要出队的元素，很明确，位于：idx = i - k处的元素需要出队。但长度为K的单调队列，不确定哪个为idx出的元素啊？  反过来想，从idx开头且长度为k的窗口内，只有**第idx开头位置的元素为最大的情况下，才有可能保留在队头(即：栈底)；否则，肯定在出栈过程中就出队了，不用再次出队了**。
+3. 还利用了一个单调栈的重要性能：**栈顶元素为最大的** 
+   
+#### 3.5.3 示例代码
+[代码示例]()
+
+``` c++
+class MaxSlideWindow {
+
+public:
+    std::vector<int> maxSlideWindow(std::vector<int> &vec, unsigned int k)
+    {
+        std::vector<int> res;
+        if (vec.size() <= 0) {
+            return res;
+        }
+        std::deque<int> deq;
+        std::size_t win_len = vec.size() - k + 1; // 滑动窗口的滑动次数
+
+        // 前k个数进队deq,保持单调队列特性
+        for (std::size_t i = 0; i < k; ++i) {
+            while (!deq.empty() && vec[i] > deq.back()) {
+                deq.pop_back();
+            }
+            deq.push_back(vec[i]);
+        }
+        res.push_back(deq.front()); // 前k个元素入队后，取队头最大元素，保存第1个窗口内的最大元素
+
+        for (std::size_t j = k; j < vec.size(); ++j) {
+
+            if (vec[j - k] == deq.front()) {
+                deq.pop_front(); // ***这步难理解，重要*** 保持单调队列更新，淘汰超出窗口的可能的最大值
+                //出队： 窗口K内，要淘汰的首元素，一定是最大的情况下，才有可能在队头；否则，已经被单调栈规则淘汰了
+            }
+            // 保持单调队列 和上面一样
+            while (!deq.empty() && vec[j] > deq.back()) {
+                deq.pop_back();
+            }
+            deq.push_back(vec[j]);
+            res.push_back(deq.front());
+        }
+        return res;
+    }
+};
+```

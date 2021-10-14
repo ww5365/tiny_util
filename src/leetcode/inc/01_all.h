@@ -6,6 +6,7 @@
 #include <set>
 
 
+void TestStockSpanner();
 void TestRainTrap();
 void TestNextGreaterElements();
 void testMaxSumSubmatrix();

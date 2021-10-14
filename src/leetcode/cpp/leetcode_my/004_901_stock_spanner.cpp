@@ -31,13 +31,6 @@
  * S.next(85) 被调用并返回 6* 
  * 注意 (例如) S.next(75) 返回 4，因为截至今天的最后4个连续价格(包括今天的价格 75) 小于或等于今天的价格。
  * 
- * 核心算法的解决思路：
- * 使用小顶栈，并且哨兵-1作为栈底；
- * 如果栈顶元素大于当前元素，那么当前元素的跨度为1； 否则，出栈并记录首位出栈元素的idx，最终跨度为：idx - st.top() + 1
- * 难点：
- * 具体工程化落地，如何实现StockSpanner类，并能进行初始化？
- *    
- *
  */
 
 #include "01_all.h"
@@ -47,13 +40,32 @@
 
 class StockSpanner {
 public:
-    StockSpanner() {
-
+    StockSpanner() 
+    {
+        st = new std::stack<Elem>();
     }
     
-    int next(int price) {
+    int next(int price) 
+    {   
+        Elem elem;
+        elem.result = 1;
+        while (!st->empty() && st->top().price <= price) {
+            Elem tmp = st->top();
+            st->pop();
+            elem.result += tmp.result;  //单调栈最关键的变形点：怎么计算连续的天数？已经初始化为1了
+        }
+        elem.price = price;
+        st->push(elem);
+        return elem.result;
 
     }
+
+private:
+    struct Elem {
+        int price; //记录输入元素的数值
+        int result; //记录小于等于该元素连续天数
+    };
+    std::stack<Elem> *st;
 };
 
 /**
@@ -63,14 +75,22 @@ public:
  */
 
 
-
 void TestStockSpanner()
 {
-    std::vector<int> vec = {2, 1, 5, 6, 2, 3};
     std::vector<int> prices = {100, 80, 60, 70, 60, 75, 85};
-    // Solution s;
-    // std::cout <<"largest rectangle area: " << s.largestRectangleArea(vec) << std::endl;
-
-
-
+    StockSpanner *sp = new StockSpanner();
+    std::cout << "stock spanner test1: " << std::endl;
+    
+    for (auto e : prices) {
+        std::cout << sp->next(e) << " ";
+    }
+    std::cout << std::endl;
+    
+    // 直接
+    StockSpanner sp2;
+    std::cout << "stock spanner test2: " << std::endl;
+    for (auto e : prices) {
+        std::cout << sp2.next(e) << " ";
+    }
+    std::cout << std::endl;
 }
