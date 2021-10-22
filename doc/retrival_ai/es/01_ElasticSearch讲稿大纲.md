@@ -46,13 +46,13 @@ Elasticsearch核心技术与实战：[Elasticsearch核心技术与实战 (geekba
 
 相关参考：尚硅谷项目课程系列之Elasticsearch.pdf，56-59页
 
-![image-20211008163854049](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008163854049.png)
+![image-20211008163854049](../../img/image-20211008163854049.png)
 
-![image-20211008164045878](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008164045878.png)
+![image-20211008164045878](../../img/image-20211008164045878.png)
 
-![image-20211008164151428](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008164151428.png)
+![image-20211008164151428](../../img/image-20211008164151428.png)
 
-![image-20211008164127741](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008164127741.png)
+![image-20211008164127741](../../img/image-20211008164127741.png)
 
 ### Linux集群参考
 
@@ -64,7 +64,7 @@ Elasticsearch核心技术与实战：[Elasticsearch核心技术与实战 (geekba
 
 Lucene是apache软件基金会 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。ElasticSearch在此基础上搭建了完整的分布式服务框架。
 
-![image-20211008164500398](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008164500398.png)
+![image-20211008164500398](../../image-20211008164500398.png)
 
 ### ELK
 
@@ -84,7 +84,7 @@ Lucene是apache软件基金会 jakarta项目组的一个子项目，是一个开
 
 相关参考：尚硅谷项目课程系列之Elasticsearch.pdf，9页
 
-<img src="C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20210924110805245.png" alt="image-20210924110805245" style="zoom:150%;" />
+<img src="../../image-20210924110805245.png" alt="image-20210924110805245" style="zoom:150%;" />
 
 Elasticsearch 是面向文档型数据库，一条数据在这里就是一个文档。为了方便大家理解， 我们将 Elasticsearch 里存储文档数据和关系型数据库 MySQL 存储数据的概念进行一个类比 ES 里的 Index 可以看做一个库，而 Types 相当于表，Documents 则相当于表的行。 这里 Types 的概念已经被逐渐弱化，Elasticsearch 6.X 中，一个 index 下已经只能包含一个 type，Elasticsearch 7.X 中, Type 的概念已经被删除了。
 
@@ -150,7 +150,7 @@ Elasticsearch 索引的精髓：一切设计都是为了提高搜索的性能。
 
 一个类型是你的索引的一个逻辑上的分类/分区，其语义完全由你来定。通常，会为具 有一组共同字段的文档定义一个类型。不同的版本，类型发生了不同的变化。
 
-![image-20211008165338560](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008165338560.png)
+![image-20211008165338560](../../image-20211008165338560.png)
 
 #### 文档（Document）
 
@@ -217,7 +217,7 @@ mapping 是处理数据的方式和规则方面做一些限制，如：某个字
 
 这里请求路径中的_cat 表示查看的意思，indices 表示索引，所以整体含义就是查看当前 ES 服务器中的所有索引，就好像 MySQL 中的 show tables 的感觉。服务器响应结果如下：
 
-![image-20211008170635563](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008170635563.png)
+![image-20211008170635563](../../image-20211008170635563.png)
 
 \_cat是整个集群的监控器，可以通过indices监控索引。\_cat的其它用途参考文章：
 
@@ -365,7 +365,7 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 向 ES 服务器发 POST 请求 ：http://127.0.0.1:9200/{索引名}/_update/{文档ID}
 
-![image-20211008172757977](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008172757977.png)
+![image-20211008172757977](../../image-20211008172757977.png)
 
 #### 删除文档
 
@@ -417,9 +417,9 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 向 ES 服务器发 POST 请求 ：http://127.0.0.1:9200/{索引名}/_delete_by_query，需要的请求体跟DSL Query相同。
 
-![image-20211008174426174](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008174426174.png)
+![image-20211008174426174](../../image-20211008174426174.png)
 
-![image-20211008174442463](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008174442463.png)
+![image-20211008174442463](../../image-20211008174442463.png)
 
 #### 创建映射
 
@@ -470,7 +470,7 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 向 ES 服务器发 GET 请求 ：http://127.0.0.1:9200/{索引名}/_mapping，示例：
 
-![image-20211008175256536](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008175256536.png)
+![image-20211008175256536](../../image-20211008175256536.png)
 
 #### 索引映射关联
 
@@ -753,7 +753,7 @@ POST http://127.0.0.1:9200/{索引名}/_analyze
 
 部分动态识别文档字段类型的模式如下：
 
-![image-20211008194454418](C:/Users/l00610664/AppData/Roaming/Typora/typora-user-images/image-20211008194454418.png)
+![image-20211008194454418](../../image-20211008194454418.png)
 
 动态映射可以在mapping中受控。通过设置全局和包含子字段的字段的dynamic关键字，我们可以控制动态映射的执行方式：
 
