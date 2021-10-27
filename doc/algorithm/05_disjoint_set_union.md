@@ -127,3 +127,1461 @@ public int find(int x) {
     return x;
 }
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    **对比学习****DFS****实现方案**
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    使用深度优先搜索，从每个节点开始，使用一个大小为 N 的 visited 数组（M 大小为 N×N），这样 visited[i]表示第 i 个元素是否被深度优先搜索访问过。首先选择一个节点，访问任一相邻的节点。然后再访问这一节点的任一相邻节点。这样不断遍历到没有未访问的相邻节点时，回溯到之前的节点进行访问。
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    //DFS实现朋友圈算法
+ public int findCircleNum(int[][] matrix) {
+   int rows = matrix.length;
+   int cols = matrix[0].length;
+   int[] visited = new int[rows];
+   int count = 0;
+   for (int i = 0; i < rows; i++) {
+     if (visited[i] == 0) {
+       dfs(matrix, visited, i);
+       count++;
+     }
+   }
+   return count;
+ }
+ 
+ private void dfs(int[][] matrix, int[] visited, int i) {
+   for (int j = 0; j < matrix.length; j++) {
+     if (matrix[i][j] == 1 && visited[j] == 0) {
+       visited[j] = 1;
+       dfs(matrix, visited, j);
+     }
+   }
+ }
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)         
+
+​        张三        
+
+​        李四        
+
+
+
+​        王五        
+
+​        赵六        
+
+​        赵一        
+
+​                                                                       
+
+
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    对比学习BFS实现:
+
+![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    广度优先搜索，把当前人员相关的所有人员全部访问完，然后再访问自己每个朋友的关系圈子。不同于DFS，访问到一个朋友之后，立刻看整个朋友的关系圈子。
+
+```
+public int findCircleNum(int[][] matrix) {
+    int[] visited = new int[matrix.length];
+    int count = 0;
+    Queue<Integer> queue = new LinkedList<>();
+    for (int i = 0; i < matrix.length; i++) {
+        if (visited[i] == 0) {
+            queue.add(i);
+            while (!queue.isEmpty()) {
+                int s = queue.poll();
+                visited[s] = 1;
+                for (int j = 0; j < matrix.length; j++) {
+                    if (matrix[s][j] == 1 && visited[j] == 0) {
+                        queue.add(j);
+                   }               
+                }
+            }
+            count++;
+        }
+    }
+    return count;
+}
+```
+
+ 
+
+## 1.1   触类旁通
+
+### 1.1.1  冗余连接（[**#684**](https://leetcode-cn.com/problems/redundant-connection/)）
+
+在本问题中, 树指的是一个连通且无环的无向图。
+
+输入一个图，该图由一个有着N个节点 (节点值不重复1, 2, ..., N) 的树及一条附加的边构成。附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边。
+
+结果图是一个以边组成的二维数组。每一个边的元素是一对[u, v] ，满足 u < v，表示连接顶点u 和v的无向图的边。
+
+返回一条可以删去的边，使得结果图是一个有着N个节点的树。如果有多个答案，则返回二维数组中最后出现的边。答案边 [u, v] 应满足相同的格式 u < v。 
+
+**示例** **1****：**
+
+**输入****:** [[1,2], [1,3], [2,3]]
+
+**输出****:** [2,3]
+
+**解释****:** 给定的无向图为:
+
+ 1
+
+ / \
+
+2 - 3示例 2：
+
+**示例** **2****：**
+
+输入: [[1,2], [2,3], [3,4], [1,4], [1,5]]
+
+输出: [1,4]
+
+解释: 给定的无向图为:
+
+5 - 1 - 2
+
+  |  |
+
+  4 – 3 
+
+**解题思路：**
+
+（1）    第一步，应该可以输出一个基本的算法起点代码
+
+（2）    第二步，根据并查集算法去做计算
+
+第一步示例代码（与算法实现管洗不大，主要是梳理思路）：
+
+public int[] findRedundantConnection(int[][] edges) {
+   int rowLen = edges.length;
+   int colLen = edges[0].length;
+   int[] ans = new int[2];
+   for (int[] edge : edges) {
+     int u = edge[0];
+     int v = edge[1];
+     //TODO：此处书写算法
+   }
+   return ans;
+ }
+
+ 
+
+ 
+
+ 
+
+**并查集的说明：**
+
+在没有添加边的时候，各个节点集合独立，我们需要初始化各个节点集合的代表节点为其自身。初始化后，集合图如下图所示：
+
+ 
+
+然后我们开始遍历边集合，将边转化为集合的关系
+
+这里有一点很重要：边[a,b]意味着a所在集合可以和b所在集合合并。
+
+合并方法很多，这里我们简单地将a集合的代表节点戳到b集合的代表节点上
+
+ 
+
+ 
+
+**代码实现：**
+
+private int find(int[] parent, int x) {
+
+//未采用递归实现，采用非递归形式实现
+   int node = x;
+   while (parent[node] != node) {
+     node = parent[node];
+   }
+   return node;
+ }
+ 
+ private void union(int[] parent, int x, int y) {
+   int setX = find(parent, x);
+   int setY = find(parent, y);
+   if (setX != setY) {
+     parent[setX] = setY;
+   }
+ }
+ 
+ public int[] findRedundantConnection(int[][] edges) {
+   int N = edges.length;
+   int[] parent = new int[N + 1];
+   for (int i = 1; i < N + 1; i++) {
+     parent[i] = i;
+   }
+ 
+   for (int[] edge : edges) {
+     if (find(parent, edge[0]) == find(parent, edge[1])) {
+       return edge;
+     } else {
+       union(parent, edge[0], edge[1]);
+     }
+   }
+ 
+   return new int[0];
+ }
+
+ 
+
+### 1.1.2  岛屿数量（[**#200**](https://leetcode-cn.com/problems/number-of-islands/)必做 简单）
+
+岛屿问题是一类典型的网格问题。每个格子中的数字可能是 0 或者 1。我们把数字为 0 的格子看成海洋格子，数字为 1 的格子看成陆地格子，这样相邻的陆地格子就连接成一个岛屿。
+
+ 
+
+岛屿问题最常见的做法包括三类，DFS，BFS和并查集实现方式三种，需要注意的是，DFS，BFS指的是针对某个连通块（此处称之为岛屿）采用深搜或者广搜实现，而不是针对整个二维矩阵，后续说采用深搜或者广搜，一定是针对图或者树进行，而不是二维矩阵。在 LeetCode 中，「岛屿问题」是一个系列问题，比如：
+
+\200. 岛屿数量 （Easy）；
+
+\463. 岛屿的周长 （Easy）；
+
+\695. 岛屿的最大面积 （Medium）；
+
+\827. 最大人工岛 （Hard）
+
+\934. 最短的桥
+
+ 
+
+本题目示例代码：
+
+https://leetcode-cn.com/problems/number-of-islands/solution/dao-yu-lei-wen-ti-de-tong-yong-jie-fa-dfs-bian-li-/
+
+
+ public class Solution {
+   class Union {
+     private int[] union;
+     int count = 0;
+ 
+     Union(char[][] grid) {
+       int rows = grid.length;
+
+int cols = grid[0].length;
+       union = new int[rows * cols];
+       // 初始化并查集
+       for (int i = 0; i < rows; i++) {
+         for (int j = 0; j < cols; j++) {
+           if (grid[i][j] == '1') {
+             int index = i * cols + j;
+             // 初始化指向自己
+
+​      union[index] = index; 
+​             count++;
+​           }
+​         }
+​       }
+​     }
+​     // 找到终点
+​     int find(int index) {
+​       if (union[index] == index) {
+​         return index;
+​       }
+​       int end = find(union[index]);// 递归查找
+​       while (union[index] != end) { // 优化并查集合并
+​         int temp = index;
+​         index = union[index];
+​         union[temp] = end;
+​       }
+​       return end;
+​     }
+
+
+     // 合并并查集
+     void union(int index1, int index2) {
+       int end1 = find(index1);
+       int end2 = find(index2);
+       if (end1 != end2) { // 不是同一终点
+         union[end2] = end1; // 合并
+         count--; // 岛屿数 -1
+       }
+     }
+ 
+   }
+ 
+   private int[] moveX = {-1, 1, 0, 0},
+       moveY = {0, 0, -1, 1};
+ 
+   public int numIslands(char[][] grid) {
+     if (grid == null || grid.length < 1) {
+       return 0;
+     }
+     Union union = new Union(grid);
+     int rows= grid.length;
+     int cols = grid[0].length;
+
+for (int i = 0; i < rows; i++) {      
+       for (int j = 0; j < cols; j++) {
+         if (grid[i][j] == '1') { // 将上下左右的 1 合并在一起
+           for (int k = 0; k < moveX.length; k++) {
+             int x = i + moveX[k];
+
+int y = j + moveY[k];
+             if (isValid(grid, rows, cols, x, y)) {
+               union.union(i * cols + j, x * cols + y);
+             }
+           }
+         }
+       }
+     }
+     return union.count;
+   }
+ 
+ 
+   private boolean isValid(char[][] grid, int rows, int cols, int x, int y) {
+     return x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] == '1';
+   }
+ 
+ }
+
+ 
+
+ 
+
+### 1.1.3  句子相似性II ([**#737**](https://leetcode-cn.com/problems/sentence-similarity-ii/)_会员)
+
+ 
+
+ 
+
+/*
+
+ \* Copyright (c) Huawei Technologies Co., Ltd. 2012-2018. All rights reserved.
+
+ \* Description: 737. 句子相似性 II
+
+ \* Author: w00448446
+
+ \* Create: 2019-11-27
+
+ */
+
+\#include <stdio.h>
+
+\#include <stdlib.h>
+
+\#include <stdbool.h>
+
+\#include <string.h>
+
+\#include <ctype.h>
+
+\#include <math.h>
+
+ 
+
+\#define MAX_WORDS_NUM 4010
+
+ 
+
+typedef struct {
+
+  int pre;
+
+  char *words;
+
+} Word;
+
+ 
+
+Word g_pair[MAX_WORDS_NUM];
+
+int g_pairLen;
+
+ 
+
+int PairCmp(const void *w1, const void *w2)
+
+{
+
+  return strcmp(((Word*)w1)->words, ((Word*)w2)->words);
+
+}
+
+ 
+
+int GetRoot(int i)
+
+{
+
+  while (g_pair[i].pre != i) {
+
+​    i = g_pair[i].pre;
+
+  }
+
+  return i;
+
+}
+
+void Init(char ***pairs, int pairsSize)
+
+{
+
+  int i, j;
+
+  int pre1, pre2;
+
+  Word pair1, pair2;
+
+  Word *word1 = NULL;
+
+  Word *word2 = NULL;
+
+ 
+
+  g_pairLen = 0;
+
+  if (pairsSize < 1) {
+
+​    return;
+
+  }
+
+ 
+
+  for (i = 0; i < pairsSize; i++) {
+
+​    g_pair[g_pairLen++].words = pairs[i][0];
+
+​    g_pair[g_pairLen++].words = pairs[i][1];
+
+  }
+
+ 
+
+  // 排序
+
+  qsort(g_pair, g_pairLen, sizeof(Word), PairCmp);
+
+ 
+
+  // 去除重复
+
+  for (i = 1, j = 0; i < g_pairLen; i++) {
+
+​    if (strcmp(g_pair[i].words, g_pair[j].words) == 0) {
+
+​      continue;
+
+​    }
+
+​    j++;
+
+​    g_pair[j].words = g_pair[i].words;
+
+  }
+
+  g_pairLen = j + 1;
+
+ 
+
+  // 初始化pre值
+
+  for (i = 0; i < g_pairLen; i++) {
+
+​    g_pair[i].pre = i;
+
+  }
+
+ 
+
+  // 根据pair,生成映射
+
+  for (i = 0; i < pairsSize; i++) {
+
+​    pair1.words = pairs[i][0];
+
+​    pair2.words = pairs[i][1];
+
+​     word1 = bsearch(&pair1, g_pair, g_pairLen, sizeof(Word), PairCmp);
+
+​    word2 = bsearch(&pair2, g_pair, g_pairLen, sizeof(Word), PairCmp);
+
+​    if ((word1 == NULL) || (word2 == NULL)) {
+
+​      printf("search fail, not expect!\n");
+
+​       continue;
+
+​    }
+
+ 
+
+​    pre1 = GetRoot(word1->pre);
+
+​    pre2 = GetRoot(word2->pre);
+
+​    if (pre1 == pre2) {
+
+​      continue;
+
+​    }
+
+​    g_pair[pre1].pre = pre2;
+
+  }
+
+  return ;
+
+}
+
+ 
+
+bool IsSimilar(char **words1, int words1Size, char **words2, int words2Size)
+
+{
+
+  int i;
+
+  int pre1, pre2;
+
+  Word pair1, pair2;
+
+  Word *word1 = NULL;
+
+  Word *word2 = NULL;
+
+  if (words1Size != words2Size) {
+
+​    return false;
+
+  }
+
+ 
+
+  for (i = 0; i < words1Size; i++) {
+
+​    // 查找
+
+​    pair1.words = words1[i];
+
+​    pair2.words = words2[i];
+
+​    word1 = bsearch(&pair1, g_pair, g_pairLen, sizeof(Word), PairCmp);
+
+​    word2 = bsearch(&pair2, g_pair, g_pairLen, sizeof(Word), PairCmp);
+
+​    if ((word1 == NULL) || (word2 == NULL)) {
+
+​      if (strcmp(words1[i], words2[i]) == 0) {
+
+​        continue;
+
+​      }
+
+​      return false;
+
+​    }
+
+ 
+
+​    pre1 = GetRoot(word1->pre);
+
+​    pre2 = GetRoot(word2->pre);
+
+​    if (pre1 == pre2) {
+
+​      continue;
+
+​    }
+
+ 
+
+​    return false;
+
+  }
+
+ 
+
+  return true;
+
+}
+
+bool areSentencesSimilarTwo(char **words1, int words1Size, char **words2, int words2Size,
+
+​              char ***pairs, int pairsSize, int *pairsColSize)
+
+{
+
+  Init(pairs, pairsSize);
+
+  bool rslt = IsSimilar(words1, words1Size, words2, words2Size);
+
+  return rslt;
+
+}
+
+ 
+
+void Test1()
+
+{
+
+  char *word1[] = { "great", "acting", "skills" };
+
+  char *word2[] = { "fine", "drama", "talent" };
+
+  char *pair1[] = { "great", "fine" };
+
+  char *pair2[] = { "acting", "drama" };
+
+  char *pair3[] = { "skills", "talent" };
+
+  char **g[] = { pair1,     pair2,      pair3 };
+
+ 
+
+  int word1Size = sizeof(word1) / sizeof(word1[0]);
+
+  int word2Size = sizeof(word2) / sizeof(word2[0]);
+
+  int pairsSize = sizeof(g) / sizeof(g[0]);
+
+  int pairsColSize[] = { 2 };
+
+  int rslt;
+
+  rslt = areSentencesSimilarTwo(word1, word1Size, word2, word2Size, g, pairsSize, pairsColSize);
+
+  if (rslt == 1) {
+
+​    printf("t1: succ\n");
+
+  }
+
+}
+
+void main()
+
+{
+
+  Test1();
+
+  return;
+
+}
+
+### 1.1.4  得分最高的路径（[**#1102**](https://leetcode-cn.com/problems/path-with-maximum-minimum-value/)会员）
+
+ 
+
+使用并查集的一种解法：
+
+\1.   将所有路径数据按照从大到小排序；
+
+\2.   然后建立圈子：依次加入数据，如果出现了从起始点到结束点的圈子，则说明找到目标解。
+
+ 
+
+ 
+
+/*
+
+ \* Copyright (c) Huawei Technologies Co., Ltd. 2019-2019. All rights reserved.
+
+ \* Description: 1102. 得分最高的路径
+
+ \* Author: w00448446
+
+ \* Create: 2019-12-13
+
+ */
+
+\#include <stdio.h>
+
+\#include <stdlib.h>
+
+\#include <stdbool.h>
+
+ 
+
+\#define MAX_NUM      10006
+
+\#define DIRECTION_NODE_NUM 2
+
+\#define DIRECTION_LEN   4
+
+ 
+
+typedef struct {
+
+  int currIndex;
+
+  int preIndex;
+
+  int marked;
+
+  int val;
+
+} Node;
+
+ 
+
+int g_direction[][DIRECTION_NODE_NUM] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+
+ 
+
+int g_col;
+
+int g_row;
+
+Node g_node[MAX_NUM];
+
+Node g_sortNode[MAX_NUM];
+
+int g_num;
+
+ 
+
+int NodeCmp(const void *node1, const void *node2)
+
+{
+
+  return (((Node *)node2)->val) - (((Node *)node1)->val);
+
+}
+
+void InitNode(const int **a, int aSize, const int *aColSize)
+
+{
+
+  int i, j;
+
+  g_col = aColSize[0];
+
+  g_row = aSize;
+
+  g_num = 0;
+
+  for (i = 0; i < aSize; i++) {
+
+​    for (j = 0; j < g_col; j++) {
+
+​      g_node[g_num].val = a[i][j];
+
+​      g_node[g_num].currIndex = i * g_col + j;
+
+​      g_node[g_num].preIndex = g_node[g_num].currIndex;
+
+​       g_node[g_num].marked = 0;
+
+​      g_sortNode[g_num] = g_node[g_num];
+
+​      g_num++;
+
+​    }
+
+  }
+
+  // 从大到小排序
+
+  qsort(g_sortNode, g_num, sizeof(Node), NodeCmp);
+
+}
+
+ 
+
+bool IsNodeValid(int i, int j)
+
+{
+
+  if (i < 0) {
+
+​    return false;
+
+  }
+
+ 
+
+  if (i >= g_row) {
+
+​    return false;
+
+  }
+
+ 
+
+  if (j < 0) {
+
+​    return false;
+
+  }
+
+ 
+
+  if (j >= g_col) {
+
+​    return false;
+
+  }
+
+ 
+
+  return true;
+
+}
+
+ 
+
+int FindRoot(int index)
+
+{
+
+  if (index == g_node[index].preIndex) {
+
+​    return index;
+
+  }
+
+  return g_node[index].preIndex = FindRoot(g_node[index].preIndex);
+
+}
+
+ 
+
+void UnionNode(int index)
+
+{
+
+  int i;
+
+  int currI, currJ, currRoot;
+
+  int nextI, nextJ, nextMap, nextRoot;
+
+ 
+
+  currI = g_node[index].currIndex / g_col;
+
+  currJ = g_node[index].currIndex % g_col;
+
+  for (i = 0; i < DIRECTION_LEN; i++) {
+
+​    nextI = currI + g_direction[i][0];
+
+​    nextJ = currJ + g_direction[i][1];
+
+ 
+
+​    if (!IsNodeValid(nextI, nextJ)) {
+
+​      continue;
+
+​    }
+
+​    // 如果有效点, 找到父亲节点进行并操作
+
+​    nextMap = nextI * g_col + nextJ;
+
+​    if (g_node[nextMap].marked == 0) {
+
+​      continue;
+
+​    }
+
+ 
+
+​    nextRoot = FindRoot(nextMap);
+
+​    currRoot = FindRoot(index);
+
+​    if (nextRoot == currRoot) {
+
+​      continue;
+
+​    }
+
+ 
+
+​    if (nextRoot <= currRoot) {
+
+​      g_node[currRoot].preIndex = nextRoot;
+
+​      continue;
+
+​    }
+
+ 
+
+​    // 进行并操作
+
+​    g_node[nextRoot].preIndex = currRoot;
+
+  }
+
+}
+
+ 
+
+int Traverse()
+
+{
+
+  int i, index;
+
+  int startValid = 0;
+
+  const int START_INDEX = 0;
+
+  int startRoot;
+
+  int endValid = 0;
+
+  int endIndex = g_num - 1;
+
+  int endRoot;
+
+ 
+
+  for (i = 0; i < g_num; i++) {
+
+​    // 查找上下左右，进行归并
+
+​    index = g_sortNode[i].currIndex;
+
+​    g_node[index].marked = 1;
+
+​    UnionNode(index);
+
+ 
+
+​    if (index == START_INDEX) {
+
+​      startValid = 1;
+
+​    }
+
+ 
+
+​    if (index == endIndex) {
+
+​       endValid = 1;
+
+​    }
+
+ 
+
+​    if ((startValid == 0) || (endValid == 0)) {
+
+​      continue;
+
+​    }
+
+ 
+
+​    // 检测起始和结束点是否在一个圈子里面，若是则找到目标解
+
+​    startRoot = FindRoot(START_INDEX);
+
+​    endRoot = FindRoot(endIndex);
+
+​    if (endRoot == startRoot) {
+
+​      return g_sortNode[i].val;
+
+​    }
+
+  }
+
+  return g_sortNode[0].val;
+
+}
+
+int maximumMinimumPath(const int **a, int aSize, const int *aColSize)
+
+{
+
+  InitNode(a, aSize, aColSize);
+
+  int max = Traverse();
+
+  return max;
+
+}
+
+ 
+
+void Test1()
+
+{
+
+  int m1[] = { 5, 4, 5 };
+
+  int m2[] = { 1, 2, 6 };
+
+  int m3[] = { 7, 4, 6 };
+
+  int *g[] = { m1, m2, m3 };
+
+  int len = sizeof(g) / sizeof(g[0]);
+
+  int col[] = { 3, 3, 3 };
+
+  int rslt = maximumMinimumPath(g, len, col);
+
+  if (rslt == 4) {
+
+​    printf("T1: pass\n");
+
+  } else {
+
+​    printf("T1: fail\n");
+
+  }
+
+}
+
+ 
+
+void Test2()
+
+{
+
+  int m1[] = { 2, 2, 1, 2, 2, 2 };
+
+  int m2[] = { 1, 2, 2, 2, 1, 2 };
+
+  int *g[] = { m1, m2 };
+
+  int len = sizeof(g) / sizeof(g[0]);
+
+  int col[] = { 6, 6, 6 };
+
+  int rslt = maximumMinimumPath(g, len, col);
+
+  if (rslt == 2) {
+
+​    printf("T2: pass\n");
+
+  } else {
+
+​    printf("T2: fail\n");
+
+  }
+
+}
+
+void main(void)
+
+{
+
+  Test2();
+
+  Test1();
+
+  return;
+
+}
+
+ 
+
+ 
+
+### 1.1.5  最低成本联通所有城市（[**#1135**](https://leetcode-cn.com/problems/connecting-cities-with-minimum-cost/)会员）
+
+ 
+
+ 
+
+#### 1.1.5.1 最小生成树
+
+（https://blog.csdn.net/luoshixian099/article/details/51908175）
+
+关于图的几个概念定义：
+
+ 
+
+连通图：在无向图中，若任意两个顶点vivi与vjvj都有路径相通，则称该无向图为连通图。
+
+强连通图：在有向图中，若任意两个顶点vivi与vjvj都有路径相通，则称该有向图为强连通图。
+
+连通网：在连通图中，若图的边具有一定的意义，每一条边都对应着一个数，称为权；权代表着连接连个顶点的代价，称这种连通图叫做连通网。
+
+生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，但只有足以构成一棵树的n-1条边。一颗有n个顶点的生成树有且仅有n-1条边，如果生成树中再添加一条边，则必定成环。
+
+最小生成树：在连通网的所有生成树中，所有边的代价和最小的生成树，称为最小生成树。
+
+ 
+
+ 
+
+### 1.1.6  以图辨树（[**#261**](https://leetcode-cn.com/problems/graph-valid-tree/)会员）
+
+ 
+
+/*
+
+\* Copyright (c) Huawei Technologies Co., Ltd. 2012-2019. All rights reserved.
+
+\* Description: 261. 以图判树 securec.h
+
+\* Author: w00448446
+
+\* Create: 2019-11-14
+
+*/
+
+\#include <stdio.h>
+
+\#include <stdlib.h>
+
+\#include <string.h>
+
+\#include <stdbool.h>
+
+\#define MAX_VERTEX_NUM 10000
+
+int g_vertex[MAX_VERTEX_NUM];
+
+int GetMin(int a, int b)
+
+{
+
+  if (a <= b) {
+
+​    return a;
+
+  }
+
+  return b;
+
+}
+
+int FindRoot(int a)
+
+{
+
+  while (g_vertex[a] != a) {
+
+​    a = g_vertex[a];
+
+  }
+
+ 
+
+  return a;
+
+}
+
+bool validTree(int n, int** edges, int edgesSize, int* edgesColSize)
+
+{
+
+  int i;
+
+  int a, b;
+
+  if (edgesSize != (n - 1)) {
+
+​    return false;
+
+  }
+
+ 
+
+  if (edgesSize == 0 && n == 1) {
+
+​    return true;
+
+  }
+
+ 
+
+  for (i = 0; i < n; i++) {
+
+​    g_vertex[i] = i;
+
+  }
+
+ 
+
+  for (i = 0; i < edgesSize; i++) {
+
+​    a = FindRoot(edges[i][0]);
+
+​    b = FindRoot(edges[i][1]);
+
+ 
+
+​    if (a == b) {
+
+​      return false;
+
+​    }
+
+ 
+
+​    if (edges[i][0] < edges[i][1]) {
+
+​      g_vertex[edges[i][1]] = a;
+
+​    } else {
+
+​      g_vertex[edges[i][0]] = b;
+
+​    }
+
+  }
+
+  return true;
+
+}
+
+void TestCase1()
+
+{
+
+  int m1[] = {0, 1};
+
+  int m2[] = {0, 2};
+
+  int m3[] = {0, 3};
+
+  int m4[] = {1, 4};
+
+  int *g[] = {m1, m2, m3, m4};
+
+  int length = sizeof(g) / sizeof(g[0]);
+
+  int col[] = {2,2,2,2};
+
+  int rslt;
+
+  int n = 5;
+
+  rslt = validTree(n, g, length, col);
+
+  if (rslt == 1) {
+
+​    printf("t1: pass\n");
+
+  }
+
+}
+
+void main()
+
+{
+
+  TestCase1();
+
+}
+
+ 
+
+### 1.1.7  按字典序排列最小的等效字符串（[**#1061**](https://leetcode-cn.com/problems/lexicographically-smallest-equivalent-string/)会员）
+
+ 
+
+ 
+
+### 1.1.8 **[无向图中连通分量的数目](https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/)**（[**#323**](https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/)_会员）
+
+ 
+
+### 1.1.9  尽量减少恶意软件的传播（[**#924**](https://leetcode-cn.com/problems/minimize-malware-spread/)_困难）
+
+ 
+
+ 
+
+注：将initial视为临时圈长，那么所拥有最大个数的圈，就是目标解。
+
+ 
+
+ 
+
+\#include <stdlib.h>
+
+\#include <string.h>
+
+\#include "securec.h"
+
+\#define MAX_LEN 301
+
+ 
+
+int g_preNode[MAX_LEN];
+
+int g_hashInfo[MAX_LEN];
+
+ 
+
+int FindRoot(int pos)
+
+{
+
+  int son = pos;
+
+  int temp;
+
+ 
+
+  if (g_preNode[pos] == -1) {
+
+​    return pos;
+
+  }
+
+ 
+
+  while (g_preNode[pos] != -1) {
+
+​    pos = g_preNode[pos];
+
+  }
+
+ 
+
+  while (g_preNode[son] != -1) {
+
+​    temp = g_preNode[son];
+
+​    g_preNode[son] = pos;
+
+​    son = temp;
+
+  }
+
+ 
+
+  return pos;
+
+}
+
+ 
+
+void UnionRoot(int x, int y)
+
+{
+
+  int a = FindRoot(x);
+
+  int b = FindRoot(y);
+
+ 
+
+  if (a != b) {
+
+​    g_preNode[a] = b;
+
+  }
+
+}
+
+ 
+
+int minMalwareSpread(int **graph, int graphSize, int *graphColSize, int *initial, int initialSize)
+
+{
+
+  int temp;
+
+  int max = 0;
+
+  int result;
+
+ 
+
+  if (graphSize <= 0 || initialSize <= 0) {
+
+​    return 0;
+
+  }
+
+ 
+
+  result = initial[0];
+
+  (void)memset_s(g_preNode, MAX_LEN * sizeof(int), -1, MAX_LEN * sizeof(int));
+
+  (void)memset_s(g_hashInfo, MAX_LEN * sizeof(int), 0, MAX_LEN * sizeof(int));
+
+ 
+
+  // step1：建圈
+
+  for (int i = 0; i < graphSize; i++) {
+
+​    for (int j = 0; j < graphColSize[i]; j++) {
+
+​      if (graph[i][j] == 1) {
+
+​        UnionRoot(i, j);
+
+​      }
+
+​    }
+
+  }
+
+ 
+
+  // step2：统计各圈长下挂节点数
+
+  for (int i = 0; i < graphSize; i++) {
+
+​    temp = FindRoot(i);
+
+​    if (temp != -1) {
+
+​      g_hashInfo[temp]++;
+
+​    }
+
+  }
+
+ 
+
+  // step3：获取initial列表中节点所属圈中圈长下挂节点数最大的节点
+
+  for (int i = 0; i < initialSize; i++) {
+
+​    temp = FindRoot(initial[i]);
+
+​    if ((temp != -1) && ((max < g_hashInfo[temp]) || ((max == g_hashInfo[temp]) && initial[i] < result))) {
+
+​      max = g_hashInfo[temp];
+
+​      result = initial[i];
+
+​    }
+
+  }
+
+ 
+
+  return result;
+
+}
+
+void main(void)
+
+{
+
+  return;
+
+}
+
+ 

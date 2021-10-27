@@ -470,7 +470,7 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 向 ES 服务器发 GET 请求 ：http://127.0.0.1:9200/{索引名}/_mapping，示例：
 
-![image-20211008175256536](../../image-20211008175256536.png)
+![image-20211008175256536](../../im/image-20211008175256536.png)
 
 #### 索引映射关联
 
@@ -753,7 +753,7 @@ POST http://127.0.0.1:9200/{索引名}/_analyze
 
 部分动态识别文档字段类型的模式如下：
 
-![image-20211008194454418](../../image-20211008194454418.png)
+![image-20211008194454418](../../img/image-20211008194454418.png)
 
 动态映射可以在mapping中受控。通过设置全局和包含子字段的字段的dynamic关键字，我们可以控制动态映射的执行方式：
 
@@ -2084,7 +2084,7 @@ nested针对以列表形式储存多个子文档的字段进行搜索，这些�
 "vehicle.model":["Mach Five","Ecto-1"]
 ```
 
-如果我们要搜索满足条件的子文档，返回的结果就不一定满足时同一个子文档，所以需要nested保证子文档的完整性。（[ElasticSearch - 嵌套对象 nested_kucw的博客-CSDN博客_es nested](https://blog.csdn.net/weixin_40341116/article/details/80778599)）
+如果我们要搜索满足条件的子文档，返回的结果就不一定同时满足同一个子文档，所以需要nested保证子文档的完整性。（[ElasticSearch - 嵌套对象 nested_kucw的博客-CSDN博客_es nested](https://blog.csdn.net/weixin_40341116/article/details/80778599)）
 
 nested保证了对nested字段以子文档为单位查询，只有列表中的任意文档中的字段内容完整满足Query才返回结果：
 
