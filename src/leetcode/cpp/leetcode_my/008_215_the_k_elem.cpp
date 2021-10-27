@@ -8,7 +8,7 @@
 * 核心考察点：
 * 快速排序中使用的划分思路，也是双指针的一种思想
 */
-#include "trust_pro.h"
+#include "01_all.h"
 #include <algorithm>
 #include <iomanip>
 #include <iostream>

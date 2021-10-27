@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 
+void TestFriendCircles();
 
 void TestStockSpanner();
 void TestRainTrap();

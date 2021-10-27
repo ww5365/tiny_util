@@ -3,6 +3,9 @@
 
 void leetcode_all_test(){
 
+    //朋友圈
+    TestFriendCircles();
+
     // 股票跨度
     TestStockSpanner();
     

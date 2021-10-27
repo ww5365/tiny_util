@@ -34,13 +34,6 @@ public:
 void TestMaxWidthRamp()
 {
     std::vector<int> prices = {100, 80, 60, 70, 60, 75, 85};
-    StockSpanner *sp = new StockSpanner();
     std::cout << "stock spanner test1: " << std::endl;
-    
-    for (auto e : prices) {
-        std::cout << sp->next(e) << " ";
-    }
-    std::cout << std::endl;
-    
 
 }
