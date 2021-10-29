@@ -1,5 +1,6 @@
 /**
 * https://leetcode-cn.com/problems/friend-circles/
+* https://leetcode-cn.com/problems/number-of-provinces/
 
 * 班上有 N 名学生。其中有些人是朋友，有些则不是。他们的友谊具有传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友。所谓的朋友圈，是指所有朋友的集合。
 * 给定一个 N * N 的矩阵 M，表示班级中学生之间的朋友关系。如果M[i][j] = 1，表示已知第 i 个和 j 个学生互为朋友关系，否则为不知道。你必须输出所有学生中的已知的朋友圈总数。
@@ -39,12 +40,14 @@
 #include <functional>
 #include <string>
 #include <stack>
+#include <deque>
 using namespace std;
 
 class Solution {
 public:
-    int FindCircleNum(vector<vector<int>>& isConnected) {
 
+    // 归并集
+    int FindCircleNum(std::vector<std::vector<int>>& isConnected) {
         if (isConnected.size() <= 0) {
             return 0;
         }
@@ -69,8 +72,71 @@ public:
         }
         return result;
     }
+    
+    //深度优先遍历DFS, 图使用矩阵表示
+    int FindCircleNum2(std::vector<std::vector<int>>& isConnected) {
+
+        if (isConnected.size() <= 0) {
+            return 0;
+        }
+        int rows = isConnected.size();
+        std::vector<bool> visited(rows, false); //标识某个节点是否被访问过
+        int result = 0;
+        for (int i = 0; i < rows; ++i) {
+            // 最多也就N个节点的连通图
+            if (visited[i] == false) {
+                dfs(isConnected, visited, i); //节点i没有被访问过，深度优先访问这个连通子图
+                result++;  // 记录一个连通子图，连通子图的个数，也就是朋友圈的个数
+            }
+        }
+        return result;
+    }
+
+    // 广度优先搜索
+    int FindCircleNum3(vector<vector<int>>& isConnected)
+    {   
+        if (isConnected.size() <= 0) {
+            return 0;
+        }
+        int n =  isConnected.size();
+        vector<bool> visited(n, false);
+        std::deque<int> qu;
+        int result = 0;
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                qu.push_back(i);
+                while (!qu.empty()) {  //访问一个完整的连通子图
+                    int node = qu.front();
+                    visited[node] = true;
+                    qu.pop_front();
+                    for (int j = 0; j < n; ++j) {
+                        if (isConnected[node][j] == 1 && !visited[j]) {
+                            qu.push_back(j); //关联的节点入队
+                        }
+                    }
+                } // while
+                result++;
+            }
+        }
+        return result;
+    }
 
 private:
+
+    //DFS 从节点id开始进行深度优先遍历
+    void dfs(std::vector<std::vector<int>> &isConnected, std::vector<bool> &visited, int i) {
+
+        int cols = isConnected[i].size();
+        // 从节点i开始，深度优先遍历这个点开始的连通子图
+        for (int j = 0; j < cols; ++j) {
+            if (isConnected[i][j] == 1 && visited[j] == false) {
+                visited[j] = true;
+                dfs(isConnected, visited, j);
+            }
+        }
+    }
+
+
 
     // 将元素x和y所在的连通子图进行归并
     void Union(std::vector<int> &parent, int x, int y) 
@@ -87,7 +153,6 @@ private:
 
     // 查找元素x的父节点(代表元)
     int find(const vector<int> &parent, int x) {
-        
         if (parent[x] == -1) {
             return x; //自身就是根节点(代表元)
         }
@@ -101,7 +166,12 @@ void TestFriendCircles()
     Solution s;
     std::vector<vector<int>> friends = {{1,1,0}, {1,1,1}, {0,1,1}};
     int circle_nums = s.FindCircleNum(friends);
-
     std::cout << "find the friend circles: " << circle_nums << std::endl;
+    
+    int circle_nums2 = s.FindCircleNum2(friends);
+    std::cout << "find the friend circles2: " << circle_nums2 << std::endl;
+    
+    int circle_nums3 = s.FindCircleNum3(friends);
+    std::cout << "find the friend circles3: " << circle_nums3 << std::endl;
 
 }
