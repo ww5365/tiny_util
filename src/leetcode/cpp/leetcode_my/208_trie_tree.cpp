@@ -71,7 +71,7 @@ public:
         if (word.size() <= 0 || !ptr) return false;
 
         //TrieNode *pre_ptr = nullptr;
-        for (size_t i = 0; i < word.size(); ++i){
+        for (size_t i = 0; i < word.size(); ++i) {
             size_t index = word[i] - 'a';
             if (!ptr->next[index]){
                 return false;
@@ -103,11 +103,10 @@ public:
 
 
 private:
-
     struct TrieNode{
         //这个节点上是否形成过完成的字符串? becasuse we have two search method
         bool isString;
-        //因为全部字母，总共26个；可以不用map来实现，直接用数组，下标用字母-'a'来映射
+        //因为全部字母，总共26个；可以不用map来实现，直接用数组，下标用字母-'a'来映射;最多26个分支；
         TrieNode* next[26];
 
         TrieNode():isString(false){

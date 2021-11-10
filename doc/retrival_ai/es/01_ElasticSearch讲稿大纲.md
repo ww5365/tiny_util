@@ -64,7 +64,7 @@ Elasticsearch核心技术与实战：[Elasticsearch核心技术与实战 (geekba
 
 Lucene是apache软件基金会 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。ElasticSearch在此基础上搭建了完整的分布式服务框架。
 
-![image-20211008164500398](../../image-20211008164500398.png)
+![image-20211008164500398](../../img/image-20211008164500398.png)
 
 ### ELK
 
@@ -392,9 +392,7 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 如果删除一条不存在的文档：
 
-```
-—————————————————————————————
-更多 Java –大数据 –前端 –python 人工智能资料下载，可百度访问：尚硅谷官网
+```json
 {
  "_index": "shopping",
  "_type": "_doc",
@@ -427,7 +425,7 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 向 ES 服务器发 PUT 请求 ：http://127.0.0.1:9200/{索引名}/_mapping，示例的请求体指明了mapping的结构：
 
-```
+```json
 {
  "properties": {
  "name":{
@@ -470,13 +468,13 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
 
 向 ES 服务器发 GET 请求 ：http://127.0.0.1:9200/{索引名}/_mapping，示例：
 
-![image-20211008175256536](../../im/image-20211008175256536.png)
+![image-20211008175256536](../../img/image-20211008175256536.png)
 
 #### 索引映射关联
 
 向 ES 服务器发 PUT 请求 ：http://127.0.0.1:9200/{索引名}，在请求体中可以指定mapping字段来设定映射：
 
-```
+```json
 {
  "mappings"（指定mapping字段）: {
  "properties": {
@@ -496,9 +494,10 @@ POST 的重复操作截然不同，10次POST请求将会创建10个资源。
  }
  }
 }
+
 ```
 
-###Analyzer
+### Analyzer
 
 分词器使用的两个情形： 
 
@@ -741,6 +740,7 @@ POST http://127.0.0.1:9200/{索引名}/_analyze
     "text": ["The 2 QUICK Brown-Foxes jumped over the lazy dog's bone."]
   }
   得到  "token": "The 2 QUICK Brown-Foxes jumped over the lazy dog's bone." 一条完整的语句
+  
   ```
 
 详情参考：[es的分词器analyzer - 卡布爱学习 - 博客园 (cnblogs.com)](https://www.cnblogs.com/xiaobaozi-95/p/9328948.html)
@@ -1017,7 +1017,7 @@ PUT /_template/<index-template>
 
 我们可以使用_template这个终点来创建，删除，查看一个index template。下面，我们来举一个例子：
 
-```
+```json
     PUT _template/logs_template
     {
       "index_patterns": "logs-*",
