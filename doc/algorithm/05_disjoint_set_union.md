@@ -127,28 +127,11 @@ public int find(int x) {
     return x;
 }
 ```
+**对比学习DFS实现方案**
+使用深度优先搜索，从每个节点开始，使用一个大小为 N 的 visited 数组（M 大小为 N×N），这样 visited[i]表示第 i 个元素是否被深度优先搜索访问过。首先选择一个节点，访问任一相邻的节点。然后再访问这一节点的任一相邻节点。这样不断遍历到没有未访问的相邻节点时，回溯到之前的节点进行访问。
 
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
- 
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    **对比学习****DFS****实现方案**
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    使用深度优先搜索，从每个节点开始，使用一个大小为 N 的 visited 数组（M 大小为 N×N），这样 visited[i]表示第 i 个元素是否被深度优先搜索访问过。首先选择一个节点，访问任一相邻的节点。然后再访问这一节点的任一相邻节点。这样不断遍历到没有未访问的相邻节点时，回溯到之前的节点进行访问。
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    //DFS实现朋友圈算法
+``` java
+//DFS实现朋友圈算法
  public int findCircleNum(int[][] matrix) {
    int rows = matrix.length;
    int cols = matrix[0].length;
@@ -162,7 +145,7 @@ public int find(int x) {
    }
    return count;
  }
- 
+
  private void dfs(int[][] matrix, int[] visited, int i) {
    for (int j = 0; j < matrix.length; j++) {
      if (matrix[i][j] == 1 && visited[j] == 0) {
@@ -171,32 +154,12 @@ public int find(int x) {
      }
    }
  }
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)         
-
-​        张三        
-
-​        李四        
-
-
-
-​        王五        
-
-​        赵六        
-
-​        赵一        
-
-​                                                                       
-
-
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    对比学习BFS实现:
-
-![*](file:///C:\Users\W00590~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png)    广度优先搜索，把当前人员相关的所有人员全部访问完，然后再访问自己每个朋友的关系圈子。不同于DFS，访问到一个朋友之后，立刻看整个朋友的关系圈子。
-
 ```
+
+**对比学习BFS实现**
+广度优先搜索，把当前人员相关的所有人员全部访问完，然后再访问自己每个朋友的关系圈子。不同于DFS，访问到一个朋友之后，立刻看整个朋友的关系圈子。
+
+```java
 public int findCircleNum(int[][] matrix) {
     int[] visited = new int[matrix.length];
     int count = 0;
@@ -224,7 +187,7 @@ public int findCircleNum(int[][] matrix) {
 
 ## 1.1   触类旁通
 
-### 1.1.1  冗余连接（[**#684**](https://leetcode-cn.com/problems/redundant-connection/)）
+### 1.1.1  冗余连接（[#684](https://leetcode-cn.com/problems/redundant-connection/)）
 
 在本问题中, 树指的是一个连通且无环的无向图。
 
@@ -315,7 +278,7 @@ private int find(int[] parent, int x) {
    }
    return node;
  }
- 
+
  private void union(int[] parent, int x, int y) {
    int setX = find(parent, x);
    int setY = find(parent, y);
@@ -323,14 +286,14 @@ private int find(int[] parent, int x) {
      parent[setX] = setY;
    }
  }
- 
+
  public int[] findRedundantConnection(int[][] edges) {
    int N = edges.length;
    int[] parent = new int[N + 1];
    for (int i = 1; i < N + 1; i++) {
      parent[i] = i;
    }
- 
+
    for (int[] edge : edges) {
      if (find(parent, edge[0]) == find(parent, edge[1])) {
        return edge;
@@ -338,121 +301,216 @@ private int find(int[] parent, int x) {
        union(parent, edge[0], edge[1]);
      }
    }
- 
+
    return new int[0];
  }
 
  
 
-### 1.1.2  岛屿数量（[**#200**](https://leetcode-cn.com/problems/number-of-islands/)必做 简单）
+### 1.1.2  岛屿数量（[#200](https://leetcode-cn.com/problems/number-of-islands/)必做 简单）
 
 岛屿问题是一类典型的网格问题。每个格子中的数字可能是 0 或者 1。我们把数字为 0 的格子看成海洋格子，数字为 1 的格子看成陆地格子，这样相邻的陆地格子就连接成一个岛屿。
 
- 
-
 岛屿问题最常见的做法包括三类，DFS，BFS和并查集实现方式三种，需要注意的是，DFS，BFS指的是针对某个连通块（此处称之为岛屿）采用深搜或者广搜实现，而不是针对整个二维矩阵，后续说采用深搜或者广搜，一定是针对图或者树进行，而不是二维矩阵。在 LeetCode 中，「岛屿问题」是一个系列问题，比如：
 
-\200. 岛屿数量 （Easy）；
-
-\463. 岛屿的周长 （Easy）；
-
-\695. 岛屿的最大面积 （Medium）；
-
-\827. 最大人工岛 （Hard）
-
-\934. 最短的桥
-
- 
+200. 岛屿数量 （Easy）；
+463. [岛屿的周长 （Easy）](https://leetcode-cn.com/problems/island-perimeter/)
+695. [岛屿的最大面积 （Medium）](https://leetcode-cn.com/problems/max-area-of-island/)
+827. [最大人工岛 （Hard)](https://leetcode-cn.com/problems/making-a-large-island/)
+934. 最短的桥
 
 本题目示例代码：
 
 https://leetcode-cn.com/problems/number-of-islands/solution/dao-yu-lei-wen-ti-de-tong-yong-jie-fa-dfs-bian-li-/
 
+```c++
+class Solution {
+public:
 
- public class Solution {
-   class Union {
-     private int[] union;
-     int count = 0;
- 
-     Union(char[][] grid) {
-       int rows = grid.length;
+    //DSU 归并集的思路
+    int numIslands(vector<vector<char>>& grid)
+    {
 
-int cols = grid[0].length;
-       union = new int[rows * cols];
-       // 初始化并查集
-       for (int i = 0; i < rows; i++) {
-         for (int j = 0; j < cols; j++) {
-           if (grid[i][j] == '1') {
-             int index = i * cols + j;
-             // 初始化指向自己
+        if (grid.size() <= 0) {
+            return 0;
+        }
 
-​      union[index] = index; 
-​             count++;
-​           }
-​         }
-​       }
-​     }
-​     // 找到终点
-​     int find(int index) {
-​       if (union[index] == index) {
-​         return index;
-​       }
-​       int end = find(union[index]);// 递归查找
-​       while (union[index] != end) { // 优化并查集合并
-​         int temp = index;
-​         index = union[index];
-​         union[temp] = end;
-​       }
-​       return end;
-​     }
+        int rows = grid.size();
+        int cols = grid[0].size();
+
+        std::vector<int> parent(rows * cols, -1); //归并集的思路，也是要用空间换取时间
+        int result = 0;
+
+        //初始化
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                if (grid[i][j] == '1') {
+                    parent[i * cols + j] = i * cols + j; //初始化，把matrix拉平，形成一维度的数组; 每个元素的代表元都是自己；
+                    result++;
+                }
+            }
+        }
+
+        //cout << "the result: " << result << std::endl;
+        //printParent(parent);
+
+        //DSU:归并法计算岛数量
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                int idx = i * cols + j;
+                if (grid[i][j] == '1') {
+                    // 此位置为1，上下左右进行探测归并
+                    for (int r = 0; r < moveX.size(); ++r) {
+                        int new_x = i + moveX[r];
+                        int new_y = j + moveY[r];
+                        int new_idx = new_x * cols + new_y;
+                        if (IsValid(grid, new_x, new_y)) {
+                            Union(grid, idx, new_idx, parent, result); //上下左右进行归并
+                            //std::cout << "update parent: " << idx << " " << new_x << "," << new_y <<std::endl;
+                            //printParent(parent);
+                        }
+                    }
+                }//if
+            }
+        }
+        return result;  
+    }
+
+    //BFS  连通分量的个数, 这种方法，在leetcode中会超时。。
+
+    int numIslands2(vector<vector<char>>& grid)
+    {
+        if (grid.size() <= 0) return 0;
+        queue<Point> qu;
+        int rows = grid.size();
+        int cols = grid[0].size();
+        int result = 0;
+        vector<vector<bool>> visited(rows, vector<bool>(cols, false)); //当前位置是否被访问过标识
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    qu.push(Point(i,j));
+                    while (!qu.empty()) {
+                        Point tmp(qu.front().x,qu.front().y);
+                        qu.pop(); 
+                        visited[tmp.x][tmp.y] = true;
+                        //std::cout <<"this is a test in whil!" << std::endl;
+                        //上下左右在入队
+                        for (int k = 0; k < moveX.size(); ++k) {
+                            int new_x = tmp.x + moveX[k];
+                            int new_y = tmp.y + moveY[k];
+                            if (IsValid(grid, new_x, new_y) && !visited[new_x][new_y]) {
+                                qu.emplace(Point(new_x, new_y));
+                            }
+                        }
+                    }//while
+                    result ++; //遍历完一个连通分量
+                }
+            }
+        }
+        return result;
+    }
+
+    //DFS 思路
+    int numIslands3(vector<vector<char>>& grid)
+    {
+        if (grid.size() <= 0) return 0;
+        int rows = grid.size();
+        int cols = grid[0].size();
+        int result = 0;
+        vector<vector<bool>> visited(rows, vector<bool>(cols, false)); //当前位置是否被访问过标识
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    dfs(grid, i, j, visited);
+                    result ++;
+                }
+            }
+        }
+        return result;
+    }
+
+private:
+    //DFS
+    void dfs(vector<vector<char>> &grid, int i, int j, vector<vector<bool>> &visited) {
+
+        if (!IsValid(grid, i, j) || grid[i][j] == '0' || visited[i][j] ){
+            return;
+        }
+        visited[i][j] = true;
+        for (int k = 0; k < moveX.size(); ++k){
+            dfs(grid, i + moveX[k], j + moveY[k], visited);
+        }
+
+    }
+    void printParent(vector<int> &parent) {
+        if (parent.size() <= 0) {
+            return;
+        }
+        int len = parent.size();
+        for (int i = 0; i < len; ++i) {
+            std::cout << parent[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    //判断是否为有效的元素
+    bool IsValid (vector<vector<char>> &grid, int x, int y)
+    {   
+        int rows = grid.size();
+        int cols = grid[0].size();
+        return x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] == '1';
+    }
+
+    //并操作
+    void Union(std::vector<std::vector<char>> &grid, int idx, int new_idx, std::vector<int> &parent, int &result)
+    {
+
+        int cur_idx = Find(parent, idx); //查找idx的代表元
+        int neighbor_idx = Find(parent, new_idx); //查找相邻探测idx的代表元(上下左右)
+
+        if (cur_idx != neighbor_idx) {
+            parent[neighbor_idx] = cur_idx; 
+            //探测位置的代表元的父节点，设置为当前元素;从而cur_idx成为最新的父节点(代表元)
+            result --;  //归并一次，'1'不可能单独成岛了，所以岛的数量减1
+        }
+        return;
+    }
+
+    //查操作：这块稍难理解 重点理解
+    int Find(std::vector<int> &parent, int idx) {
+
+        //代表元就是自身的
+        if (parent[idx] == idx) {
+            return idx;
+        }
+
+        int end = Find(parent, parent[idx]);
+        
+        while (parent[idx] != end) { 
+            //优化并查集合并, 进行树的压缩, 把原来路径上以parent[idx]为父节点的元素，都把父节点重置为最新的代表元
+            int temp = idx;
+            idx = parent[idx];
+            parent[temp] = end;
+        }
+        return end;
+    }
 
 
-     // 合并并查集
-     void union(int index1, int index2) {
-       int end1 = find(index1);
-       int end2 = find(index2);
-       if (end1 != end2) { // 不是同一终点
-         union[end2] = end1; // 合并
-         count--; // 岛屿数 -1
-       }
-     }
- 
-   }
- 
-   private int[] moveX = {-1, 1, 0, 0},
-       moveY = {0, 0, -1, 1};
- 
-   public int numIslands(char[][] grid) {
-     if (grid == null || grid.length < 1) {
-       return 0;
-     }
-     Union union = new Union(grid);
-     int rows= grid.length;
-     int cols = grid[0].length;
+private:
+    const std::vector<int> moveX = {-1, 1, 0, 0}; //上下左右
+    const std::vector<int> moveY = {0, 0, -1, 1};
 
-for (int i = 0; i < rows; i++) {      
-       for (int j = 0; j < cols; j++) {
-         if (grid[i][j] == '1') { // 将上下左右的 1 合并在一起
-           for (int k = 0; k < moveX.length; k++) {
-             int x = i + moveX[k];
+    struct Point {
+        int x;
+        int y;
+        Point():x(-1),y(-1){}
+        Point(int i, int j):x(i), y(j){}
+    };
 
-int y = j + moveY[k];
-             if (isValid(grid, rows, cols, x, y)) {
-               union.union(i * cols + j, x * cols + y);
-             }
-           }
-         }
-       }
-     }
-     return union.count;
-   }
- 
- 
-   private boolean isValid(char[][] grid, int rows, int cols, int x, int y) {
-     return x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] == '1';
-   }
- 
- }
+};
+```
 
  
 

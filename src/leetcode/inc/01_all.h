@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 
+void TestIslandsNums();
 void TestFriendCircles();
 
 void TestStockSpanner();

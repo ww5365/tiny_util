@@ -3,29 +3,32 @@
 
 void leetcode_all_test(){
 
-    //朋友圈
-    TestFriendCircles();
+    // 岛数量
+    TestIslandsNums();
 
-    // 股票跨度
-    TestStockSpanner();
+    // //朋友圈
+    // TestFriendCircles();
+
+    // // 股票跨度
+    // TestStockSpanner();
     
-    // 接雨水 
-    TestRainTrap();
+    // // 接雨水 
+    // TestRainTrap();
 
-    // 下一个最大元素
-    TestNextGreaterElements();
+    // // 下一个最大元素
+    // TestNextGreaterElements();
     
-    //最大子矩阵中可能最大的K值
-    testMaxSumSubmatrix();
+    // //最大子矩阵中可能最大的K值
+    // testMaxSumSubmatrix();
 
-    // 最大面积2
-    // testLargestRectangleArea2();
+    // // 最大面积2
+    // // testLargestRectangleArea2();
 
-    // 最大面积
-    testLargestRectangleArea();
+    // // 最大面积
+    // testLargestRectangleArea();
 
-    // 每日温度计算 
-    testEveryDayTemprature();
+    // // 每日温度计算 
+    // testEveryDayTemprature();
 
     // 最小单调栈
     // testMinStack();
