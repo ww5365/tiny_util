@@ -678,17 +678,31 @@ private:
 
 
 
-### 1.1.4  得分最高的路径（[**#1102**](https://leetcode-cn.com/problems/path-with-maximum-minimum-value/)会员）
+### 1.1.4  得分最高的路径（[#1102](https://leetcode-cn.com/problems/path-with-maximum-minimum-value/)会员）
 
- 
+#### 问题描述
+![image-20211130210553150](../img/image-20211130210553150.png)
 
-使用并查集的一种解法：
+给你一个R行C列的整数矩阵A。矩阵上的路径从 [0,0] 开始，在 [R-1,C-1] 结束。
+路径沿四个基本方向（上、下、左、右）展开，从一个已访问单元格移动到任一相邻的未访问单元格。路径的得分是该路径上的最小值。例如，路径 8 → 4 → 5 → 9 的值为 4 。
+找出所有路径中得分最高的那条路径，返回其得分。
 
-\1.   将所有路径数据按照从大到小排序；
 
-\2.   然后建立圈子：依次加入数据，如果出现了从起始点到结束点的圈子，则说明找到目标解。
+#### 解题思路和示例代码
+* 使用并查集的一种解法：[参考](https://www.cnblogs.com/hunter-w/p/12790499.html)
 
- 
+  1.将所有路径数据按照从大到小排序；
+  2.然后建立圈子：依次加入数据，如果出现了从起始点到结束点的圈子，则说明找到目标解。
+
+* BFS / 二分查找
+https://cloud.tencent.com/developer/article/1787970
+
+
+
+
+
+
+
 
 ### 1.1.5  最低成本联通所有城市（[**#1135**](https://leetcode-cn.com/problems/connecting-cities-with-minimum-cost/)会员）
 
@@ -710,9 +724,7 @@ private:
 
 最小生成树：在连通网的所有生成树中，所有边的代价和最小的生成树，称为最小生成树。
 
- 
 
- 
 
 ### 1.1.6  以图辨树（[**#261**](https://leetcode-cn.com/problems/graph-valid-tree/)会员）
 
