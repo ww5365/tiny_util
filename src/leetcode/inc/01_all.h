@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 
+void TestAreSentencesSimilarTwo();
 void TestIslandsNums();
 void TestFriendCircles();
 

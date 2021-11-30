@@ -17,78 +17,38 @@
 3. [考核时问题说明](/km/groups/3803117/blogs/details/7887463?l=zh-cn)
 
 
-
-
 ## 二、算法分类学习
 
+| **小类**       | **内容**                                                     |
+| -------------- | ------------------------------------------------------------ |
+|进制与位运算   | •位运算  •进制转换  •进位计算                                |
+|基础数据结构   | •字符串（字典树等）  •线性表（字符数组、静态数组动态数组）  •栈（单调栈）  •队列  •链表  •哈希/Map |
+|高级数据结构   | •树  •堆和优先队列  •图（并查集）                            |
+|常用算法及应用 | •排序及查找  •枚举（遍历、排列、组合）  •滑窗、双指针、前缀和  •迭代、递归、回溯、分治（归并、二分等）  •搜索（深搜、广搜)  •贪心  •动归 •模拟 |
 
-### 2.1 004 栈、单调栈：
-https://leetcode-cn.com/problems/decode-string/
-https://leetcode-cn.com/problems/daily-temperatures/solution/  
-https://leetcode-cn.com/problems/smallest-subsequence-of-distinct-characters/
-https://leetcode-cn.com/problems/number-of-islands/
-https://leetcode-cn.com/problems/redundant-connection/
-https://leetcode-cn.com/problems/minimum-size-subarray-sum/
+* 004 栈、单调栈
+详见：04_monotonous_stack.md
 
-
-
-
-### 001 字符串、排序
-https://leetcode-cn.com/problems/bianry-number-to-string-lcci/1
-https://leetcode-cn.com/problems/longest-palindromic-substring/
-https://leetcode-cn.com/problems/restore-ip-addresses/
-https://leetcode-cn.com/problems/basic-calculator-ii/
-
-### 002 链表、队列、哈希
-https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/
-https://leetcode-cn.com/problems/top-k-frequent-words/
-https://leetcode-cn.com/problems/find-the-most-competitive-subsequence/ 
-https://leetcode-cn.com/problems/swapping-nodes-in-a-linked-list/
-
-### 003 滑动窗口、双指针
-https://leetcode-cn.com/problems/interval-list-intersections/
-https://leetcode-cn.com/problems/max-consecutive-ones-iii/
-https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/
-https://leetcode-cn.com/problems/container-with-most-water/
+* 009 归并集 DSU
+详见：09_disjoint_set_union.md
 
 
 
+001 字符串、排序
 
-### 005 递归
-https://leetcode-cn.com/problems/swap-nodes-in-pairs/
-https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
-https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
-https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
-https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/
-https://leetcode-cn.com/problems/partition-to-k-equal-sum-subsets/
+002 链表、队列、哈希
 
-### 006 树、二叉树
-https://leetcode-cn.com/problems/maximum-width-of-binary-tree/ 
-https://leetcode-cn.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/
-https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
-https://leetcode-cn.com/problems/maximum-difference-between-node-and-ancestor/
+003 滑动窗口、双指针
 
+005 递归
 
-### 007 搜索算法 BFS、DFS：
-https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/solution/
-https://leetcode-cn.com/problems/course-schedule/solution/
-https://leetcode-cn.com/problems/perfect-squares/
-https://leetcode-cn.com/problems/course-schedule/
+006 树、二叉树
 
+007 搜索算法 BFS、DFS：
 
-### 008 贪心和动态规划：
+008 贪心和动态规划：
 
-https://leetcode-cn.com/problems/task-scheduler/
-https://leetcode-cn.com/problems/house-robber/
-https://leetcode-cn.com/problems/boats-to-save-people/
-https://leetcode-cn.com/problems/house-robber-iii/
-
-### 009 打家劫舍专题，大家先做1，再做2，如果有兴趣，可以再做3
-https://leetcode-cn.com/problems/house-robber/
-https://leetcode-cn.com/problems/house-robber-ii/
-https://leetcode-cn.com/problems/house-robber-iii/
-
-
+009 打家劫舍专题，大家先做1，再做2，如果有兴趣，可以再做3
 
 
 ## 代码实现

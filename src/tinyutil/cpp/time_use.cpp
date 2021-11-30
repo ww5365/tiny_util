@@ -84,44 +84,44 @@ time_t get_next_time(){
 int get_current_idx(int period, int delay){
 
 
-    time_t now = time(NULL);//从1970到现在秒数；long int
+    // time_t now = time(NULL);//从1970到现在秒数；long int
 
-    cout << "now: " << now << std::endl;
-    struct tm ptm;
-    /*
-     * 结构体：struct tm
-     int tm_sec;   秒 – 取值区间为[0,59]
-     int tm_min;        分 - 取值区间为[0,59]
-     int tm_hour;       时 - 取值区间为[0,23]
-     int tm_mday;      一个月中的日期 - 取值区间为[1,31]
-     int tm_mon;       月份（从一月开始，0代表一月） - 取值区间为[0,11]
-     int tm_year;       年份，其值等于实际年份减去1900
-     int tm_wday;      星期 – 取值区间为[0,6]，其中0代表星期天，1代表星期一，以此类推
-     int tm_yday;      从每年的1月1日开始的天数 – 取值区间为[0,365]，其中0代表1月1日，1代表1月2日，以此类推
-     int tm_isdst;      夏令时标识符，实行夏令时的时候，tm_isdst为正。不实行夏令时为0；不了解情况时，tm_isdst()为负。
-     *
-     */
-    localtime_r(&now, &ptm);//获取当前时间now（日期）
+    // cout << "now: " << now << std::endl;
+    // struct tm ptm;
+    // /*
+    //  * 结构体：struct tm
+    //  int tm_sec;   秒 – 取值区间为[0,59]
+    //  int tm_min;        分 - 取值区间为[0,59]
+    //  int tm_hour;       时 - 取值区间为[0,23]
+    //  int tm_mday;      一个月中的日期 - 取值区间为[1,31]
+    //  int tm_mon;       月份（从一月开始，0代表一月） - 取值区间为[0,11]
+    //  int tm_year;       年份，其值等于实际年份减去1900
+    //  int tm_wday;      星期 – 取值区间为[0,6]，其中0代表星期天，1代表星期一，以此类推
+    //  int tm_yday;      从每年的1月1日开始的天数 – 取值区间为[0,365]，其中0代表1月1日，1代表1月2日，以此类推
+    //  int tm_isdst;      夏令时标识符，实行夏令时的时候，tm_isdst为正。不实行夏令时为0；不了解情况时，tm_isdst()为负。
+    //  *
+    //  */
+    // localtime_r(&now, &ptm);//获取当前时间now（日期）
 
-    cout << "sec: " << ptm.tm_sec << " "
-         << "min: " << ptm.tm_min << " "
-         << "hour: " << ptm.tm_hour << " "
-         << "year:" << 1900+ptm.tm_year << " "
-         << "month: " << ptm.tm_mon + 1 << " "
-         << "day: " << ptm.tm_mday << " "
-         << "days from yuandan:" << ptm.tm_yday << " "
-         << "xialing: " << ptm.tm_isdst << std::endl;
+    // cout << "sec: " << ptm.tm_sec << " "
+    //      << "min: " << ptm.tm_min << " "
+    //      << "hour: " << ptm.tm_hour << " "
+    //      << "year:" << 1900+ptm.tm_year << " "
+    //      << "month: " << ptm.tm_mon + 1 << " "
+    //      << "day: " << ptm.tm_mday << " "
+    //      << "days from yuandan:" << ptm.tm_yday << " "
+    //      << "xialing: " << ptm.tm_isdst << std::endl;
 
 
-    now = ptm.tm_hour * 3600 + ptm.tm_min * 60 + ptm.tm_sec;
-    int sec = now - delay;
-    if (sec < 0) {
-        sec += 3600 * 24;
-    }
-    int idx = sec / (period * 60) + 1;
+    // now = ptm.tm_hour * 3600 + ptm.tm_min * 60 + ptm.tm_sec;
+    // int sec = now - delay;
+    // if (sec < 0) {
+    //     sec += 3600 * 24;
+    // }
+    // int idx = sec / (period * 60) + 1;
 
-    cout << "indx: " << idx << std::endl;
-    return idx;
+    // cout << "indx: " << idx << std::endl;
+    // return idx;
 }
 
 /*

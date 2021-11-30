@@ -3,8 +3,12 @@
 
 void leetcode_all_test(){
 
+    // 句子相似度
+
+    TestAreSentencesSimilarTwo();
+
     // 岛数量
-    TestIslandsNums();
+    // TestIslandsNums();
 
     // //朋友圈
     // TestFriendCircles();
