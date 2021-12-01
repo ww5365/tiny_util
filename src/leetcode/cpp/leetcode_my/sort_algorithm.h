@@ -21,7 +21,9 @@ public:
     //堆排序 vec从下标1开始排序
     static bool heap_sort(int vec[],int start, int end);
     static void heap_adjust(int vec[], int s, int e);
-
+    //堆排序  第2个版本
+    static bool heap_sort_v2(int vec[],int start, int end);
+    static void heap_adjust2(int vec[], int s, int e);
     //快速排序
     static void quick_sort(int vec[], int s, int e);
     static int partition(int vec[], int s, int e);

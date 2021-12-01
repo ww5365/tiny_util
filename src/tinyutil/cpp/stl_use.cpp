@@ -530,8 +530,8 @@ void stl_use::vector_use(){
 /*
 * deque 使用  顺序容器
 * 双端队列：
-  deque支持push_front、pop_front、push_back、pop_back
-  queue支持push_back、pop_front  容器适配器
+  deque支持push_front、pop_front、push_back、pop_back  头文件<deque> 
+  queue支持push_back、pop_front  容器适配器 头文件<queue>
 * 
 */
 void stl_use::deque_use(){
@@ -564,12 +564,26 @@ void stl_use::deque_use(){
 
 /*
 *  priorrity_queue 队列使用
+* 需求：有5个同学随意入队；他们都有成绩和姓名；请按照成绩从低到高出队列，如果成绩相等，按照名字字母逆顺序出队；
+
 *  模拟大小顶堆的实现
+*  priority_queue <类名, 底层容器, 比较类>  
+*  第三个参数：比较类重载()运算，实现仿函数功能，类似本例；
+              也可以通过重载类本身operator<运算符，进行比较实现
+              left < right: 大顶堆  出队时：元素从大到小
+              left > right: 小顶堆  出队是： 元素从小到大  greator<T>
+              默认：less<T>
+*  push   emplace ： 入队
+*  pop ：出队
+*  top: 队头元素
 */
 void stl_use::priority_queue_use(){
     //下面是使用优先级队列的常见形式；deque中数据是按照分数从小到大排序
-    // priority_queue <类名, 底层容器, 比较类名>
-    std::priority_queue<Student,std::deque<Student>,CompareClass> qu_test;
+    // std::priority_queue<Student,std::deque<Student>,CompareClass> qu_test;
+    std::priority_queue<Student,std::deque<Student>> qu_test;
+
+    //  void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp) 最后一个参数是比较对象
+    //  sort(it1, it2, CompareClass()); //最后是一个对象
 
     Student s1("wang",60);
     Student s2("wei",60);
@@ -592,7 +606,7 @@ void stl_use::priority_queue_use(){
         qu_test.pop();
     }
 
-    priority_queue<int, deque<int>> que2;
+    priority_queue<int, deque<int>, greater<int>> que2; //默认是less<int> 类: 大顶堆  而： greater<int> 是小顶堆，从小到大
     que2.push(8);
     que2.push(4);
     que2.push(5);

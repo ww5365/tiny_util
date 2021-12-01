@@ -3,9 +3,11 @@
 
 void leetcode_all_test(){
 
-    // 句子相似度
+    // 排序算法实现
+    sort_algorithm_test();
 
-    TestAreSentencesSimilarTwo();
+    // 句子相似度
+    // TestAreSentencesSimilarTwo();
 
     // 岛数量
     // TestIslandsNums();

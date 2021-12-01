@@ -135,6 +135,8 @@ do{\
 
 int main(int argc, char* argv[]) {
 
+    std::cout << "hello test world!" << std::endl;
+
     // std::string str = "abcde";
     // cout << "substr: " << str.substr(1, 3) << endl;
     // cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
@@ -245,6 +247,7 @@ int main(int argc, char* argv[]) {
     // }
 
     // //测试文件处理:compare
+
     // //cmpare_file_use_test();
 
 

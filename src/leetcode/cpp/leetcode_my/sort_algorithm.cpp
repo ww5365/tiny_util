@@ -6,7 +6,7 @@
  */
 
 #include "sort_algorithm.h"
-#include "test_main.h"
+#include "01_all.h"
 #include <iostream>
 
 /*
@@ -15,9 +15,7 @@
 bool Sort::merge_sort(int vec[], size_t start, size_t end){
 
     size_t mid = (start + end)/2;
-
-    cout << "test" << " "<< start << ":" << mid << ":" << end << endl;
-
+    //cout << "test" << " "<< start << ":" << mid << ":" << end << endl;
     if (start < end){
         merge_sort(vec, start, mid);
         merge_sort(vec, mid+1, end);
@@ -34,7 +32,7 @@ bool Sort::merge_sort(int vec[], size_t start, size_t end){
 
 void Sort::merge(int vec[], size_t s, size_t mid, size_t e){
 
-    int *tmp = new int[e - s + 1];
+    int *tmp = new int[e - s + 1]; //o(n)空间复杂度
     int i = s, j = mid + 1, k = 0;
 
     while(i <= mid && j <= e){
@@ -60,6 +58,7 @@ void Sort::merge(int vec[], size_t s, size_t mid, size_t e){
         vec[pos++] = tmp[tmp_pos++];
     }
 
+    delete []tmp;
 
     return;
 }
@@ -122,7 +121,63 @@ bool Sort::heap_sort(int vec[],int start, int end){
 }
 
 /*
+* heap排序的第二个版本
+*/
+
+void swap2(int vec[], int i, int j) {
+    int tmp = vec[i];
+    vec[i] = vec[j];
+    vec[j] = tmp;
+}
+
+void Sort::heap_adjust2(int vec[], int start, int end)
+{
+//start和end之间的元素，除了首位，其它都满足大顶堆的定义；将vec[start:end]调整成大顶堆
+    if (start >= end) {
+    	return;
+    }
+
+    while (start < end) {
+        int idx = 2 * start;
+        if (idx > end) break;
+    	if (idx <= end && idx + 1 <= end && vec[idx] < vec[idx + 1]){
+    		idx += 1;
+    	}
+    	if (vec[start] >= vec[idx]) break;
+    	//栈顶元素小于其中一个子元素
+    	swap2(vec, start, idx);
+    	start = idx;
+    	}
+} 
+
+/*
+* 进行堆排序：
+* start：从1开始进行堆排序
+*  
+*/
+bool Sort::heap_sort_v2(int vec[], int start, int end)
+{
+
+	if((end - start) < 1) return true;
+	
+	//从mid位置开始到1结束，进行堆调整
+	int mid = end/2;
+	for (int i = end/2; i >= start; --i) {
+		heap_adjust2(vec, i, end);
+	}
+	
+	//输出排序结果
+	for(int i = end; i > start; --i){
+		swap2(vec, i, start);
+		heap_adjust2(vec, start, i-1);
+	}
+	
+	return true;
+}
+
+/*
  * 快速排序： 一次划分; 返回轴点被放置的位置。
+ * 双指针
  *
  */
 int Sort::partition(int vec[], int s, int e){
@@ -154,6 +209,8 @@ int Sort::partition(int vec[], int s, int e){
 
 /*
  * 算法：快速排序
+ * 
+ * 最终轴点的位置非常关键
  *
  */
 void Sort::quick_sort(int vec[], int s, int e){
@@ -165,33 +222,33 @@ void Sort::quick_sort(int vec[], int s, int e){
         quick_sort(vec, s, pos);
         quick_sort(vec,pos + 1,e);
     }
-
 }
 
 
-
 void sort_algorithm_test(){
-
     //归并排序
     int arr[10] = {13, 14, 4, 8, 9, 10, 18, 23, 7, 3};
     Sort::merge_sort(arr,0,9);
+    std::cout <<"merge sort result: " << std::endl;
     for(int i = 0 ; i < 10; i++){
         std::cout<< arr[i] << " ";
     }
 
     std::cout << std::endl;
-    int arr2[] = {0,232,1,2,31,112};
+    int arr2[] = {0,232,1,2,31,112, 20};
 
     //堆排序
-    Sort::heap_sort(arr2,1,5);
+    Sort::heap_sort_v2(arr2,1,5);
+    std::cout <<"heap sort result: " << std::endl;
     for(int i = 0 ; i < 6; i++){
             std::cout<< arr2[i] << " ";
         }
     std::cout << std::endl;
 
     //快速排序
-    int arr3[] = {0,232,1,2,31,112};
-    Sort::heap_sort(arr3,0,5);
+    int arr3[] = {34,21,1,2,31,112};
+    Sort::quick_sort(arr3,0,5);
+    std::cout <<"quick sort result: " << std::endl;
     for(int i = 0 ; i < 6; i++){
             std::cout<< arr3[i] << " ";
         }
