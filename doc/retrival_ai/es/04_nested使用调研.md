@@ -1,6 +1,70 @@
+## array 数组
+
+在Elasticsearch中，没有专用的array数据类型。默认情况下，任何字段都可以包含零个或多个值，但是，数组中的所有值都必须具有相同的数据类型。
+
+这一点是区别于nested的，nested指的对象的集合。而arrays则是单一类型的数组集合而已。
+
+``` json
+
+curl -X PUT 'http://localhost:9200/my-index-test001/_doc/1' -H 'Content-Type: application/json' -d '
+{
+  "id" : "1",
+  "name": "张三",
+  "favoriteBeers" : [ 
+    {
+      "brand" : "青岛",
+      "type" :  "黑啤"
+    },
+    {
+      "brand" : "燕京",
+      "type" :  "白啤"
+    }
+  ]
+}'
+
+curl -X PUT 'http://localhost:9200/my-index-test001/_doc/2' -H 'Content-Type: application/json' -d '
+{
+  "id" : "2",
+  "name": "李四",
+  "favoriteBeers" : [ 
+    {
+      "brand" : "青岛",
+      "type" :  "白啤"
+    },
+    {
+      "brand" : "燕京",
+      "type" :  "黑啤"
+    }
+  ]
+}'
+
+## 实际存储，es内部看起来应该是这样的
+
+{
+  "name" :        "张三",
+  "favoriteBeers.brand" : [ "青岛", "燕京" ],
+  "favoriteBeers.type" :  [ "黑啤", "白啤" ]
+}
+
+## 所以下面的查询结果，张三和李四都会命中
+
+curl -X GET 'http://localhost:9200/my-index-test001/_search?pretty=true' -H 'Content-Type: application/json' -d '
+{
+  "query" :{
+    "bool":{
+      "must":[
+        {"match": {"favoriteBeers.brand": "青岛"}},
+        {"match": {"favoriteBeers.type": "白啤"}}
+      ]
+    }
+  }
+}'
+```
 
 
-#### nested
+
+
+## nested 嵌套类型
 
 nested针对以列表形式储存多个子文档的字段进行搜索，这些字段的type类型就是nested：
 
