@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿# ElasticSearch DSL检索语句详解和召回场景解决方案
+﻿﻿﻿﻿﻿﻿# ElasticSearch DSL详解和召回场景解决方案
 
 ## 前言
 
