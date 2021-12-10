@@ -2059,7 +2059,7 @@ terms_set针对包含多个keyword的列表格式的字段，用多个Query的�
 
 nested针对以列表形式储存多个子文档的字段进行搜索，这些字段的type类型就是nested：
 
-```console
+```json
 {
   "driver" : {
         "last_name" : "Hudson",
@@ -2088,7 +2088,7 @@ nested针对以列表形式储存多个子文档的字段进行搜索，这些�
 
 nested保证了对nested字段以子文档为单位查询，只有列表中的任意文档中的字段内容完整满足Query才返回结果：
 
-```console
+```json
 {
   "query": {
     "nested": {
@@ -2101,7 +2101,7 @@ nested保证了对nested字段以子文档为单位查询，只有列表中的�
           ]
         }
       },
-      "score_mode"（多个子文档匹配时的打分策略）: "avg"
+      "score_mode"（多个子文档匹配时的打分策略）: "avg"    //这个是包再neste
     }
   }
 }

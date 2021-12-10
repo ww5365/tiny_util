@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿# ElasticSearch DSL详解和召回场景解决方案
+﻿﻿﻿﻿﻿﻿﻿﻿﻿# ElasticSearch DSL详解和召回场景解决方案
 
 ## 前言
 
@@ -12,10 +12,10 @@
 
 文档搜索和DSL查询的核心逻辑是查找满足最多条件的文档，实现这个的途径是相关度打分，每个最基础的打分语句从最细的Query语句开始，如下以match语句为例。
 
-```
-    "match": {
-      "message": {
-        "query": "this is a test"
+```json
+    "match": {  //match是关键字
+      "message": { //message:字段
+        "query": "this is a test"  //query是关键字
       }
     }
 ```
@@ -69,9 +69,9 @@ Filter语句只关注查询的句子中与字段是否完全匹配并给出二�
 
 ### 一般形式
 
-一般的DSL由query语句进入，内容由复合查询连接独立查询语句，形成query-复合-子语句的结构。
+一般的DSL由query语句进入，内容由**复合查询连接独立查询语句**，形成query-复合-子语句的结构。
 
-```
+```json
 {
   "query"（query）: { 
     "bool"（复合语句）: { 
@@ -92,13 +92,15 @@ Filter语句只关注查询的句子中与字段是否完全匹配并给出二�
 
 对于一个标准的子语句，衡量匹配程度的语句（match语句系列）：
 
-    "match": {
-      "message": {
-        "query": "this is a test"
-      }
-    }
-    
-    目标字段message内容：this is a quiz
+```json
+"match": {
+  "message": {
+    "query": "this is a test"
+  }
+}
+
+目标字段message内容：this is a quiz
+```
 通过比较两个内容匹配程度（这里match比较有多少个单词匹配），ElasticSearch可以打出分数来衡量匹配程度。
 
 旧版本ES使用的默认打分公式为标准TF-IDF公式结合协调因子等其它参数，目前已经废弃。ElasticSearch 7.x默认使用Okapi BM25打分公式。
@@ -355,9 +357,48 @@ function_score作为可以对子语句自定义打分的语句，使用方式灵
 - [`field_value_factor`](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/query-dsl-function-score-query.html#function-field-value-factor)
 - [decay functions](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/query-dsl-function-score-query.html#function-decay)（衰减函数）: `gauss`, `linear`, `exp`
 
+
+
 对上面的语句和，function_score可以再组合自定义打分：
 
-```console
+````json
+// 单个加强函数的查询模板
+{
+    "query": {
+        "function_score": {
+            "query": {.....}, //主查询，查询完后这裡自己会有一个评分，就是old_score
+            "field_value_factor": {...}, //在old_score的基础上，给他加强其他字段的评分，这裡会产生一个加强score
+，如果只有一个加强function时，直接将加强函数名写在query下面就可以了
+            "boost_mode": "multiply", //指定用哪种方式结合old_score和加强score成为new_score = old_score + min{max_boost, 加强score}
+            "max_boost": 1.5 //限制加强score的最高分，但是不会限制old_score
+        }
+    }
+}
+
+````
+
+``` json
+{
+    "query": {
+        "function_score": {
+            "query": {.....},
+            "functions": [   //可以有多个加强函数(或是filter+加强函数)，每一个加强函数会产生一个加强score，因
+此functions会有多个加强score
+                { "field_value_factor": ... },
+                { "gauss": ... },
+                { "filter": {...}, "weight": ... }
+            ],
+            "score_mode": "sum", //决定functions中加强的score们怎麽合併,
+            "boost_mode": "multiply" //決定總加強score怎麼和old_score合併
+        }
+    }
+}
+```
+
+示例：
+
+
+```json
 {
   "query": {
     "function_score": {
@@ -382,6 +423,12 @@ function_score作为可以对子语句自定义打分的语句，使用方式灵
   }
 }
 ```
+
+
+
+
+
+
 
 #### script_score
 
