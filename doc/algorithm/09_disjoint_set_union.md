@@ -7,20 +7,20 @@
 并查集DSU：Disjoint Set Union
 
 并查集顾名思义就是具有“合并集合”和“查找集合中元素”两种操作的一种算法。但是，实际并查集的基本操作有三个：
-makeSet(size)：建立一个新的并查集，其中包含size个单元素集合。通常该操作比较隐晦，用一句int[] parent = new int[size];直接替代了make set的过程。
+makeSet(size)：建立一个新的并查集，其中包含size个单元素集合。通常该操作比较隐晦，用一句int[] root= new int[size];直接替代了make set的过程。
 
 
-Union(x, y)：把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。
+UnionRoot(x, y)：把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。
 ``` c++
-x_parent = Find(parent, x)
-y_parent = Find(parent, y)
+x_parent = Find(root, x)
+y_parent = Find(root, y)
 
-if (x_parent != y_parent) {
-	parent[x_parent] = y_parent; // 把x元素的父节点(代表元)挂到y元素的父节点上
+if (x_root != y_root) {
+	root[x_root] = y_root; // 把x元素的父节点(代表元)挂到y元素的父节点上
 }
 ```
 
-Find(x)：找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了。find(x)有两种实现方法，一种是递归，一种是非递归形式。
+FindRoot(x)：找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了。find(x)有两种实现方法，一种是递归，一种是非递归形式。
 
 ``` c++
 //非递归 Find(x)
@@ -688,7 +688,7 @@ private:
 找出所有路径中得分最高的那条路径，返回其得分。
 
 
-#### 解题思路和示例代码
+#### 解题思路
 * 使用并查集的一种解法：[参考](https://www.cnblogs.com/hunter-w/p/12790499.html)
 
   1.将所有路径数据按照从大到小排序；
@@ -697,8 +697,186 @@ private:
 * BFS / 二分查找
 https://cloud.tencent.com/developer/article/1787970
 
+* 迪杰斯特拉算法变形
+  1、单源点到各个顶点的最小路径的变形
+  2、(0,0) -> (R-1, C-1) 最大最小值路径： 路径的最大值由路径上顶点最小值决定。
+     - 每轮选择加入S集合顶点：把相邻顶点按照：min{minVal, A[x][y]} weight 加入到优先级队列
+     - 选择栈顶元素，即最大最小值的顶点
+     - 直到顶点(R-1,C-1)也加入S，找到了(0,0) -> (R-1, C-1)
+
+#### 解题思路
+
+- 排序 + 归并集
+``` c++
+class Solution {
+public:
+
+    /* 
+    * 排序 + 归并集 
+    * 1：按照节点权重值，从大到小排序
+    * 2：按照从大到小的顺序，形成一个从(0,0)->(R-1, C-1)的一个连通分量。这个连通分量的最后一个顶点的值，就是整个路径的最大值
+    * 3: 怎么形成一个连通分量？ 同属一个归并集
+    */
+
+    int MaximumMinPath(vector<vector<int>> &matrix)
+    {
+        if (matrix.size() <= 0 || matrix[0].size() <= 0) {
+            return -1;
+        }
+        
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+
+        vector<int> root(rows * cols, -1);
+        for (int i = 0; i < root.size(); ++i) {
+            root[i] = i; //每个元素的代表元是自己，初始化
+        }
+        
+        vector<Node> vertex(rows * cols);
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                vertex[i*cols + j].pos.first = i;
+                vertex[i*cols + j].pos.second = j;
+                vertex[i*cols + j].weight = matrix[i][j];
+            }
+        }
+        // 按照weight值对vertex进行排序, 从大到小
+        std::sort(vertex.begin(), vertex.end());
+
+        vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+        const vector<vector<int>> dirs{{0, 1},{0, -1},{-1, 0},{1, 0}};
+
+        visited[0][0] = true;
+        visited[rows-1][cols-1] = true; //起始点, 作为连通的印子
+        int res = std::min(matrix[0][0], matrix[rows - 1][cols - 1]);
+        for (int i = 0; i < vertex.size(); ++i) {
+            //对Node数组从大到小进行遍历
+            int x = vertex[i].pos.first;
+            int y = vertex[i].pos.second;
+            visited[x][y] = true;
+            res = std::min(res, vertex[i].weight);
+            // std::cout << "x= " << x << " y= " << y << "weight:" << vertex[i].weight<< std::endl;
+
+            for (int j = 0; j < dirs.size(); ++j) {
+                int nx = x + dirs[j][0];
+                int ny = y + dirs[j][1];
+                bool flag = IsValid(matrix, nx, ny) && visited[nx][ny];
+                if (flag) {
+                    Union3(root, x * cols + y, nx * cols + ny); // 归并相邻被访问过的单元格，形成连通分量
+                }
+            }
+            bool break_flag = (Find3(root, 0) == Find3(root, cols * rows - 1));
+            if (break_flag) {
+                std::cout << "break when i: " << i << std::endl;
+                // 如果起始顶点的代表元相同，即连通了
+                break;
+            }
+        }
+        return res;
+    }
+
+private:
+    struct Node {
+        std::pair<int, int> pos;
+        int weight;
+        Node() : pos(-1, -1), weight(0){}
+        Node(int x, int y, int w) : pos(x, y), weight(w) {
+            // pos = make_pair(x, y);
+        }
+
+        // 重载<运算符
+        bool operator<(const Node & right) const
+        {
+            return (this->weight > right.weight); // 从大到小排序
+        }
+    };
+    
+    bool IsValid (vector<vector<int>> &grid, int x, int y)
+    {
+        int rows = grid.size();
+        int cols = grid[0].size();
+        return x >= 0 && x < rows && y >= 0 && y < cols;
+    }
 
 
+    void Union3(vector<int> &root, int x, int y)
+    {
+
+        int root_x = Find3(root, x);
+        int root_y = Find3(root, y);
+
+        if (root_x != root_y) {
+            root[root_x] = root_y;
+        }
+        return;
+    }
+
+    int Find3(vector<int> &root, int x)
+    {
+        int origin_x = x;
+        std::cout << "Find3 in origin x = " << origin_x << std::endl;
+        while (x != root[x]) {
+            x = root[x];
+        }
+        if (x != origin_x) {
+            root[origin_x] = x;
+        }
+        std::cout << "Find3 in root x = " << x << std::endl;
+        return x;
+    }
+
+};
+```
+
+- 迪杰斯特拉算法变形
+
+``` c++
+    // djstrja算法变形
+    int MaximumMinPath2(vector<vector<int>> &matrix)
+    {
+        if (matrix.size() <= 0 || matrix[0].size() <= 0) {
+            return -1;
+        }
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+        priority_queue<Node, deque<Node>, CompareClass> qu;
+        int res = matrix[0][0];
+        vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+        //初始化
+        qu.emplace(Node(0, 0, matrix[0][0]));
+        const vector<vector<int>> dirs{{0, 1},{0, -1},{-1, 0},{1, 0}};
+
+        while (!qu.empty()) {
+            int x = qu.top().pos.first;
+            int y = qu.top().pos.second;
+            int weight  = qu.top().weight;//保持当前为止全局的最大最小值
+            qu.pop();
+            if (visited[x][y]) continue;
+            res = weight; 
+            bool overFlag = (x == rows - 1) && (y == cols - 1);
+            if (overFlag) {
+                return res;
+            }
+
+            visited[x][y] = true;
+            for (int i = 0; i < dirs.size(); ++i){
+                int nx = x + dirs[i][0];
+                int ny = y + dirs[i][1];
+                if (IsValid(matrix, nx, ny)) {
+                    qu.emplace(Node(nx, ny, std::min(res, matrix[nx][ny]))); // 栈顶始终保持，最大的最小值;
+                }
+            }
+        }
+        return res;
+    }
+    private:
+    class CompareClass {
+    public:
+        bool operator()(const Node &left, const Node &right) const{
+            return left.weight < right.weight; // 大顶堆
+        }
+    }
+```
 
 
 
@@ -711,18 +889,24 @@ https://cloud.tencent.com/developer/article/1787970
 （https://blog.csdn.net/luoshixian099/article/details/51908175）
 
 关于图的几个概念定义：
-
- 
-
 连通图：在无向图中，若任意两个顶点vivi与vjvj都有路径相通，则称该无向图为连通图。
-
 强连通图：在有向图中，若任意两个顶点vivi与vjvj都有路径相通，则称该有向图为强连通图。
-
 连通网：在连通图中，若图的边具有一定的意义，每一条边都对应着一个数，称为权；权代表着连接连个顶点的代价，称这种连通图叫做连通网。
-
 生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，但只有足以构成一棵树的n-1条边。一颗有n个顶点的生成树有且仅有n-1条边，如果生成树中再添加一条边，则必定成环。
-
 最小生成树：在连通网的所有生成树中，所有边的代价和最小的生成树，称为最小生成树。
+
+
+#### 题目说明
+
+想象一下你是个城市基建规划者，地图上有 N 座城市，它们按以1到N的次序编号。
+
+给你一些可连接的选项 conections，其中每个选项 conections[i] = [city1, city2, cost] 表示将城市 city1 和城市 city2 连接所要的成本。（连接是双向的，也就是说城市 city1 和城市 city2 相连也同样意味着城市 city2 和城市 city1 相连）。
+
+返回使得每对城市间都存在将它们连接在一起的连通路径（可能长度为 1 的）最小成本。
+ 该最小成本应该是所用全部连接代价的综合。如果根据已知条件无法完成该项任务，则请你返回 -1。
+
+
+
 
 
 
