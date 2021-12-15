@@ -15,7 +15,7 @@
   图删除一条边后，还保持是N个节点的树(连通)
 
 */
-#include "trust_pro.h"
+#include "01_all.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -47,6 +47,7 @@ public:
             int p_u = Find2(parent, u);
             int p_v = Find2(parent, v);
             if (p_u == p_v) {
+                // 因为总共有N条边，只多1条边构成了环，只要找到最右边这条构成"环"的边就可以了
                 return vector<int>{u, v};
             } else {
                 Union1(parent, p_u, p_v);

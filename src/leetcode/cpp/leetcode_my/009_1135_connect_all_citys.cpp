@@ -5,7 +5,7 @@
 * 返回使得每对城市间都存在将它们连接在一起的连通路径（可能长度为 1 的）最小成本。
 * 该最小成本应该是所用全部连接代价的综合。如果根据已知条件无法完成该项任务，则请你返回 -1。
 */
-#include "trust_pro.h"
+#include "01_all.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>

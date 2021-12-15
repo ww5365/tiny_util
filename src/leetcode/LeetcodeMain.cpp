@@ -3,8 +3,20 @@
 
 void leetcode_all_test(){
 
+    // 寻找具有最大最小值的路径
+    TestMaximumMinPath();
+
+    // 去掉冗余的边，使得图变成一棵树
+    TestRedundantConnections();
+
+    // 最小成本连通所有城市
+    TestConnectAllCitys();
+
+    // 实现图的重要算法
+    // TestGraph();
+
     // 排序算法实现
-    sort_algorithm_test();
+    // sort_algorithm_test();
 
     // 句子相似度
     // TestAreSentencesSimilarTwo();

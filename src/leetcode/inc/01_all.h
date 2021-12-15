@@ -5,6 +5,10 @@
 #include <vector>
 #include <set>
 
+void TestMaximumMinPath();
+void TestRedundantConnections();
+void TestConnectAllCitys();
+void TestGraph();
 void TestAreSentencesSimilarTwo();
 void TestIslandsNums();
 void TestFriendCircles();
