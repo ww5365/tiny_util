@@ -899,11 +899,163 @@ private:
 #### 题目说明
 
 想象一下你是个城市基建规划者，地图上有 N 座城市，它们按以1到N的次序编号。
+给你一些可连接的选项 conections，其中每个选项 conections[i] = [city1, city2, cost] 表示将城市 city1 和城市 city2 连接所要的成本。（连接是双向的，也就是说城市 city1 和城市 city2 相连也同样意味着城市 city2 和城市 city1 相连）。返回使得每对城市间都存在将它们连接在一起的连通路径（可能长度为 1 的）最小成本。该最小成本应该是所用全部连接代价的综合。如果根据已知条件无法完成该项任务，则请你返回-1。
 
-给你一些可连接的选项 conections，其中每个选项 conections[i] = [city1, city2, cost] 表示将城市 city1 和城市 city2 连接所要的成本。（连接是双向的，也就是说城市 city1 和城市 city2 相连也同样意味着城市 city2 和城市 city1 相连）。
+#### 算法实现
 
-返回使得每对城市间都存在将它们连接在一起的连通路径（可能长度为 1 的）最小成本。
- 该最小成本应该是所用全部连接代价的综合。如果根据已知条件无法完成该项任务，则请你返回 -1。
+- kruskal ： dsu + 排序
+
+``` c++
+class Solution {
+public:
+
+    /* 
+    * kruskal算法:
+    * 从边出发，选最小的边加入生成树，保持没有回路。如果有回路舍弃。
+    * 回路判断：归并集 ?
+    */
+
+    int ConnectAllCitys(int N, vector<vector<int>> &connctions)
+    {
+        if (connctions.size() < N -1) {
+            // 边的总数小于顶点数-1
+            return -1;
+        }
+        vector<int> root(N + 1, -1);
+        for (int i = 1; i <= N; ++i) {
+            root[i] = i; // 每个顶点的代表元，是自己
+        }
+
+        //按照第3个元素进行从小到大的排序
+        sort(connctions.begin(), connctions.end(), CompareClass());
+        int total = 0;
+        int edgeNum = 0;
+        for (auto &e: connctions) {
+            std::cout << "after sort connections: " << e[0] << " : " << e[1] << " cost: " << e[2] << std::endl;
+            // 循环遍历所有的边, 加边，判断回路
+            int u = e[0];
+            int v = e[1];
+            int cost = e[2];
+
+            if (edgeNum == N -1) {
+                return total;
+            }
+
+            int uRoot = FindRoot(root, u);
+            int vRoot = FindRoot(root, v);
+            if (uRoot != vRoot) {
+                // 不存在回路
+                edgeNum ++;
+                total += cost;
+                // 归并两个顶点
+                // UnionRoot(root, u, v);
+                root[uRoot] = vRoot;
+            }
+        }
+
+        return (edgeNum == N -1) ? total : -1;
+    }
+
+private:
+
+    class CompareClass {
+    public:
+        bool operator()(const auto &left, const auto&right) const{
+            return left[2] < right[2]; // 按照第3个元素，从小到大排序
+        }
+    };
+    
+    int FindRoot(vector<int> &root, int x)
+    {
+        int origin_x = x;
+        while (x != root[x]) {
+            x = root[x];
+        }
+        if (x != origin_x) {
+            root[origin_x] = x;
+        }
+        return x;
+    }
+
+};
+```
+
+- prim 算法 : priority_queue 
+
+```c++
+
+/* 
+* 使用prim算法思路实现
+* 1:从顶点开始，将和此顶点关联的权重最小的边顶点，加入集合U
+* 2： 重复1，直至所有节点加入集合U
+*/
+
+class Solution2 {
+public:
+    int ConnectAllCitys(int N, vector<vector<int>> &connctions)
+    {
+        if (connctions.size() < N -1) {
+            // 边的总数小于顶点数-1
+            return -1;
+        }
+
+        std::unordered_map<int, vector<pair<int, int>>> graph;
+
+        for (auto &e : connctions) {
+            //顶点u对应的边cost和边的另一个顶点,类似临接表的存储方式;双向
+            for (int i = 0; i < 2; ++i) {
+                auto it = graph.find(e[i]);
+                if (it == graph.end()) {
+                    graph[e[i]] = vector<pair<int, int>>();
+            }
+            graph[e[i]].emplace_back(std::make_pair(e[(i + 1)%2], e[2]));
+            }
+        }
+
+        for (auto &e : graph) {
+            std::cout << "graph result: " << e.first << " second: " <<e.second.size() << std::endl;
+        }
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>, CompareClass> qu;
+        // 初始化起始节点
+        for (auto &edge : graph[1]) {
+            qu.push(edge);
+        }
+        vector<bool> visited(N, false);
+        visited[1] = true; //节点1被访问
+        int addVertexNum = 1;
+        int res = 0;
+        while (!qu.empty()) {
+            //出队cost最小的顶点和cost
+            int v = qu.top().first;
+            int cost = qu.top().second;
+            qu.pop();
+            if (visited[v]) continue;
+            res += cost;
+            visited[v] = true;
+            addVertexNum ++;
+            if (addVertexNum == N) {
+                break;
+            }
+
+            for (auto &e : graph[v]) {
+                //v开始的边
+                qu.push(e);
+            }
+        }
+        return (addVertexNum == N) ? res : -1;
+    }
+
+private:
+
+    struct CompareClass {
+        bool operator()(const auto &left, const auto &right)const{
+            return left.second > right.second; // 小顶堆
+        }
+    };
+};
+```
+
 
 
 
@@ -920,12 +1072,77 @@ private:
 
 ### 1.1.8 **[无向图中连通分量的数目](https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/)**（[**#323**](https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/)_会员）
 
- 
+lintcode: 431
+#### 题目描述：
+给定编号从 0 到 n-1 的 n 个节点和一个无向边列表（每条边都是一对节点），请编写一个函数来计算无向图中连通分量的数目。
+
+注意:
+你可以假设在edges中不会出现重复的边。而且由于所有的边都是无向边，[0, 1] 与 [1, 0]  相同，所以它们不会同时在 edges 中出现。
+
+输入: n = 5 和 edges = [[0, 1], [1, 2], [3, 4]]
+
+     0          3
+     |          |
+     1 --- 2    4 
+
+输出: 2
+
+#### 算法思路
+
+并查集的思路：
+1) 顶点个数：n  初始态，连通分量的个数：n
+2) 对每条边进行归并，形成每个连通分量的代表元的root数组
+3) 统计root数组中：i == find(i) 的个数，有多少个，就有多少个连通分量。
+
+
+
+
 
 ### 1.1.9  尽量减少恶意软件的传播（[**#924**](https://leetcode-cn.com/problems/minimize-malware-spread/)_困难）
 
- 
+#### 题目描述
 
- 
+在节点网络中，只有当 graph[i][j] = 1 时，每个节点 i 能够直接连接到另一个节点 j。
+一些节点 initial 最初被恶意软件感染。只要两个节点直接连接，且其中至少一个节点受到恶意软件的感染，那么两个节点都将被恶意软件感染。这种恶意软件的传播将继续，直到没有更多的节点可以被这种方式感染。
 
- 
+假设 M(initial) 是在恶意软件停止传播之后，整个网络中感染恶意软件的最终节点数。
+
+我们可以从初始列表中删除一个节点。如果移除这一节点将最小化 M(initial)， 则返回该节点。如果有多个节点满足条件，就返回索引最小的节点。
+
+请注意，如果某个节点已从受感染节点的列表 initial 中删除，它以后可能仍然因恶意软件传播而受到感染。
+
+输入：graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
+输出：0
+输入：graph = [[1,0,0],[0,1,0],[0,0,1]], initial = [0,2]
+输出：0
+输入：graph = [[1,1,1],[1,1,1],[1,1,1]], initial = [1,2]
+输出：1
+
+
+#### 算法分析
+
+删除哪个初始节点是好的？删除后，使得感染的恶意软件的节点数M最少。两种理解：
+- 删除这个节点后，整个图的，连通分量变多，且剩下的initial中的恶意软件节点分布在同一个或几个连通分量中且连通分量的节点总数最少。这样才能有效的控制感染。
+- 只是洗白inital中某个感染节点，不在整个图中删除此节点，不影响图的连通分量的个数。只是剩下intial数组中节点，可以感染的节点数，是最少的。
+
+
+思路：
+1、依次删除initial中节点，计算剩余节点可以感染的节点数；剩余节点感染节点可能重复，需要去重。
+2、选择去重后，可以感染节点数M最小时的节点，作为最终要删除的节点。
+
+
+ [LEETCODE924：尽量减少恶意软件的传播](https://www.freesion.com/article/7393842486/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

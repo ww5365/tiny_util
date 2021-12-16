@@ -4,13 +4,13 @@
 void leetcode_all_test(){
 
     // 寻找具有最大最小值的路径
-    TestMaximumMinPath();
+    // TestMaximumMinPath();
 
     // 去掉冗余的边，使得图变成一棵树
-    TestRedundantConnections();
+    // TestRedundantConnections();
 
     // 最小成本连通所有城市
-    TestConnectAllCitys();
+    // TestConnectAllCitys();
 
     // 实现图的重要算法
     // TestGraph();
