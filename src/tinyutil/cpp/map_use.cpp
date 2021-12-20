@@ -21,7 +21,6 @@ using namespace std;
 class TestMap {
 
 public:
-
     explicit TestMap(): graph(){
         //初始化一个空的map变量
     }
@@ -37,7 +36,6 @@ public:
             graph[key].clear();
         }
         graph[key] = vec;
-        
         return true;
     }
     bool empty()
@@ -51,14 +49,12 @@ public:
             for (auto const &adjv : elem.second) {
                 os << "edge from:" << elem.first  << " to: "<< adjv << std::endl;
             }
-            os << std::endl;
         }
         return os;
     }
 
 private:
-    map<int, vector<int>> graph;  // 类中成员变量需要初始化吗？ 默认会调用初始化构造函数进行
-
+    map<int, vector<int>> graph;  // 遍历时按照key时有序的;类中成员变量需要初始化吗？ 默认会调用初始化构造函数进行
 };
 
 /*
@@ -117,7 +113,6 @@ void com_map_use() {
     auto it = mm1.find(1);
 
     cout << "key: test1 -> " << it->second << endl;
-
 
     for(auto it = mm1.lower_bound(2); it != mm1.upper_bound(2); ++it){
 
@@ -200,17 +195,18 @@ void map_use_test() {
     TestMap test;
 
     std::cout << "begin to test mmapap use-----" << std::endl; 
-    std::cout << "begin to test mmapap use-----" << std::endl; 
 
     std::cout << test << std::endl;
     test.set(1, 2);
     test.set(1, 3);
     test.set(2, 3);
 
-    //{1,<2,3>},{2,<3>}
+    //结果为：{1,<2,3>},{2,<3>}
+    std::cout << "begin to test mmapap use1111-----" << std::endl; 
+    std::cout << test << std::endl;
 
-    // 更新2对应的值
-
+    // 更新key=2对应的值:<4,5,6>
+    std::cout << "begin to test map use222-----" << std::endl; 
     std::vector<int> tmp = {4,5,6};
     test.update(2,tmp);
     

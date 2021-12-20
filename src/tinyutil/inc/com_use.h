@@ -8,9 +8,10 @@
 #define INC_COM_USE_H_
 
 #include <iostream>
+ 
 
+void enum_use_test();
 void map_use_test();
-
 void read_write_demo();
 void cpp_r_w_demo();
 int string_using_test();

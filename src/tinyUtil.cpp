@@ -136,10 +136,8 @@ do{\
 int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
-
+    
     map_use_test();
-
-
 
     // std::string str = "abcde";
     // cout << "substr: " << str.substr(1, 3) << endl;
