@@ -116,8 +116,6 @@ void const_use_test(){
 }
 
 
-
-
 void com_use_test(){
 
 

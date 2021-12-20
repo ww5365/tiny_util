@@ -3,6 +3,11 @@
 
 void leetcode_all_test(){
 
+    // test exam 0
+
+    TestExam0();
+    TestExam1();
+
     // 寻找具有最大最小值的路径
     // TestMaximumMinPath();
 

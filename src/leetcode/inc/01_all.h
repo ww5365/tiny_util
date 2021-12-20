@@ -5,6 +5,13 @@
 #include <vector>
 #include <set>
 
+
+void TestExam0();
+void TestExam1();
+void TestExam2();
+void TestExam3();
+
+
 void TestMaximumMinPath();
 void TestRedundantConnections();
 void TestConnectAllCitys();

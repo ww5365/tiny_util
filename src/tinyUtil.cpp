@@ -137,6 +137,10 @@ int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
 
+    map_use_test();
+
+
+
     // std::string str = "abcde";
     // cout << "substr: " << str.substr(1, 3) << endl;
     // cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
@@ -147,7 +151,7 @@ int main(int argc, char* argv[]) {
 
 
     //leetcode 目录下testcase
-    leetcode_all_test();
+    // leetcode_all_test();
 
     //nlohmann使用
     // json_test();
