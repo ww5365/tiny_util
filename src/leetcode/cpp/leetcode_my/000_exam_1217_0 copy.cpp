@@ -1,6 +1,20 @@
 
 /*
- * 
+ *  现在有 num 个站点，每个站点都有2个设备，一个主设备，一个备设备，站点内主设备和备设备是连通的，相邻2个站点的各自主备设备互相连通，如下图（第一行是主设备，第二行是备设备）
+
+每个设备都有 “上电” 和 “下电” 2种操作，如果设备当前状态是 “上电”，则变为 “下电”，如果设备当前状态是 “下电”，则变为 “上电”
+
+初始每个设备都 “上电”
+
+输入是站点数量，操作，操作一个二维数组，[[设备标识，站点编号]]， 设备标识为0，标识主设备，设备表示为1，表示备设备
+
+输出为进行对应操作后它现在是否还连通，连通则返回1，不连通则返回0
+
+
+算法类的题:给定操作序列判断连通情况并输出,耗时55ms
+左右,主要是取巧,不能直接暴力每次都去判断连通情况,可以用一个blockCount变量来存储每次的隔断情况,然后直接每次更新状态之后看blockCount是否归零即可;
+
+
  * 
  * 
  */
@@ -23,3 +37,41 @@ void TestExam1()
 
 
 }
+
+
+	public class Solutoin {
+	    private final int[] di = {-1, 0, 1};
+	 
+	    public int[] checkConnectivity(int num, int[][] operations) {
+	        int blockCount = 0;
+	        boolean[][] state = new boolean[2][num];
+	        for (int i = 0; i < num; i++) {
+	            state[0][i] = true;
+	            state[1][i] = true;
+	        }
+	 
+	        int[] ans = new int[operations.length];
+	        for (int i = 0; i < operations.length; i++) {
+	            int x = operations[i][0];
+	            int y = operations[i][1];
+	            state[x][y] = !state[x][y];
+	            int count = getCount(x, y, num, state);
+	            if (count > 0) {
+	                blockCount -= (state[x][y] ? count : -count);
+	            }
+	            ans[i] = blockCount == 0 ? 1 : 0;
+	        }
+	        return ans;
+	    }
+	 
+	    private int getCount(int x, int y, int num, boolean[][] state) {
+	        int count = 0;
+	        for (int i : di) {
+	            int dy = y + i;
+	            if (dy >= 0 && dy < num && !state[Math.abs(x - 1)][dy]) {
+	                count++;
+	            }
+	        }
+	        return count;
+	    }
+	}

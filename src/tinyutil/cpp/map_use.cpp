@@ -42,6 +42,22 @@ public:
     {
         return graph.empty();
     }
+
+    void del(int id)
+    {
+        auto it = graph.find(id);
+        if (it != graph.end()) {
+            graph.erase(it);
+        }
+        return;
+    }
+
+    void Swap(){
+        std::map<int ,vector<int>> tmp;
+        tmp[5] = std::vector(3, 1);
+        std::swap(graph, tmp);
+    }
+
     // 重载<< 打印此类的对象
     friend ostream& operator<< (ostream &os, const TestMap &obj)
     {   
@@ -202,14 +218,23 @@ void map_use_test() {
     test.set(2, 3);
 
     //结果为：{1,<2,3>},{2,<3>}
-    std::cout << "begin to test mmapap use1111-----" << std::endl; 
+    std::cout << "begin to test mmapap use111-----" << std::endl; 
     std::cout << test << std::endl;
 
     // 更新key=2对应的值:<4,5,6>
     std::cout << "begin to test map use222-----" << std::endl; 
     std::vector<int> tmp = {4,5,6};
     test.update(2,tmp);
+    std::cout << test << std::endl;
     
+    // 删除key=1对应的值
+    std::cout << "begin to test map use333-----" << std::endl; 
+    test.del(1);
+    std::cout << test << std::endl;
+
+    // 
+    std::cout << "begin to test map use444-----" << std::endl; 
+    test.Swap();
     std::cout << test << std::endl;
 
 }

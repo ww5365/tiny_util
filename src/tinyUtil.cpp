@@ -136,6 +136,8 @@ do{\
 int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
+
+    enum_use_test();
     
     map_use_test();
 
