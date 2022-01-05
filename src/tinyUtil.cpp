@@ -137,9 +137,9 @@ int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
 
-    enum_use_test();
+    // enum_use_test();
     
-    map_use_test();
+    // map_use_test();
 
     // std::string str = "abcde";
     // cout << "substr: " << str.substr(1, 3) << endl;
@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
 
 
     //leetcode 目录下testcase
-    // leetcode_all_test();
+    leetcode_all_test();
 
     //nlohmann使用
     // json_test();

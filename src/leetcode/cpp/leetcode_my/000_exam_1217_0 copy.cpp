@@ -27,51 +27,10 @@
 
 
 class Solution {
-public:
 };
 
 void TestExam1()
 {
     // Solution s;
     std::cout <<"this is test exam 0 " << std::endl;
-
-
 }
-
-
-	public class Solutoin {
-	    private final int[] di = {-1, 0, 1};
-	 
-	    public int[] checkConnectivity(int num, int[][] operations) {
-	        int blockCount = 0;
-	        boolean[][] state = new boolean[2][num];
-	        for (int i = 0; i < num; i++) {
-	            state[0][i] = true;
-	            state[1][i] = true;
-	        }
-	 
-	        int[] ans = new int[operations.length];
-	        for (int i = 0; i < operations.length; i++) {
-	            int x = operations[i][0];
-	            int y = operations[i][1];
-	            state[x][y] = !state[x][y];
-	            int count = getCount(x, y, num, state);
-	            if (count > 0) {
-	                blockCount -= (state[x][y] ? count : -count);
-	            }
-	            ans[i] = blockCount == 0 ? 1 : 0;
-	        }
-	        return ans;
-	    }
-	 
-	    private int getCount(int x, int y, int num, boolean[][] state) {
-	        int count = 0;
-	        for (int i : di) {
-	            int dy = y + i;
-	            if (dy >= 0 && dy < num && !state[Math.abs(x - 1)][dy]) {
-	                count++;
-	            }
-	        }
-	        return count;
-	    }
-	}

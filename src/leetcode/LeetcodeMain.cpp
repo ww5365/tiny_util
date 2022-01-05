@@ -7,6 +7,7 @@ void leetcode_all_test(){
 
     TestExam0();
     TestExam1();
+    TestExamBinarySearch();
 
     // 寻找具有最大最小值的路径
     // TestMaximumMinPath();

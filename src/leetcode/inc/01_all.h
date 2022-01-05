@@ -11,7 +11,7 @@ void TestExam1();
 void TestExam2();
 void TestExam3();
 
-
+void TestExamBinarySearch();
 void TestMaximumMinPath();
 void TestRedundantConnections();
 void TestConnectAllCitys();
