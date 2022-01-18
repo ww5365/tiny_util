@@ -10,8 +10,11 @@ void TestExam0();
 void TestExam1();
 void TestExam2();
 void TestExam3();
+void TestExam1119One();
 
 void TestExamBinarySearch();
+
+void TestMinMaxServerLoad();
 void TestMaximumMinPath();
 void TestRedundantConnections();
 void TestConnectAllCitys();

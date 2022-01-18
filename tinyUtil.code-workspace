@@ -99,6 +99,10 @@
 		},
 		"search.exclude": {
 			"**/.cache/clangd/**": true
-		}
+		},
+		"git.scanRepositories": [
+			"tiny_util"
+		],
+		"git.ignoredRepositories": []
 	}
 }
