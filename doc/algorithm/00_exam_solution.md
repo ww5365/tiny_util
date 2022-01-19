@@ -1222,7 +1222,21 @@ int Solution::solveII(vector<int> &&goods) {
 
 （keys非重复，最多为26个大写字母）
 
-求满足条件的messages的子串的个数（即该子串包含keys中所有的字母），用例中有13种情况
+求满足条件的messages的子串的个数（即该子串包含keys中所有的字母），用例中有13种情况。
+
+1. **ABBC**DCDAB
+2. **ABBCD**CDAB
+3. **ABBCDC**DAB
+4. **ABBCDCD**AB
+5. **ABBCDCDA**B
+6. **ABBCDCDAB**
+7. A**BBCDCDA**B
+8. A**BBCDCDAB**
+9. AB**BCDCDA**B
+10. AB**BCDCDAB**
+11. ABB**CDCDAB**
+12. ABBC**DCDAB**
+13. ABBCD**CDAB**
 
 ### 题解
 思路：滑动窗口之最小窗口变种。
