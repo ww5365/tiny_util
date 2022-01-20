@@ -291,7 +291,7 @@ int main(int argc, char* argv[]) {
 
     // test_design_pattern();
 
-    // algorithm_use();
+    algorithm_use();
 
     // //size 大小计算
 
@@ -595,7 +595,7 @@ int main(int argc, char* argv[]) {
     // macro_study();
 //
 //    //c read_write_demo
-//    read_write_demo();
+   read_write_demo();
 //
 //    cout << "!!!Hello World!!!" << endl;
 //    cout << "args num :" << argc << endl;

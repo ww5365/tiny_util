@@ -9,6 +9,7 @@
 #include "../inc/com_use.h"
 
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 #include <vector>
 #include <iterator>
@@ -16,16 +17,32 @@
 
 using namespace std;
 
-void read_write_demo(){
 
-    //sscanf读入格式化的数字字符串到变量中
-    const char *geo = "(123.22,456.33;234.11,567.22)";
-    double x1=0,y1=0,x2=0,y2=0;
-    sscanf(geo,"(%lf,%lf;%lf,%lf)",&x1,&y1,&x2,&y2);  //读入形如：(1,2;1,2)  这样的数字字符串到变量中
-    printf("geo str: %s\n",geo);
-    printf("the res is: %f,%f,%f,%f \n",x1,y1,x2,y2);
+// 输出数据一种新方法: 使用输出流的迭代器
 
+void stream_output_use_iterator() {
+
+    std::cout << "---stream_output_use_iterator--- " << std::endl;
+
+    std::vector<int> vec = {1,2,3,4}; // 标准输入和输出，输出这个vec，分割符使用逗号
+
+    // 输出到标准输出cout
+    std::copy(vec.cbegin(), vec.cend(), std::ostream_iterator<int>(std::cout, ","));
+    std::cout << std::endl;
+
+    // 使用for_each
+    for_each(vec.cbegin(), vec.cend(), [](const int &elem){ std::cout << elem << ",";});
+    std::cout << std::endl;
+   
+    // 输出到ostringstream
+    std::ostringstream oStrStream;
+    std::ostream_iterator<int> itOss(oStrStream, ",");
+    std::copy(vec.cbegin(), vec.cend(), itOss);
+    string vec2String = oStrStream.str();
+    std::cout << "ostringstream result: " << vec2String << std::endl;
 }
+
+
 
 
 /*
@@ -134,3 +151,17 @@ private:
 };
 
 
+void read_write_demo(){
+
+    //c 风格： sscanf读入格式化的数字字符串到变量中
+    const char *geo = "(123.22,456.33;234.11,567.22)";
+    double x1=0,y1=0,x2=0,y2=0;
+    sscanf(geo,"(%lf,%lf;%lf,%lf)",&x1,&y1,&x2,&y2);  //读入形如：(1,2;1,2)  这样的数字字符串到变量中
+    printf("geo str: %s\n",geo);
+    printf("the res is: %f,%f,%f,%f \n",x1,y1,x2,y2);
+    
+    stream_output_use_iterator();
+
+
+
+}

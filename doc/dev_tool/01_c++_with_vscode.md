@@ -71,6 +71,8 @@ make  //根据生成makefile文件，编译程序。
   > 修改项目路径下：./scripts/build.sh
   >
   > 产出文件目录：
+  >
+  > -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE 
 
 
 ``` shell

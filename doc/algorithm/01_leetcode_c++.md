@@ -51,12 +51,80 @@
 009 打家劫舍专题，大家先做1，再做2，如果有兴趣，可以再做3
 
 
-## 代码实现
-具体实现参考：src/leetcode/cpp/leetcode_my   使用前面的编号辨识
+## 算法学习思维导图
 
 
+## 算法中常用的函数
 
-![算法学习思路](../img/算法学习思路-16416401495941.png)
+
+### 头文件 algorithm
+
+
+#### std::all_of  
+
+all_of(itor_begin, itor_end, predit); // 判断[itor_begin, itor_end)中的元素是否都满足谓词条件
+
+``` c++
+
+#include <algorithm> 
+
+// 声明
+template< class InputIt, class UnaryPredicate >
+bool all_of( InputIt first, InputIt last, UnaryPredicate p );
+
+
+1) Checks if unary predicate p returns true for all elements in the range [first, last).
+
+template< class InputIt, class UnaryPredicate >
+bool any_of( InputIt first, InputIt last, UnaryPredicate p );
+
+3) Checks if unary predicate p returns true for at least one element in the range [first, last).
+
+template< class InputIt, class UnaryPredicate >
+bool none_of( InputIt first, InputIt last, UnaryPredicate p );
+
+5) Checks if unary predicate p returns true for no elements in the range [first, last).
+
+// 代码示例1：
+std::all_of(keys.begin(), keys.end(), [hash](const char &c) { return hash[c - 'A'] > 0; });  // keys中值，全部满足lambda表达式,lambda表达式传递外部变量到内部使用
+
+// 代码示例2：
+
+#include <vector>
+#include <numeric>
+#include <algorithm>
+#include <iterator>
+#include <iostream>
+#include <functional>
+ 
+int main()
+{
+    std::vector<int> v(10, 2);
+    std::partial_sum(v.cbegin(), v.cend(), v.begin()); // 部分和累加函数，并把结果放到v.begin起始位置；{1,2,3}->{1,1+2,1+2+3},以覆盖的方式写;
+    std::cout << "Among the numbers: ";
+    std::copy(v.cbegin(), v.cend(), std::ostream_iterator<int>(std::cout, " ")); // 输出vector中的值，并用空格分割
+    std::cout << '\n';
+ 
+    if (std::all_of(v.cbegin(), v.cend(), [](int i){ return i % 2 == 0; })) {
+        std::cout << "All numbers are even\n";
+    }
+    if (std::none_of(v.cbegin(), v.cend(), std::bind(std::modulus<>(), 
+                                                     std::placeholders::_1, 2))) {
+        // 使用ff = bind(f,_1, 2) => ff(1) 实际f(1, 2)
+        std::cout << "None of them are odd\n";
+    }
+    struct DivisibleBy
+    {
+        const int d;
+        DivisibleBy(int n) : d(n) {}
+        bool operator()(int n) const { return n % d == 0; } // 重载()运算符
+    };
+ 
+    if (std::any_of(v.cbegin(), v.cend(), DivisibleBy(7))) {
+        std::cout << "At least one number is divisible by 7\n";
+    }
+}
+```
 
 
 
