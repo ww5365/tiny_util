@@ -28,7 +28,17 @@ bool cmp_fun(const Type&t1,const Type &t2){
     return (t1.size() < t2.size());
 }
 
+template <class Type> 
+class CmpClass {
+    public:
+    bool operator() (const Type& left, const Type& right) const {
+        return left < right;
+    }
+};
+
 void sort_algorithm_use(){
+    
+    std::cout << "----sort_algorithm_use---" << std::endl;
 
     //按照字符串的长度,从小到大排序
     vector<std::string> test;
@@ -73,8 +83,13 @@ void sort_algorithm_use(){
     vector<int> test2 = {1,2,4,5,9};
     std::sort(test2.begin(), test2.end(), std::greater<int>());
     std::copy(test2.cbegin(), test2.cend(), std::ostream_iterator<int>(std::cout, " ")); // 输出每个元素
-
     cout << endl;
+
+    // 从小到大排序
+    std::sort(test2.begin(), test2.end(), CmpClass<int>());
+    std::cout <<"--- test use CmpClass sort --- " << std::endl;
+    std::copy(test2.cbegin(), test2.cend(), std::ostream_iterator<int>(std::cout, " ")); // 输出每个元素
+    std::cout << endl;
 
 }
 
@@ -113,7 +128,10 @@ void replace_str_use() {
 void container_algorithm_use(){
 
     std::cout << "----container_algorithm_use---" << std::endl;
-    //将vector中字符串，尾插的方法拷贝到map对应的某个key中
+
+    // copy for_each back_inserter, lambda表达式
+    // 将vector中字符串，尾插的方法拷贝到map对应的某个key中
+    // 一条语句打印vector
     std::map<uint32_t, std::vector<std::string>> test_map;
     test_map[1].push_back("one");
     std::vector<std::string> vec = {"wang", "wei", "ni", "hao"};
@@ -142,7 +160,6 @@ void container_algorithm_use(){
     // all_of ： vec中的元素全部满足条件
     std::vector<int> vec3 = {1, 3, 5};
     bool res = std::all_of(vec3.cbegin(), vec3.cend(), [](const int &elem){return (elem % 2 == 1);}); // 判断是否全部为奇数
-    
     if (res) {
         std::cout << "all_of result is all odd" << std::endl;
     }
@@ -150,15 +167,15 @@ void container_algorithm_use(){
     // any_of ： vec中元素任何一个满足条件
     int val = 5;
     res = std::any_of(vec3.cbegin(), vec3.cend(), [val](const int &elem) {return elem == val;});
-
     if (res) {
         std::cout << "any_of result exsit VAL" << std::endl;
     }
 
+
+
 }
 
 void algorithm_use(){
-
     sort_algorithm_use();
     replace_str_use();
     container_algorithm_use();
