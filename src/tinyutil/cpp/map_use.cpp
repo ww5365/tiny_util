@@ -16,6 +16,7 @@
 #include <map>
 #include <unordered_map>
 #include "../inc/com_use.h"
+
 using namespace std;
 
 class TestMap {
@@ -77,6 +78,8 @@ private:
 *  通用的 map 使用方法
 */
 void com_map_use() {
+
+    std::cout << "---- com_map_use -----" << std::endl;
     //pair make_pair map
     pair<int, string> pa(1, "wang"); //直接初始化
     pair<int, string> pb;
@@ -94,6 +97,16 @@ void com_map_use() {
     for (auto e : ma) {
         cout << e.first << ":" << e.second << endl;
     }
+
+    // map是按照key排序, 输出有序使用map，不能用unordered_map
+    
+    std::cout << "---- com_map_use : map sort output -----" << std::endl;
+
+    map<string, string> mTest{{"bba", "val1"}};
+    mTest.insert(make_pair("baa", "val2"));
+    for_each(mTest.cbegin(), mTest.cend(), [](const pair<string, string>& elem){ std:: cout << elem.first << " : " << elem.second << std::endl;}); // 按照string的字典序输出 : baa, bba
+    std::cout << std::endl;
+
 
     //unoreder_map
 
@@ -205,7 +218,7 @@ void com_map_use() {
 
 void map_use_test() {
 
-    //com_map_use();
+    com_map_use();
 
 
     TestMap test;

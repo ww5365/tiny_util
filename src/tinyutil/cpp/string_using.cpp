@@ -574,8 +574,6 @@ size_t split_string(const std::string& src,
     }
 
     return fields.size();
-
-
 }
 
 /*

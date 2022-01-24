@@ -139,11 +139,12 @@ int main(int argc, char* argv[]) {
 
     // enum_use_test();
     
-    // map_use_test();
+    map_use_test();
 
-    // std::string str = "abcde";
-    // cout << "substr: " << str.substr(1, 3) << endl;
-    // cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
+    std::string str = "abcde";
+    cout << "test substr1: " << str.substr(1, 3) << endl;
+    cout << "test substr2: " << str.substr(1, 6) << endl;
+    cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
  
     // std::pair<int, string> pa = {1, "wangwei"};
 
@@ -291,7 +292,7 @@ int main(int argc, char* argv[]) {
 
     // test_design_pattern();
 
-    algorithm_use();
+    // algorithm_use();
 
     // //size 大小计算
 

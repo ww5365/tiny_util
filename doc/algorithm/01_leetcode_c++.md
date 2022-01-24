@@ -127,6 +127,60 @@ int main()
 ```
 
 
+### 头文件 string
+
+字符串处理的常用函数
+
+#### find
+
+size_t find (const string& sbustr, size_t pos = 0) ：从字符串pos位置开始，寻找匹配的substr。
+返回值：
+The position of the first character of the first match.
+If no matches were found, the function returns string::npos.
+
+#### substr
+
+substr(pos, len) : 从pos位置截取，len个字符。pos默认起始是0。返回子串。
+
+pos
+Position of the first character to be copied as a substring.
+If this is equal to the string length, the function returns an empty string.
+If this is greater than the string length, it throws out_of_range. // pos超出长度时，会抛异常
+Note: The first character is denoted by a value of 0 (not 1).
+len
+Number of characters to include in the substring (if the string is shorter, as many characters as possible are used).
+A value of string::npos indicates all characters until the end of the string.
+
+当len大于实际的长度时，怎么样？不会抛异常，直接截取到最后，相当于substr(pos);
+
+
+``` c++
+
+// 分隔符切出所有字符串，比如：ab/cd/e  => [ab, cd, e]  ab/cd/ef/  => [ab, cd, ef, ""] 
+
+size_t split_string(const std::string& src,
+                    const std::string& delimiter,
+                    std::vector<std::string>& fields){
+
+    fields.clear();
+    size_t previous_pos = 0;
+    size_t current_pos = 0;
+    while ((current_pos = src.find(delimiter, previous_pos)) != std::string::npos) {
+        fields.push_back(src.substr(previous_pos, current_pos - previous_pos));
+        previous_pos = current_pos + delimiter.length();
+    }
+
+    // Add the last string
+    // If the last string is delimiter, add emyty string to fields too.
+    if (previous_pos <= src.length()) {
+        fields.push_back(src.substr(previous_pos));
+    }
+
+    return fields.size();
+}
+```
+
+
 
 
 
