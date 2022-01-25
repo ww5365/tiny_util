@@ -14,7 +14,7 @@
 需要安装插件：
 - cmake , cmake tools
 - c/c++
-- 
+- sftp
 
 wecode配置： ctrl+shift+p -> 首选项：打开设置(json)，新增如下配置，涉及**字体**、**编码**、**目录树缩进**、**ctrl+鼠标滚轮调整字体大小**，**markdown配置**
 
@@ -68,11 +68,13 @@ make  //根据生成makefile文件，编译程序。
 
 * cmake 命令：关键编译时生成complie_commands.json文件，用来进行代码的跳转
 
-  > 修改项目路径下：./scripts/build.sh
-  >
-  > 产出文件目录：
-  >
   > -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE 
+  >
+  > 或者
+  >
+  > set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+  
+  
 
 
 ``` shell
@@ -403,6 +405,10 @@ cmd.exe /d /c "C:\\mingw64\\bin\\g++.exe -g D:\\Wecode-Tutorial\\tutorial\\main.
 9. setupCommands： gdb的命令行参数
 10. **preLaunchTask**：启动器依赖的编译task，启动器启动前，会先运行该任务。可以不设置，但那样需要先手动运行编译任务
 
+
+
+
+
 ### 3.2 远程编译/调试
 
 远程编译调试的方法，大致与本地相同，核心是通过plink在远程服务器上执行命令。另外在执行命令前，需要配置Sftp插件将本地代码同步到远端环境。
@@ -435,6 +441,8 @@ cmd.exe /d /c "C:\\mingw64\\bin\\g++.exe -g D:\\Wecode-Tutorial\\tutorial\\main.
 `ctrl+shift+p`打开命令面板，选择命令`SFTP: Sync Local -> Remote`，可以把本地目录同步到远程服务器上
 ![sftp](./img/sftp.gif)
 由于我们配置了`"uploadOnSave": true`，在首次同步完整个项目后，只需要在wecode中保存文件，wecode会自动把文件同步到服务器
+
+
 
 #### 3.2.2 编译
 
@@ -483,6 +491,8 @@ cmd.exe /d /c "C:\\mingw64\\bin\\g++.exe -g D:\\Wecode-Tutorial\\tutorial\\main.
 
 运行任务结果如下
 ![remote-build](./img/remote-build.gif)
+
+
 
 #### 3.2.3 调试
 
@@ -536,10 +546,61 @@ cmd.exe /d /c "C:\\mingw64\\bin\\g++.exe -g D:\\Wecode-Tutorial\\tutorial\\main.
 运行结果如下
 ![remote-debug](./img/remote-debug.gif)
 
+
+
+### 3.3 远程编译/调试 之二 
+
+#### 远程编译 + 下载远程服务器代码到本地
+
+tasks.json  远程编译 代码同步
+
+这一步我们使用了build for remote 来配置代码同步及远程编译，会自动生成tasks.json 和  sftp.json 配置 
+
+Build for remote插件中配置：相关的配置是写入到tasks.json 和 sftp.json中
+
+a)    远程主机的ip和用户名密码：10.**.**.**:22 wangwei/123456
+
+远程和本地映射目录：D:\workspace\my_codehub\MapGeoCodingRankEngine_dev\MapGeoCodingRankEngine\rankserver\engine <-> /opt/huawei/wangwei/GeoCodingRankEngine_dev/MapGeoCodingRankEngine/rankserver/engine
+
+b)    远程编译命令：remote-build
+
+cd /opt/huawei/wangwei/GeoCodingRankEngine_dev/MapGeoCodingRankEngine/rankserver/engine
+
+sh ./scripts/build.sh -p -t Debug
+
+回收目录：/opt/huawei/wangwei/ GeoCodingRankEngine_dev/MapGeoCodingRankEngine/rankserver/engine/build/release/x86_64/release/archive/*.zip
+
+远程编译命令： Crtl + shift + p -> tasks: run ->remote-build
+
+配置快捷键： win + shift + b 
+
+配置方法：Ctrl + k / ctrl+s ->
+
+![image-20211013161220601](../img/859d241db890bc6dcda72fe353372547_538x431.png@900-0-90-f.png)
+
+ c )    编译成功之后，目标文件下拉本地：
+编译cmakelist.txt文件增加：-DCMAKE_EXPORT_COMPILE_COMMANDS=1 
+
+Ctrl + shift+ p –》 sftp： 同步本地和服务器上文件 
+
+同时，上传和下载配置了快捷键：Win + alt + u/l
+
+使用如下的命令，将远程机器上的代码及所依赖的库，同步到本地。文件较多，时间较长。
+
+![image-20211013153000782](../img/acb12a5d91fec0bf728028d4c34a517d_617x203.png@900-0-90-f.png)
+
+ 上面是全量同步，如果只想同步单个文件，使用右键：
+
+![image-20211013153542916](../img/760ec711f2f896a63e8fecf07905a0d1_431x323.png@900-0-90-f.png)
+
+
+
+
+
 ## 4. 静态检查与fixbot修复
 
 在代码编辑界面右键，会有很多有用的功能，包括，**格式化文档**、**静态检查**、**fixbot修复**，下面以静态检查和fixbot修复为例做一个展示
-![check_and_fix](./img/check_and_fix.gif)
+右键->codecheck
 
 ## 5. 其他
 
@@ -549,14 +610,7 @@ ctrl+shift+p：命令面板，所有的操作都列在里面
 ctrl+p： 全局查找文件
 ctrl+t： 全局查找符号，包括函数等
 
-### 5.2 建议的其他插件
-
-- **CMake Tools**： cmake构建
-- **Markdown Preview Enhanced**： markdown预览
-- **Markdown Shortcuts**： markdown快捷键
-- **markdownlint**： markdown格式化
-
-### 5.3 关于远程编译和调试
+### 5.2 关于远程编译和调试
 
 本文介绍了进行远程编译和调试的根本原理和方法。vscode中还有很多其他的插件可以协助完成这项任务，大家可以按需选取。
 
@@ -566,32 +620,87 @@ ctrl+t： 全局查找符号，包括函数等
 
 其中，Remote-SSH和gdbserver进行调试可以参考[我的博客](http://3ms.huawei.com/km/blogs/details/9674131?l=zh-cn)
 
-### 5.4 关于跳转
+### 5.3 关于跳转
 
-Wecode的跳转完全是基于Clangd的，我们用wecode打开项目时，会自动在.vscode下面生成`compile_commands.json`文件，这个文件也被称作编译数据库，是编译整个项目所需编译信息的集合。其格式如下，每个command对象记录了一个编译单元在项目编译过程中是如何被编译的，包括编译参数、工作目录和源文件等
+#### compile_commands.json
 
-```json
-[
-    {
-        "arguments": [
-            "g++",
-            "-c",
-     "-DDOUBLE_PATH_ENABLE=1",
-            "-I/home/zhenghang/cc/Codebin_Linux/update/../inireader",
-            "-o",
-  "CMakeFiles/fnbuildm.dir/home/zhenghang/cc/Codebin_Linux/inireader/inireader.cpp.o",
-            "../inireader/inireader.cpp"
-        ],
-        "directory": "/home/zhenghang/cc/Codebin_Linux/update",
-        "file": "../inireader/inireader.cpp"
-    }
-]
+Wecode的跳转完全是基于Clangd的，我们用wecode打开项目时，会自动在.vscode下面生成`compile_commands.json`文件，这个文件也被称作编译数据库，是编译整个项目所需编译信息的集合。
+
+人工编辑该文件，修复好编译命令后，重启wecode，代码就可以正常的跳转.另外CMake也支持直接生成`compile_commands.json`文件.
+
+``` json
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE 
+
+或者
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 ```
 
-如果生成的compile_commands.json不能满足我们的要求，可以人工编辑该文件，修复好编译命令后，重启wecode，代码就可以正常的跳转.另外CMake也支持直接生成`compile_commands.json`文件
-具体参考[http://wecode.huawei.com/Docs/74](http://wecode.huawei.com/Docs/74)
+#### setting.json  配置跳转
+  ``` json
+  {
+    "wecode-cpp.clangd.arguments": [
+        "--pch-storage=memory",
+        "--preambles-limit=80",
+        "--background-index",
+        "--prefer-index-without-ast=always",
+        "--limit-results=80",
+        "--header-insertion=never",
+        "--cross-file-rename=true",
+        "--fallback-style=Huawei",
+        "--compile-commands-dir=D:/workspace/my_codehub/MapGeoCodingRankEngine_dev/MapGeoCodingRankEngine/rankserver/engine/.vscode",
+        "--missing-headers-out-file=D:/workspace/my_codehub/MapGeoCodingRankEngine_dev/MapGeoCodingRankEngine/rankserver/engine/.vscode/missingHeaderFiles.txt"
+    ],
+    "C_Cpp.autocomplete": "Disabled",
+    "C_Cpp.formatting": "Disabled",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.intelliSenseEngine": "Disabled",
+    "files.watcherExclude": {
+        "**/.cache/clangd/**": true
+    },
+    "search.exclude": {
+        "**/.cache/clangd/**": true
+    },
+    "cmake.configureOnOpen": false,
+    "editor.fontFamily": "Cascadia Code, Microsoft YaHei Mono, Consolas, 'Courier New', monospace",
+    "editor.fontSize": 15,
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "workbench.tree.indent": 16,
+    "editor.tabSize": 4,
+    "editor.mouseWheelZoom": true,
+    "editor.wordWrap": "on",
+    "markdownlint.config": {
+        "MD025": {
+            "front_matter_title": ""
+        },
+        "MD013": false,
+        "MD041": false,
+        "MD033": false
+    },
+    "markdown-preview-enhanced.previewTheme": "one-light.css",
+  }
+  ```
+  说明：
+  修改setting.json配置：关键是修改compile-commands-dir参数，指向compile_commands.json文件；修改json配置文件，支持wecode的跳转。
+  本地机器使用：将2.1中生成的compile_commands.json文件的主目录修改为本地目录：即MapGeoCodingRankEngine这层
 
-本地不跳转,不提示的解决方案：
+
+#### 导入文件
+
+先替换compile_commands.json 中路径为windows本机路径
+
+```shell
+1,$s#/usr/local/bin/g++#g++#g
+1,$s#/opt/huawei/wangwei/GeoCodingRankEngine_dev#D:/workspace/my_codehub/MapGeoCodingRankEngine_dev#g
+
+```
+
+
+将上面处理的compile_commands.json 放在.vscode 下，导入：F1 -> import compile_commands.json 文件
+
+
+#### 本地不跳转,不提示的解决方案：
 
 导入本地头文件：
     设置→用户→拓展→WeCode C/C++→Codebase › Generator: Search Paths 包含头文件路径列表，可以是src根目录
