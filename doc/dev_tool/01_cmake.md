@@ -243,12 +243,41 @@ add_executable(demo demo.cpp) # demo为要生成的可执行文件名字，demo
 add_library(hello SHARED ${SOURCE_1}) #生成一个动态链接库libhello.so, 使用#{SOURCE_1}中的代码
 add_library(common STATIC util.cpp) # 生成静态库，libcommon.a为名字
 ```
+
+* 补充add_library使用
+
+从CMake版本2.8.8开始，您可以使用“对象库” 来避免**对象文件的重复编译**。使用Christopher Bruns的带有两个源文件的库示例：
+
+```cmake
+# list of source files
+set(libsrc source1.c source2.c)
+
+# this is the "object library" target: compiles the sources only once
+add_library(objlib OBJECT ${libsrc})
+
+# shared libraries need PIC
+set_property(TARGET objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
+
+# shared and static libraries built from the same object files
+add_library(MyLib_shared SHARED $<TARGET_OBJECTS:objlib>)
+add_library(MyLib_static STATIC $<TARGET_OBJECTS:objlib>)
+```
+从CMake文档：
+
+对象库可编译源文件，但不会将其目标文件存档或链接到库中。取而代之的是，由其他目标创建 add_library()或add_executable()可以使用形式的表达式$<TARGET_OBJECTS:objlib>作为源来引用对象，其中objlib是对象库名称。
+
+简而言之，该add_library(objlib OBJECT ${libsrc})命令指示CMake将源文件编译为*.o目标文件。*.o然后，$<TARGET_OBJECT:objlib>在两个add_library(...)命令中引用此文件集合，这两个命令调用相应的库创建命令，这些命令从同一组目标文件构建共享库和静态库。如果您有很多源文件，那么编译这些*.o文件可能会花费很长时间。使用对象库，您只能将它们编译一次。
+
+您要付出的代价是必须将目标文件构建为与位置无关的代码，因为共享库需要这样做（静态库无关紧要）。请注意，与位置无关的代码效率可能较低，因此，如果要获得最佳性能，则需要静态库。此外，更容易分发静态链接的可执行文件。
+
+
+
 * 设置源码文件搜索规则
 ``` cmake
 aux_source_directory(./src/ DIR_SRCS) ## 扫描 ./src/ 下的所有源文件，并将文件名存入DIR_SRCS中
 list(REMOVE_ITEM DIR_SRCS "./src/main.cpp")  ## 排除./src/main.cpp文件
 add_executable(main ${DIR_SRCS}) ## ${DIR_SRCS}所有源文件 main是可执行文件名
-FILE(GLOB SOURCE_1 "${CMAKE_SOURCE_DIR}/src/*.cpp")  ##自定义的文件搜索规则
+FILE(GLOB SOURCE_1 "${CMAKE_SOURCE_DIR}/src/*.cpp")  ##自定义的文件搜索规则；GLOB 会产生一个由所有匹配globbing表达式的文件组成的列表，并将其保存到变量中。Globbing 表达式与正则表达式类似，但更简单。
 ```
 
 * 设置构建的子目录
@@ -379,6 +408,18 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 ```
 
+
+ * execute_process
+ 使用execute_process调用shell命令或脚本
+ ``` cmake
+ execute_process(COMMAND bash -c "mkdir -p ${CMAKE_CURRENT_SOURCE_DIR}/lib")
+ ```
+
+
+
+
+
+
 #### 1.4.2.3 示例变量
 
 * 生成一个动态库并链接到main的可执行文件
@@ -392,6 +433,7 @@ ADD_LIBRARY(hello SHARED ${SOURCE_1}) ##告诉cmake生成一个动态链接库li
 ADD_EXECUTABLE(sayhello ${SOURCE_2})  ##根据main.cpp生成可执行文件 sayhello
 TARGET_LINK_LIBRARIES(sayhello ${hello}) ##将libhello.so链接到可执行文件
 ```
+
 
 
 
