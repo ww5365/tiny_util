@@ -21,29 +21,33 @@
 #include <set>
 #include <queue>
 #include <deque>
-
 #include <algorithm>
 #include <memory>
-
 
 typedef struct test_struct{
     int a;
     char *str;
 }test_struct;
 
+#define QT_LEN 2
+#define IP_SIZE 2
 
 #define MAMA(x...)  p_##x;
 
-#define QT_LEN 2
-
-#define IP_SIZE 2
+#define TEST_MACRO(TYPE)  \
+do{\
+    cout << "TEST MACRO para name: " << #TYPE << endl;  \
+    cout << "TEST MACRO Para content: " << TYPE << endl; \
+}while(0)
 
 //禁止拷贝的构造函数；放在private中
 #define DISABALE(C)\
     C(const C&);\
     C& operator=(const C&);
 
-
+//#define TEST(fmt,arg...) do{\
+//    printf("function:[%s]"fmt,__FUNCTION__,##arg);\
+//}while(0)
 
 template<typename T1,typename T2>struct CustomType
 {
@@ -51,12 +55,6 @@ template<typename T1,typename T2>struct CustomType
     typedef T2 ATOMIC;
 
 };
-
-
-//#define TEST(fmt,arg...) do{\
-//    printf("function:[%s]"fmt,__FUNCTION__,##arg);\
-//}while(0)
-
 
 int is_alpha(const char c)
 {
@@ -125,13 +123,6 @@ struct DisplayItem {
 
 };
 
-//const std::string BOOK_GBK_STR {0xD4, 0xA4, 0xB6, 0xA9};
-
-#define TEST_MACRO(TYPE)  \
-do{\
-    cout << "TEST MACRO para name: " << #TYPE << endl;  \
-    cout << "TEST MACRO Para content: " << TYPE << endl; \
-}while(0)
 
 int main(int argc, char* argv[]) {
 
@@ -593,7 +584,7 @@ int main(int argc, char* argv[]) {
 //    cpp_r_w_demo();
 //
 //    //test macro
-    // macro_study();
+    macro_study();
 //
 //    //c read_write_demo
    read_write_demo();

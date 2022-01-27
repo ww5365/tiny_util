@@ -414,8 +414,30 @@ include(CPack)
  ``` cmake
  execute_process(COMMAND bash -c "mkdir -p ${CMAKE_CURRENT_SOURCE_DIR}/lib")
  ```
+ 
+ * add_custom_target 
+ 这条指令也可以执行
+ ``` cmake
+ 
+    add_custom_target(boost ALL
+        COMMAND sh ./bootstrap.sh --with-libraries=${BOOST_BUILD_LIBRARIES} --prefix=${BOOST_BUILD_DIR}/installed
+             variant=release link=shared runtime-link=shared
+        COMMAND sed -i "s/using gcc ;/using gcc : : ${BOOST_GCC} ;/" project-config.jam
+        COMMAND ./b2 install
+            --build-dir=${BOOST_BUILD_DIR}
+            cflags="-fstack-protector-strong"
+            cxxflags="-fstack-protector-strong"
+            cxxflags="-D_FORTIFY_SOURCE=2"
+            cxxflags="-O2"
+            linkflags="-Wl,-z,relro,-z,now,-z,noexecstack,--disable-new-dtags" 
+            linkflags="-s"
+            variant=release link=shared runtime-link=shared -j8 -d0
+        WORKING_DIRECTORY ${THIRDPARTY_BOOST_PATH}        
+        COMMENT "Build boost target by rankengine cmake target."
+        VERBATIM
+    )
 
-
+ ```
 
 
 
@@ -433,7 +455,6 @@ ADD_LIBRARY(hello SHARED ${SOURCE_1}) ##告诉cmake生成一个动态链接库li
 ADD_EXECUTABLE(sayhello ${SOURCE_2})  ##根据main.cpp生成可执行文件 sayhello
 TARGET_LINK_LIBRARIES(sayhello ${hello}) ##将libhello.so链接到可执行文件
 ```
-
 
 
 
