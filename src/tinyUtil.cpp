@@ -12,7 +12,7 @@
 #include "./tinyutil/inc/com_use.h"
 #include "./tinyutil/inc/macro_study.h"
 #include  "./tinyutil/inc/stl_use.h"
-#include  "./tinyutil/inc/design_pattern.h"
+#include  "./tinyutil/inc/design_model.h"
 #include "./leetcode/inc/01_all.h"
 
 #include <cstdlib>
@@ -281,7 +281,7 @@ int main(int argc, char* argv[]) {
 
     // //设计模式相关疑问点的验证
 
-    // test_design_pattern();
+    test_design_pattern();
 
     // algorithm_use();
 
