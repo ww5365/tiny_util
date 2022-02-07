@@ -128,9 +128,9 @@ int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
 
-    // enum_use_test();
+    enum_use_test();
     
-    map_use_test();
+    // map_use_test();
 
     std::string str = "abcde";
     cout << "test substr1: " << str.substr(1, 3) << endl;
@@ -281,7 +281,7 @@ int main(int argc, char* argv[]) {
 
     // //设计模式相关疑问点的验证
 
-    test_design_pattern();
+    // test_design_pattern();
 
     // algorithm_use();
 
@@ -584,10 +584,10 @@ int main(int argc, char* argv[]) {
 //    cpp_r_w_demo();
 //
 //    //test macro
-    macro_study();
+    // macro_study();
 //
 //    //c read_write_demo
-   read_write_demo();
+//    read_write_demo();
 //
 //    cout << "!!!Hello World!!!" << endl;
 //    cout << "args num :" << argc << endl;
