@@ -14,6 +14,7 @@
 #include  "./tinyutil/inc/stl_use.h"
 #include  "./tinyutil/inc/design_model.h"
 #include "./leetcode/inc/01_all.h"
+#include "./leetcode/cpp/chapater_nine/chapater_nine.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -127,6 +128,8 @@ struct DisplayItem {
 int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
+
+    base_2_rotated_array();
 
     enum_use_test();
     

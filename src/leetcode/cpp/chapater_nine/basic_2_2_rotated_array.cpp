@@ -71,6 +71,8 @@ int findMinElement(vector<int> &vec){
  *
  * 通过画图，分析旋转数组；mid截断之后，会发现至少有一半是单调的；
  * 利用这一半单调性，来缩小搜索空间；
+
+ * leetcode : 33. 搜索旋转排序数组
  *
  *
  */
@@ -141,22 +143,18 @@ int findElement(vector<int> &vec, int target){
 
 void base_2_rotated_array(){
 
+    std::cout << "base_2_rotated_array------------" << std::endl;
+
     vector<int> vec = {4,5,6,9,3,4};
 
     int element = findMinElement(vec);
-
     cout << "the minmum element is : " << element << endl;
 
 
     vector<int> vec2 = {4,5,7,9,1,2};
-
     int pos = findElement(vec2, 5);
 
     cout << "the target in rotated sorted array position: " << pos << endl;
-
-
-
-
 
 
 }
