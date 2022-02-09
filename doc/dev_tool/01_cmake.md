@@ -307,6 +307,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L${CMAKE_CURRENT_SOURCE_DIR}/libs") # �
 link_libraries("/opt/MATLAB/R2012a/bin/glnxa64/libeng.so" "/opt/MATLAB/R2012a/bin/glnxa64/libmx.so") #链接库文件的路径,多个用空格分开，要写全路径
 target_link_libraries(demo ${CMAKE_CURRENT_SOURCE_DIR}/libs/libface.a boost_system.a pthread) #链接多个库文件的名称， 最后的库等价于：libpthread.so -lpthread
 
+#动态库的链接写法等价：
+target_link_libraries(demo libpthread.so)   # 完整的文件名称和后缀
+target_link_libraries(demo pthread)   # 去掉lib和so后缀
+target_link_libraries(demo -lpthread)   # -l + 文件名
+
+
+#静态库的链接写法等价：
+target_link_libraries(demo libface.a)   # 完整的文件名称和后缀
+target_link_libraries(demo face)   # 去掉lib 和 .a  后缀 
+target_link_libraries(demo face.a)   # 去掉lib
+
+
 说明：
 link_libraries用在add_executable之前，target_link_libraries用在add_executable之后
 
@@ -334,7 +346,7 @@ DOC 指定缓存条目的文档字符串。
 REQUIRED 如果未找到任何内容，则停止处理并显示错误消息。
 ```
 
-* 几个target命令
+* 几个target命令延伸
 
 ``` cmake
 target_include_directories()：指定目标包含的头文件路径
@@ -369,6 +381,8 @@ cmake-test/                 工程主目录，main.c 调用 libhello-world.so
 └── main.c
 
 ```
+
+![image-20220209145427189](../img/image-20220209145427189.png)
 
 * install 安装命令
 
@@ -414,7 +428,7 @@ include(CPack)
  ``` cmake
  execute_process(COMMAND bash -c "mkdir -p ${CMAKE_CURRENT_SOURCE_DIR}/lib")
  ```
- 
+
  * add_custom_target 
  这条指令也可以执行
  ``` cmake
