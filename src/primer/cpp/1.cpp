@@ -9,6 +9,7 @@
 #include <limits>
 #include <cwchar>
 #include <string>
+#include <cstdlib>
 #include "1.h"
 using namespace std;
 
@@ -42,7 +43,8 @@ char *get_str_3(){
  */
 
 //const 变量的作用范围？ 默认情况下文件内有效；定义时使用extern，其它文件中可以通用
-extern int test_const =  random();
+// extern int test_const =  random();
+extern int test_const =  5;
 
 void primer_2_4_5(){
 
@@ -69,7 +71,7 @@ void primer_2_4_5(){
     //constexpr 用来申明一个变量是常量且必须用常量表达式初始化
 
     constexpr int  i = 32;  //必须用常量表示式赋值；
-    const int ii = random(); // ii不是常量表达式
+    // const int ii = random(); // ii不是常量表达式
 
     //constexpr int iii = random();//不正确赋值；iii不是常量表示式；
     cout << "constexpr: " << i <<endl;

@@ -22,7 +22,7 @@ aux_source_directory(./cpp/chapater_nine DIR_SRCS_2)
 
 
 #add_executable(${PROJECT_NAME}  ${DIR_SRCS_2} ${DIR_SRCS_3})
-add_library(LeetCode  ${DIR_SRCS_0} ${DIR_SRCS_1} ${DIR_SRCS_2} ${DIR_SRCS_3})
+add_library(LeetCode   ${DIR_SRCS_0} ${DIR_SRCS_1} ${DIR_SRCS_2} ${DIR_SRCS_3})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

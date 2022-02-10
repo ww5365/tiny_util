@@ -47,7 +47,7 @@ inline vector<T> ReadVector(int size)
     return objects;
 }
 
-int main()
+int TestExam1224One()
 {
     int serverNum;
     cin >> serverNum;

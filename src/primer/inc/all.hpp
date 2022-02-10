@@ -1,12 +1,7 @@
-/*
- * 4.hpp
- *
- *  Created on: 2016Äê6ÔÂ28ÈÕ
- *      Author: wangwei69
- */
+#ifndef _ALL_HPP_
+#define _ALL_HPP_
 
-#ifndef _4_HPP_
-#define _4_HPP_
+void primer_all_test();
 
 void test_4();
 
@@ -38,8 +33,6 @@ void test_14();
 
 void test_15();
 void test_15_textquery();
-
-
 
 
 #endif /* 4_HPP_ */

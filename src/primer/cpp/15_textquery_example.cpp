@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "15_textquery_example.h"
+#include "../inc/15_textquery_example.h"
 
 
 void test_15_textquery(){

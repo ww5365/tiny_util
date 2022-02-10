@@ -39,7 +39,7 @@ void test_text_query(){
 //在文件中ifs查找key值
 void text_query(ifstream &ifs){
 
-    TextQuery tq(ifs); //构造查询对象
+    TextQuery2 tq(ifs); //构造查询对象
     string key;
     cout << "enter a key to find: " << endl;
     while (true){
@@ -49,7 +49,7 @@ void text_query(ifstream &ifs){
             break;
         }
 
-        TextQueryRes res = tq.query(key); //实施查询操作
+        TextQuery2Res res = tq.query(key); //实施查询操作
         print(cout, res); //打印结果
 
         cout << "please enter next word: " << endl;

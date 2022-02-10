@@ -103,6 +103,7 @@
 		"git.scanRepositories": [
 			"tiny_util"
 		],
-		"git.ignoredRepositories": []
+		"git.ignoredRepositories": [],
+		"git.ignoreDescendantSubmodules": false
 	}
 }

@@ -25,6 +25,8 @@
 #include <algorithm>
 #include <memory>
 
+#include "./primer/inc/all.hpp"
+
 typedef struct test_struct{
     int a;
     char *str;
@@ -129,21 +131,11 @@ int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
 
-    base_2_rotated_array();
-
-    enum_use_test();
     
+    primer_all_test();
+
+    // enum_use_test();
     // map_use_test();
-
-    std::string str = "abcde";
-    cout << "test substr1: " << str.substr(1, 3) << endl;
-    cout << "test substr2: " << str.substr(1, 6) << endl;
-    cout << "time and file name:  " << __TIME__  << " "<<  __FILE__ << endl;
- 
-    // std::pair<int, string> pa = {1, "wangwei"};
-
-    // std::cout << "pair initilize: " << pa.first << " " << pa.second << std::endl;
-
 
     //leetcode 目录下testcase
     leetcode_all_test();

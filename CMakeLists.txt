@@ -26,6 +26,7 @@ set(JSON_BuildTests OFF CACHE INTERNAL "")
 ##特定目录头文件
 include_directories(${PROJECT_SOURCE_DIR}/src/tinyutil/inc)
 include_directories(${PROJECT_SOURCE_DIR}/src/leetcode/inc)
+include_directories(${PROJECT_SOURCE_DIR}/src/primer/inc)
 
 ## 只需要下载git上下载nlohmann库,把头文件加载cmakelist就可以使用
 include_directories(${PROJECT_SOURCE_DIR}/third-party/json/single_include)
@@ -36,6 +37,8 @@ aux_source_directory(./src/tinyUtil/cpp DIR_SRCS)
 #aux_source_directory(./src/leetcode/cpp LEETCODE_DIR_SRCS)
 ###############
 add_subdirectory(./src/leetcode)   # 会在当前目录下面生成libLeetCode.a静态库文件
+
+add_subdirectory(./src/primer)   # 会在当前目录下面生成libLeetCode.a静态库文件
 
 add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
 
@@ -48,7 +51,7 @@ add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
 # 配置了子目录，子目录中的文件打成了库文件 子目录leetcode中代码都打包到库：libLeetCode.a 中
 
 ##############
-target_link_libraries(${PROJECT_NAME} LeetCode)
+target_link_libraries(${PROJECT_NAME} LeetCode Primer)
 
 
 message(STATUS "STD_LIBRARY: ${STD_LIBRARY}")

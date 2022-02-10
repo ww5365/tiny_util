@@ -155,7 +155,7 @@ public:
 };
 
 
-int main()
+int TestExam1224Two()
 {
     Solution solution;
     vector<int> nodes = { 0, 0, 0, 0, 1, 0, 0, 1, 1, -1, -1, 1, 1, 0, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1 };

@@ -1,18 +1,20 @@
 #include "./inc/01_all.h"
+#include "./cpp/chapater_nine/chapater_nine.h"
 #include <iostream>
 
 void leetcode_all_test(){
 
-    // test exam 0
+    // 旋转数组
+    base_2_rotated_array();
 
-    TestExam0();
-    TestExam1();
-    TestExam1119One();
+    // test exam 0
+    // TestExam0();
+    // TestExam1119One();
 
     // TestExamBinarySearch();
 
     TestMinMaxServerLoad();
-    // 寻找具有最大最小值的路径
+
     // TestMaximumMinPath();
 
     // 去掉冗余的边，使得图变成一棵树

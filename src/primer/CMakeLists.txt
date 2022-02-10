@@ -9,20 +9,22 @@
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++17")
 
 ##特定目录头文件
-message("test for ww source dir: ${PROJECT_SOURCE_DIR}" ${PROJECT_SOURCE_DIR})
+message("test for ww primer source dir: " ${PROJECT_SOURCE_DIR})
 
 #include_directories(${PROJECT_SOURCE_DIR}/src/*.h ${PROJECT_SOURCE_DIR}/src/chapater_nine/*.h ${PROJECT_SOURCE_DIR}/src/leetcode_my/*.h)
 
 ## 扫描 ./src/cpp 下的所有源文件，并将文件名存入DIR_SRCS中
 ##aux_source_directory(./src/test_main.cpp DIR_SRCS)
+
+include_directories(./inc)
 aux_source_directory(. DIR_SRCS_0)
 aux_source_directory(./cpp DIR_SRCS_1)
-aux_source_directory(./cpp/leetcode_my DIR_SRCS_3)
-aux_source_directory(./cpp/chapater_nine DIR_SRCS_2)
 
 
 #add_executable(${PROJECT_NAME}  ${DIR_SRCS_2} ${DIR_SRCS_3})
-add_library(LeetCode  ${DIR_SRCS_0} ${DIR_SRCS_1} ${DIR_SRCS_2} ${DIR_SRCS_3})
+add_library(Primer  ${DIR_SRCS_0} ${DIR_SRCS_1})
+
+
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
