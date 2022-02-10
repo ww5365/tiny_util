@@ -5,7 +5,7 @@
  *      Author: wangwei69
  */
 
-#include "com_use.h"
+#include "../inc/com_use.h"
 #include <vector>
 
 #include <iostream>

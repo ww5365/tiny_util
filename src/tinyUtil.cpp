@@ -144,7 +144,7 @@ int main(int argc, char* argv[]) {
     // json_test();
 
     //predicate : 谓词
-    // predicate_use_test();
+    predicate_use_test();
 
     //rtti : run time type info
     // rtti_use_test();

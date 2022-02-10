@@ -4,7 +4,7 @@
  *  Created on: Mar 8, 2019
  *      Author: wangwei69
  */
-#include "all.hpp"
+#include "../inc/all.hpp"
 #include <iostream>
 #include <string>
 #include <functional>

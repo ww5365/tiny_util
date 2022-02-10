@@ -268,7 +268,7 @@ void test_10(){
      *
      *    捕获的变量，是在函数的生命周期内的；
      *     []
-     *     [names]
+     *     [names] : 显式 值捕获
      *     [=] : 隐式 值捕获
      *     [&] : 隐式 引用捕获
      *     [=, identifier_list]  : identifier_list,必须是显示 引用捕获
@@ -317,7 +317,7 @@ void test_10(){
       *    std::greater<TYPE>()
       * 2、自定义比较函数
       *    bool cmpfun(const TYPE&left, const Type&right);
-      * 3、自定义比较类
+      * 3、自定义比较类: 仿函数
       *    struct cmpClass{
       *       bool operator()(const TYPE&left, const TYPE&right){
       *       }
