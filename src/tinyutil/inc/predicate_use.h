@@ -4,9 +4,10 @@
 #include <iostream>
 
 
-//定义个类；类中成员函数再定义lamda表达式，使用类成员变量和成员函数局部变量；调用后看值的变化
+//定义个类；类中成员函数定义lamda表达式，使用类成员变量和成员函数局部变量；调用后看值的变化
 class Predicate{
 public:
+    Predicate() = default;
     Predicate(int a = 0):_a(a){}
     virtual ~Predicate(){}
 
@@ -29,23 +30,7 @@ public:
 
 private:
     int _a;
-
-
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif
 

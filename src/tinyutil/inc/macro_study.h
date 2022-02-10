@@ -54,4 +54,24 @@
 void macro_study();
 
 
+// extern C 的功能说明： c++ 中引入c代码，使用c的标准进行编译
+
+#ifdef __cplusplus    // 明确了当用c++标准进行编译时， 这个宏__cplusplus在编译cpp文件时，编译器会定义; 这部分代码还是按照c语言的标准进行编译；
+extern "C" {
+#endif    
+
+/*
+ * 宏定义：实现常用的位运算
+ */
+
+#define BIT_MSK(bit) (1 << (bit))
+#define BIT_SET(x, bit) ((x) |= BIT_MSK(bit))
+#define BIT_CLR(x, bit) ((x) &= ~BIT_MSK(bit))
+#define BIT_TST(x, bit) ((x) >> (bit)&1) // 判断某个bit 位是否为1
+
+#ifdef __cplusplus
+}
+#endif
+
+
 #endif /* INC_MACRO_STUDY_H_ */

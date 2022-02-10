@@ -239,9 +239,13 @@ endif()
 * 设置编译输出可执行文件或库文件
 
 ```cmake
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/output/bin) # 设置可执行文件的输出路径：RUNTIME
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/output/lib) # 静态库输出路径： ARCHIVE
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)  # 动态库输出路： LIBRARY
+
 add_executable(demo demo.cpp) # demo为要生成的可执行文件名字，demo.cpp是要编译的文件
 add_library(hello SHARED ${SOURCE_1}) #生成一个动态链接库libhello.so, 使用#{SOURCE_1}中的代码
-add_library(common STATIC util.cpp) # 生成静态库，libcommon.a为名字
+add_library(common STATIC util.cpp) # 生成静态库，libcommon.a为名字 默认状态生成静态库
 ```
 
 * 补充add_library使用
@@ -261,6 +265,8 @@ set_property(TARGET objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
 # shared and static libraries built from the same object files
 add_library(MyLib_shared SHARED $<TARGET_OBJECTS:objlib>)
 add_library(MyLib_static STATIC $<TARGET_OBJECTS:objlib>)
+
+
 ```
 从CMake文档：
 

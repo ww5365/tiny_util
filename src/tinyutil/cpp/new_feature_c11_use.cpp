@@ -69,7 +69,7 @@ void rvalue_referenct_use(){
     std::cout << "a.x: " << a.x << " size: " << vec.size()<<std::endl;
 
     std::cout << "-----" << std::endl;
-    vec.emplace_back(std::move(a));
+    vec.emplace_back(std::move(a)); // 右值传入，使用右值构造函数进行构造
 
     std::cout << "a.x: " << a.x << " size: " << vec.size() << std::endl;
 
