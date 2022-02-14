@@ -132,7 +132,7 @@ int main(int argc, char* argv[]) {
     std::cout << "hello test world!" << std::endl;
 
     
-    primer_all_test();
+    // primer_all_test();
 
     // enum_use_test();
     // map_use_test();

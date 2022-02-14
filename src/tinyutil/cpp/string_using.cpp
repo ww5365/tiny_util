@@ -553,7 +553,11 @@ void string_com_use(){
  *    find(substr,pos):从某个位置开始查找子串substr；返回第一个出现位置的下标；否则返回npos；
  * 2、字符串取子串：substr
  *    substr(pos,len):从某个位置开始取子串，长度为len；返回子串；或nullptr
- *
+ 
+ *  boost 库中有字符串分割的功能函数
+ *  boost::split(vector<string> splitResult, string strToSplit, string delimiter)
+ *  
+ *   boost::split(rangePrice, d.key(), boost::is_any_of("-"));
  */
 size_t split_string(const std::string& src,
                     const std::string& delimiter,

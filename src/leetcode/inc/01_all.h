@@ -14,6 +14,9 @@ void TestExam1119One();
 
 void TestExamBinarySearch();
 
+void TestSerachMatrixII();
+void TestSearchRange();
+
 void TestMinMaxServerLoad();
 void TestMaximumMinPath();
 void TestRedundantConnections();

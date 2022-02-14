@@ -4,8 +4,13 @@
 
 void leetcode_all_test(){
 
+    
+    TestSerachMatrixII();
+    
+    TestSearchRange();
+
     // 旋转数组
-    base_2_rotated_array();
+    // base_2_rotated_array();
 
     // test exam 0
     // TestExam0();
@@ -13,7 +18,7 @@ void leetcode_all_test(){
 
     // TestExamBinarySearch();
 
-    TestMinMaxServerLoad();
+    // TestMinMaxServerLoad();
 
     // TestMaximumMinPath();
 
