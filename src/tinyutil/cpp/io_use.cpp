@@ -19,6 +19,7 @@ using namespace std;
 
 
 // 输出数据一种新方法: 使用输出流的迭代器
+// ostream_iterator( ostream_type& stream, const CharT* delim ) 和某个输出流stream关联,使用delim作为分割输出数据
 
 void stream_output_use_iterator() {
 

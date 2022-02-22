@@ -3,11 +3,14 @@
 #include <iostream>
 
 void leetcode_all_test(){
+    
+    test_base_5_dfs();
 
+    TestRotatedArray();
+
+    // TestSerachMatrixII();
     
-    TestSerachMatrixII();
-    
-    TestSearchRange();
+    // TestSearchRange();
 
     // 旋转数组
     // base_2_rotated_array();

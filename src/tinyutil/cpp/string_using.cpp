@@ -552,7 +552,8 @@ void string_com_use(){
  * 1、字符串的查找：find
  *    find(substr,pos):从某个位置开始查找子串substr；返回第一个出现位置的下标；否则返回npos；
  * 2、字符串取子串：substr
- *    substr(pos,len):从某个位置开始取子串，长度为len；返回子串；或nullptr
+ *    substr(pos,len):从某个位置开始取子串，长度为len；返回子串；或nullptr; 
+      长度不足的情况下，起始地址过长，直接substr，会抛出out of range异常; 最大长度为：size() 截取出来是空字符串
  
  *  boost 库中有字符串分割的功能函数
  *  boost::split(vector<string> splitResult, string strToSplit, string delimiter)

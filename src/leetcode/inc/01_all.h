@@ -6,6 +6,9 @@
 #include <set>
 
 
+void TestRotatedArray();
+
+
 void TestExam0();
 void TestExam1();
 void TestExam2();

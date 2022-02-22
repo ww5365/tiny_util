@@ -9,24 +9,34 @@
 #include <vector>
 
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 
+#include "chapater_nine.h"
 
 using namespace std;
 
-/*
+/* 分割回文串 · Palindrome Partitioning
  * 1、给定字符串s，切成子串，使得每个子串都是回文的子串;返回所有可能的分割方案。
  * problem:
  * https://www.jiuzhang.com/solutions/palindrome-partitioning/
  * https://www.lintcode.com/problem/palindrome-partitioning/description
+   
+   lintcode : 136 
  *
  * Decribe:
  * Given a string s. Partition s such that every substring in the partition is a palindrome.
  * Return all possible palindrome partitioning of s.
  *
- * 
- * 一个问题包含了两种算法考察：？
- * a. 如何得到字符串的所有的子串：  组合问题
- * b. 如何判断一个字符串是回文：    动态规划
+ * 输入: "aab"
+   输出: [["aa", "b"], ["a", "a", "b"]]
+   解释: 有两种分割的方式.
+    1. 将 "aab" 分割成 "aa" 和 "b", 它们都是回文的.
+    2. 将 "aab" 分割成 "a", "a" 和 "b", 它们全都是回文的.
+
+ * 两种算法思路？
+ * a. 如何得到字符串的所有的子串：  组合问题 dfs  + 判断子串是否为回文串
+ * b. 备忘录方法来判断字符串的子串是否为回文串？：    动态规划
  *
  */
 
@@ -36,9 +46,9 @@ public:
     void all_substring(string &s){
         vector<string> path;
         vector<vector<string> > res;
-        palindromeTable(s);
-        dfs(s, 0, path, res);
-
+        // palindromeTable(s);
+        // dfs(s, 0, path, res);
+        dfs2(s, path, res);
         print_res(res);
     }
     Solution(): arr(nullptr), arr_len(0){}
@@ -65,13 +75,13 @@ public:
         cout << "all substring : " << res.size() << endl;
         for (auto elems: res){
             for (auto elem: elems){
-                cout << elem << "|";
+                cout << elem << ",";
             }
             cout << endl;
         }
     }
 
-    //version1: 深度优先算法，切分字符串s，得到所有切割方案;参考版本
+    //version1: 深度优先算法，切分字符串s，得到所有子串的方案;参考版本
     //切割的方案：2^n 组合问题
 
     void dfs(const string &s, vector<string> &path, vector<vector<string> > &res){
@@ -111,7 +121,7 @@ public:
 
 
     /*
-     * 判断一个字符串是否为回文串
+     * 判断一个字符串是否是回文子串/存在回文子串/多少回文子串/
      *  dp 算法
      *
      *  f(i,j): 0 <= i <= j < len  代表从索引位置i到j的子串
@@ -158,6 +168,87 @@ public:
         }
         return false;
     }
+
+    vector<string> PalindromeMemo(const string &s) {
+        /* 
+        * dp 的 备忘录法，找字符串中的所有的回文子串
+        * 0<= i <= j < length 上三角
+        * f(i,j) =  true  j - i = 0
+          f(i,j) = s[i] == s[j]  j -i = 1
+          f(i,j) = f(i+1, j-1) + s[] == s[j] j - i >= 2
+
+          自下而上的记忆搜索
+        */
+        vector<string> result;
+        if (s.size() <= 1) {
+            result.push_back(s);
+            return result;
+        }
+
+        int n = s.size();
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
+        for (int i = n - 1; i >= 0; --i) {
+            for (int j = i; j < n; ++j) {
+                if ((j - i) < 2) {
+                    dp[i][j] = (s[i] == s[j]);
+                } else {
+                    dp[i][j] = dp[i + 1][j - 1] & (s[i] == s[j]);
+                }
+
+                if (dp[i][j]) {
+                    result.push_back(s.substr(i, j - i + 1)); // 是回文子串
+                }
+                std::cout << " i: " << i << " j: " << j << " size: " << result.size()<< std::endl;
+            }
+        }
+        
+        std::cout << " finish in parlindrome fun" << std::endl;
+
+        return result;
+    }
+
+    /*
+    * 使用深搜 + 剪枝 
+
+    * 找出子串中： 所有的回文子串
+
+    */
+    void dfs2(const string &s, vector<string> &path, vector<vector<string> > &res){
+
+        if (s.size() == 0) {
+            res.push_back(path);
+            return;
+        }
+
+        for (int len = 1; len <= s.size(); ++len) {
+            string tmp = s.substr(0, len);
+
+            if (IsPalindrome(tmp)) {
+                path.push_back(tmp);
+                dfs2(s.substr(len), path, res);
+                path.pop_back();
+            }
+        }
+    }
+    
+    bool IsPalindrome(const string &s) {
+
+        if (s.size() <= 1) 
+            return true;
+
+        int i = 0; 
+        int j = s.size() - 1;
+
+        while (i < j) {
+            if (s[i] != s[j]) {
+                return false;
+            }
+            i ++;
+            j --;
+        }
+        return true;
+    }
+
 };
 
 
@@ -180,6 +271,8 @@ public:
 
 
 void test_base_5_dfs(){
+    
+    std::cout << "-------test_base_5_dfs------" << std::endl; 
     Solution test;
     string s = "abc";
     //test.all_substring(s);
@@ -187,6 +280,18 @@ void test_base_5_dfs(){
     vector<vector<std::string> > res;
     test.dfs(s, path, res);
     test.print_res(res);
+
+    string s2 = "aba";
+
+    vector<string>res2 = test.PalindromeMemo(s2);
+    std::cout << "test_base_5_dfs dp result:" << std::endl;
+    std::copy(res2.begin(), res2.end(),std::ostream_iterator<string>(std::cout, ","));
+    std::cout << std::endl;
+    
+    std::cout << "test_base_5_dfs dfs result:" << std::endl;
+    test.all_substring(s2);
+
+    std::cout << std::endl;
 
 }
 

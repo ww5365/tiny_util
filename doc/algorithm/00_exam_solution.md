@@ -334,21 +334,15 @@ public class Solution {
 }
 ```
 可能不太好理解，手笨，不会画动图，可以debug一把看看codes和allResults列表的内容，帮助理解。以“118computer1a”为例，程序回溯得到的解为
-
-Connected to the target VM, address: '127.0.0.1:49218', transport: 'socket'
 回溯共得到解 2 个
 回溯共得到解 [[1, 8, 1], [11]]
 最终结果为：-1
-Disconnected from the target VM, address: '127.0.0.1:49218', transport: 'socket'
 
 #### 2.4 思考及优化：
 这种方法应该不是最优解，因为虽然回溯到了所有解。以“118computer1a118computer1a”为例，得到的解为
-
-Connected to the target VM, address: '127.0.0.1:49178', transport: 'socket'
 回溯共得到解 4 个
 回溯共得到解 [[1, 8, 1, 1, 8, 1], [1, 8, 1, 11], [11, 1, 8, 1], [11, 11]]
 最终结果为：-1
-Disconnected from the target VM, address: '127.0.0.1:49178', transport: 'socket'
 但是实际题目并不需要所有解，当判断到解列表中有多个解就可以结束回溯了，修改如下。
 
 ``` java
@@ -421,12 +415,10 @@ public class Solution {
 ```
 
 以“118computer1a118computer1a”为例，运行之后得到的解及最终输出结果为
-
-Connected to the target VM, address: '127.0.0.1:65459', transport: 'socket'
 回溯共得到解 2 个
 回溯共得到解 [[1, 8, 1, 1, 8, 1], [1, 8, 1, 11]]
 最终结果为：-1
-Disconnected from the target VM, address: '127.0.0.1:65459', transport: 'socket'
+
 
 
 ## 商品折购
