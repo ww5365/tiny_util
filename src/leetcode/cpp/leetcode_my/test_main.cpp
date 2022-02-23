@@ -68,7 +68,7 @@ int main(int argc,char *argv[]){
 
 //    sort_algorithm_test();
 
-    combination_test();
+    // combination_test();
 
 //      combination_sum_test();
 

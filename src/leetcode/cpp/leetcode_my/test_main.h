@@ -43,7 +43,7 @@ void binary_tree_build_test();
 
 //void sort_algorithm_test();
 
-void combination_test();
+// void combination_test();
 
 //void combination_sum_test();
 

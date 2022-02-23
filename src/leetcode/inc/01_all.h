@@ -6,8 +6,9 @@
 #include <set>
 
 
-void TestRotatedArray();
+void TestEncodingAmbiguity();
 
+void TestRotatedArray();
 
 void TestExam0();
 void TestExam1();
@@ -46,6 +47,8 @@ void testLargestRectangleArea();
 
 // 之前leetcode_my下面的老的test，不放在test_main中调用了
 void sort_algorithm_test();
+
+void combination_test();
 
 // 所有testcase都放在tinyutil中调用
 void leetcode_all_test();

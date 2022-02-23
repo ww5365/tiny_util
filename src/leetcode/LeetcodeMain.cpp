@@ -3,10 +3,14 @@
 #include <iostream>
 
 void leetcode_all_test(){
-    
-    test_base_5_dfs();
 
-    TestRotatedArray();
+    combination_test();
+
+    // TestEncodingAmbiguity();
+    
+    // test_base_5_dfs();
+
+    // TestRotatedArray();
 
     // TestSerachMatrixII();
     
@@ -17,6 +21,7 @@ void leetcode_all_test(){
 
     // test exam 0
     // TestExam0();
+
     // TestExam1119One();
 
     // TestExamBinarySearch();

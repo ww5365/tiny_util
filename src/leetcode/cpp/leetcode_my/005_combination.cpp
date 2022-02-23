@@ -18,14 +18,16 @@ using namespace std;
  * 求集合C的所有子集
  *
  * 场景1： 集合C中元素都不重复
- * 场景2： 集合C中元素有重复
- *        两种处理方法：
- *        1、直接排序后去重，再进行求子集
- *        2、排序后，不去重，进行求子集；在求子集的过程中
+        {1,2,3}=》{} {1} {2} {3} {12} {13} {23} {123}
+
+ * 场景2： 集合C中元素有重复,  求所有重复的子集
+        先排序
+        水平方向的搜索空间，控制重复的数字，不再进入下一次结果
+        {1,2,2} => {} {1} {1,2} {1, 2, 2} {2} {2, 2}  
  *
  */
 
-class Solution{
+class Solution {
 
 public:
 
@@ -33,14 +35,30 @@ public:
 
         vector<int> path;
         vector<vector<int>> res;
-
         //dfs1(vec, path, 0, res);
+        // dfs2(vec, path, 0, res);
 
-        dfs2(vec, path, 0, res);
+        sort(vec.begin(), vec.end(), less<int>());
+        dfs3(vec, 0, path, res);
 
         return res;
     }
 
+
+    // 对应场景2： 有重复的数据的情况: 
+    void dfs3(const vector<int> &vec, int start, vector<int> &path, vector<vector<int>> &result) {
+
+        // 无需条件控制，每个深度的中间结果，直接进入结果
+        result.push_back(path);
+        for (int i = start; i < vec.size(); ++i) {
+            if (i != start && vec[i] == vec[i - 1]) {
+                continue; // 水平防线，去掉重复的
+            }
+            path.push_back(vec[i]);
+            dfs3(vec, i + 1, path, result);
+            path.pop_back();
+        }
+    }
 
     /*
      * 位向量法：非递归的方式
@@ -205,8 +223,20 @@ void combination_test(){
         cout << endl;
     }
 
-    cout << "combination2 res: " << res.size() << endl;
+    cout << "combination3 res:------ " << endl;
 
+    res.clear();
+    vector<int> test3 = {1, 2, 2};
+    res = s.combination(test3);
+
+    for (auto one_subset : res){
+        for (auto e : one_subset) {
+            cout << e << " ";
+        }
+        cout << endl;
+    }
+
+    cout << "combination3 res:------- " << endl;
 }
 
 

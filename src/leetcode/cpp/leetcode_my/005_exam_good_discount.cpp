@@ -7,6 +7,22 @@
 
 using namespace std;
 
+/*
+
+price[6] = {10,5,8,8,6,3}; // 商品 0 单价10， 商品1 单价5
+pro[][] = {
+         {0， 7}，
+         {4， 10}，
+         {2, 6，1,  9}，
+         {5，2}
+};
+dis[] = {4, 3, 5, 1};
+上面共有4个折扣规则，1.  0号商品买7个，可以减4元，2. 4号商品买10个可以减3元。 3.  2号商品买6个 && 1号商品买9个可以减5元
+order[] = {2,17,3,10,1,27,5,2,4,9}； // 顾客需要买的商品列表
+问题： 按最大折扣后，用户最终需要支付多少？
+
+*/
+
 class Solution {
 public:
     bool canDis(vector<int> &pro, unordered_map<int, int> &orders)
@@ -71,10 +87,12 @@ void TestExam1119One()
     vector<int> price = { 10, 5, 8, 8, 6, 3 };
     vector<vector<int>> pro = { { 0, 7 }, { 4, 10 }, { 2, 6, 1, 9 }, { 5, 2 } };
     vector<int> dis = { 4, 3, 5, 1 };
-    vector<int> order = { 2, 17, 3, 10, 1, 27, 5, 2, 4, 9 };
+    // vector<int> order = { 2, 17, 3, 10, 1, 27, 5, 2, 4, 9 };
+    vector<int> order = { 0, 14};
+    cout << "------------TestExam1119One------------" << endl;
 
     Solution solution;
     int res = solution.solve(price, pro, dis, order);
-    cout << res << endl;
-    assert(res == 405);
+    cout << "TestExam1119One result: " << res << endl;
+    // assert(res == 405);
 }
