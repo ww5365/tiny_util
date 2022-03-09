@@ -79,7 +79,7 @@
 
 ```
 
-```
+```json
 
       {
         "_index": "indexName",
@@ -125,3 +125,61 @@
       }
 
 ```
+
+
+
+
+
+## mapping中的参数 - fields
+
+
+
+fields 它可以使同一个字段通过不同的方式实现不同的目的
+
+```json
+PUT my-index-000001
+{
+  "mappings": {
+    "properties": {
+      "city": {
+        "type": "text",  // 全文搜索 分词
+        "fields": {
+          "raw": {
+            "type":  "keyword", // 同时可以利用fields设置为keyword类型，用于排序和聚合。
+            "normalizer": "my_lowercase"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
+
+查询时我们就可以使用`city`进行全文检索，使用`city.raw`进行排序和聚合。
+
+```json
+
+GET my-index-000001/_search
+{
+  "query": {
+    "match": {
+      "city": "york" 
+    }
+  },
+  "sort": {
+    "city.raw": "asc" 
+  },
+  "aggs": {
+    "Cities": {
+      "terms": {
+        "field": "city.raw" 
+      }
+    }
+  }
+}
+```
+
+
+

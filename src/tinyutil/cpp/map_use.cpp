@@ -74,13 +74,27 @@ private:
     map<int, vector<int>> graph;  // 遍历时按照key时有序的;类中成员变量需要初始化吗？ 默认会调用初始化构造函数进行
 };
 
+// 用于排序的仿函数
+template <typename T>
+class CmpFun {
+public:
+    bool operator()(const T &left, const T &right) {
+        return left > right;
+    }
+};
+
 /*
 *  通用的 map 使用方法
 */
 void com_map_use() {
 
     std::cout << "---- com_map_use -----" << std::endl;
-    //pair make_pair map
+
+    // map 定义 初始化
+    map<string, string> mTest{{"bba", "val1"}};
+
+
+    // pair make_pair map  往map中插入元素
     pair<int, string> pa(1, "wang"); //直接初始化
     pair<int, string> pb;
     pb = make_pair(2, "wei");
@@ -101,14 +115,24 @@ void com_map_use() {
     // map是按照key排序, 输出有序使用map，不能用unordered_map
     
     std::cout << "---- com_map_use : map sort output -----" << std::endl;
-
-    map<string, string> mTest{{"bba", "val1"}};
     mTest.insert(make_pair("baa", "val2"));
     for_each(mTest.cbegin(), mTest.cend(), [](const pair<string, string>& elem){ std:: cout << elem.first << " : " << elem.second << std::endl;}); // 按照string的字典序输出 : baa, bba
     std::cout << std::endl;
 
+    /*
+     map: 按照key进行排序  eg：按照key降序排序输出
+    */
 
-    //unoreder_map
+    map<string, int, CmpFun<string>> mTest2;
+    mTest2.insert(make_pair("niu", 1));
+    mTest2.insert(make_pair("wang", 2));
+    mTest2.insert(make_pair("ni", 3));
+    mTest2.insert(make_pair("hao", 4));
+
+    std::cout << "---- com_map_use : map sort by dict desc output -----" << std::endl;
+    for_each(mTest2.cbegin(), mTest2.cend(), [](const pair<string, int>& elem){ std:: cout << elem.first << " : " << elem.second << std::endl;}); // 按照string的字典逆序输出
+
+    //unoreder_map 无序
 
     std::unordered_map<uint32_t, int> brand_cnt;
 

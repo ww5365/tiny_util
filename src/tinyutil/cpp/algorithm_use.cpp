@@ -90,6 +90,13 @@ void sort_algorithm_use(){
     std::cout <<"--- test use CmpClass sort --- " << std::endl;
     std::copy(test2.cbegin(), test2.cend(), std::ostream_iterator<int>(std::cout, " ")); // 输出每个元素
     std::cout << endl;
+    
+    // 部分排序 partial_sort 
+    vector<int> vec3 {3, 6, 2, 1, 10};
+    std::partial_sort(vec3.begin(), vec3.begin() + 3,  vec3.end(), std::greater<int>()); // [begin, end)之间的元素部分排序，只排前：3 个 较大的元素
+    std::cout <<"--- test use partial_sort --- " << std::endl;
+    std::copy(vec3.cbegin(), vec3.cend(), std::ostream_iterator<int>(std::cout, " ")); // 输出每个元素
+    std::cout << endl;
 
 }
 

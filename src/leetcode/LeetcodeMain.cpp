@@ -4,6 +4,8 @@
 
 void leetcode_all_test(){
 
+    test_basic_3_binary_tree_divide_conquer();
+
     combination_test();
 
     // TestEncodingAmbiguity();
