@@ -93,7 +93,7 @@ void test_3(){
 
     //string和int转换,stringstream
 
-    //int to str
+    //int to str : stringstream 方式  另外：to_string(val) -> string
     int aa = 30;
     stringstream ss1;  //串流输入和输出
     ss1<<aa;
@@ -103,7 +103,7 @@ void test_3(){
     cout<<"int2str_str1: " <<int2str_str1<<endl; // 30
     cout<<"int2str_str1: " <<int2str_str1<<endl; // 30
 
-    //str to int
+    //str to int  另外方式: std::stoi(string, &pos, 进制) std::stoi/stol/stoll等等函数
     string str2int_str ="122";
     ss1.flush();
     ss1.clear();

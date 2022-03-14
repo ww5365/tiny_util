@@ -54,49 +54,42 @@ void wchar_using() {
 
     std::cout << std::endl;
     std::wcout << "wchar_t bytes : " << sizeof(wchar_t) << std::endl; // wchar_t占用的字节数
-
     std::cout << std::endl;
-    const string str = "正常字符";
-    std::cout << "string size:" << str.size() << std::endl;  // 实际占用的字节数，utf8
 
+    const string str = "正常字符";
+    std::cout << "string size:" << str.size() << std::endl;  // 实际占用的字节数，utf8 : 12 bytes
 
     // wstring 保存英文是什么情况？
-
     wstring wstr2 = L"ni hao";
-
     for (size_t i = 0; i < wstr2.size(); ++i) {
         std::wcout << "wstr2: " << wstr2[i] << std::endl;
     }
 
-    /*
-     * 部分匹配是否能用find()匹配到，并返回部分匹配的第一个下标？
-     *
-     */
-
+    // 部分匹配是否能用find()匹配到，并返回部分匹配的第一个下标？
     wstring poi_name = L"王伟你好伟大";
     wstring query = L"王伟";
 
     size_t pos = poi_name.find(query);
 
     if (pos != string::npos) {
-        cout << "find the match pos: " << pos << endl;
+        std::cout << "find the match pos: " << pos << std::endl;
     } else {
-        cout << "not find the match  " << endl;
+        std::cout << "not find the match  " << std::endl;
     }
 
+    // wchar_t作为key构成map
     std::map<wchar_t, int> w_map;
     for (wchar_t word : poi_name) {
         auto it = w_map.find(word);
         if (it == w_map.end()) {
             w_map.insert(make_pair(word, 1));
-            cout << "w_word: " << word << endl;
+            std::cout << "w_word: " << word << std::endl;
         } else {
             it->second++;
-            cout << "w_word2: " << word << " val: " << it->second << endl;
+            std::cout << "w_word2: " << word << " val: " << it->second << std::endl;
         }
     }
-
-    cout << "w_map size: " << w_map.size() << endl;
+    std::cout << "w_map size: " << w_map.size() << std::endl;
 
     // hashcode 转64bit的base64编码
     int64_t res = 0;
