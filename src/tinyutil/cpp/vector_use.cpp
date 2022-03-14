@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <iterator>
 #include "com_use.h"
 using namespace std;
 
@@ -30,7 +31,7 @@ double get_norma(vector<double> &vec){
 
 void vector_use_test(){
 
-    //通过swap交换数据，保持
+    // 通过swap交换数据，保持
 
     vector<int *> data;
     vector<int *> tmp;
@@ -47,7 +48,7 @@ void vector_use_test(){
     data.clear();
     cout << "vector size: " << tmp.size() << " :  " << data.size() << endl;
 
-    //在循环访问过程中实现对某些元素的删除？
+    //删除：在循环访问过程中实现对某些元素的删除？
 
     vector<int> test = {1,2, 3, 4, 5};
     auto it = test.begin();
@@ -59,14 +60,11 @@ void vector_use_test(){
         }
     }
 
-    cout << "test vector size: " << test.size() << endl;
-    cout << "test vector elem: " ;
-    for (auto e : test){
-        cout << "  " << e;
-    }
+    cout << "test vector size: " << test.size()  << " content elems : " << endl;
+    std::copy(test.begin(), test.end(), std::ostream_iterator<int>(std::cout, " "));
     cout << endl;
 
-    //插入特定位置元素
+    //插入： 插入特定位置元素
 
     auto itor = test.begin();
 
@@ -96,10 +94,6 @@ void vector_use_test(){
     vector<double> test3 = {0.3, 0.4};
     double l2 = get_norma(test3);
     cout << "L2 norma: " << l2 << endl;
-
-    //插入特定位置的元素
-
-
 
 
 }

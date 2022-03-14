@@ -179,7 +179,7 @@ int main(int argc, char* argv[]) {
 
     //字符串相关的测试使用
 
-    // string_use_test2();
+    string_use_test2();
 
     //double feature[4];
     //fill_n(feature, 4, 19);//快速赋初始值
