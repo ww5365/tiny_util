@@ -355,7 +355,7 @@ void test_9(){
      *  顺序适配器：
      *                        默认容器         常用操作                                       能支持的容器
      *  stack                 deque          push_back pop_back back                     除了array,forward_list 都可以
-     *  queue                 deque          back push_back front pop_front              list deque
+     *  queue                 deque          push pop front  back              list deque
      *  priority_queue        vector         front push_back pop_front 随机访问             vector deque 不能list
      *
      *
@@ -381,6 +381,8 @@ void test_9(){
         std::cout << "priority queue: " << value << std::endl;
         pri_qu.pop();
     }
+
+
 
 
     /*
@@ -414,13 +416,9 @@ void test_9(){
     pri_que_rank.emplace(2, "test2");
 
     while (!pri_que_rank.empty()){
-
-        Rank tmp = pri_que_rank.top();
-
+        Rank tmp = pri_que_rank.top(); // 取队头元素
         std::cout << "priority test: " << tmp.get_name() << std::endl;
-
         pri_que_rank.pop();
-
     }
 
     //BFS算法中，要借助queue来实现
@@ -432,7 +430,7 @@ void test_9(){
     int ele = qu.front(); //取队头元素
     qu.pop(); //出队
 
+    int back_elem = qu.back(); // 取队尾元素
+
     std::cout<< "elem queue: " << ele << std::endl;
-
-
 }

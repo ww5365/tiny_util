@@ -1,19 +1,85 @@
 # 滑动窗口
 
-## 1 滑动窗口介绍
+## 滑动窗口介绍
 出处：（https://zhuanlan.zhihu.com/p/61564531）
 滑动窗口法，也叫尺取法（可能也不一定相等，大概就是这样），可以用来解决一些查找满足一定条件的连续区间的性质（长度等）的问题。
 由于区间连续，因此当区间发生变化时，可以通过旧有的计算结果对搜索空间进行剪枝，这样便减少了重复计算，降低了时间复杂度。
 往往类似于“请找到满足xx的最x的区间（子串、子数组）的xx”这类问题都可以使用该方法进行解决。
 
+## 代码模板
+
+``` java
+
+/* 滑动窗口算法框架 */
+void slidingWindow(string s, string t) {
+    unordered_map<char, int> need, window;
+    for (char c : t) need[c]++;
+    
+    int left = 0, right = 0;
+    int valid = 0; 
+    while (right < s.size()) {
+        // c 是将移入窗口的字符
+        char c = s[right];
+        // 右移窗口
+        right++;
+        // 进行窗口内数据的一系列更新
+        ...
+
+        /*** debug 输出的位置 ***/
+        printf("window: [%d, %d)\n", left, right);
+        /********************/
+        
+        // 判断左侧窗口是否要收缩
+        while (window needs shrink) {
+            // d 是将移出窗口的字符
+            char d = s[left];
+            // 左移窗口
+            left++;
+            // 进行窗口内数据的一系列更新
+            ...
+        }
+    }
+}
+
+```
+
 ## 典型题
 
-### 1 长度最小的子数组(#209)
+### 1 长度最小的子数组(#[209](https://leetcode-cn.com/problems/minimum-size-subarray-sum/))
 
 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的连续子数组。如果不存在符合条件的连续子数组，返回 0。示例: 
 输入: s = 7, nums = [2,3,1,2,4,3]
 输出: 2
 解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。
+
+``` c++
+// 暴力算法 o(n^3)  leetcode 超时
+    int minSubArrayLen(int target, vector<int>& nums) {
+       int len = nums.size();
+       int result = std::numeric_limits<int>::max();
+        for (int i = 0; i < len; ++i) {
+            for (int j = i; j < len; ++j) {
+                int sum = std::accumulate(nums.begin() + i, nums.begin() + j + 1, 0);
+                cout << "sum: " << sum << endl;
+                if (sum >= target) {
+                    result = std::min(result, j - i + 1);
+                    break;
+                }
+            }
+        }
+        if (result == std::numeric_limits<int>::max()) {
+            result = 0;
+        }
+        return result;
+    }
+```
+
+优化思路：
+
+
+
+
+
 
 
 ### 2 无重复字符的最长子串(#3)
@@ -63,6 +129,9 @@
 ### 4 长度为 K 的无重复字符子串（#1100会员）
 
 
+## 真题练习
+
+### 
 
 
 
@@ -70,5 +139,5 @@
 
 
 
-     
+​     
 
