@@ -6,6 +6,9 @@
 #include <set>
 
 
+void TestMinLenSubArray();
+void TestMaxUniqueSubString();
+
 void TestEncodingAmbiguity();
 
 void TestRotatedArray();

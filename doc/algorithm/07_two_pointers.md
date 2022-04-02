@@ -4,7 +4,7 @@
 ## 滑动窗口介绍
 出处：（https://zhuanlan.zhihu.com/p/61564531）
 滑动窗口法，也叫尺取法（可能也不一定相等，大概就是这样），可以用来解决一些查找满足一定条件的连续区间的性质（长度等）的问题。
-由于区间连续，因此当区间发生变化时，可以通过旧有的计算结果对搜索空间进行剪枝，这样便减少了重复计算，降低了时间复杂度。
+由于区间连续，因此当区间发生变化时，可以通过旧有的计算结果对**搜索空间进行剪枝**，这样便减少了重复计算，降低了时间复杂度。
 往往类似于“请找到满足xx的最x的区间（子串、子数组）的xx”这类问题都可以使用该方法进行解决。
 
 ## 代码模板
@@ -77,7 +77,28 @@ void slidingWindow(string s, string t) {
     }
 ```
 
-优化思路：
+优化思路: 滑动窗口
+
+```c++
+    // 两根指针：滑动窗口的思路
+    int minSubArrayLen2(int target, vector<int> &nums)
+    {
+
+        int result = std::numeric_limits<int>::max();
+        int sum = 0;
+
+        for (int right = 0, left = 0; right < nums.size(); ++right) {
+            sum += nums[right];
+
+            while (sum >= target) {
+                result = std::min(result, right - left + 1);
+                sum -= nums[left];
+                ++left;
+            }
+        }
+        return (result == std::numeric_limits<int>::max() ? 0 : result);
+    }
+```
 
 
 
@@ -101,6 +122,38 @@ void slidingWindow(string s, string t) {
 输出: 3
 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+
+实现思路：
+
+
+
+``` c++
+// 滑动窗口的思路
+class Solution {
+public:
+
+    int lengthOfLongestSubstring(string s)
+    {
+        int res = 0;
+        unordered_set<char> charSet;
+        for (int right = 0, left = 0; right < s.size(); ++right) {
+            if (charSet.find(s[right]) != charSet.end()) {
+
+                while (left < right && s[left] != s[right]) {
+                    charSet.erase(s[left++]); // 左侧找到和当前字符相同的字符为止
+                }
+                left ++; // 移动到和当前right位置相同字符的下一个字符为止
+            } else {
+                res = std::max(res, right - left + 1);
+                charSet.insert(s[right]);
+            }
+        }
+        return res;
+    }
+
+};
+```
+
 
 
 ### 3 最大连续1的个数 III（#1004）
