@@ -1,4 +1,5 @@
-# 滑动窗口
+# 两根指针
+
 
 ## 滑动窗口介绍
 出处：（https://zhuanlan.zhihu.com/p/61564531）
@@ -40,6 +41,8 @@ void slidingWindow(string s, string t) {
         }
     }
 }
+
+时间复杂度？
 
 ```
 
