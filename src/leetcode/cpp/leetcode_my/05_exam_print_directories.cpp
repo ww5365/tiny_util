@@ -165,18 +165,7 @@ void TestPrintDirectories() {
                              "mnt/test"
                             };
     Solution s;
-
     cout << "----------------------test print directories---------------" << endl;
-    
-    // vector<string> res = s.Split(str, "/");
-    // cout << "result size: " << res.size() << endl;
-    // copy(res.begin(), res.end(), std::ostream_iterator<string>(std::cout, " "));
-    // cout << endl;
-
     s.PrintTree(paths);
-    
     cout << "----------------------test print directories finished---------------" << endl;
-
-
-
 }

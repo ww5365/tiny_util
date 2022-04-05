@@ -4,12 +4,14 @@
 
 void leetcode_all_test(){
 
-    TestMinLenSubArray();
-    TestMaxUniqueSubString();
+    TestPrintDirectories();
 
-    test_basic_3_binary_tree_divide_conquer();
+    // TestMinLenSubArray();
+    // TestMaxUniqueSubString();
 
-    combination_test();
+    // test_basic_3_binary_tree_divide_conquer();
+
+    // combination_test();
 
     // TestEncodingAmbiguity();
     

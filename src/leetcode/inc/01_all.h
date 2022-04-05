@@ -6,6 +6,8 @@
 #include <set>
 
 
+void TestPrintDirectories();
+
 void TestMinLenSubArray();
 void TestMaxUniqueSubString();
 
