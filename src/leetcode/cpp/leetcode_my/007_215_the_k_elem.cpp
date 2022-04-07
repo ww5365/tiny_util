@@ -6,7 +6,8 @@
 * 输出: 4
 
 * 核心考察点：
-* 快速排序中使用的划分思路，也是双指针的一种思想
+* 快速排序中使用的划分思路，具体实现也是双指针的一种思想: 相向指针
+* 
 */
 #include "01_all.h"
 #include <algorithm>
@@ -16,6 +17,7 @@
 #include <functional>
 #include <string>
 #include <stack>
+#include <queue>
 using namespace std;
 
 class Solution {
@@ -39,9 +41,9 @@ public:
 
 private:
 
+    // 划分的思路：双指针  来解决第K大元素的问题
     int FindKLargeElem(vector<int> &nums, int start, int end, int k) 
     {
-
         if (start >= end) {
             return nums[start];
         }
@@ -82,7 +84,8 @@ private:
         int left = start;
         int right = end;
         int pivot = nums[(start + end)/2];
-        swap(nums, start, (start + end)/2);
+        // swap(nums, start, (start + end)/2);
+        std::swap(nums[start], nums[(start + end) / 2]);
         
         //左右互相覆盖的原理
         while (left < right) {
@@ -111,6 +114,25 @@ private:
             nums[i] = tmp;
         }
     }
+
+public:
+    // 使用heap：优先级队列 方式解决第k大元素问题： 队列大小为k； 小顶堆，每次出队最小元素；
+    // 最终结果保留k个最大元素在队列中，依次出队，第一个出队的为第K大元素，最后一个出队的为最大元素
+    int findKthLargest2(vector<int> &nums, int k)
+    {   
+        if (nums.size() < k){
+            return -1;
+        }
+        priority_queue<int, deque<int>, greater<int>> qu; // 小顶堆
+        for (int i = 0; i < nums.size(); ++i) {
+            qu.push(nums[i]);
+            if (qu.size() > k) {
+                qu.pop();
+            }
+        }
+        return qu.top();
+    }
+
 };
 
 void TestKLargeElem()
@@ -129,6 +151,14 @@ void TestKLargeElem()
     int k = 1;
     int k_large_elem = s.findKthLargest(nums, k);
 
-    std::cout << "the K = " << k << " large elem: "<< k_large_elem << std::endl;
+    std::cout << "the K = " << k << " partition(double pointer) large elem: "<< k_large_elem << std::endl;
+    
+    k = 2;
+
+    int res = s.findKthLargest2(nums, k); // 9
+
+    std::cout << "the K = " << k << " heap(priority_queue) large elem: "<< res << std::endl;
+
+
 
 }

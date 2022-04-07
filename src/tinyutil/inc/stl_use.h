@@ -40,7 +40,7 @@ public:
         if (score == s.get_score()) {
             return name < s.get_name();
         }
-        return score > s.get_score(); //score的小顶堆
+        return score > s.get_score(); //score的小顶堆, 成绩从小到大出队
     }
 
 

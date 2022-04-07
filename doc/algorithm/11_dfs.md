@@ -8,6 +8,63 @@
 
 
 
+## 算法模板
+
+
+
+``` C++
+
+// 数据结构为矩阵时，进行DFS的模板 
+
+vector<int> direction = {-1,0,1,0,-1};
+void dfs(const vector<vector>& matrix,vector<vector>& can_reach,int row,int col)
+{
+        //如果为true
+        if(can_reach[row][col])
+        {
+                return;
+        }
+        can_reach[row][col]=true;
+        int x,y;
+        //遍历上下左右节点
+        for(int i=0;i<4;++i)
+        {
+            x=row+direction[i],y=col+direction[i+1];
+            if(x>=0 && y<matrix.size() && matrix[r][c] <=matrix[x][y])
+            {
+                dfs(matrix,can_reach,x,y);
+            }
+        }
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

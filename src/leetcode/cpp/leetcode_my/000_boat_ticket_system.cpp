@@ -31,155 +31,155 @@ num 个空的座位给该乘客。
 
 */
 
-class TicketSystem {
-public:
-    explicit TicketSystem(const vector<int> &cabins)
+// class TicketSystem {
+// public:
+//     explicit TicketSystem(const vector<int> &cabins)
 
-    {
-        int n = cabins.size();
+//     {
+//         int n = cabins.size();
 
-        Cabins.resize(n);
+//         Cabins.resize(n);
 
-        Waiting.resize(n);
+//         Waiting.resize(n);
 
-        for (int i = 0; i < n; ++i) {
-            Cabins[i] = {cabins[i], cabins[i], bitset<1000>(0)};
-        }
-    }
-
-
-    bool Book(int id, int cabinId, int num)
-
-    {
-        if (Waiting[cabinId].size() != 0 || get<1>(Cabins[cabinId]) < num) {
-            Waiting[cabinId].emplace_back(id, num);
-
-            return false;
-        }
-
-        Request(id, cabinId, num);
-
-        return true;
-    }
+//         for (int i = 0; i < n; ++i) {
+//             Cabins[i] = {cabins[i], cabins[i], bitset<1000>(0)};
+//         }
+//     }
 
 
-    bool Cancel(int id)
+//     bool Book(int id, int cabinId, int num)
 
-    {
-        if (auto it = Booked.find(id); it != Booked.end()) {
-            const auto &[cabinId, num, book] = it->second;
+//     {
+//         if (Waiting[cabinId].size() != 0 || get<1>(Cabins[cabinId]) < num) {
+//             Waiting[cabinId].emplace_back(id, num);
 
-            get<1>(Cabins[cabinId]) += num;
+//             return false;
+//         }
 
-            get<2>(Cabins[cabinId]) ^= book;
+//         Request(id, cabinId, num);
 
-            Waitline(cabinId);
-
-            Booked.erase(it);
-
-            return true;
-        }
-
-        for (int cid = 0; cid < Waiting.size(); ++cid) {
-            for (auto it = Waiting[cid].begin(); it != Waiting[cid].end(); ++it) {
-                if (it->first == id) {
-                    Waiting[cid].erase(it);
-
-                    Waitline(cid);
-
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
+//         return true;
+//     }
 
 
-    int Query(int id)
+//     bool Cancel(int id)
 
-    {
-        if (auto it = Booked.find(id); it != Booked.end()) {
-            int i = 0;
+//     {
+//         if (auto it = Booked.find(id); it != Booked.end()) {
+//             const auto &[cabinId, num, book] = it->second;
 
-            while (i < 1000 && !get<2>(it->second)[i]) {
-                ++i;
-            }
+//             get<1>(Cabins[cabinId]) += num;
 
-            return i;
-        }
+//             get<2>(Cabins[cabinId]) ^= book;
 
-        return -1;
-    }
+//             Waitline(cabinId);
 
+//             Booked.erase(it);
 
-private:
-    void Request(int id, int cabinId, int num)
+//             return true;
+//         }
 
-    {
-        if (num > get<1>(Cabins[cabinId])) {
-            return;
-        }
+//         for (int cid = 0; cid < Waiting.size(); ++cid) {
+//             for (auto it = Waiting[cid].begin(); it != Waiting[cid].end(); ++it) {
+//                 if (it->first == id) {
+//                     Waiting[cid].erase(it);
 
-        get<1>(Cabins[cabinId]) -= num;
+//                     Waitline(cid);
 
-        bitset<1000> book(0);
+//                     return true;
+//                 }
+//             }
+//         }
 
-        for (int l = -1, r = 0; r < get<0>(Cabins[cabinId]);) {
-            while (++l < get<0>(Cabins[cabinId]) && get<2>(Cabins[cabinId])[l]) {
-            }
-
-            r = l;
-
-            while (++r < get<0>(Cabins[cabinId]) && !get<2>(Cabins[cabinId])[r]) {
-            }
-
-            if (r - l >= num) {
-                for (int i = l; i < l + num; ++i) {
-                    get<2>(Cabins[cabinId])[i] = true;
-
-                    book[i] = true;
-                }
-
-                Booked[id] = {cabinId, num, std::move(book)};
-
-                return;
-            }
-
-            l = r;
-        }
+//         return false;
+//     }
 
 
-        for (int i = 0, t = num; i < get<0>(Cabins[cabinId]) && t > 0; ++i) {
-            if (!get<2>(Cabins[cabinId])[i]) {
-                --t;
+//     int Query(int id)
 
-                get<2>(Cabins[cabinId])[i] = true;
+//     {
+//         if (auto it = Booked.find(id); it != Booked.end()) {
+//             int i = 0;
 
-                book[i] = true;
-            }
-        }
+//             while (i < 1000 && !get<2>(it->second)[i]) {
+//                 ++i;
+//             }
 
-        Booked[id] = {cabinId, num, std::move(book)};
-    }
+//             return i;
+//         }
 
-
-    void Waitline(int cabinId)
-
-    {
-        auto it = Waiting[cabinId].begin();
-
-        while (it != Waiting[cabinId].end() && it->second <= get<1>(Cabins[cabinId])) {
-            Request(it->first, cabinId, it->second);
-
-            it = Waiting[cabinId].erase(it);
-        }
-    }
+//         return -1;
+//     }
 
 
-    vector<tuple<int, int, bitset<1000>>> Cabins;
+// private:
+//     void Request(int id, int cabinId, int num)
 
-    vector<list<pair<int, int>>> Waiting;
+//     {
+//         if (num > get<1>(Cabins[cabinId])) {
+//             return;
+//         }
 
-    unordered_map<int, tuple<int, int, bitset<1000>>> Booked;
-};
+//         get<1>(Cabins[cabinId]) -= num;
+
+//         bitset<1000> book(0);
+
+//         for (int l = -1, r = 0; r < get<0>(Cabins[cabinId]);) {
+//             while (++l < get<0>(Cabins[cabinId]) && get<2>(Cabins[cabinId])[l]) {
+//             }
+
+//             r = l;
+
+//             while (++r < get<0>(Cabins[cabinId]) && !get<2>(Cabins[cabinId])[r]) {
+//             }
+
+//             if (r - l >= num) {
+//                 for (int i = l; i < l + num; ++i) {
+//                     get<2>(Cabins[cabinId])[i] = true;
+
+//                     book[i] = true;
+//                 }
+
+//                 Booked[id] = {cabinId, num, std::move(book)};
+
+//                 return;
+//             }
+
+//             l = r;
+//         }
+
+
+//         for (int i = 0, t = num; i < get<0>(Cabins[cabinId]) && t > 0; ++i) {
+//             if (!get<2>(Cabins[cabinId])[i]) {
+//                 --t;
+
+//                 get<2>(Cabins[cabinId])[i] = true;
+
+//                 book[i] = true;
+//             }
+//         }
+
+//         Booked[id] = {cabinId, num, std::move(book)};
+//     }
+
+
+//     void Waitline(int cabinId)
+
+//     {
+//         auto it = Waiting[cabinId].begin();
+
+//         while (it != Waiting[cabinId].end() && it->second <= get<1>(Cabins[cabinId])) {
+//             Request(it->first, cabinId, it->second);
+
+//             it = Waiting[cabinId].erase(it);
+//         }
+//     }
+
+
+//     vector<tuple<int, int, bitset<1000>>> Cabins;
+
+//     vector<list<pair<int, int>>> Waiting;
+
+//     unordered_map<int, tuple<int, int, bitset<1000>>> Booked;
+// };

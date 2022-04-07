@@ -570,8 +570,8 @@ void stl_use::deque_use(){
               1、 比较类重载()运算，实现仿函数功能；
               2、 重载类本身operator<运算符，进行比较实现
 
-              left < right: 大顶堆  出队时：元素从大到小
-              left > right: 小顶堆  出队时： 元素从小到大  
+              left < right: 大顶堆  队头为大元素，出队时：元素从大到小
+              left > right: 小顶堆  队头为小元素，出队时： 元素从小到大  
 
               默认：less<T> 大顶堆
                     greator<T>  小顶堆
@@ -620,11 +620,19 @@ void stl_use::priority_queue_use(){
         que2.pop();
     }
 
+    // 使用lambda表达式，实现cmpare class
+
+    vector<int> vec = {1,2,3,4,5};
+    auto cmp = [](int left, int right){return left < right;}; // 大顶堆
+    priority_queue<int, deque<int>, decltype(cmp)> que3(cmp);
+
+    for (auto elem : vec) {
+        que3.push(elem);
+    }
+    while (!que3.empty()){
+        std::cout << "priority que3: " << que3.top() << std::endl;//大顶堆，队头最大；
+        que3.pop();
+    }
 
 }
-
-
-
-
-
 
