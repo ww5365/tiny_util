@@ -298,6 +298,25 @@ void stl_use::map_use() {
         cout << e.first << ":" << e.second << endl;
     }
 
+    // 循环遍历过程中，如何删除map中的元素 ?  类似的set list   但vector deque 使用： iter = vec.erase(iter); 方式来删除
+
+    /*
+    不过这种删除方式也是STL源码一书中推荐的方式，分析 m.erase(it++)语句，map中在删除iter的时候，先将iter做缓存，然后执行iter++使之指向下一个结点，再进入erase函数体中执行删除操作，删除时使用的iter就是缓存下来的iter(也就是当前iter(做了加操作之后的iter)所指向结点的上一个结点)。根据以上分析，可以看出（m.erase(it++) ）和（m.erase(it); iter++; ）这个执行序列是不相同的。前者在erase执行前进行了加操作，在it被删除(失效)前进行了加操作，是安全的；后者是在erase执行后才进行加操作，而此时iter已经被删除(当前的迭代器已经失效了)，对一个已经失效的迭代器进行加操作，行为是不可预期的，这种写法势必会导致 map操作的失败并引起进程的异常。
+    */
+
+    for(auto iter = ma.begin(); iter != ma.end();) {
+
+        if (iter->second == "hao") {
+            ma.erase(iter ++);
+
+        } else {
+            ++ iter;
+        }
+
+    }
+
+
+
     //unoreder_map
 
     std::unordered_map<uint32_t, int> brand_cnt;

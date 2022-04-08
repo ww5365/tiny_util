@@ -5,11 +5,12 @@
 #include <limits>
 #include <numeric>
 #include <queue>
-
 #include <iterator>
-
 #include <unordered_map>
 
+#include <bitset>
+#include <tuple>
+#include <list>
 
 using namespace std;
 
@@ -31,155 +32,134 @@ num 个空的座位给该乘客。
 
 */
 
-// class TicketSystem {
-// public:
-//     explicit TicketSystem(const vector<int> &cabins)
+class TicketSystem {
 
-//     {
-//         int n = cabins.size();
+private:
 
-//         Cabins.resize(n);
+    // 数据结构建模，表示船舱， 订单， 队列
 
-//         Waiting.resize(n);
+    vector<tuple<int, int, bitset<1000>>> Cabins;  // 船舱： 容量， 空余座位， 占用情况
 
-//         for (int i = 0; i < n; ++i) {
-//             Cabins[i] = {cabins[i], cabins[i], bitset<1000>(0)};
-//         }
-//     }
+    vector<list<pair<int, int>>> Waiting;   // 每个船舱有一个等待队列， 每个队列的元素是一个pair，<订单id, 座位量>  滑动窗口：找最小编号的连续空闲座位
 
+    unordered_map<int, tuple<int, int, bitset<1000>>> Booked; // 订单： 订单号 -》 预定信息（船舱号，座位数，座位占用详细信息）
 
-//     bool Book(int id, int cabinId, int num)
-
-//     {
-//         if (Waiting[cabinId].size() != 0 || get<1>(Cabins[cabinId]) < num) {
-//             Waiting[cabinId].emplace_back(id, num);
-
-//             return false;
-//         }
-
-//         Request(id, cabinId, num);
-
-//         return true;
-//     }
+public:
+    explicit TicketSystem(const vector<int> &cabins)
+    {
+        int n = cabins.size();
+        Cabins.resize(n);
+        Waiting.resize(n);
+        for (int i = 0; i < n; ++i) {
+            Cabins[i] = {cabins[i], cabins[i], bitset<1000>(0)}; // make_tuple  bitset 必须定义时就指定了大小, 
+        }
+    }
 
 
-//     bool Cancel(int id)
+    bool Book(int id, int cabinId, int num)
+    {
+        if (Waiting[cabinId].size() != 0 || get<1>(Cabins[cabinId]) < num) {
+            Waiting[cabinId].emplace_back(id, num);
+            return false;
+        }
 
-//     {
-//         if (auto it = Booked.find(id); it != Booked.end()) {
-//             const auto &[cabinId, num, book] = it->second;
-
-//             get<1>(Cabins[cabinId]) += num;
-
-//             get<2>(Cabins[cabinId]) ^= book;
-
-//             Waitline(cabinId);
-
-//             Booked.erase(it);
-
-//             return true;
-//         }
-
-//         for (int cid = 0; cid < Waiting.size(); ++cid) {
-//             for (auto it = Waiting[cid].begin(); it != Waiting[cid].end(); ++it) {
-//                 if (it->first == id) {
-//                     Waiting[cid].erase(it);
-
-//                     Waitline(cid);
-
-//                     return true;
-//                 }
-//             }
-//         }
-
-//         return false;
-//     }
+        Request(id, cabinId, num);
+        return true;
+    }
 
 
-//     int Query(int id)
+    bool Cancel(int id)
 
-//     {
-//         if (auto it = Booked.find(id); it != Booked.end()) {
-//             int i = 0;
+    {
+        if (auto it = Booked.find(id); it != Booked.end()) {
+            const auto &[cabinId, num, book] = it->second;
+            get<1>(Cabins[cabinId]) += num;
+            get<2>(Cabins[cabinId]) ^= book;
+            Waitline(cabinId);
+            Booked.erase(it);
+            return true;
+        }
 
-//             while (i < 1000 && !get<2>(it->second)[i]) {
-//                 ++i;
-//             }
+        for (int cid = 0; cid < Waiting.size(); ++cid) {
+            for (auto it = Waiting[cid].begin(); it != Waiting[cid].end(); ++it) {
+                if (it->first == id) {
+                    Waiting[cid].erase(it);
+                    Waitline(cid);
+                    return true;
+                }
+            }
+        }
 
-//             return i;
-//         }
-
-//         return -1;
-//     }
-
-
-// private:
-//     void Request(int id, int cabinId, int num)
-
-//     {
-//         if (num > get<1>(Cabins[cabinId])) {
-//             return;
-//         }
-
-//         get<1>(Cabins[cabinId]) -= num;
-
-//         bitset<1000> book(0);
-
-//         for (int l = -1, r = 0; r < get<0>(Cabins[cabinId]);) {
-//             while (++l < get<0>(Cabins[cabinId]) && get<2>(Cabins[cabinId])[l]) {
-//             }
-
-//             r = l;
-
-//             while (++r < get<0>(Cabins[cabinId]) && !get<2>(Cabins[cabinId])[r]) {
-//             }
-
-//             if (r - l >= num) {
-//                 for (int i = l; i < l + num; ++i) {
-//                     get<2>(Cabins[cabinId])[i] = true;
-
-//                     book[i] = true;
-//                 }
-
-//                 Booked[id] = {cabinId, num, std::move(book)};
-
-//                 return;
-//             }
-
-//             l = r;
-//         }
+        return false;
+    }
 
 
-//         for (int i = 0, t = num; i < get<0>(Cabins[cabinId]) && t > 0; ++i) {
-//             if (!get<2>(Cabins[cabinId])[i]) {
-//                 --t;
+    int Query(int id)
 
-//                 get<2>(Cabins[cabinId])[i] = true;
+    {
+        if (auto it = Booked.find(id); it != Booked.end()) {
+            int i = 0;
+            while (i < 1000 && !get<2>(it->second)[i]) {
+                ++i;
+            }
+            return i;
+        }
+        return -1;
+    }
 
-//                 book[i] = true;
-//             }
-//         }
+private:
+    void Request(int id, int cabinId, int num)
 
-//         Booked[id] = {cabinId, num, std::move(book)};
-//     }
+    {
+        if (num > get<1>(Cabins[cabinId])) {
+            return;
+        }
+        get<1>(Cabins[cabinId]) -= num;
+        bitset<1000> book(0);
+
+        // 滑窗 ： 找idx最小的连续空闲的座位
+        for (int l = -1, r = 0; r < get<0>(Cabins[cabinId]);) {
+            while (++l < get<0>(Cabins[cabinId]) && get<2>(Cabins[cabinId])[l]) {
+            }
+            r = l;
+            while (++r < get<0>(Cabins[cabinId]) && !get<2>(Cabins[cabinId])[r]) {
+            }
+
+            if (r - l >= num) {
+                for (int i = l; i < l + num; ++i) {
+                    get<2>(Cabins[cabinId])[i] = true;
+                    book[i] = true;
+                }
+                Booked[id] = {cabinId, num, std::move(book)}; // 找到连续空闲座位，就返回了
+                return;
+            }
+            l = r;
+        }
 
 
-//     void Waitline(int cabinId)
+        for (int i = 0, t = num; i < get<0>(Cabins[cabinId]) && t > 0; ++i) {
+            // 没有连续空闲了，座位还够，只能按照序号分配座位了
+            if (!get<2>(Cabins[cabinId])[i]) {
+                --t;
+                get<2>(Cabins[cabinId])[i] = true;
+                book[i] = true;
+            }
+        }
 
-//     {
-//         auto it = Waiting[cabinId].begin();
-
-//         while (it != Waiting[cabinId].end() && it->second <= get<1>(Cabins[cabinId])) {
-//             Request(it->first, cabinId, it->second);
-
-//             it = Waiting[cabinId].erase(it);
-//         }
-//     }
+        Booked[id] = {cabinId, num, std::move(book)};
+    }
 
 
-//     vector<tuple<int, int, bitset<1000>>> Cabins;
+    void Waitline(int cabinId)
 
-//     vector<list<pair<int, int>>> Waiting;
+    {
+        auto it = Waiting[cabinId].begin();
+        while (it != Waiting[cabinId].end() && it->second <= get<1>(Cabins[cabinId])) {
+            Request(it->first, cabinId, it->second);
+            it = Waiting[cabinId].erase(it);
+        }
+    }
 
-//     unordered_map<int, tuple<int, int, bitset<1000>>> Booked;
-// };
+
+
+};
