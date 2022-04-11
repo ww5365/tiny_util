@@ -138,13 +138,14 @@ int main(int argc, char* argv[]) {
     // map_use_test();
 
     //leetcode 目录下testcase
-    leetcode_all_test();
+    // leetcode_all_test();
 
     //nlohmann使用
     // json_test();
 
     //predicate : 谓词
-    predicate_use_test();
+    // predicate_use_test();
+
 
     //rtti : run time type info
     // rtti_use_test();
@@ -179,7 +180,7 @@ int main(int argc, char* argv[]) {
 
     //字符串相关的测试使用
 
-    string_use_test2();
+    // string_use_test2();
 
     //double feature[4];
     //fill_n(feature, 4, 19);//快速赋初始值
@@ -223,7 +224,7 @@ int main(int argc, char* argv[]) {
 
     // stl_use::vector_use();
     // stl_use::deque_use();
-    stl_use::priority_queue_use();
+    // stl_use::priority_queue_use();
 
     // std::shared_ptr<vector<string> > content;
     // cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
@@ -330,7 +331,7 @@ int main(int argc, char* argv[]) {
     // delete ptr;
 
     // //set使用测试
-    // stl_use::set_use();
+    stl_use::set_use();
     // stl_use::list_use();
     // stl_use::iterator_use();
     // stl_use::map_use();

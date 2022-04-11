@@ -183,7 +183,7 @@ void stl_use::set_use() {
     }
 
     for (auto e : heap){
-        std::cout << "set mock heap : " << e << std::endl;
+        std::cout << "set mock heap : " << e << std::endl; // 1 2  7 9
     }
 
     for (auto iter = heap.rbegin(); iter != heap.rend(); ++iter){
