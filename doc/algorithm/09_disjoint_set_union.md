@@ -7,20 +7,20 @@
 并查集DSU：Disjoint Set Union
 
 并查集顾名思义就是具有“合并集合”和“查找集合中元素”两种操作的一种算法。但是，实际并查集的基本操作有三个：
-makeSet(size)：建立一个新的并查集，其中包含size个单元素集合。通常该操作比较隐晦，用一句int[] root= new int[size];直接替代了make set的过程。
+makeSet(size)：建立一个新的并查集，其中包含size个单元素集合。通常该操作比较隐晦，用一句int[] parent= new int[size];直接替代了make set的过程。
 
 
-UnionRoot(x, y)：把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。
+Union(x, y)：把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。
 ``` c++
-x_parent = Find(root, x)
-y_parent = Find(root, y)
+x_parent = Find(parent, x)
+y_parent = Find(parent, y)
 
-if (x_root != y_root) {
-	root[x_root] = y_root; // 把x元素的父节点(代表元)挂到y元素的父节点上
+if (x_parent != y_parent) {
+	root[x_parent] = y_parent; // 把x元素的父节点(代表元)挂到y元素的父节点上
 }
 ```
 
-FindRoot(x)：找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了。find(x)有两种实现方法，一种是递归，一种是非递归形式。
+Find(x)：找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了。find(x)有两种实现方法，一种是递归，一种是非递归形式。
 
 ``` c++
 //非递归 Find(x)

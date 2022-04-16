@@ -1,7 +1,7 @@
 # 两根指针
 
 
-## 滑动窗口介绍
+## 滑动窗口介绍  -- 同向指针
 出处：（https://zhuanlan.zhihu.com/p/61564531）
 滑动窗口法，也叫尺取法（可能也不一定相等，大概就是这样），可以用来解决一些查找满足一定条件的连续区间的性质（长度等）的问题。
 由于区间连续，因此当区间发生变化时，可以通过旧有的计算结果对**搜索空间进行剪枝**，这样便减少了重复计算，降低了时间复杂度。
@@ -100,12 +100,6 @@ void slidingWindow(string s, string t) {
     }
 ```
 
-
-
-
-
-
-
 ### 2 无重复字符的最长子串([#3](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/))
 
 给定一个字符串，请你找出其中不含有重复字符的 最长子串的长度。
@@ -176,7 +170,7 @@ public:
 
 ### 1 尽可能使字符串相等（#1208）
 
-### 2 至多包含 K 个不同字符的最长子串
+### 2 至多包含 K 个不同字符的最长子串 ([#340](https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/))
 
 ### 3 最少交换次数来组合所有的 1（#1151会员）
 
