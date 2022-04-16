@@ -8,17 +8,16 @@
 prefixSum [0] = 0 【备注：此处不要定义prefix[0]=nums[0]，这种定义违背前缀和的意义】
 prefixSum [1] = prefixSum[0] + nums[0] = 0 + num[0] 
 …
-prefixSum [i] = prefixSum [i-1] + nums [i]。
+prefixSum [i] = prefixSum [i-1] + nums [i-1]。
+prefixSum [i + 1] = prefixSum [i] + nums [i]。
 
 由此推导出两个变换公式： 
 （1）nums[某一项] = 两个相邻 前缀和 之差：
-nums[x] = prefixSum[x] - prefixSum[x - 1]
-（2）从left到right的元素和等于refixSum[right+1] – prefix[left];
-
+nums[x] = prefixSum[x + 1] - prefixSum[x]
+（2）从left到right的元素和等于prefixSum[right+1] – prefix[left];
 
 
 ![image-20220119165542949](../img/image-20220119165542949.png)
-
 
 
 前缀和数组初始化过程伪代码示例：
@@ -52,11 +51,8 @@ int[] prefixSum = new int[nums.length];
 划重点:
 
 （1）   预处理过程看似简单，但是考试计算容易出现混乱；
-
 （2）   prefixSum[i] – prefixSum[i-1]; 容易出现错误理解和计算丢失。
-
 示例：prefixSum[1] – prefixSum[0] = nums[1]，造成nums[0]丢失，出现后续错误
-
 
 ## 代表题目：和为K的子数组(#560中等)
 给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。
@@ -67,6 +63,19 @@ int[] prefixSum = new int[nums.length];
 数组的长度为 [1, 20,000]。
 数组中元素的范围是 [-1000, 1000] ，且整数 k 的范围是 [-1e7, 1e7]。
 代码实现提供三种算法，避免学习算法过程中思维被限制。
+
+
+### 思路1： 暴力
+
+### 思路2： 前缀和
+
+### 思路3： 前缀和  +  hash
+
+
+
+
+
+
 
 ## 触类旁通
 
