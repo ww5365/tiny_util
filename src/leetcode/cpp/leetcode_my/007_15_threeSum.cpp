@@ -1,4 +1,6 @@
 /*
+ * 15.https://leetcode-cn.com/problems/3sum/
+
  * 5_3Sum.cpp
  *Given an array S of n integers,are there elements a, b, c in Find all unique triplets in the array which gives the sum of zero（a+b+c=0）
  *Note: Elements in a triplet (a,b,c) must be in non-descending order. (ie, a ≤ b ≤ c) The solution set must not contain duplicate triplets.
@@ -6,7 +8,7 @@
  * A solution set is:
  * (-1, 0, 1)
  * (-1, -1, 2)
- *
+ 
  *分析：
  *疑问：有时间复杂度要求？空间复杂度？
  *self idea：将S中元素存在hashtable中；利用a+b=-c,顺序取数组中相邻两个元素ab，查询是否存在-(a+b)；找到c后，排下序列；
