@@ -16,9 +16,7 @@ prefixSum [i + 1] = prefixSum [i] + nums [i]。
 nums[x] = prefixSum[x + 1] - prefixSum[x]
 （2）从left到right的元素和等于prefixSum[right+1] – prefix[left];
 
-
 ![image-20220119165542949](../img/image-20220119165542949.png)
-
 
 前缀和数组初始化过程伪代码示例：
 
