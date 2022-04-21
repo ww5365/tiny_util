@@ -234,6 +234,19 @@ void stl_use::set_use() {
             ++first_elem;
         }
     }
+
+    /* set_intersection 总结
+
+    算法set_intersection可以用来求两个集合的交集，具有如下特点：
+    * 集合可以为std::set，也可以是std::multiset，但是不可以是hash_set以及hash_multiset。因为set_intersection要求两个区间必须是有序的（从小到大排列），std::set和std::multiset为有序序列，而hash_set以及hash_multiset为无序序列。
+    * 并不仅限于对两个集合取交集，只要是两个有序区间，均可以用此代码求交集。
+    * 由于两个集合内的每个元素都不需唯一，因此，如果某个值在区间1中出现m次，在区间2中出现n次，那么该值在输出区间中会出现min(m,n)次，且全部来自于区间1.函数返回值为一个迭代器，指向输出区间的尾部。
+    
+    * set_intersection为稳定操作，即输出区间内的每个元素的相对顺序都和区间1内的相对顺序相同。总是从第一个集合拷贝数据。
+
+    */
+
+
 }
 
 
