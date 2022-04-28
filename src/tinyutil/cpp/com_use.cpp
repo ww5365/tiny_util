@@ -104,15 +104,6 @@ void const_use_test(){
     bs.flip(9); //第10bit的数据取反: bs.set(9,~bs[9]);
     std::cout << "the value of pos 10: " << bs[9] << std::endl;
 
-
-
-
-
-
-
-
-
-
 }
 
 

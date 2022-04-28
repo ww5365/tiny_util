@@ -131,6 +131,7 @@ int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
 
+    tuple_use_test();
     
     // primer_all_test();
 
@@ -148,7 +149,7 @@ int main(int argc, char* argv[]) {
 
 
     //rtti : run time type info
-    // rtti_use_test();
+    rtti_use_test();
 
     //c类型子串的使用
 

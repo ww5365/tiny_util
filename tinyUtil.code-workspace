@@ -104,6 +104,7 @@
 			"tiny_util"
 		],
 		"git.ignoredRepositories": [],
-		"git.ignoreDescendantSubmodules": false
+		"git.ignoreDescendantSubmodules": false,
+		"CodeCheck.RelatedRemoteRepo": "https://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@github.com/ww5365/tiny_util.git"
 	}
 }
