@@ -170,6 +170,15 @@ void stl_use::list_use(){
 
 /*
 * set 使用  
+
+* 基于红黑树，有序
+* 时间复杂度
+map, set, multimap, and multiset
+上述四种容器采用红黑树实现，红黑树是平衡二叉树的一种。不同操作的时间复杂度近似为:
+插入: O(logN)
+查看:O(logN)
+删除:O(logN)
+* 
 */
 
 void stl_use::set_use() {
@@ -182,6 +191,7 @@ void stl_use::set_use() {
         heap.insert(e);
     }
 
+    // 有序
     for (auto e : heap){
         std::cout << "set mock heap : " << e << std::endl; // 1 2  7 9
     }
@@ -189,6 +199,14 @@ void stl_use::set_use() {
     for (auto iter = heap.rbegin(); iter != heap.rend(); ++iter){
         std::cout << "set mock heap reverse order: " << *iter << std::endl;
     }
+
+    // 返回最后一个 key<=keyElem 元素的迭代器：st.lower_bound(keyElem);  比如： 1 2 7 9 st.lower_bound(2) 返回指向2的迭代器
+    // 返回第一个 key>keyElem 元素的迭代器： st.upper_bound(keyElem); 比如： 1 2 7 9 st.upper_bound(2) 返回指向7的迭代器
+    // 返回容器中 key 与 keyElem 相等的上下限的两个迭代器，这两个迭代器被放在对组（pair）中： st.equal_range(keyElem);
+
+    std::cout << "lower bound : " << *heap.lower_bound(2) << endl; 
+    std::cout << "upper bound : " << *heap.upper_bound(2) << endl; 
+
 
 
     //测试set存相同结构的情况,如何去重struct类型的数据？

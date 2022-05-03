@@ -120,6 +120,13 @@ void com_map_use() {
         cout << e.first << ":" << e.second << endl;
     }
 
+    // map 访问 [] 和  find 区别
+
+    cout <<" key not exisit: "  << ma[9] << std::endl;  // []访问不存在的key， 不会报错，会取得value对象默认构造;
+
+    //  因此在访问map元素时，应先用map.find查找该元素，找到后再访问。 同时，用法mymap2["str"]++;常用于词频统计，存在则加一，不存在则创建后赋值为1。
+
+
 
     // 循环遍历过程中，如何删除map中的元素 ?  类似的set list   但vector deque 使用： iter = vec.erase(iter); 方式来删除
 

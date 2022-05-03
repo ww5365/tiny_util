@@ -14,17 +14,24 @@ c++ 中使用优先级队列可以模拟实现堆的功能和使用
 * 需求：有5个同学随意入队；他们都有成绩和姓名；请按照成绩从低到高出队列，如果成绩相等，按照名字字母逆顺序出队；
 
 *  模拟大小顶堆的实现
-*  priority_queue <类名, 底层容器, 比较类>  
+* priority_queue<Type, Container, Functional>
 *  头文件: #include <queue>
-*  第三个参数：比较类重载()运算，实现仿函数功能，类似本例；
-              也可以通过重载类本身operator<运算符，进行比较实现
+*  第三个参数：
+    1.比较类重载()运算，实现仿函数功能，类似本例；比较类名作为参数
               left < right: 大顶堆  出队时：元素从大到小
               left > right: 小顶堆  出队是： 元素从小到大  greator<T>
               默认：less<T>
+
+    2.也可以通过重载类本身operator<运算符，进行比较实现
+
+    3. 定义匿名函数：decltype(匿名函数) -> 类型作为参数
+
 *  push   emplace ： 入队
 *  pop ：出队
 *  top: 队头元素
 *  参考：https://en.cppreference.com/w/cpp/container/priority_queue
+
+
 */
 void stl_use::priority_queue_use(){
     //下面是使用优先级队列的常见形式；deque中数据是按照分数从小到大排序
@@ -108,6 +115,92 @@ public:
 
 
 #### topK
+
+
+``` c++
+
+/*
+
+给定一个单词列表 words 和一个整数 k ，返回前 k 个出现次数最多的单词。
+返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， 按字典顺序 排序。
+
+思路：
+1、统计列表中每个word的出现频次，保存在hashtable中。
+2、使用优先级队列，大小为K，保存频次较大的K个元素？ 使用频次的小顶堆，当到达k个元素时，最小的频次出队，保留住最大的k个元素；使用字典的大顶堆，当到达k个元素时，保留前k个小的元素。
+
+
+*/
+
+class Solution {
+public:
+
+    vector<string> TopKFrequent(vector<string>& words, int k)
+    {
+        vector<string> res(k);
+        unordered_map<string ,int> freq;
+
+        auto cmp = [](pair<string, int> &a, pair<string, int> &b) {
+            return a.second > b.second || (a.second == b.second && a.first < b.first); 
+        };
+        priority_queue<pair<string, int>, deque<pair<string, int>>, decltype(cmp)> qu(cmp);
+
+        for (auto word : words) ++freq[word];
+
+        for (auto f : freq) {
+            qu.push(f);
+            if (qu.size() > k) {
+                qu.pop(); // 保持前k大的数据
+            }
+        }
+
+        for (int i = res.size() - 1; i >= 0; --i) {
+            res[i] = qu.top().first;
+            qu.pop();
+        }
+        return res;
+    }
+
+    vector<string> TopKFrequent2(vector<string>& words, int k) {
+
+        // 
+        unordered_map<string, int> freq;
+        for (auto word : words) {
+            freq[word] ++;
+        }
+
+        auto cmp = [](const pair<string, int>& left, const pair<string, int>& right) {
+            if (left.second == right.second) {
+                return left.first < right.first; // 字母大的先出队
+            }
+            return left.second > right.second; // 频次小的先出队
+        };
+
+        priority_queue<pair<string, int>, deque<pair<string, int>>, decltype(cmp)> qu(cmp);
+
+
+        for (const pair<string, int> &elem : freq) {
+            qu.push(elem);
+            if (qu.size() > k) {
+                qu.pop();
+            }
+        }
+
+        // 逆序输出qu中的结果，即为前K大的元素
+        vector<string> result(k);
+        // result.reserve(k);
+
+        for (int i = k - 1; i >= 0; --i) {
+            result[i] = qu.top().first;
+            qu.pop();
+        }
+
+        return result;
+    }
+
+};
+
+```
+
 
 
 

@@ -130,8 +130,18 @@ struct DisplayItem {
 int main(int argc, char* argv[]) {
 
     std::cout << "hello test world!" << std::endl;
+    int n = 4;
+    string tmpStr(n, '.');
 
-    tuple_use_test();
+    std::cout << "tmpstr: " << tmpStr << std::endl;
+
+    tmpStr[2] = 'Q';
+    
+    std::cout << "tmpstr: " << tmpStr << std::endl;
+
+
+
+    // tuple_use_test();
     
     // primer_all_test();
 
@@ -149,7 +159,7 @@ int main(int argc, char* argv[]) {
 
 
     //rtti : run time type info
-    rtti_use_test();
+    // rtti_use_test();
 
     //c类型子串的使用
 
@@ -181,7 +191,10 @@ int main(int argc, char* argv[]) {
 
     //字符串相关的测试使用
 
-    // string_use_test2();
+    string_use_test2();
+    
+    // //字符串测试
+    // string_using_test();
 
     //double feature[4];
     //fill_n(feature, 4, 19);//快速赋初始值
@@ -338,8 +351,6 @@ int main(int argc, char* argv[]) {
     // stl_use::map_use();
     // stl_use::unordered_set_use();
 
-    // //字符串测试
-    // string_using_test();
 
     // //正则表达式
 

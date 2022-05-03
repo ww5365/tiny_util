@@ -32,7 +32,7 @@ public:
         std::deque<int> deq;
         std::size_t win_len = vec.size() - k + 1; // 滑动窗口的滑动次数
 
-        // 前k个数进队deq,保持单调队列特性
+        // 前k个数进队deq,保持单调队列特性: 从大到小
         for (std::size_t i = 0; i < k; ++i) {
             while (!deq.empty() && vec[i] > deq.back()) {
                 deq.pop_back();

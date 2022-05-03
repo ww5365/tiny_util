@@ -11,6 +11,8 @@
 #include <map>
 #include <string>
 
+#include <algorithm>
+
 using namespace std;
 
 
@@ -103,10 +105,34 @@ void wchar_using() {
 
 void string_use_test2()
 {
-
     std::cout << "-----------string_use_test2------------" << std::endl;
+    // string 赋初值
+    string str1(5, '.'); // string初始化，5个相同的字符.给到字符串str1
+    std::cout << "inital string : " << str1 << std::endl; //  str1 = "....."
+
+    // 字符串进行翻转 : Reverse 可以翻转容器内 [first,last) 指向的内容 <algorithm>
+    string str2 = "abcde";
+    std::reverse(str2.begin(), str2.end());
+    std::cout <<"reverse str2: " << str2  << std::endl;
+
+    //  字符串查找 和 截取substr()
+    size_t pos = 1; // 下标从0开始；在下标1处截取长度为n的子串: edcba 即从d开始
+    size_t n  = 3;
+    string subStr2 = str2.substr(pos, n);  // 如果n大于字符串长度，截取到最后; 这里是：dcb  如果pos大于字符串长度，抛出异常:out of range
+    std::cout << "subStr2 : " << subStr2 << std::endl;
+
+    size_t idx = str2.find(subStr2);  // 返回字符串第一次出现的下标位置, 从0 开始; 这里是1
+    
+    string subStr3 = str2.substr(idx, n);  // 如果n大于字符串长度，截取到最后; 这里是：dcb  如果pos大于字符串长度，抛出异常:out of range
+    std::cout << "subStr3 : " << subStr3 << std::endl;
+
+
+
+    
     // wchar 相关的测试
     wchar_using();
+    
+
 
 
     // 整数vec<int>转成字符串
