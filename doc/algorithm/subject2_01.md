@@ -43,8 +43,6 @@ const Rational& operator*(const Rational& lhs, const Rational& rhs)
 
 
 
-
-
 ## subject 2真题 
 
 1、使用rand()产生随机数适用的场景，类似的还有random()和/dev/urandom()也是不安全的。
@@ -168,7 +166,8 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 * sizeof运算符
 * 三目运算符"?:"
   
-2.运算符函数重载一般有两种形式：重载为类的成员函数和重载为类的非成员函数。非成员函数通常是友元。注意：可以把一个运算符作为一个非成员、非友元函数重载，但此时运算符无法直接访问类的私有和保护成员。
+2.运算符函数重载一般有两种形式：重载为类的成员函数和重载为类的非成员函数。非成员函数通常是友元。
+* 注意：也可以把一个运算符作为一个非成员、非友元函数重载，但此时运算符无法直接访问类的私有和保护成员。
 * 当运算符重载为类的成员函数时，函数的参数个数比原来的操作数要少一个（后置单目运算符除外），这是因为成员函数用this指针隐式地访问了类的一个对象，它充当了运算符函数最左边的操作数。
 * 当运算符重载为类的友元函数时，由于没有隐含的this指针，因此操作数的个数没有变化，所有的操作数都必须通过函数的形参进行传递，函数的参数与操作数自左至右一一对应。
 
@@ -186,7 +185,7 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 
 9、初始化列表的初始化顺序
 
-1.成员是按照他们在类中出现的顺序进行初始化的，而不是按照他们在初始化列表出现的顺序初始化的
+1.成员是按照他们在类中声明的顺序进行初始化的，而不是按照他们在初始化列表出现的顺序初始化的
 2.内置类型变量是否自动初始化取决于变量定义的位置。函数体外定义的变量初始成0；函数体内定义的变量不进行自动初始化。类的成员变量会调用类的默认构造函数来进行初始化，若显式定义了构造函数，则编译会报错。
 
 
@@ -255,7 +254,7 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 
 ```
 
-这题考察的主要知识点是函数模板实例化。即：若在模板中定义静态变量，相同类型的模板共享同一个静态变量。
+这题考察的主要知识点是函数模板实例化。即：若在**模板中定义静态变量，相同类型的模板共享同一个静态变量**。
 
 * Dub和Square都属于函数指针，且函数签名相同，所以Use(y, Dub)和Use(y, Square)调用的是模板实例化出的同一个函数。
 
@@ -342,7 +341,7 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 	     apple->Foo();
 	     return 0;
 	 }
-    //  输出： 1  2
+    //  输出： Apple: 1  Apple: 2
 	// fruit的静态类型是Fruit的引用，而动态类型是Apple的引用，因此，当fruit调用虚函数Foo()时，根据动态绑定规则，它调用的是Apple的成员函数Foo()；而对于虚函数的缺省参数，根据静态绑定规则，它将value确定为Fruit中给出的缺省值1。
 
 ```
@@ -352,13 +351,6 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 * 是否有const。有const则多态失效。
 * 函数返回值不同
 * 函数参数列表不同等都是判断条件
-
-
-
-
-
-
-
 
 12.  智能指针引用计数
 
@@ -455,6 +447,8 @@ tuple是一个固定大小的不同类型值的集合，是泛化的std::pair，
 
 >> 返回值可以相同也可以不同； 仅仅只有返回值不同，不是函数重载；
 
+>> 注意：函数返回值不同，对多态，特别是override修饰的接口有影响
+
 
 
 15.new/delete
@@ -468,7 +462,7 @@ tuple是一个固定大小的不同类型值的集合，是泛化的std::pair，
 ```c++
 class Task;
 char buf[sizeof(Task)]; // 缓存提前分配
-Task *task = new (buf) Task; //在已分配内存上new对象，并不会申请内存
+Task *task = new (buf) Task; //在已分配内存上new对象，并不会申请内存; 感觉上，只有new操作的后两步隐含操作
 task->suspend(); // 按照普通方式使用分配的对象
 ...
 task->~Task(); //调用外在的析构函数来销毁对象
@@ -573,7 +567,7 @@ a：指向数组第一个元素的指针，a + 1则指向第二个元素，即�
 
 21.函数对象
 
-函数对象也叫函数符，**函数符**是可以以函数方式与()结合使用的任意对象。这包括函数名、指向函数的指针和重载了()运算符的类对象。即函数名、指向函数的指针和重载了括号运算符的类对象与括号结合，从而以函数方式实现某种功能。
+函数对象也叫函数符(是不是就是functor)，**函数符**是可以以函数方式与()结合使用的任意对象。这包括 **函数名、指向函数的指针和重载了()运算符的类对象**。即函数名、指向函数的指针和重载了括号运算符的类对象与括号结合，从而以函数方式实现某种功能。
 
 包括以下几种：
 
@@ -632,15 +626,14 @@ class Person {
 
 * vector和deque是序列式容器，进行元素的增删操作（erase insert push_back）之后，迭代器将失效
 * 对于关联式容器，删除当前的iterator仅会使当前的iterator失效，在erase时递增当前的iterator即可
-
 >> 对应了之前的:如何循环的删除：vector 或  map中的元素 ?
-
-
 
 
 24. constexpr  常量表达式
 
-constexpr： 主要是给编译器用的，明确告诉编译器可以把变量认为是：字面长量   编译期间就可以确定值；编译时就能得出常量值的表达式去优化我
+constexpr： 主要是给编译器用的，明确告诉编译器可以把变量认为是：字面长量   
+* 编译期间就可以确定值；
+* 编译时就能得出常量值的表达式去优化
 
 const： 编译或运行期间确定值
 
@@ -653,6 +646,313 @@ constexpr int Foo(int i)
 std::array<int, Foo(5)> arr; // ok
 int i = 5;
 std::array<int, Foo(i)> arr; // 不可以，因为array<T, N>必须在编译期间就要确定其大小N
+```
+
+
+
+
+24. 完美转发  ??
+ 
+（单选）模板函数，下列哪个选项是错误的
+template <typename …Args>
+void ForwardRef(Args&& …args)
+{
+    Foo(std::forward<Args>(args)…);
+}
+A.	如果参数中有const T&，则Foo接受的参数类型为const T&
+B.	如果参数中有T&&，则Foo接受的参数类型为T&&
+C.	如果参数中有T，则Foo接受的参数类型为T&
+D.	如果参数中有T&，则Foo接受的参数类型为T&&
+
+（多选）模板函数，下列哪个选项是正确的
+template <typename …Args>
+void ForwardRef(Args&& …args)
+{
+    Foo(std::forward<Args>(args)…);
+}
+A.	将入参T解释为T
+B.	将入参T&&解释为T&&
+C.	将入参T解释为T&
+D.	将入参T&解释为T&&
+
+
+补充：规范：
+
+要被完美转发的参数使用“转发引用”类型，并在函数内使用std::forward
+如果一个函数参数类型为T&& 并且T 是模板的类型参数，则该参数传递时将会保持调用者所传参数类型
+的 const 属性和左值/右值属性。这种类型应当只被用于完美转发——即函数需要保留入参的 const 属
+性和左值/右值属性，并且将入参用std::forward 转给需要区分这些属性的另一个函数。
+
+
+要被移动的参数，应使用右值引用类型，并在函数内使用std::move;
+对于只能被移动，并且移动的代价很小的类型，如std::unique_ptr，可以按值传递，这样写起来更简单
+而且效果相同。
+
+
+``` c++
+void Fun(std::vector<int>&& v) // 获取入参的所有权
+{
+StoreSomewhere(std::move(v));
+// v已被移动走，不能再使用
+...
+}
+
+// unique_ptr不能被复制，只能被移动，并且移动代价小，
+// 因此可以使用“std::unique_ptr<SomeClass>”或“std::unique_ptr<SomeClass>&&”作为参数类型
+void Fun1(std::unique_ptr<SomeClass> p)
+{
+...
+}
+void Fun2(std::unique_ptr<SomeClass>&& p)
+{
+...
+}
+
+```
+
+25. （多选）using typedef数组指针，指向数组的指针是
+A.	typedef int (Array*)[10]
+B.	using Array = int(*)[10]
+C.	typedef int (*Array)[10]
+D.	using *Array = int[10]
+
+答案：BC
+A申明方式不对
+D两边类型不对等
+
+
+
+26. （多选）假设函数Foo返回类型为const A&，下列语句与 const A& r = Foo(); 等价的有
+A.	auto r = Foo();
+B.	auto& r = Foo();
+C.	const auto& r = Foo();
+D.	decltype(Foo()) r = Foo();
+
+答案： BCD
+当有&的时候，const会默认复制过来；auto 的const属性保留。
+
+
+27. 函数匹配：
+
+```c++
+void fun1(void *ptr) {
+    std::cout << "1111";
+}
+
+void fun1(int i) {
+    std::cout <<"2222";
+}
+
+    fun1(1); //输出：1111
+    fun1(nullptr); // 输出： 2222
+```
+
+28. 类型变换后的溢出
+
+```c++
+    unsigned int a = 10;
+    int b = -20;
+    std::cout << (a + b) << std::endl; // 输出：4294967286 溢出
+```
+
+
+
+
+
+## 编码规范
+
+
+1. 使用标准的头文件包含顺序可增强可读性，避免隐藏依赖，建议的头文件包含顺序为：
+
+	cpp对应的头文件,C/C++标准库, 系统库的.h, 其他库的.h, 本项目内其他的.h
+
+
+2.（多选）以下标识符的申明或定义，错误的有
+A.	undef _LINE__   // 规范要求，不能undef任何在标准库头文件中声明的标识符
+B.	define MODULE_INCLUDE  // 规范要求不能定义空的宏
+C.	void *malloc(size_t nbytes);
+D.	define SIZE_MAX 80 // 
+
+规范：
+
+#undef __LINE__ // 不符合：__LINE__为保留宏，不允许#undef保留宏
+#define _MODULE_INCLUDE_ // 不符合：下划线开头
+enum { MAX_SIZE = 80 }; // 不符合：MAX_SIZE是<cstdint>中保留宏
+int errno; // 不符合：errno是标准库中的保留标识符
+void* malloc(size_t nbytes); // 不符合：malloc是标准库中的保留标识符
+
+>> 规范：不要声明或定义保留标识符
+
+3. 可以在extern “C” 中包含头文件 ： 错误
+
+ 在 extern "C" 中包含头文件，有可能会导致 extern "C" 嵌套，部分编译器对 extern "C" 嵌套层次有限制，嵌套层次太多会编译错误。在C，C++混合编程的情况下，在extern "C"中包含头文件，可能会导致被包含头文件的原有意图遭到破坏，例如链接规范被不正确地更改。
+
+>> 规范：禁止在extern "C"中包含头文件
+
+
+4.（单选）以下移位操作中符合编程规范的是
+A.	int lhs = 180;
+int a = lhs >> 3;
+B.	int lhs = 10;
+int a = 3 >> lhs;
+C.	unsigned char lhs = 80
+unsigned int a = (~lhs) >> 3;
+D.	constexpr int lhs = 10;
+unsigned int a = 3u >> lhs;
+
+答案：D
+AB整型不推荐用移位
+C中对char型求反时会自动提升类型，不符合预期逻辑
+
+5.（单选）以下说法中不符合编程规范的选项
+A.	基类的虚构函数应该声明为virtual 
+B.	虚函数可以使用缺省参数值 
+C.	禁止重新定义继承而来的非虚函数
+D.	为避免隐式转换，可以将单参数构造函数声明为explict
+
+答案：B
+规范：
+G.CLS.10-CPP 通过基类指针释放派生类时，必须将基类中析构函数声明为虚函数
+G.CLS.11-CPP 在派生类中重写虚函数时禁止重新定义缺省参数值
+G.CLS.12-CPP 在重写虚函数时应明确指定override或final
+G.CLS.13-CPP 禁止重新定义继承而来的非虚函数
+
+G.CLS.03-CPP 单参数构造函数声明为explicit: 建议
+
+
+6.（单选）以下描述符合C++语言编程规范的是
+A.	为了适应不定数量参数的要求，优先定义C风格的变参函数
+B.	可以使用可变参数模板替代一部分C风格变参函数
+C.	优先使用void* 类型参数来实现泛型
+D.	设计函数是，优先使用输出参数而非返回值
+
+答案：B
+
+设计函数时，优先使用返回值而不是输出参数
+
+7. （单选）以下代码符合规范的是
+A.	void Log_func()
+{
+    printf(“%s %s”, __LINE__, __func__, “exaval”);
+}
+B.	inline void Log_func()
+{
+    printf(“%s %s”, __LINE__, __func__, “exaval”);
+}
+C.	#define Log_func printf(“%s %s”, __LINE__, __func__, “exaval”);
+D.	class Log_func {
+void Log_func()
+{
+        printf(“%s %s”, __LINE__, __func__, “exaval”);
+}
+}
+规范：
+函数和内联函数不能完全替代函数式宏，函数式宏在某些场景更适合。例如：在日志记录场景中，只有
+宏可以保持调用点的文件名（__FILE__）、行号（__LINE__）等信息。
+
+
+
+
+6.以下均为涉及动态内存管理的C++11代码，分配的内存都只在局部使用，return之前要保证释放。其中符合公司C++通用编程规范的规则和建议的是（）
+A.
+Image* imageA = new Image;
+Image* imageB = new Image;
+// …
+if (ProcFail()) {
+delete imageA;
+delete imageB;
+return;
+}
+// …
+delete imageA;
+delete imageB;
+return;
+
+B.
+auto imageA = std::make_unique();
+auto imageB = std::make_unique();
+if (ProcFail()) {
+return;
+}
+return;
+
+C.
+auto imageA = std::make_shared();
+auto imageB = std::make_shared();
+// …
+if (ProcFail()) {
+return;
+}
+//…
+return;
+
+D.
+std::auto_ptr imageA(new image);
+std::auto_ptr imageB(new image);
+// …
+if (ProcFail()) {
+return;
+}
+// …
+return;
+
+参考答案：B  
+
+B的小问题，c++14才提供make_unique;  保证释放的话，这个最合适。 为什么？
+
+
+使用RAII技术管理资源的生命周期
+使用std::make_unique而不是new创建std::unique_ptr
+使用std::make_shared而不是new创建std::shared_ptr
+new和delete配对使用，new[]和delete[]配对使用
+自定义new/delete操作符需要配对定义，且行为与被替换的操作符一致
+
+
+```c++
+// 使用std::make_unique而不是new创建std::unique_ptr
+void Foo()
+{
+C* p = new C();
+std::unique_ptr<C> sp = std::unique_ptr<C>(p); // 不符合
+... // 代码中既可以使用 p 也可以使用 sp
+}
+
+void Foo()
+{
+std::unique_ptr<C> sp = std::make_unique<C>(); // 符合
+... // 代码中只能使用 sp
+}
+
+```
+
+
+```c++
+
+// 下面的例子适用于无法使用异常的工程。工厂函数Foo::Create 使用C++17的std::optional 型作为返回值，表示可能出错的情形。有可能出错的操作被提出构造函数之外。
+Foo {
+public:
+static std::optional<Foo> Create(const std::string& fileName)
+{
+std::ifstream file(fileName); // RAII会自动关闭文件
+if (file.fail()) {
+return {}; // 返回特殊值
+}
+std::unique_ptr<Data> resource = std::make_unique<Data>(); // 使用智能指针保证释放
+if (DoMoreInitialization() == FAILED) {
+return {}; // 返回特殊值
+}
+return Foo(std::move(file), std::move(resource));
+}
+private:
+Foo(std::ifstream file, std::unique_ptr<Data> resource)
+: file(std::move(file)), resource(std::move(resource))
+{
+// 这样的构造函数只设置成员值，不会出错
+}
+std::ifstream file;
+std::unique_ptr<Data> resource;
+};
+
 ```
 
 

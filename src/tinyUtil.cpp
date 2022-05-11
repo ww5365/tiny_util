@@ -127,7 +127,28 @@ struct DisplayItem {
 };
 
 
+void fun1(void *ptr) {
+    std::cout << "1111" <<std::endl;
+}
+
+
+void fun1(int i) {
+    std::cout <<"2222" << std::endl;;
+}
+
+
+
 int main(int argc, char* argv[]) {
+
+    fun1(1);
+    fun1(nullptr);
+
+
+    unsigned int a = 10;
+    int b = -20;
+
+    std::cout << (a + b) << std::endl;
+
 
     std::cout << "hello test world!" << std::endl;
     int n = 4;
