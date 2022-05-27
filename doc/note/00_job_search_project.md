@@ -7,27 +7,27 @@
 
 resume准备 -> leetcode -> jingdong 项目为依托：召回和排序深入 (LTR,Transformer, BERT)  -> 项目 
 
-* resume
+1. resume
   
   作为准备的基版，涉及的点，都要准备下
 
   可能需要补充，项目的更新点
 
 
-* leetcode
+2. leetcode
   1. 依托trust考试，形成这块的算法体系。题目要实现，代码写一遍。
   2. 笔记本上题目要手写一遍
 
 
-* jingdong项目 - ml dl retrival
+3. jingdong项目 - ml dl retrival rank
 
-  1. 指标
+  * 指标
 
   ROC
   NDCG
   混淆矩阵
 
-  2. 排序特征
+  * 排序特征
   
   文本：
   BM25
@@ -38,7 +38,7 @@ resume准备 -> leetcode -> jingdong 项目为依托：召回和排序深入 (LT
   CTR
   用户需求分布
 
-  3. ML DL
+  *  ML DL
   
   树模型：
   CART -> GBDT  XGBOOST  -> Gbrank, lambdaMart (xgboost  lightGBM) -> deepFM (pytorch)
@@ -53,17 +53,18 @@ resume准备 -> leetcode -> jingdong 项目为依托：召回和排序深入 (LT
   spark
   pytorch
 
+  
+  1) 召回：
+     语义召回： 03_深度模型_语义召回.md
+
+  
+  
+  2) 排序：
 
 
 
-  4. jingdong项目作为依托，回溯ML DL
 
-  排序：
-
-  召回：
-
-
-* 项目
+4. 项目
 
   项目难点？
   最好的项目？
@@ -84,7 +85,7 @@ resume准备 -> leetcode -> jingdong 项目为依托：召回和排序深入 (LT
 
 
 
-* 目标职位
+5. 目标职位
 
 sp - one
 岗位描述：

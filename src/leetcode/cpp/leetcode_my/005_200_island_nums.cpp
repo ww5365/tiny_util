@@ -28,8 +28,9 @@ using namespace std;
 2、使用visited记录已经被访问的陆地
 3、每轮一个连通分量的计算
 
-
 思路二： 连通分量的问题 - DSU
+
+思路三： BFS
 
 
 */
