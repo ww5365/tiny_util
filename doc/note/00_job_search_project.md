@@ -1,7 +1,19 @@
 # job search project
 
 
-## 202205
+## project 回溯
+
+2022.5.31  回溯：
+
+leetcode : 基本刷了一遍，持续性的
+
+技术深度准备：transformer, bert 一半 ， 还差ltr
+
+project 回顾和准备： 未准备
+
+
+
+
 
 ### todolist
 
@@ -81,8 +93,7 @@ resume准备 -> leetcode -> jingdong 项目为依托：召回和排序深入 (LT
 
   项目和领域深度思考 ？
 
-  技术规划？
-
+  技术规划？  工程落地能力？思考
 
 
 5. 目标职位
@@ -101,6 +112,7 @@ sp - one
 5. 具备良好的编程能力和数据结构算法基础，能熟练使用 Python/Java/C++ 等任一语言进行算法策略的落地部署，具备用 Hadoop/Hive/Spark/Flink 等大数据工具分析海量数据的能力。
 6. 具备强烈的责任感，逻辑思维严谨清晰，具有优秀的分析问题和解决问题的能力，易于沟通协作。
 7. 有 Dense Retrieval、多目标建模、模型压缩/蒸馏等经验者优先。
+
 
 
 

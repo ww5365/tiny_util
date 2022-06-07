@@ -142,7 +142,9 @@ private:
 
 public:
 
-    LRU2(int cap = 3):capcity(cap), size(0){}
+    LRU2(int cap = 3):capcity(cap), size(0){
+
+    }
 
     /*
      * hash存在key： 直接通过iterator获取到 list 中的 value；同时要更新最近访问的 list 队列；
@@ -181,11 +183,14 @@ public:
                 int del_key = cache.back().key; //list尾部元素:back(), 头部元素：front(); 头指针：begin() 尾部之后迭代器：end()
                 cache.pop_back(); //list head or tail pop: pop_back() / pop_front();
                 hash.erase(del_key); //map delete key
+                size --;
+
             }else{
-                //直接将 capcity+1
-                ++ size;
+                //直接将 capcity+1 这样写有bug啊， 这个size变动，搞死我了；
+                // ++ size;
             }
             auto insert_itor = cache.insert(cache.begin(), LNode(key, value));
+            size ++;
             hash.insert(std::make_pair(key, insert_itor));
         }
     }
@@ -238,6 +243,8 @@ void lru_cache_test(){
     lru2.set(2, 20);
     lru2.set(3, 30);
     lru2.set(4, 40);
+    
+    std::cout << "get lru cache22222-----------: " << std::endl;
 
     int value = lru2.get(2);
     std::cout << "get lru cache: " << value << std::endl;

@@ -103,6 +103,10 @@
 		"git.scanRepositories": [],
 		"git.ignoredRepositories": [],
 		"git.ignoreDescendantSubmodules": false,
-		"CodeCheck.RelatedRemoteRepo": "https://github.com/ww5365/tiny_util.git"
+		"CodeCheck.RelatedRemoteRepo": "https://github.com/ww5365/tiny_util.git",
+		"CodeCheck.RealTimeCodeMarsCheck.Enable": false,
+		"CodeCheck.RealTimeFixbotCheck.Enable": false,
+		"CodeCheck.RealTimeClangTidyCheck.Enable": false,
+		"CodeCheck.AllRelatedRemoteBranch": ""
 	}
 }

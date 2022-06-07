@@ -6,6 +6,8 @@
 #include <set>
 
 
+void lru_cache_test();
+
 void TestPrintDirectories();
 
 void TestMinLenSubArray();

@@ -4,7 +4,9 @@
 
 void leetcode_all_test(){
 
-    TestPrintDirectories();
+    lru_cache_test();
+
+    // TestPrintDirectories();
 
     // TestMinLenSubArray();
     // TestMaxUniqueSubString();

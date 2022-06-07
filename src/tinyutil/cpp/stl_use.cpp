@@ -107,11 +107,11 @@ void stl_use::iterator_use(){
 */
 void stl_use::list_use(){
 
-    //test splice
+    //test splice 剪切: void splice(iter1, list2, iter2) 将list2中iter2指向的元素，剪切到iter1指向的前面；剪切后iter2指向的元素不变，但有可能变成另一个容器中指向该元素的迭代器；返回void；
     std::list<int> li_t{3,4,5,6,9};
     list<int>::iterator itor = li_t.begin();
     std::advance(itor, 2); //point to 5
-    li_t.splice(li_t.end(), li_t, itor); //cut 5 to the end of list
+    li_t.splice(li_t.end(), li_t, itor); //cut 5 to the end of list 剪切li_t容器中itor指向的元素，放到li_t中的end()指针之前; itor 还有效，还指向该元素，可能是另一个容器中了；返回void；
     //itor is valid? yes
     std::cout << "itor is valid?" << *itor << std::endl;
 
@@ -139,18 +139,13 @@ void stl_use::list_use(){
 
     li_t.insert(li_t.begin(), other.begin(), other.end());
 
-
-
-
-    //再现有list的基础上，插入任意位置元素
+    //再现有list的基础上，插入任意位置元素: iterator insert(itor, value) 在itor指向元素前面插入value值，返回最新的value的迭代器
 
     list<int> li_t2 = {3,4,5,6};
-
     auto itor2 = li_t2.begin();
-
     std::advance(itor2, 1);
 
-    itor2 = li_t2.insert(itor2, 10000);  // 3, 10000, 4,5,6  itor2由4指向10000
+    itor2 = li_t2.insert(itor2, 10000);  // 3, 10000, 4,5,6 // 4之前插入10000 并返回新元素的迭代器； itor2由4指向10000
     li_t2.insert(itor2, 100);  // 3, 100，10000, 4，5，6  由于itor2指向10000，所以100插入其之前
     li_t2.insert(itor2, 10);  //itor2没有变动，还是指向10000，此时结果是：3,100，10，10000, 4,5,6
 
