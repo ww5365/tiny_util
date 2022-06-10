@@ -424,10 +424,138 @@ function_score作为可以对子语句自定义打分的语句，使用方式灵
 }
 ```
 
+#### Field Value Factor
+
+应用场景：
+
+
+可能有一种情况，您想要将文档中特定字段的值纳入相关性分数的计算。 比如，希望增加更受欢迎的书籍（按评论数量判断）。 这可以使用field_value_factor函数进行混合打分。
+
+
+``` json
+
+POST /bookdb_index/book/_search
+{
+    "query": {
+        "function_score": {
+            "query": {
+                "multi_match" : {
+                    "query" : "search engine",
+                    "fields": ["title", "summary"]
+                }
+            },
+            "field_value_factor": {
+                "field" : "votes",  # 这个字段的数值算入到相关性得分中，类似离线权重
+                "modifier": "log1p",  # log1p代表： log(1 + x)
+                "factor" : 2          # log(1 + 2 * x)  以10为底的对数
+                "boost_mode": "multiply"  # 评分_score与函数值的积 new_score = old_score * log(1 + factor * field.value())] ; 还可以是sum,min,max,replace;
+                "max_boost": 1.5  #这部分的最大值，不包含_score, 不超过1.5
+            }
+        }
+    },
+    "_source": ["title", "summary", "publish_date", "num_reviews"]
+}
+
+```
+效果有点：
+
+1. 我们可以运行一个常规的multi_match查询，并按num_reviews字段排序，但是我们失去了相关性得分的好处。[思考为什么？ 类似：利用原始分数召回,之后再按照votes重排;  使用的好处是：new_score = old_score * log(1 + factor * field.value())]
+function_score 查询将主查询和函数包括在内。
+2. 有许多附加参数可以调整对原始相关性分数
+（如“ modifier ”，“ factor ”，“boost_mode”等）的增强效果的程度。
+
+使用说明：
+1.function_score 查询将主查询和函数包括在内。
+2.主查询优先执行。
+3.field_value_factor 函数会被应用到每个与主 query 匹配的文档。
+4.每个文档的 votes 字段都 必须 有值供 function_score 计算。如果 没有 文档的 votes 字段有值，那么就 必须 使用 missing 属性 提供的默认值来进行评分计算。
+
+**思考**： 
+这个也给规则性排序提供了个最基本的参考,假设我有个基础分值，使用 ： new_score = old_score * min{log(1 + factor * field.value())],1.5}  或者 new_score = old_score +  min{log(1 + factor * field.value())],1.5}  线性规则计算打分
+
+#### decay_function
+
+decay_function针对数字字段值和目标值的距离计算随距离增大逐渐减小的分数，对geo_point地理点格式同样成立。gauss（高斯函数）、exp（指数函数）、linear（线性函数）都涉及四种用户定义参数：
+
+- origin：目标点，函数中心点，也即最高值
+- offset：从目标点延伸的一段平台距离，在offset之类打分维持中心点一样
+- decay & scale：从offest开始，分数衰减到decay的时候延伸的距离为scale
+
+四个参数和三种decay_function的分数计算可视化如下：
+
+![decay 2d](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/images/decay_2d.png)
+
+关于decay_function具体函数的详细公式与使用，参见[Function score query | Elasticsearch Guide 7.9 | Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/query-dsl-function-score-query.html#function-decay)
 
 
 
+示例：
+用户希望租一个离伦敦市中心近（ { "lat": 51.50, "lon": 0.12} ）且每晚不超过 £100 英镑的度假屋，而且与距离相比， 我们的用户对价格更为敏感
 
+``` console
+{
+  "query": {
+    "function_score": {
+      "functions": [
+        {
+          "gauss": {
+            "location": { 
+              "origin": { "lat": 51.5, "lon": 0.12 },
+              "offset": "2km",
+              "scale":  "3km"
+            }
+          }
+        },
+        {
+          "gauss": {
+            "price": { 
+              "origin": "50", 
+              "offset": "50",
+              "scale":  "20"
+            }
+          },
+          "weight": 2 
+        }
+      ]
+    }
+  }
+}
+
+```
+
+打分和排序的区别，思考：
+
+```
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      },
+      "filter": {
+        "geo_distance": { // 按距离搜索
+          "distance": "1km", // 搜索1千米范围
+          "location": { // 搜索字段为location
+            "lat": 39.889916, // 当前纬度
+            "lon": 116.379547 // 当前经度
+          }
+        }
+      }
+    }
+  },
+  "sort": [ // 设置排序条件
+    {
+      "_geo_distance": { // _geo_distance代表根据距离排序
+        "location": { // 根据location存储的经纬度计算距离。
+          "lat": 39.889916, // 当前纬度
+          "lon": 116.379547 // 当前经度
+        },
+        "order": "asc" // asc 表示升序，desc 表示降序
+      }
+    }
+  ]
+}
+```
 
 
 #### script_score
@@ -451,19 +579,38 @@ function_score作为可以对子语句自定义打分的语句，使用方式灵
 }
 ```
 
-#### decay_function
+### rescore
 
-decay_function针对数字字段值和目标值的距离计算随距离增大逐渐减小的分数，对geo_point地理点格式同样成立。gauss（高斯函数）、exp（指数函数）、linear（线性函数）都涉及四种用户定义参数：
+比function_score性能更高
 
-- origin：目标点，函数中心点，也即最高值
-- offset：从目标点延伸的一段平台距离，在offset之类打分维持中心点一样
-- decay & scale：从offest开始，分数衰减到decay的时候延伸的距离为scale
+结果集重排：重新评分阶段支持一个代价更高的评分算法--比如 phrase 查询--只是为了从每个分片中获得前 K 个结果。 然后会根据它们的最新评分重新排序。
 
-四个参数和三种decay_function的分数计算可视化如下：
+```console
+{
+    "query": {
+        "match": {  
+            "title": {
+                "query":                "quick brown fox",
+                "minimum_should_match": "30%"
+            }
+        }
+    },
+    "rescore": {
+        "window_size": 50, 
+        "query": {         
+            "rescore_query": {
+                "match_phrase": {
+                    "title": {
+                        "query": "quick brown fox",
+                        "slop":  50
+                    }
+                }
+            }
+        }
+    }
+}
 
-![decay 2d](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/images/decay_2d.png)
-
-关于decay_function具体函数的详细公式与使用，参见[Function score query | Elasticsearch Guide 7.9 | Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/query-dsl-function-score-query.html#function-decay)
+```
 
 ## 子语句
 

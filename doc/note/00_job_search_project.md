@@ -1,9 +1,10 @@
 # job search project
 
 
-## project 回溯
+## project 准备进展
 
-2022.5.31  回溯：
+
+### 2022.5.31  回溯：
 
 leetcode : 基本刷了一遍，持续性的
 
@@ -11,11 +12,25 @@ leetcode : 基本刷了一遍，持续性的
 
 project 回顾和准备： 未准备
 
+### 2022.6.10  进展
+
+1.todolist ？
+
+
+2. zijie 面的情况
+
+* 一面：
+  暴露两个问题：
+  1. 项目准备的不充分，介绍项目思路稍有混乱，重点突出什么能力(技术)？ 或者 你想聊什么，突出你的能力？
+  2. ES相关知识，忘了。
+
+
+  leetcode：考察:最小子数组和
 
 
 
 
-### todolist
+## todolist
 
 resume准备 -> leetcode -> jingdong 项目为依托：召回和排序深入 (LTR,Transformer, BERT)  -> 项目 
 
