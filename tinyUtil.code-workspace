@@ -106,7 +106,10 @@
 		"CodeCheck.RelatedRemoteRepo": "https://github.com/ww5365/tiny_util.git",
 		"CodeCheck.RealTimeCodeMarsCheck.Enable": false,
 		"CodeCheck.RealTimeFixbotCheck.Enable": false,
-		"CodeCheck.RealTimeClangTidyCheck.Enable": false,
-		"CodeCheck.AllRelatedRemoteBranch": ""
+		"CodeCheck.RealTimeClangTidyCheck.Enable": true,
+		"CodeCheck.AllRelatedRemoteBranch": "",
+		"wecode-cpp.clangd.diagnosticsMappingFiles": [
+			"d:\\workspace\\gitlab\\tiny_util\\.vscode\\ruleMap.json"
+		]
 	}
 }

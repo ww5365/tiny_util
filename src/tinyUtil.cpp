@@ -149,17 +149,7 @@ int main(int argc, char* argv[]) {
 
     std::cout << (a + b) << std::endl;
 
-
     std::cout << "hello test world!" << std::endl;
-    int n = 4;
-    string tmpStr(n, '.');
-
-    std::cout << "tmpstr: " << tmpStr << std::endl;
-
-    tmpStr[2] = 'Q';
-    
-    std::cout << "tmpstr: " << tmpStr << std::endl;
-
 
 
     // tuple_use_test();

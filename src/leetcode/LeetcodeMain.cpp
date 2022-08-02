@@ -4,6 +4,8 @@
 
 void leetcode_all_test(){
 
+    test_base_6_list();
+
     lru_cache_test();
 
     // TestPrintDirectories();

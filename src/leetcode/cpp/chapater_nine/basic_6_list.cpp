@@ -11,7 +11,7 @@
 void print_list(LNode *head){
     LNode *cur = head;
     cout << "list value: "  << endl;
-    while(cur != nullptr){
+    while(cur){
         if (cur->next){
             cout<< cur->val << " -> ";
         } else {
@@ -93,18 +93,49 @@ LNode* rotate_list(LNode *head,  int k){
  */
 
 
+/*
+* 链表的拆分: 按照奇偶位置，拆分成两个链表
+*/
+
+void SplitList(LNode *head, LNode *&odd, LNode *&even)
+{
+
+    if (!head) {
+        odd = nullptr;
+        even = nullptr;
+    }
+    odd = head;
+    even = head->next;
+    LNode *oddCur = head;
+    LNode *cur = head->next;
+    LNode *evenCur = cur;
+
+    while(cur) {
+        oddCur->next = cur->next;
+        evenCur = cur;
+        cur = cur->next;
+
+        if (cur) {
+            evenCur -> next = cur->next;
+            oddCur = cur;
+            cur = cur->next;
+        }
+    }
+
+    return;
+
+}
 
 
 
-
-void test_base_6_list(){
+void test_base_6_list()
+{
 
     //构造一个链表
 
     LNode *head = nullptr;
     LNode *last = nullptr;
-    for (int i = 1; i <= 5; ++i){
-
+    for (int i = 1; i <= 7; ++i){
         LNode *node = new LNode(i);
         node->next = nullptr;
 
@@ -117,9 +148,17 @@ void test_base_6_list(){
     }
 
 
-    head = rotate_list(head, 1);
+    // head = rotate_list(head, 1);
+    // print_list(head);
 
-    print_list(head);
+    LNode *odd = nullptr;
+    LNode *even = nullptr;
+
+    SplitList(head, odd, even);
+
+    print_list(odd);
+    print_list(even);
+
 
 
 

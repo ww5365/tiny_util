@@ -24,6 +24,7 @@ https://leetcode.cn/problems/word-search/submissions/
 */
 
 const vector<int> directions79 = {-1, 0, 1, 0, -1};
+class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word) {
 
