@@ -650,7 +650,7 @@ void stl_use::priority_queue_use(){
 
     while(!qu_test.empty()){
         std::cout << qu_test.top().get_score() << "\t"
-                <<qu_test.top().get_name() <<std::endl;
+                <<qu_test.top().get_name() <<std::endl;  // 按照姓名的字母表逆序，  成绩从小到大
 
         qu_test.pop();
     }
