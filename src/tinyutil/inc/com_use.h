@@ -9,6 +9,9 @@
 
 #include <iostream>
 
+
+void move_use_test();
+
 void tuple_use_test(); 
 
 void enum_use_test();

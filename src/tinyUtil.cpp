@@ -140,17 +140,8 @@ void fun1(int i) {
 
 int main(int argc, char* argv[]) {
 
-    fun1(1);
-    fun1(nullptr);
 
-
-    unsigned int a = 10;
-    int b = -20;
-
-    std::cout << (a + b) << std::endl;
-
-    std::cout << "hello test world!" << std::endl;
-
+    move_use_test();
 
     // tuple_use_test();
     
@@ -161,6 +152,7 @@ int main(int argc, char* argv[]) {
 
     //leetcode 目录下testcase
     leetcode_all_test();
+
 
     //nlohmann使用
     // json_test();
@@ -202,7 +194,7 @@ int main(int argc, char* argv[]) {
 
     //字符串相关的测试使用
 
-    string_use_test2();
+    // string_use_test2();
     
     // //字符串测试
     // string_using_test();
@@ -249,7 +241,7 @@ int main(int argc, char* argv[]) {
 
     // stl_use::vector_use();
     // stl_use::deque_use();
-    stl_use::priority_queue_use();
+    // stl_use::priority_queue_use();
 
     // std::shared_ptr<vector<string> > content;
     // cout << "test shared_ptr use cnt1: " << content.use_count() << endl;
@@ -356,7 +348,7 @@ int main(int argc, char* argv[]) {
     // delete ptr;
 
     // //set使用测试
-    stl_use::set_use();
+    // stl_use::set_use();
     // stl_use::list_use();
     // stl_use::iterator_use();
     // stl_use::map_use();
