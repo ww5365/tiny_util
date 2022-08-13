@@ -81,7 +81,7 @@ public:
         return *this;
     }
 
-
+    // 移动构造函数
     MyString(MyString &&moveSrc)
     {
         cout << "Move constructor called, move from: " << moveSrc.buffer << endl;
@@ -97,7 +97,6 @@ public:
         cout << "Move assignment op. move: " << moveSrc.buffer << endl;
         if ((moveSrc.buffer != nullptr) && (this != &moveSrc)) {
             delete[] buffer;
-
             buffer = moveSrc.buffer;
             moveSrc.buffer = nullptr;
         }
@@ -122,6 +121,14 @@ void move_use_test()
     // hello + word ： 默认构造 + return之前的copy构造(可能会被编译器优化，直接作为上层调用函数的临时变量)
     //  hello word + cpp : 默认构造 +  return之前的copy构造 (如上)
     //  使用 = 的赋值运算
+
+    
+    cout << "--------trigger move constructor function -------" << endl;
+    MyString g_str("test");
+    MyString s = std::move(g_str);
+
+    MyString s2 = MyString("test2");
+    MyString s3 = "test3";
 
 
     cout << "finish test mem_use_test --------" << endl;

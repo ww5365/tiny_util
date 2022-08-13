@@ -274,7 +274,7 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 * 基类大小多出来4个字节，即一个指针，指向虚函数表（函数指针数组，元素为函数地址）
 * 派生类会继承基类的虚函数表
 * 如果派生类有重写，那么重写的函数地址会覆盖虚函数表中基类的该函数的地址。
-* 调用函数时，回去虚函数表中找到函数。
+* 调用函数时，会去虚函数表中找到函数。
 * 但类对象的虚函数指针永不会变，永远都指向所属类的虚函数表
 * 只有当使用指针或引用时，虚函数指针才会指向继承类的虚函数表
   
@@ -308,6 +308,28 @@ const_cast ：用于移除对象的 const 属性，使对象变得可修改，�
 	}
 	// 输出：Derived Base Derived
 ```
+
+```c++
+class Base {
+public:
+   virtual ~Base(){}
+   virtual void fun1() { std::cout<<"Base Fun1 "; }
+   virtual void fun2() { std::cout<<"Base Fun2 "; }
+   virtual void fun3() { fun2(); };
+};
+
+class Derived : public Base {
+public:
+   virtual void fun1() {
+       std::cout<<"Derived Fun1 ";
+       fun3();
+  }
+   virtual void fun2() { std::cout<<"Derived Fun2 "; }
+};
+
+// 输出：Derived Fun1 Derived Fun2;
+````
+
 
 虚函数绑定: 
 * 两个层面的绑定： 运行时函数绑定 -- 动态绑定;  虚函数参数的绑定 -- 静态绑定，编译期间。
