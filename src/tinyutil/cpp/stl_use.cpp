@@ -194,6 +194,25 @@ void stl_use::set_use() {
     for (auto iter = heap.rbegin(); iter != heap.rend(); ++iter){
         std::cout << "set mock heap reverse order: " << *iter << std::endl;
     }
+    // 删除元素
+    /*
+    删除 set 容器中值为 val 的元素 size_type erase (const value_type& val);
+    删除 position 迭代器指向的元素  iterator  erase (const_iterator position);
+    删除 [first,last) 区间内的所有元素  iterator  erase (const_iterator first, const_iterator last);
+
+    其中，第 1 种格式的 erase() 方法，其返回值为一个整数，表示成功删除的元素个数；后 2 种格式的 erase() 方法，返回值都是迭代器，其指向的是 set 容器中删除元素之后的第一个元素。
+    */
+
+
+    // set 中的元素不能通过iterator直接修改
+
+
+    // insert iterator insert( iterator hint, const value_type& value ); 从iterator初开始查找插入位置，把value插到set中
+
+
+
+
+    
 
     // 返回最后一个 key<=keyElem 元素的迭代器：st.lower_bound(keyElem);  比如： 1 2 7 9 st.lower_bound(2) 返回指向2的迭代器
     // 返回第一个 key>keyElem 元素的迭代器： st.upper_bound(keyElem); 比如： 1 2 7 9 st.upper_bound(2) 返回指向7的迭代器

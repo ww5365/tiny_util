@@ -108,7 +108,55 @@ private:
 ```
 
 
+* enum 使用规范
 
+enum class TestEnum {
+RED,
+YELLOW,
+BLUE
+};
+
+标准： 建议使用enum class  或  enum  struct   类型安全的枚举类
+
+细节规范参考：enum_use.cpp 
+
+* namespace 使用规范
+
+G.INC.12-CPP 对于cpp文件中不需要导出的变量、常量或函数，应使用匿名namespace封装或者使用static修饰 ，更建议:namespace
+
+G.INC.09-CPP 头文件中禁止向全局命名空间中导入符号, 可以在模块自定义命名空间中以及类、函数等局部作用域中使用它们.
+
+
+```
+// Foo.h
+#include <mylib/string>
+using namespace mylib; // 不符合：禁止向全局命名空间导入
+using mylib::string; // 不符合：禁止向全局命名空间导入符号
+
+
+// Foo.h
+namespace Foo {
+using mylib::string; // 符合：可以在模块自定义命名空间中导入符号
+void Foo()
+{
+using namespace mylib; // 符合：在函数作用域内使用using-directive
+...
+}
+}
+```
+
+* vector<int> 中标准库的使用
+
+remove, remove_if, remove_copy, remove_copy_if
+erease, erease_if
+
+
+* strdup  
+
+* 线程安全同步
+  promise 
+  future
+  
 
 
 
@@ -117,4 +165,26 @@ private:
 
 * gdb查看内存数据
   格式: x /nfu  ADDR
+
+
+## 测试
+
+* 地址消毒 ？
+
+地址消毒技术，一种兼顾性能和功能的新型工具。 地址消毒技术可以找到越界错误（关于堆，栈，全局变量）以及释放后使用错误，仅降低系统73%的运行速度和消耗3.4倍的内存。 这使得它是个全面测试C/C++应用程序的好的选择。 地址消毒技术由两部分组成：一个模块和一个运行时库。
+
+
+ASAN/KASan，也即地址消毒技术，通过编译插桩，能够发现此3类型问题：内存泄露，堆/栈/全局变量读写溢出，将问题直接打印出来；
+ASCan：检测用户态堆，栈，全局变量读写溢出等20多种类错误
+KASan：
+即Kernel中的ASAN，Kernel Address Sanitizer，是内核中动态检测内存非法访问的工具，可以检测常见的内存访问错误，如：释放后访问（use-after-free），访问越界（out-of-bounds）
+
+LSAN是ASAN的一部分，只做内存泄漏检测。
+TSAN：
+Thread Sanitizer，即线程消毒，针对C/C++数据竞争检测工具。数据竞争是多线程系统中最常见和最难调试的问题；与ASAN冲突，需单独编译版本；
+
+http://3ms.huawei.com/hi/group/2029293/thread_8461144.html?mapId=10280992
+
+http://3ms.huawei.com/km/groups/2705403/blogs/details/10488871
+
 
