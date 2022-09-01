@@ -171,7 +171,9 @@ execute_process(COMMAND bash -c "export LD_LIBRARY_PATH=./tool:./lib:$LD_LIBRARY
 #test print 关键信息
 message(STATUS "test ww source dir: ${CMAKE_SOURCE_DIR}")
 
+# CMAKE_RUNTIME_OUTPUT_DIRECTORY  用于设置 RUNTIME 目标的输出路径  生成的bin文件放在这里的
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/output/bin)
+
 set(CFLAGS "${CFLAGS} -fstack-protector-strong -fPIE")  # fPIE : -fPIC用于生成动态库，-fPIE用与生成可执行文件。再说得直白一点：-fPIE用来生成位置无关的可执行代码.位置无关可执行程序是一种比较有趣的程序。这种程序像动态库一样，可以自由加载到内存中任意合适的位置执行
 
 #set 设置环境变量 

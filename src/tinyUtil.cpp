@@ -140,20 +140,7 @@ void fun1(int i) {
 
 int main(int argc, char* argv[]) {
 
-
-
-ii
-
-ii
-
-
-
-
-
-
-
-
-
+    
     // mem_use_test();
 
     // move_use_test();
@@ -199,8 +186,8 @@ ii
     //    cout << "a not equal b !" << endl;
     //}
 
-    // string test_macro = "wangwei";
-    // TEST_MACRO(test_macro);
+    string test_macro = "wangwei";
+    TEST_MACRO(test_macro);
 
     //vector的使用测试
 
