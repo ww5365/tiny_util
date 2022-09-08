@@ -1,6 +1,12 @@
 # linux shell常用命令学习
 
 
+## 查看系统版本信息
+
+lsb_release -a
+cat /etc/os-release
+
+
 ## 文件
 
 ### readlink
