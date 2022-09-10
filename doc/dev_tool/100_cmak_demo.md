@@ -188,7 +188,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${LDFLAGS} -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,no
 message(STATUS "test ww cmake current source dir: ${CMAKE_CURRENT_SOURCE_DIR}  cmake_cxx_flags: ${CMAKE_CXX_FLAGS}  ld_flags:${CMAKE_EXE_LINKER_FLAGS}")
 
 # 头文件搜索目录:include_directories命令时使用AFTER或BEFORE选项来指定是添加到列表的前面或者后面
-include_directories(BEFORE "${CMAKE_CURRENT_BINARY_DIR}/")  #CMAKE_CURRENT_BINARY_DIR cmake 命令执行的目录
+include_directories(BEFORE "${CMAKE_CURRENT_BINARY_DIR}/")  #CMAKE_CURRENT_BINARY_DIR cmake 命令执行的目录; 可以临时改变行为，添加到列表最前面
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/src")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/proto")
 include_directories(BEFORE "${CMAKE_CURRENT_BINARY_DIR}/third_party")

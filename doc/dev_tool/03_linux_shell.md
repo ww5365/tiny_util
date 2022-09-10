@@ -6,6 +6,13 @@
 lsb_release -a
 cat /etc/os-release
 
+##  压缩和解压
+
+解压tar.gz命令是
+tar -zxvf xx.tar.gz
+
+解压tar.bz2的命令是
+tar -jxvf xx.tar.bz2
 
 ## 文件
 
