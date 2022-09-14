@@ -1,7 +1,6 @@
 # GCC 使用
 
 
-
 ## fPIC
 
 
@@ -80,3 +79,5 @@ int func1(int a)
 
 1、[linux编译动态库 fPIC作用](https://www.cnblogs.com/fengliu-/p/10216878.html)
 
+
+## .a 和 .so 库生成和使用

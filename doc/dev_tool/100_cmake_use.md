@@ -280,7 +280,7 @@ add_library(MyLib_static STATIC $<TARGET_OBJECTS:objlib>)
 
 * 设置源码文件搜索规则
 ``` cmake
-aux_source_directory(./src/ DIR_SRCS) ## 扫描 ./src/ 下的所有源文件，并将文件名存入DIR_SRCS中
+aux_source_directory(./src/ DIR_SRCS) ## 扫描 ./src/ 下的所有源文件，并将文件名存入DIR_SRCS中; 多次重复使用aux_source_directory,不会覆盖变量中值，而是append的方式。
 list(REMOVE_ITEM DIR_SRCS "./src/main.cpp")  ## 排除./src/main.cpp文件
 add_executable(main ${DIR_SRCS}) ## ${DIR_SRCS}所有源文件 main是可执行文件名
 FILE(GLOB SOURCE_1 "${CMAKE_SOURCE_DIR}/src/*.cpp")  ##自定义的文件搜索规则；GLOB 会产生一个由所有匹配globbing表达式的文件组成的列表，并将其保存到变量中。Globbing 表达式与正则表达式类似，但更简单。
@@ -479,6 +479,10 @@ TARGET_LINK_LIBRARIES(sayhello ${hello}) ##将libhello.so链接到可执行文�
 
 
 
+## cmake几个使用待思考点
+
+
+1. aux_
 
 
 
