@@ -153,7 +153,7 @@ int main(int argc, char* argv[]) {
     // map_use_test();
 
     //leetcode 目录下testcase
-    // leetcode_all_test();
+    leetcode_all_test();
 
 
     //nlohmann使用

@@ -4,6 +4,8 @@
 
 void leetcode_all_test(){
 
+    TestRerankList();
+
     test_base_6_list();
 
     lru_cache_test();

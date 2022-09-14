@@ -6,6 +6,8 @@
 #include <set>
 
 
+void TestRerankList();
+
 void lru_cache_test();
 
 void TestPrintDirectories();
