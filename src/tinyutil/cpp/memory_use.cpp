@@ -11,6 +11,7 @@
 #include <map>
 #include <memory>
 #include <fstream>
+#include <vector>
 
 
 /*
@@ -111,8 +112,28 @@ void unique_ptr_use()
     std::cout << "unique_ptr test p3:  " << p3.get() << " p1:  " << p1.get() << std::endl; // p1 为空了
 }
 
+void shared_ptr_use()
+{
+
+    // 定义一个指向：vector<int> 类型的指针,类似vector<int> *ptr = new vector<int>(3); 定义指向一个vector<int>的指针，并且这个vector<int> 大小初始化为3
+    std::shared_ptr<std::vector<int> > ptr(new std::vector<int>(10, 2)); 
+    std::cout << "shared ptr point vector<int> size: " << ptr->size() << std::endl;
+    std::cout << "shared ptr point vector<int> first elem: " << ptr->at(0)<< std::endl;
+
+    // 定义指向： vector<int> [4] 类型的指针, 类似vector<int> *ptr2 = new vector<int>[3]
+
+    std::shared_ptr<std::vector<int>> ptr2 (new std::vector<int>[3], [](std::vector<int> *p){delete []p;});
+    //类似指针使用
+    auto realPtr2 = ptr2.get();
+    realPtr2[0].push_back(1);
+    realPtr2[1].push_back(2);
+
+    std::cout << "ptr2 size---"<< realPtr2[0].size()  << std::endl;
+
+}
 
 void mem_use_test()
 {
     unique_ptr_use();
+    shared_ptr_use();
 }
