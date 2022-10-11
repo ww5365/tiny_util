@@ -16,6 +16,8 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+#include <chrono>
+
 using std::cout;
 
 int get_current_idx(int, int);
@@ -23,24 +25,38 @@ time_t get_next_time();
 void utc_to_localtime();
 void accurate_time();
 void sleep_time();
+void chrono_use();
 
 void time_use_test(){
 
+    // chrono 使用
+    chrono_use();
     //
     get_current_idx(4, 20);
     //get_current_idx(4, 120);
     //get_next_time();
     utc_to_localtime();
-
     accurate_time();
-
     Timer timer;
-
     sleep_time();
-
     cout << "the program run time: " << timer.elapse() << " us "<<std::endl;
+}
+
+void chrono_use() {
+
+    /*
+    chrono : 是从boost库中演进到std的，c++11
+    */
+    // 获取当前的系统时间
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    // 距离1970到现在的纳秒数： 10^-9 s
+    std::chrono::nanoseconds d = now.time_since_epoch();
+    std::cout << "current system clock: " << d.count() << std::endl;
 
 }
+
+
+
 
 /*
 *  time_t:
