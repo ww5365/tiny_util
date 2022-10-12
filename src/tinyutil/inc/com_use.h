@@ -9,6 +9,7 @@
 
 #include <iostream>
 
+void thread_pool_test();
 
 void move_use_test();
 

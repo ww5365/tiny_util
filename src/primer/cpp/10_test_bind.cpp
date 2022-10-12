@@ -71,7 +71,7 @@ void test_10_bind(){
      *
      */
 
-    typedef function<int(const string &str)> FunType; //函数类型指针
+    typedef function<int(const string &str)> FunType; //函数对象类型指针
 
     FunType newf = std::bind(fun, std::placeholders::_1, number);
     ++number;

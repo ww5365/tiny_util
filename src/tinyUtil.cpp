@@ -140,7 +140,8 @@ void fun1(int i) {
 
 int main(int argc, char* argv[]) {
 
-    
+
+     thread_pool_test(); 
     // mem_use_test();
 
     // move_use_test();
@@ -343,7 +344,7 @@ int main(int argc, char* argv[]) {
 
     // //时间的测试
 
-    time_use_test();
+    // time_use_test();
 
     // //直接delete null指针，会不会core？
     // char *ptr = NULL;
