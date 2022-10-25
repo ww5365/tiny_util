@@ -110,6 +110,12 @@
 		"CodeCheck.AllRelatedRemoteBranch": "",
 		"wecode-cpp.clangd.diagnosticsMappingFiles": [
 			"d:\\workspace\\gitlab\\tiny_util\\.vscode\\ruleMap.json"
-		]
+		],
+		"CodeCheck.TaskIdsUpdateTime": "2022-10-23 05:56:48",
+		"CodeCheck.TaskIdsForRemoteUrl": "https://github.com/ww5365/tiny_util.git",
+		"CodeCheck.TaskIdsForRemoteBranch": "",
+		"CodeCheck.TaskIds": "",
+		"CodeCheck.SubRepoTaskIdsInfo": {},
+		"CodeCheck.RelatedRemoteBranch": ""
 	}
 }

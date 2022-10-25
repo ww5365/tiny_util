@@ -140,6 +140,10 @@ void fun1(int i) {
 
 int main(int argc, char* argv[]) {
 
+    unsigned long tt = time(nullptr);
+
+    std::cout << "time result: " << tt << std::endl;
+
 
      thread_pool_test(); 
     // mem_use_test();
@@ -299,7 +303,7 @@ int main(int argc, char* argv[]) {
 
     // test_design_pattern();
 
-    // algorithm_use();
+    algorithm_use();
 
     // //size 大小计算
 
