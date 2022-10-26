@@ -178,7 +178,7 @@ set(CFLAGS "${CFLAGS} -fstack-protector-strong -fPIE")  # fPIE : -fPIC用于生�
 
 #set 设置环境变量 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CFLAGS} -g -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -L${CMAKE_CURRENT_SOURCE_DIR}/../lib -lcurl -ldl -lrt -O3")   #  -g -O3  error: -L 库的搜索路径设置错了？
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__FILENAME__='\"$(notdir $(abspath $<))\"'")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__FILENAME__='\"$(notdir $(abspath $<))\"'")  # 可以使用宏定义 __FILENAME__
 set(CMAKE_CXX_STANDARD 17)  # specify the C++ standard
 set(CMAKE_STATIC_LINKER_FLAGS "${LDFLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${LDFLAGS} -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -pie -s")
