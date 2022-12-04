@@ -6,17 +6,27 @@
 
 如要安装的软件如下：
 
-- [wecode](http://wecode.huawei.com/Home)，直接下载安装
-- [mingw64](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/)，下载`x86_64-posix-seh`，解压到`C:\mingw64`下，并在环境变量PATH配置`C:\mingw64\bin`。同时把`bin`目录下`mingw32-make.exe`重新copy，重命名为`make.exe`。使用命令`gcc -v`和`g++ -v`，检验安装是否成功
+- [vscode](https://code.visualstudio.com/DownloadF)，直接下载安装
+- [mingw64](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/)，下载`x86_64-posix-seh`，[结构化异常处理:SEH Structured Exception Handling Windows使用自己的异常处理机制]; 解压到`C:\mingw64`下，并在环境变量PATH配置`C:\mingw64\bin`。同时把`bin`目录下`mingw32-make.exe`重新copy，重命名为`make.exe`。使用命令`gcc -v`和`g++ -v`，检验安装是否成功
 - [cmake](https://cmake.org/download/)，下载完解压，并将`bin`配置到环境变量PATH下。使用`cmake --version`检验安装是否成功
 - [plink](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)，用于远程编译和调试
+
+## 2. vscode插件
 
 需要安装插件：
 - cmake , cmake tools
 - c/c++
+  搜索 c/c++，选择第一个安装即可
 - sftp
+- Visual Studio IntelliCode
+  是一组AI辅助功能，可通过上下文智能感知，参数完成，代码格式和样式规则推断等功能提高开发人员的工作效率。
+- code runer
+  
+  
+## 3.vscode 配置
 
-wecode配置： ctrl+shift+p -> 首选项：打开设置(json)，新增如下配置，涉及**字体**、**编码**、**目录树缩进**、**ctrl+鼠标滚轮调整字体大小**，**markdown配置**
+### 3.1 vscoe基本配置
+ctrl+shift+p -> 首选项：打开设置(json)，新增如下配置，涉及**字体**、**编码**、**目录树缩进**、**ctrl+鼠标滚轮调整字体大小**，**markdown配置**
 
 ``` json
 {
@@ -42,82 +52,6 @@ wecode配置： ctrl+shift+p -> 首选项：打开设置(json)，新增如下配
 
 注意`"files.eol": "\n"`表示换行符是LF，同时建议git config设置`core.autocrlf=false`，方便windows与linux文件同步
 
-## 2. cmake编译项目
-
-### 2.1 cmake介绍
-cmake命令将CMakeLists.txt文件转化为make所需要的makefile文件，最后用make命令编译源码生成可执行程序或共享库（so(shared object)）。
-
-cmake  指向CMakeLists.txt所在的目录，例如cmake .. 表示CMakeLists.txt在当前目录的上一级目录。
-cmake后会生成很多编译的中间文件以及makefile文件，所以一般建议新建一个新的目录，专门用来编译，例如
-
-``` shell
-mkdir build
-cd build
-cmake ..
-make  //根据生成makefile文件，编译程序。
-```
-
-### 2.2 cmake的配置及编译
-
-* VsCode设置Makefile类型：
-  文件>首选项>设置>搜索cmake: generator
-  设置为”MinGw Makefiles”或者” Unix Makefiles”，这相当于运行cmake –G “MinGw Makefiles” .
-
-* VsCode中cmake全部配置：
-  ctrl + shift + p -> cmake -> edit cmake cache 也可以修改cmake配置,运行环境
-
-* cmake 命令：关键编译时生成complie_commands.json文件，用来进行代码的跳转
-
-  > -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE 
-  >
-  > 或者
-  >
-  > set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-  
-  
-
-
-``` shell
-# configure the project and generate a native build system: 
-cmake    "-GNinja" \   # 配置使用Ninja来进行构建和编译；指定构建系统生成器,生成build.ninja文件
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \  #  指定生成的Makefile的编译模式：Debug /Release
-        -DENABLE_COVERAGE=OFF \
-        -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \  # 其生成的文件compile_commands.json，包含所有编译单元所执行的指令; 同：cmakelist.txt中set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-        -DSERVICE_VERSION=$SERVICE_VERSION \
-        -DPROJECT_VERSION=$PROJECT_VERSION \
-        -DOUTPUT_DIR=$BUILD_RELEASE_DIR \
-        -DCMAKE_C_FLAGS="${SAFE_FLAGS}" \
-        -DCMAKE_CXX_FLAGS="${SAFE_FLAGS}" \  #指定编译参数;同set(CMAKE_CXX_FLAGS   "${SAFE_FLAGS}")
-        -DNATIVE_EXECUTABLES_DIR=$BUILD_EXECUTABLES_DIR \
-        -DCOMPILIE_PREBUILD=$COMPILIE_PREBUILD \
-        -DBUILD_COMMON_DIR=$BUILD_OBJ_COMMON \
-        -DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOL_CHAIN_FILE ${SOURCE_DIR} 2>&1 | tee -a $LOG_FILE
-
-# Then call that build system to actually compile/link the project
-cmake --build . --target  rankengine_all  
-# --build是指定CMakeCache.txt（或CMakeFiles文件夹）所在的路径;在此目录中构建二进制树
-
-cmake --no-warn-unused-cli \
--DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
--DCMAKE_BUILD_TYPE:STRING=Debug \
--DCMAKE_C_COMPILER:FILEPATH=C:\msys64\mingw64\bin\x86_64-w64-mingw32-gcc.exe \
--DCMAKE_CXX_COMPILER:FILEPATH=C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe \
--Hg:i1Protocol \
--Bg:i1Protocol/build \
--G Ninja
-#-H定义home目录也就是主CMakeLists.txt所在目录
-#-B定义build编译生成目录
-#-G定义generator-name生成的编译规则文件类型
-  -S <path-to-source>          = Explicitly specify a source directory.
-  -B <path-to-build>           = Explicitly specify a build directory.
-  -C <initial-cache>           = Pre-load a script to populate the cache.
-  -D <var>[:<type>]=<value>    = Create or update a cmake cache entry.
-  -U <globbing_expr>           = Remove matching entries from CMake cache.
-  -G <generator-name>          = Specify a build system generator.
-  -T <toolset-name>            = Specify toolset name if supported by
-
-```
-
 
 ### 2.3 task.json配置及运行
 
@@ -125,6 +59,11 @@ cmake --no-warn-unused-cli \
   ctrl + shift + p -> tasks: configure default task  生成task.json
 * task.json使用：
   workspaceFolder: [vs预定义变量全部](https://code.visualstudio.com/docs/editor/variables-reference)
+
+
+ctrl + shift + b : 选择不同的task任务执行
+shift + f5 : run without debug
+
 
   ``` json
   {
@@ -204,8 +143,85 @@ cmake --no-warn-unused-cli \
   
   ```
 
-ctrl + shift + b : 选择不同的task任务执行
-shift + f5 : run without debug
+
+## 2. cmake编译项目
+
+### 2.1 cmake介绍
+cmake命令将CMakeLists.txt文件转化为make所需要的makefile文件，最后用make命令编译源码生成可执行程序或共享库（so(shared object)）。
+
+cmake  指向CMakeLists.txt所在的目录，例如cmake .. 表示CMakeLists.txt在当前目录的上一级目录。
+cmake后会生成很多编译的中间文件以及makefile文件，所以一般建议新建一个新的目录，专门用来编译，例如
+
+``` shell
+mkdir build
+cd build
+cmake ..
+make  //根据生成makefile文件，编译程序。
+```
+
+### 2.2 cmake的配置及编译
+
+* VsCode设置Makefile类型：
+  文件>首选项>设置>搜索cmake: generator
+  设置为”MinGw Makefiles”或者” Unix Makefiles”，这相当于运行cmake –G “MinGw Makefiles” .
+
+* VsCode中cmake全部配置：
+  ctrl + shift + p -> cmake -> edit cmake cache 也可以修改cmake配置,运行环境
+
+* cmake 命令：关键编译时生成complie_commands.json文件，用来进行代码的跳转
+
+  > -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE 
+  >
+  > 或者
+  >
+  > set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+  
+  
+
+
+``` shell
+# configure the project and generate a native build system: 
+cmake    "-GNinja" \   # 配置使用Ninja来进行构建和编译；指定构建系统生成器,生成build.ninja文件
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \  #  指定生成的Makefile的编译模式：Debug /Release
+        -DENABLE_COVERAGE=OFF \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \  # 其生成的文件compile_commands.json，包含所有编译单元所执行的指令; 同：cmakelist.txt中set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+        -DSERVICE_VERSION=$SERVICE_VERSION \
+        -DPROJECT_VERSION=$PROJECT_VERSION \
+        -DOUTPUT_DIR=$BUILD_RELEASE_DIR \
+        -DCMAKE_C_FLAGS="${SAFE_FLAGS}" \
+        -DCMAKE_CXX_FLAGS="${SAFE_FLAGS}" \  #指定编译参数;同set(CMAKE_CXX_FLAGS   "${SAFE_FLAGS}")
+        -DNATIVE_EXECUTABLES_DIR=$BUILD_EXECUTABLES_DIR \
+        -DCOMPILIE_PREBUILD=$COMPILIE_PREBUILD \
+        -DBUILD_COMMON_DIR=$BUILD_OBJ_COMMON \
+        -DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOL_CHAIN_FILE ${SOURCE_DIR} 2>&1 | tee -a $LOG_FILE
+
+# Then call that build system to actually compile/link the project
+cmake --build . --target  rankengine_all  
+# --build是指定CMakeCache.txt（或CMakeFiles文件夹）所在的路径;在此目录中构建二进制树
+
+cmake --no-warn-unused-cli \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_BUILD_TYPE:STRING=Debug \
+-DCMAKE_C_COMPILER:FILEPATH=C:\msys64\mingw64\bin\x86_64-w64-mingw32-gcc.exe \
+-DCMAKE_CXX_COMPILER:FILEPATH=C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe \
+-Hg:i1Protocol \
+-Bg:i1Protocol/build \
+-G Ninja
+#-H定义home目录也就是主CMakeLists.txt所在目录
+#-B定义build编译生成目录
+#-G定义generator-name生成的编译规则文件类型
+  -S <path-to-source>          = Explicitly specify a source directory.
+  -B <path-to-build>           = Explicitly specify a build directory.
+  -C <initial-cache>           = Pre-load a script to populate the cache.
+  -D <var>[:<type>]=<value>    = Create or update a cmake cache entry.
+  -U <globbing_expr>           = Remove matching entries from CMake cache.
+  -G <generator-name>          = Specify a build system generator.
+  -T <toolset-name>            = Specify toolset name if supported by
+
+```
+
+
+
 
 ### 2.4 launch.json 配置debug
 
