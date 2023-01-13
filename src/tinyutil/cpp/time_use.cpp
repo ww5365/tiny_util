@@ -117,6 +117,11 @@ int get_current_idx(int period, int delay){
     //  int tm_isdst;      夏令时标识符，实行夏令时的时候，tm_isdst为正。不实行夏令时为0；不了解情况时，tm_isdst()为负。
     //  *
     //  */
+    
+    /*
+    localtime() 与gmtime()函数都可以将时间戳time_t类型的时间换算成分解时间struct tm 。区别在于gmtime()是转换成标准时间，即UTC时间 localtime() 会考虑时区的因素
+    */
+    
     // localtime_r(&now, &ptm);//获取当前时间now（日期）
 
     // cout << "sec: " << ptm.tm_sec << " "
