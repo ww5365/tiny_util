@@ -100,8 +100,7 @@ void com_map_use() {
 
     // map 定义 初始化
     map<string, string> mTest{{"bba", "val1"}};
-
-
+    
     // pair make_pair map  往map中插入元素
     pair<int, string> pa(1, "wang"); //直接初始化
     pair<int, string> pb;
@@ -156,12 +155,14 @@ void com_map_use() {
     mTest.insert(make_pair("baa", "val2"));
     for_each(mTest.cbegin(), mTest.cend(), [](const pair<string, string>& elem){ std:: cout << elem.first << " : " << elem.second << std::endl;}); // 按照string的字典序输出 : baa, bba
     std::cout << std::endl;
-
+ 
+ 
     /*
      map: 按照key进行排序  eg：按照key降序排序输出,  这是定义时实现，如果按照value排序呢？
     */
 
-    map<string, int, CmpFun<string>> mTest2;
+    // std::map<string, int, CmpFun<string> > mTest2;
+      std::map<string, int> mTest2;
     mTest2.insert(make_pair("niu", 1));
     mTest2.insert(make_pair("wang", 2));
     mTest2.insert(make_pair("ni", 3));
