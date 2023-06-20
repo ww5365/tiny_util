@@ -10,6 +10,8 @@ https://www.cnblogs.com/tmpUser/p/15092467.html  【推荐算法】AUC的计算�
 https://blog.csdn.net/pearl8899/article/details/126129148  AUC的两种计算方式
 https://zhuanlan.zhihu.com/p/411010918   谈auc的计算
 
+AUC是一根竖线，是什么场景？
+
 multi_logloss ： 多分类的对数损失函数
 参考：
 https://blog.csdn.net/Linyi_DanielWu/article/details/108278465
