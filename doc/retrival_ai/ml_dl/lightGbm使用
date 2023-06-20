@@ -1,3 +1,7 @@
+KFold 交叉验证
+从过拟合的角度上讲，N折交叉验证是防止过拟合的手段之一，它是以寻找最佳模型的方式防止过拟合
+
+
 AUC计算
 https://www.cnblogs.com/tmpUser/p/15092467.html  【推荐算法】AUC的计算方法
 https://blog.csdn.net/pearl8899/article/details/126129148  AUC的两种计算方式
