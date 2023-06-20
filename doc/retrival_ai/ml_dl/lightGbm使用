@@ -35,3 +35,9 @@ https://blog.csdn.net/weixin_44414593/article/details/108727307
 
 lambda_l2 分析
 https://www.jianshu.com/p/a86b39f0b151
+
+
+lightGBM 底层原理和xgboost的异同：
+
+LightGBM = XGBoost + Histogram + GOSS + EFB。
+https://blog.csdn.net/pearl8899/article/details/106159264
