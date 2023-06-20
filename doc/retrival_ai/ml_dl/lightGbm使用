@@ -1,4 +1,16 @@
 
 
+multi_logloss ： 多分类的对数损失函数
+
+
+参考：
+https://blog.csdn.net/Linyi_DanielWu/article/details/108278465
+
+
+lightGBM 使用
+
 参考：
 https://www.biaodianfu.com/lightgbm.html
+https://lightgbm.cn/docs/7/   # 官方文档
+https://zhuanlan.zhihu.com/p/376485485  LightGBM参数设置，看这篇就够了  
+https://www.showmeai.tech/article-detail/205  https://www.showmeai.tech/article-detail/205
