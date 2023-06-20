@@ -41,3 +41,7 @@ lightGBM 底层原理和xgboost的异同：
 
 LightGBM = XGBoost + Histogram + GOSS + EFB。
 https://blog.csdn.net/pearl8899/article/details/106159264
+
+lightGBM的训练预测和分析等使用
+https://aitechtogether.com/article/17905.html
+https://blog.51cto.com/showmeai/5133227
