@@ -49,8 +49,17 @@ https://aitechtogether.com/article/17905.html
 https://blog.51cto.com/showmeai/5133227
 https://blog.csdn.net/weixin_44953928/article/details/123426233
 
+lightgbm c++ 使用
+https://gist.github.com/cbecker/fb628bec3c179fc49617ba369cbb1aab 
 
 孟子社区：
 无意中发现的学习机器学习，深度学习和NLP课程的资料汇总：
 https://www.langboat.com/mengzi/course/basics/7-nlp
 http://nlp.seas.harvard.edu/annotated-transformer/  ： 这个是havard的对transformer的解析的blog
+
+
+
+lightgbm应用：
+
+量化交易策略：
+https://www.joinquant.com/view/community/detail/562c2d23d3d035f89991b33a2138089a     手把手教你LGB+Alpha260+TopKDropN策略  
