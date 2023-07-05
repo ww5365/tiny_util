@@ -35,6 +35,7 @@ http://xn--48st0qbtbj02b.com/index.php/2021/09/22/lgb-cv.html
 https://blog.csdn.net/weixin_44414593/article/details/108727307
 
   early_stopping_rounds ： 重点理解这个参数？
+  stopping_rounds=15指如果验证集的误差在15次迭代内没有降低，则停止迭代  这个误差不降低的数据，我怎么去验证？
 
 
 
