@@ -37,6 +37,24 @@ https://blog.csdn.net/weixin_44414593/article/details/108727307
   early_stopping_rounds ： 重点理解这个参数？
   stopping_rounds=15指如果验证集的误差在15次迭代内没有降低，则停止迭代  这个误差不降低的数据，我怎么去验证？
 
+  ``` python
+  from lightgbm import log_evaluation, early_stopping
+  callbacks = [log_evaluation(period=1), early_stopping(stopping_rounds=10)]
+# 打开log记录
+[49]    cv_agg's multi_logloss: 1.15338 + 0.0087536
+[50]    cv_agg's multi_logloss: 1.15362 + 0.00885681
+[51]    cv_agg's multi_logloss: 1.1535 + 0.00865666
+[52]    cv_agg's multi_logloss: 1.15359 + 0.00869833
+[53]    cv_agg's multi_logloss: 1.15353 + 0.00839901
+[54]    cv_agg's multi_logloss: 1.15358 + 0.00833005
+[55]    cv_agg's multi_logloss: 1.15385 + 0.00771347
+[56]    cv_agg's multi_logloss: 1.15402 + 0.00734993
+[57]    cv_agg's multi_logloss: 1.15404 + 0.00722902
+[58]    cv_agg's multi_logloss: 1.15437 + 0.00715347
+[59]    cv_agg's multi_logloss: 1.15444 + 0.00744138
+Early stopping, best iteration is:
+[49]    cv_agg's multi_logloss: 1.15338 + 0.0087536
+  ```
 
 
 lambda_l2 分析
