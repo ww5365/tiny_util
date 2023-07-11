@@ -12,9 +12,15 @@ https://zhuanlan.zhihu.com/p/411010918   谈auc的计算
 
 AUC是一根竖线，是什么场景？
 
+准召率,ROC等计算
+https://www.cnblogs.com/limingqi/p/11729572.html
+
+
 multi_logloss ： 多分类的对数损失函数
 参考：
 https://blog.csdn.net/Linyi_DanielWu/article/details/108278465
+
+
 
 
 lightGBM 使用
