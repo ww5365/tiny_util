@@ -1,3 +1,11 @@
+特征的离散化处理
+https://www.jianshu.com/p/918649ce379a      
+
+特征的离散化是特征工程中一种常见的针对连续特征数据进行预处理的方式
+
+集成学习——Bagging和Boosting
+https://www.jianshu.com/p/c69301c8cd95
+
 KFold 交叉验证
 从过拟合的角度上讲，N折交叉验证是防止过拟合的手段之一，它是以寻找最佳模型的方式防止过拟合
 
