@@ -13,6 +13,31 @@
 
 ### 项目
 
+#### transformer专题
+
+1. https://mp.weixin.qq.com/s/VrzkxEVBAO6abJcUsYGr0Q ： 这篇是比较好的，也是参考了jalammer这篇博客
+https://blog.csdn.net/longxinchen_ml/article/details/86533005
+原作者：Jay Alammar  https://jalammar.github.io/illustrated-transformer
+
+2. tanxin的视频及记录的笔记
+
+3. transfomer 原理和实现
+
+4. 面试常见的类型：
+   https://www.bilibili.com/video/BV1Di4y1c7Zm?p=2&spm_id_from=pageDriver&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6
+   这个视频中会涉及些面试相关的，其中qoute到作者写的知乎上面试汇总文章
+   
+
+
+#### pytorch 专题
+
+1. 重点学习了视频： 非常好
+   https://www.bilibili.com/video/BV1zS4y1n7Eq/?spm_id_from=333.999.0.0&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6
+
+   形成了学习笔记及github的代码：https://github.com/ww5365/python/tree/master/deepshare
+   
+
+   
 
 
 
