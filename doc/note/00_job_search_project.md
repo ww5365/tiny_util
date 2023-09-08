@@ -3,6 +3,76 @@
 
 ## project 准备进展
 
+
+
+## 2023.9.8
+
+
+再次启程
+
+
+LTR：
+
+D:\workfiles\20220906_大搜搜索\20220920_精排资料\LTR
+
+ 
+   \level2model\catboost_rongz ： rongzhe 的 level2model 二层精排模型
+   
+    D:\workspace\tanxin2\20230128_catboost_rz\catboost ： 这里存了代码
+	
+	D:\workspace\tanxin2\20221206_catboost   这是网上 + 官网的关于catboost的实例代码
+	
+
+这是排序思路整理参考资料：
+
+https://github.com/ww5365/tiny_util/blob/master/doc/retrival_ai/retrival_algorithm/02_%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B.md	
+ 
+
+xgboost专题：
+
+D:\myfiles\技术文档\xgboost： 原理参考   
+   D:\workspace\tanxin2\20201012_xgboost ： 代码参考
+   
+
+word2vec专题：
+
+  deep_learning/20200620_word_vec/skip-gram/word2vec中的数学.pdf  ：  这个github的仓(tanxin)可以合并到python的仓中，进行整理整合
+   
+
+
+
+
+
+语义召回：
+   
+   
+   D:\workfiles\20220906_大搜搜索\20220119_deepmatch
+   语义召回模型学习过程.md
+   
+   D:\workfiles\20220906_大搜搜索\20220920_精排资料\deep
+   
+   
+   http://wenote.xxx.com/wapp/recent/75283210-1f2d-11eb-9ec0-5b0de86f74be?docGuid=8ad22250-46dc-11ed-94a0-4b397f3a3391
+   
+   语义召回对用MTP上东东？
+   
+   语义相关原理网上参考： https://github.com/ww5365/tiny_util/blob/master/doc/retrival_ai/retrival_algorithm/03_%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B_%E8%AF%AD%E4%B9%89%E5%8F%AC%E5%9B%9E.md
+   
+   
+   D:\workspace\my_codehub\myproject\bd_sparklesearch_semantic ：深度语义代码
+   
+   http://7.185.31.49:3000/9rFac158QVWqTdoVkZ3cpg?view  ： 实习生的产出
+
+
+
+leetcode:
+
+  http://3ms.xxx.com/km/blogs/details/14249309?l=zh-cn  大家有空就看看练练。
+  https://labuladong.gitee.io/algo/home/
+  
+  高频即可
+
+
 ## 2023.9.1
 
 一定要形成积累，材料及相关的参考(博客，视频，文档，一定要记录)
