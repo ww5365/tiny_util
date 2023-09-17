@@ -41,15 +41,6 @@ word2vec专题：
 
 
 
-
-
-语义召回：
-
-transformer专题，语义相关项目，已汇总到这里：
-https://github.com/ww5365/tiny_util/blob/master/doc/retrival_ai/retrival_algorithm/03_%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B_%E8%AF%AD%E4%B9%89%E5%8F%AC%E5%9B%9E.md
-   
-
-
 leetcode:
 
   http://3ms.xxx.com/km/blogs/details/14249309?l=zh-cn  大家有空就看看练练。
@@ -82,7 +73,11 @@ https://blog.csdn.net/longxinchen_ml/article/details/86533005
    https://www.bilibili.com/video/BV1Di4y1c7Zm?p=2&spm_id_from=pageDriver&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6
    这个视频中会涉及些面试相关的，其中qoute到作者写的知乎上面试汇总文章
    
+语义召回：
 
+transformer专题，语义相关项目，已汇总到这里：
+https://github.com/ww5365/tiny_util/blob/master/doc/retrival_ai/retrival_algorithm/03_%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B_%E8%AF%AD%E4%B9%89%E5%8F%AC%E5%9B%9E.md
+   
 
 #### pytorch 专题
 
