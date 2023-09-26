@@ -1,8 +1,17 @@
 # 项目开发小工具
 
+## 使用本project
+
+1. 先配置task.json, 参考01_c++_with_vscode.md中task.json配置
+2. 其它设置小改动：解决exe文件不能执行，显示有问题
+   ```
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.shell.windows": "C:/WINDOWS/System32/cmd.exe",
+    "terminal.integrated.persistentSessionScrollback": 1000000,
+    "terminal.integrated.scrollback": 1000000
+   ```
 
 ## 使用cmake进行编译
-
 
 1. config + 编译 + 运行
 
