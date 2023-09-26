@@ -71,18 +71,17 @@ BFS:
 
 系统设计：
 
+## 再次起航
 
-
-## 重新出发-积累
-
-1. jiuzhang笔记
-2. 九阳神功
-   算法梳理的框架结构，值得借鉴
+1. jiuzhang
+   * 形成的纸质笔记， 知识体系
+   * https://lc.jiuzhang.com/problem/  题库,可以按照不同公司分类
+2. 九阳神功 : 现在doc/algorithm中md文档基于这个材料形成,  培养知识体系
    
-4. labuladong  高频
+3. labuladong  
+   * chrome 插件，在leetcode上刷题时参考解题思路
+4. 打榜活动
 
-
-5. 打榜活动，如下
 
 
 
