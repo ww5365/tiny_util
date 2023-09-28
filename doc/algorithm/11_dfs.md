@@ -55,8 +55,25 @@ void dfs(const vector<vector>& matrix,vector<vector>& can_reach,int row,int col)
 
 参考：https://www.lintcode.com/problem/570
 
-* 
 
+
+* 其它题目
+  回溯？
+LeetCode	力扣	难度
+1.   Combination Sum III	216. 组合总和 III	🟠
+2.  Combination Sum	39. 组合总和	🟠
+3.  Combination Sum II	40. 组合总和 II	🟠
+4.  Permutations	46. 全排列	🟠
+5.  Permutations II	47. 全排列 II	🟠
+6.  Combinations	77. 组合	🟠
+7.  Subsets	78. 子集	🟠
+8.  Subsets II	90. 子集 II	🟠
+-	剑指 Offer II 079. 所有子集	🟠
+-	剑指 Offer II 080. 含有 k 个元素的组合	🟠
+-	剑指 Offer II 081. 允许重复选择元素的组合	🟠
+-	剑指 Offer II 082. 含有重复元素集合的组合	🟠
+-	剑指 Offer II 083. 没有重复元素集合的全排列	🟠
+-	剑指 Offer II 084. 含有重复元素集合的全排列	🟠
 
 
 
