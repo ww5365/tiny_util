@@ -7,8 +7,10 @@ using namespace std;
 
 
 /*
-给定一个可包含重复数字的序列nums ，按任意顺序 返回所有不重复的全排列。
+47. 全排列 II
+https://leetcode.cn/problems/permutations-ii/
 
+给定一个可包含重复数字的序列nums ，按任意顺序 返回所有不重复的全排列。
 
 输入：nums = [1,2,3]
 输出：
@@ -85,11 +87,64 @@ private:
 
 };
 
+
+// 2023.9.28
+class Solution2 {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+
+        vector<vector<int>> res;
+        vector<int> path; 
+        vector<bool> selected(nums.size(), false); // 这个可以初始化， size大小和nums相同，都为false
+        path.reserve(nums.size()); // 这个size大小为0，只预留空间但size大小为0
+        // 先排序，去重的需要
+        std::sort(nums.begin(), nums.end(), std::greater<int>());
+        dfs(nums, path, selected, res);
+    
+        return res;
+    }
+
+private:
+
+    void dfs(const vector<int> &nums, vector<int> &path, vector<bool> & selected, vector<vector<int>> &res) {
+
+        if (path.size() == nums.size()) {
+            res.push_back(path);
+            return;
+        }
+
+        for (size_t i = 0; i < nums.size(); i++) {
+
+            if (selected[i]) continue;
+
+            // 去掉重复数字: 前后两个数字相同且前一个数字未被选择到，说明再选i就重复了，第i-1个数字已经被选择过了
+
+            if (i != 0 && nums[i - 1] == nums[i] && selected[i - 1] == false) continue;
+
+            selected[i] = true;
+            path.push_back(nums[i]);
+            dfs(nums, path, selected, res);
+            path.pop_back();
+            selected[i] = false;
+        }
+    }
+};
+
+
+
+
+
+
 void TestPermuteUnique() {
 
     // vector<int> nums = {1, 2, 3};
     vector<int> nums = {1, 2, 2};
+    
+    vector<int> test(nums.size());
+    vector<int> test2;
+    test2.reserve(nums.size());
 
+    cout << "the size of vector: " << nums.size() << " " << test.size() << " " << test2.size()<< endl;
     vector<vector<int>> result;
 
     Solution s;
