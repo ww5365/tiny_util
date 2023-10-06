@@ -57,6 +57,55 @@ private:
     }
 };
 
+//2023.10.16 https://leetcode.cn/problems/next-permutation/submissions/
+class Solution2 {
+public:
+    void nextPermutation(vector<int>& nums) {  
+
+        
+        if (nums.size() <= 1) {
+            return;
+        }
+
+        int right = nums.size() - 1;
+        int left = 0;
+        int index = right - 1;
+
+        // 找到第1处变小的位置
+        while(index >= left && nums[index] >= nums[index + 1]) {
+            --index;
+        }
+
+        if (index < left) {
+            // 已是最大的排列情况
+           reverse(nums.begin(), nums.end()); 
+        //    std::cout << "reverse 111111111111" << std::endl;
+           return;
+        }
+
+        // 不是最大排列，要正常处理
+
+        // 从右往左，找第1个比nums[index]大的元素
+        int changeIdx = right;
+        while (changeIdx > index && nums[changeIdx] <= nums[index]) changeIdx--;
+
+        std::swap(nums[index], nums[changeIdx]);
+
+        // std::cout << "1111111111111111111111111111: " << index << " : " << changeIdx << std::endl; 
+        // std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(std::cout, ","));
+        // std::cout << std::endl; 
+
+        // 从index + 1 到尾部，逆转, 得到比原排序大的最小的排序数
+        std::reverse(nums.begin() + index + 1, nums.end()); // reverse 使用iterator进行操作
+        
+        // std::cout << "222222222222222222222222222222: " << right << std::endl; 
+        // std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(std::cout, ","));
+        // std::cout << std::endl; 
+
+        return;
+    }
+};
+
 
 void next_permutation_test(){
 
