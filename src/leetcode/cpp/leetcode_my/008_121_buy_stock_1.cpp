@@ -12,6 +12,7 @@ using namespace std;
 
 /*
 
+leetcode 121 https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
 121. 买卖股票的最佳时机
 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
@@ -93,7 +94,7 @@ public:
         return result;
     }
 
-    // 双指针 贪心
+    // 双指针 贪心 时间：o(n) 空间: o(1)
     int maxProfit3(vector<int>& prices) {
 
         int left = 0;
@@ -109,13 +110,13 @@ public:
                 }
             } else { //当前元素，比最小的元素都要小
                 left = i;
-                right = i;
+                right = i; // 也可以不更新right ，不影响结果
             }
         }
         return result;
     }
     
-    // dp
+    // dp 时间o(n) 空间o(n) 能否优化空间复杂度：o(1)?
 
     int maxProfit4(vector<int>& prices) {
         // dp[i] 表示前i天的最大利润，因为我们始终要使利润最大化，则：dp[i]=max(dp[i−1],prices[i]−minprice)
@@ -131,6 +132,34 @@ public:
             minPrice = std::min(minPrice, prices[i]);
         }
         return dp[prices.size() - 1];
+    }
+
+     // dp 优化了空间复杂度
+    int maxProfit5(vector<int>& prices) {
+        // dp[i] 表示前i天的最大利润，因为我们始终要使利润最大化，则：dp[i]=max(dp[i−1],prices[i]−minprice)
+
+        if (prices.size() <= 1) {
+            return 0;
+        }
+        // vector<int> dp(prices.size(), 0);
+        int preDp = 0; //前i-1天最大利润
+        int res = 0;
+        // dp[0] = 0;
+        int minPrice = prices[0];
+        for (int i = 1; i < prices.size(); ++i) {
+            // res = std::max(preDp, prices[i] - minPrice);
+            // preDp = std::max(preDp, res);
+
+            if (preDp >= prices[i] - minPrice) {
+                res = preDp; //保持i-1天的最大利润
+            } else {
+                res = prices[i] - minPrice;
+                preDp = res; // 更新为当前的利润
+            }
+            minPrice = std::min(minPrice, prices[i]);
+        }
+        return res;
+
     }
 
 };
