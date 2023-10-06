@@ -14,6 +14,12 @@ leetcode：31  https://leetcode.cn/problems/next-permutation/
 3.swap: swap partitionNumber and changeNumber
 4.reverse: reverse the numbers from partitionNumber index to the end;
 
+
+初始态： x1 x2 x3 x4 x5  
+从右往左看，x2 变小了，即：x1 x2 < x3 > x4 > x5  从右开始，找第1个大于x2的元素，假设是x4 则x2和x4交换
+x1 x4 < x3 > x2 > x5  ,可以看到数组肯定是变大了，同时可以看到：x3 x2 x5 是单调递减的，reverse后，可以得到整体最小的排列即：x1 x4 x5  x2  x3
+
+
  */
 
 #include "test_main.h"
