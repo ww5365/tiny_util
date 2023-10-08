@@ -303,25 +303,91 @@ https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/
 困难
 1.6K
 相关企业
-给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
-
+给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。       
 设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。
 
 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-
  
-
 示例 1:
 
 输入：prices = [3,3,5,0,0,3,1,4]
 输出：6
 解释：在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候卖出，这笔交易所能获得利润 = 3-0 = 3 。
      随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候卖出，这笔交易所能获得利润 = 4-1 = 3 。
+
 */
 
 class Solution4 {
 public:
     int maxProfit(vector<int>& prices) {
+    
+    /*
+    状态转移方程：
+
+    dp[i][k][0] : 第i天，交易次数最大限制为k，当天空仓时，最大利润
+    dp[i][k][1] : 第i天，交易次数最大限制为k，当天满仓时，持仓时的最大利润 
+    
+    dp[i][k][0] = std::max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+    dp[i][k][1] = std::max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+
+    初始状态 i = 0 ,  k = 0:
+    dp[0][0][0] = 0  
+    dp[0][1][0] = 0  
+    dp[0][2][0] = 0
+
+    dp[0][0][1] = 0  
+    dp[0][1][1] = -prices[0]
+    dp[0][2][1] = -prices[0]
+
+    */
+
+    int n = prices.size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(3, vector<int>(2))); //三维辅助数组
+
+    dp[0][0][0] = 0;
+    dp[0][1][0] = 0; 
+    dp[0][2][0] = 0;
+
+    dp[0][0][1] = 0;  
+    dp[0][1][1] = -prices[0];
+    dp[0][2][1] = -prices[0];
+
+    for (int i = 1; i < n; ++i) {
+        for (int k = 2; k >= 1; --k) {
+        
+            dp[i][k][0] = std::max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+            dp[i][k][1] = std::max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
+
+            if ( k-1 == 0){
+                std::cout << "k - 1:  " << dp[i-1][k-1][0] << std::endl;
+            }
+        }
+    }
+
+    return dp[n-1][2][0];
+
+    }
+    
+    int maxProfit2(vector<int>& prices) {
+
+        // 丝滑的代码实现
+        int p10 = 0;
+        int p20 = 0;
+        int p11 = -prices[0];
+        int p21 = -prices[0];
+        int p00 = 0;
+        int n = prices.size();
+
+        for (int i = 0; i < n; ++i) {
+
+            p20 = std::max(p20, p21 + prices[i]);
+            p21 = std::max(p21, p10 - prices[i]);
+            p10 = std::max(p10, p11 + prices[i]);
+            p11 = std::max(p11, -prices[i]);
+
+        }
+
+        return p20;
 
     }
 };
@@ -345,6 +411,15 @@ void testAllStock()
     int maxProfit21 = s2.maxProfit(nums);
     int maxProfit22 = s2.maxProfit2(nums);
     std::cout << "s2 max profit is :" << maxProfit21  << " : " << maxProfit22<< std::endl;
+
+    vector<int> nums4 = {3,3,5,0,0,3,1,4};
+
+    Solution4 s4;
+    int maxProfit41 = s4.maxProfit(nums4);
+    int maxProfit42 = s4.maxProfit2(nums4);
+
+    std::cout << "s4 max profit is :" << maxProfit41  << " : " << maxProfit42<< std::endl;
+    
 
 
 }
