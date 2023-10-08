@@ -48,6 +48,9 @@ leetcode 121 https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
 * dp 算法
 dp[i] 表示前i天的最大利润，因为我们始终要使利润最大化，则：dp[i]=max(dp[i−1],prices[i]−minprice)
 
+股票收益计算：https://github.com/ww5365/tiny_util/blob/master/src/leetcode/cpp/leetcode_my/010_stock.cpp
+这是个使用dp算法，团灭的这类算法题目的方法。
+
 */
 
 class Solution {
