@@ -14,6 +14,13 @@
 using namespace std;
 
 
+/*
+lintcode ： 41 · 最大子数组
+https://www.lintcode.com/problem/41/?showListFe=false&page=1&problemTypeId=2&tagIds=390&pageSize=50
+给定一个整数数组，找到一个具有最大和的子数组，返回其最大和。
+每个子数组的数字在数组中的位置应该是连续的
+*/
+
 class Solution {
 public:
     /**
