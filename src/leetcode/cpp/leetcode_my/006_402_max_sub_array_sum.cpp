@@ -11,7 +11,12 @@
 #include <vector>
 using namespace std;
 
+/*
+lintcode : 402 · 连续子数组求和
+https://www.lintcode.com/problem/402/?showListFe=true&page=1&problemTypeId=2&tagIds=390&pageSize=50
+给定一个整数数组，请找出一个连续子数组，使得该子数组的和最大。输出答案时，请分别返回第一个数字和最后一个数字的下标。（如果存在多个答案，请返回字典序最小的
 
+*/
 class Solution {
 public:
     /**
