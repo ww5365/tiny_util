@@ -171,10 +171,8 @@ public:
         int left = 0;
         int right = height.size() - 1;
         int result = 0;
-
-        for (int i = 0; i < height.size(); ++i) {
-            
-            while (left < right) {
+     
+        while (left < right) {
                 int steps = right - left;
                 if(height[left] < height[right]) {
                     result = std::max(result, height[left] * steps);
@@ -183,9 +181,7 @@ public:
                     result = std::max(result, height[right] * steps);
                     right --;
                 }
-            }
-        }
-
+         }
         return result;
     }
 };
