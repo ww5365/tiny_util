@@ -73,16 +73,34 @@ BFS:
 
 ## 再次起航
 
+### 重拾资料
+#### 2023.9.25
 1. jiuzhang
    * 形成的纸质笔记， 知识体系
-   * doc/algorithm 下面形成的知识体系和已写过的实例代码
-   * https://lc.jiuzhang.com/problem/  题库
+   * doc/algorithm 基于知识体系的实现代码
+   * leetcode： https://leetcode.cn/problemset/all/      主要用来运行新写的代码，是否AC；有错误case提示；
+   * lintcode： https://www.lintcode.com/problem/?typeId=2  主要来参考解决方法，leetcode上找不到原题的，用它来AC代码；
     
 2. 九阳神功 : 现在doc/algorithm中md文档基于这个材料形成,  培养知识体系
    
 3. labuladong  
-   * chrome 插件，在leetcode上刷题时参考解题思路
+   * chrome 插件，在leetcode上刷题时参考解题思路 ： 这个插件已装，整体来说有参考价值
 4. 打榜活动
+
+#### 2023.10
+
+数组前缀和：  这个为起点： 纸质笔记
+* 连续子数组最大和I II ： lintcode：41/402  前缀和
+* 和为k的连续子数组 ：560 前缀和 + hash
+
+* 股票最大收益 ： 差分 + 前缀和  **双指针**  动态规划
+* 股票最大收益：121,122,123,309,714 团灭，动态规划建模
+* 乘积最大的子数组：152  双指针  最大 + 最小
+* 接雨水：42 左右双指针，最大 + 最大
+* 盛最多水的容器：11  左右双指针
+* 下一个大的排列 ： 31 双指针
+
+
 
 
 
