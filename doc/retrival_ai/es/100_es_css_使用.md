@@ -155,6 +155,9 @@ GET my_index1/_search
 
 ## 写入es中数据
 
+参考：https://cloud.tencent.com/developer/article/1643818
+
+直接用json写入
 
 
 
