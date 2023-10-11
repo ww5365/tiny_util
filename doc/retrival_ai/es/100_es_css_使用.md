@@ -95,6 +95,71 @@ GET /my_store/_search
 
 ## python访问ES
 
+## 创建mapping
+
+```json
+
+{
+  "settings": {
+    "refresh_interval": "120s",
+    "number_of_shards": "3",
+	  "routing.allocation.total_shards_per_node": 2,
+    "number_of_replicas": "1"
+  },
+  "mappings": {
+    "_source": {
+      "enabled": "false"    ## 关闭store，不存原始数据字段，但能查询也就是只存储索引情况
+    },
+    "properties": {
+      "title": {
+        "type": "text",
+        "store": "false",   ## 不存原始字段
+        "index": "true",
+        "similarity": "Payload",
+        "analyzer": "whitespace",
+        "search_analyzer": "whitespace"
+      },
+      "real_title_analyzer": {
+        "type": "text",
+        "store": "true",  ## 会存原始字段
+        "index": "true",
+        "similarity": "Payload",
+        "analyzer": "whitespace",
+        "search_analyzer": "whitespace"
+	  }
+    }
+  }
+}
+```
+
+1).关注store使用
+
+``` json
+GET my_index1/_search
+{
+  "stored_fields": [
+    "real_title_analyzer"   # 指明了要显示的存储的原始字段值
+  ],
+  "query": {
+    "match": {
+      "title": "query for search"
+    }
+  }
+}
+```
+2) REST High Level Client 接口来创建索引
+参考：https://www.cnblogs.com/xiaoyh/p/16061594.html
+可以把mapping写在配置中，读入后，指定映射1的方式，整体创建
+
+4) REST High Level Client 接口来判断索引是否已经创建过了
+
+## 写入es中数据
+
+
+
+
+
+
 
 
 
