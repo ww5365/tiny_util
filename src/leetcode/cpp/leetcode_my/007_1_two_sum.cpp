@@ -149,15 +149,12 @@ public:
 
 private:
     // 按照val大小，对索引进行排序
-
     void IndexSort(const vector<int> &num, vector<int> &result) {
-
         if (num.size() <= 1) 
             return;
         std::sort(result.begin(), result.end(), [&num](const int left, const int right)->bool{return num[left] < num[right];});
         return ;
     }
-
 };
 
 void TestTwoSum(){
