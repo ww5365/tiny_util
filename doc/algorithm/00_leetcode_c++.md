@@ -233,6 +233,22 @@ size_t split_string(const std::string& src,
 ```
 
 
+``` c++
+
+// copy式输出
+std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(std::cout, ","))
+
+// 逆转
+reverse(nums.begin(), nums.end());   // reverse 使用iterator进行操
+std::reverse(nums.begin() + index + 1, nums.end()); // 从index + 1 到尾部，逆转, 得到比原排序大的最小的排序数
+
+//交换
+ std::swap(nums[index], nums[changeIdx]);
+
+
+
+
+```
 
 
 
