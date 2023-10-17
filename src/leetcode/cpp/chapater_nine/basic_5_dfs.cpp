@@ -238,7 +238,7 @@ public:
             return;
         }
 
-        for (int len = 1; len <= s.size(); ++len) {
+        for (int len = 1; len <= s.size(); ++len) {  // 注意第2个参数len最大可以是s.size()
             string tmp = s.substr(0, len);
 
             if (IsPalindrome(tmp)) {
