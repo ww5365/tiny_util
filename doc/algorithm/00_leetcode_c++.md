@@ -80,6 +80,7 @@ BFS:
    * doc/algorithm 基于知识体系的实现代码
    * leetcode： https://leetcode.cn/problemset/all/      主要用来运行新写的代码，是否AC；有错误case提示；
    * lintcode： https://www.lintcode.com/problem/?typeId=2  主要来参考解决方法，leetcode上找不到原题的，用它来AC代码；
+   * https://www.jiuzhang.com/problem/search?tags=microsoft  这里也可以参考答案
     
 2. 九阳神功 : 现在doc/algorithm中md文档基于这个材料形成,  培养知识体系
    
