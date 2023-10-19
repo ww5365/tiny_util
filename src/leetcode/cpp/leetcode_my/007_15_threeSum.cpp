@@ -1,5 +1,8 @@
+
 /*
  * 15.https://leetcode-cn.com/problems/3sum/
+
+   57. https://www.lintcode.com/problem/57
 
  * 5_3Sum.cpp
  *Given an array S of n integers,are there elements a, b, c in Find all unique triplets in the array which gives the sum of zero（a+b+c=0）
@@ -29,12 +32,14 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <queue>
+#include <iterator>
 
-#include "test_main.h"
+#include "01_all.h"
 
 using namespace std;
-class Solution{
 
+class Solution{
 public:
     vector<vector<int> > threeSum(vector<int> &vec){
 
@@ -120,8 +125,67 @@ public:
         }
 };
 
+// 2023.10.17 
+class Solution2 {
+public:
+    /**
+     * @param numbers: Give an array numbers of n integer
+     * @return: Find all unique triplets in the array which gives the sum of zero.
+     *          we will sort your return value in output
 
-void three_sum(){
+     输入：numbers = [-1,0,1,2,-1,-4]
+     输出：[[-1, 0, 1],[-1, -1, 2]] 是符合条件的2个三元组
+     [-1,0,1] 和 [0, 1, -1] 是相同的2个三元组，注意算1个
+
+     思路：
+     1. a + b + c = 0 转成-a = b + c  同向双指针
+     2. 有重复，边界的处理，被选择的时候，判断left和right指针是否有重复的数字； 同时也要判断a是否有重复的；
+
+
+     */
+    vector<vector<int>> threeSum(vector<int> &numbers) {
+        // write your code here
+        vector<vector<int>> result;
+        if (numbers.size() <= 2) {
+            return result;
+        }
+
+        std::sort(numbers.begin(), numbers.end(), std::less<int>());
+        
+        int len = numbers.size();
+
+        for (int i = 0; i < len - 2; ++i) {
+
+            // target是否有重复的？
+            if(i > 0 && numbers[i] == numbers[i - 1]){
+                continue;
+            }
+            
+            int target = -numbers[i];
+            int left = i + 1;
+            int right = len - 1;
+
+            while(left < right){
+                if(left < right && numbers[left] + numbers[right] < target) {
+                    left ++;
+                }else if (left < right && numbers[left] + numbers[right] > target) {
+                    right--;
+                } else {
+                    result.push_back({numbers[i], numbers[left], numbers[right]});
+                    left ++;
+                    right --;
+                    while (left < right && numbers[left - 1] == numbers[left]) left ++;
+                    while (left < right && numbers[right] == numbers[right + 1]) right --;
+                }
+            } 
+        }
+        return result;
+    }
+};
+
+
+
+void TestThreeSum(){
 
     int arr[] = {-2,-1,-1,0,1,2,2,11,3,3,4,5};
     vector<int> num(arr,arr + 12);
@@ -129,6 +193,27 @@ void three_sum(){
     for(size_t i = 0; i < num.size(); i++){
         cout << num[i] << " ";
     }
+
+    std::cout << std::endl;
+
+    std::sort(num.begin(), num.end(), std::less<int>()); // 最后1个参数是比较对象
+
+    std::copy(num.begin(), num.end(), ostream_iterator<int>(std::cout, ","));
+
+    std::cout << std::endl;
+    
+    std::priority_queue<int, vector<int>, std::less<int>> qp; // 大顶堆，突然想到大顶堆的使用了,模板中最后1个参数是比较类型
+
+    for (size_t i = 0; i < 5; ++i) {
+        qp.push(i);
+    }
+
+    while(!qp.empty()) {
+        std::cout << "queue elem: " << qp.top() << " ";
+        qp.pop();
+    }
+
+
     cout << endl;
 
     Solution s;
@@ -146,14 +231,5 @@ void three_sum(){
         }
         cout << endl;
     }
-
     cout << endl;
-
 }
-
-
-
-
-
-
-
