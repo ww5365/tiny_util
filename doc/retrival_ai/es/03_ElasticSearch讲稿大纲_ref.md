@@ -1611,7 +1611,9 @@ $$
   }
   ```
 
-  详细的解读请参考[es 仅返回单个字段 查询_ES系列13：彻底掌握相关度：从TF-IDF、BM25到对相关度的控制..._李诗旸的博客-CSDN博客](https://blog.csdn.net/weixin_35782943/article/details/112331093)。
+  详细的解读请参考：
+  https://www.cnblogs.com/novwind/p/15177871.html 这个重点参考，完全可以看懂
+  [es 仅返回单个字段 查询_ES系列13：彻底掌握相关度：从TF-IDF、BM25到对相关度的控制..._李诗旸的博客-CSDN博客](https://blog.csdn.net/weixin_35782943/article/details/112331093)。
 
 ### 复合查询
 
