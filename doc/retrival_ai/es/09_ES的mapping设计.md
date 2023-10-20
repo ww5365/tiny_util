@@ -134,7 +134,7 @@
 
 
 
-fields 它可以使同一个字段通过不同的方式实现不同的目的
+### fields 它可以使同一个字段通过不同的方式实现不同的目的
 
 ```json
 PUT my-index-000001
@@ -157,7 +157,7 @@ PUT my-index-000001
 
 
 
-查询时我们就可以使用`city`进行全文检索，使用`city.raw`进行排序和聚合。
+### 查询时我们就可以使用`city`进行全文检索，使用`city.raw`进行排序和聚合。
 
 ```json
 
@@ -180,6 +180,31 @@ GET my-index-000001/_search
   }
 }
 ```
+
+### position_increment_gap 使用
+
+position_increment_gap（短语位置间隙）
+
+
+PUT /my_index/groups/1
+{
+    "names": [ "John Abraham", "Lincoln Smith"]
+}
+
+
+GET /my_index/groups/_search
+{
+    "query": {
+        "match_phrase": {
+            "names": "Abraham Lincoln"   # 正常不想搜到上面的doc， 那么mapping中names字段需要设置poistion_increment_gap为100，让其查不到doc。
+        }
+    }
+}
+
+
+
+参考：https://www.modb.pro/db/574558
+https://blog.csdn.net/chuan442616909/article/details/56664861
 
 
 
