@@ -43,6 +43,10 @@ PUT /index/_mapping
 
 ### BM25
 
+参考es bm25的介绍：
+https://www.cnblogs.com/novwind/p/15177871.html
+
+
 ### DFR
 
 
