@@ -70,7 +70,8 @@ get /testboost/_search
    }
   }
 }
-* filter和Query有什么区别 ， filter过滤的性能好于查询的性能， 为什么 ？ 因为 filter 过滤不计算得分，但是查询计算得分， 而且过滤可以使用缓存，但是查询不会使用缓冲
+* filter和Query有什么区别 ，
+filter过滤的性能好于查询的性能， 为什么 ？ 因为 filter 过滤不计算得分，但是查询计算得分， 而且过滤可以使用缓存，但是查询不会使用缓冲
 
 
 参考：https://juejin.cn/post/7154251873321484319
