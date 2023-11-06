@@ -128,3 +128,100 @@ private:
  */
 // @lc code=end
 
+
+//////////////////////2023.11.6
+
+#include "01_all.h"
+
+#include <algorithm>
+#include <iostream>
+#include <unordered_map>
+#include <list>
+using namespace std;
+
+/* trie tree
+
+442: https://www.lintcode.com/problem/442/description
+
+实现一个 Trie（前缀树），包含 insert, search, 和 startsWith 这三个方法。
+
+*/
+
+
+// 每个节点设计使用map来存储
+struct TrieNode {
+    bool isLeaf;
+    unordered_map<char, TrieNode*> children;
+    TrieNode():isLeaf(false){}
+};
+
+class Trie {
+private:
+    TrieNode *tree;
+
+public:
+    Trie() {
+        // do intialization if necessary
+        tree = new TrieNode();
+    }
+
+    /*
+     * @param word: a word
+     * @return: nothing
+     */
+    void insert(string &word) {
+        // write your code here
+        TrieNode *node = tree;
+        for (char ch : word) {
+
+            if (node->children.find(ch) == node->children.end()) {
+                node->children[ch] = new TrieNode();
+            }
+            node = node->children[ch];
+        }
+        node->isLeaf = true;
+    }
+
+    /*
+     * @param word: A string
+     * @return: if the word is in the trie.
+     */
+    bool search(string &word) {
+        // write your code here
+
+        TrieNode *node = tree;
+
+        for (auto ch : word) {
+            auto it = node->children.find(ch);
+            if (it == node->children.end()) {
+                return false;
+            }
+            node = it->second;
+        }
+        return node->isLeaf;
+    }
+
+    /*
+     * @param prefix: A string
+     * @return: if there is any word in the trie that starts with the given prefix.
+     */
+    bool startsWith(string &prefix) {
+        // write your code here
+        TrieNode *node = tree;
+        for (auto ch : prefix) {
+            auto it = node->children.find(ch);
+            if (it == node->children.end()) {
+                return false;
+            }
+            node = it->second;
+        }
+        return true; 
+    }
+};
+
+void TestTrieTree()
+{
+    std::cout << "----begin to TestLRUCache ---" << std::endl;
+    std::cout << "----finished TestLRUCache ---" << std::endl;
+}
+
