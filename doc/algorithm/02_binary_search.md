@@ -44,3 +44,14 @@ int BinarySearch(vector<int> &vec, int target){
 
     return -1;
 }
+
+
+典型题目：
+* 74. 搜索二维矩阵
+74: https://leetcode.cn/problems/search-a-2d-matrix/
+28: https://www.lintcode.com/problem/28/
+end = m * n - 1
+mid -> mid/n mid%n
+
+
+
