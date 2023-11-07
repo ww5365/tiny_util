@@ -24,25 +24,20 @@ int BinarySearch(vector<int> &vec, int target){
         return -1;
     }
 
+    // 初始状态
     int start = 0;
     int end = vec.size() - 1;
-
-    cout << "enter into binary search! " << endl;
     //循环条件结束时，停留在最后两个元素的位置；
     while(start + 1  < end){
         int mid = start + (end - start)/2;
         if (vec[mid] == target){
-            //查收第一个出现target索引位置
-            end = mid;  //不断往左移动，减少搜索空间
-            //查找最后一个出现target索引位置
-            //start = mid; //不断往右移动，
+            end = mid;  //查收第一个出现target索引位置
         }else if (vec[mid] < target){
-            start = mid;
+            start = mid; //不断往右移动，减少搜索空间
         }else{
-            end = mid;
+            end = mid;  //不断往左移动
         }
     }
-
     if (vec[start] == target)
         return start;
     if (vec[end] == target)
