@@ -12,6 +12,7 @@
  */
 
 
+``` c++
 int BinarySearch(vector<int> &vec, int target){
 
     if (vec.empty()){
@@ -44,6 +45,23 @@ int BinarySearch(vector<int> &vec, int target){
 
     return -1;
 }
+
+// 我自己的模型
+
+while(left < right) {
+}
+
+if (nums[left] ?) {
+}
+
+return
+
+```
+
+
+
+
+
 
 
 典型题目：
