@@ -203,9 +203,8 @@ public:
             }
 
             ptr = st.top();
-            // 可以被访问的条件： 叶子结点(或者是右子树为空) / 上一个访问节点是其右子树
-
-            if ((!ptr->left && ! ptr->right) || (ptr ->right == lastVisited)) {
+            // 可以被访问的条件: 叶子结点(或者是右子树为空) /右子树为空，左子树非空，上一个访问节点是左子树最父节点/ 右子树不为空，上一个访问节点是其右子树最父节点
+            if ((!ptr->left && !ptr->right) || (!ptr->right && ptr->left == lastVisited) || ptr->right == lastVisited) {
                 // 左子树节点已访问
                 st.pop();
                 result.push_back(ptr->value);
