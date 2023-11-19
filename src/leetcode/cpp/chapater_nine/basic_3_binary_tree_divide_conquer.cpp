@@ -227,17 +227,43 @@ public:
  * 分治思想：
  * 1、左右子树 为平衡二叉树
  * 2、左右子树的最大高度
- * 3、
  */
 
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        return helper(root).isBalancedTree;
+    }
+private:
+    struct RetType {
+        int height;
+        bool isBalancedTree;
+        RetType(): height(0), isBalancedTree(true){}
+    };
 
-class BalanceTree {};
+
+    RetType helper(TreeNode* root) {
+
+        RetType result;
+        if (!root) {
+            return result;
+        }
+
+        RetType left = helper(root->left);
+        RetType right = helper(root->right);
+        
+        result.height = std::max(left.height, right.height) + 1;
+        result.isBalancedTree = (left.isBalancedTree && right.isBalancedTree && std::abs(left.height - right.height) <= 1);
+        return result;
+    }
+}
 
 
 /*
  * example：
- *
+ * leetcode：1120 ： https://leetcode.cn/problems/maximum-average-subtree/
  * 给出一颗二叉树，计算这个二叉树中平均值最大的子树，并返回这颗子树的root；
+ 
  *
  * 比如：
  * 1
@@ -246,7 +272,10 @@ class BalanceTree {};
  *
  * 平均值最大的子树根节点：11
  *
- *
+ * 分治思路： 
+   1. 左子树平均值
+   2. 右子树平均值
+   3. 最终结果：std::max(左，右，左和 + 右和 + root / 总节点数)
  */
 
 class MaxAverageSubTree {};
