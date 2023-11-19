@@ -278,7 +278,44 @@ private:
    3. 最终结果：std::max(左，右，左和 + 右和 + root / 总节点数)
  */
 
-class MaxAverageSubTree {};
+class Solution2 {
+public:
+    TreeNode* isBalanced(TreeNode* root) {
+        helper(root);
+        return resultRoot;
+    }
+
+private:
+TreeNode *resultRoot = nullptr;
+float maxAverage = std::numeric_limits<float>::min();
+private:
+    struct RetType {
+        int nodeNum;
+        int sum;
+        RetType(): nodeNum(0), sum(0){}
+    };
+
+
+    RetType helper(TreeNode* root) {
+
+        RetType result;
+        if (!root) {
+            return result;
+        }
+
+        RetType left = helper(root->left);
+        RetType right = helper(root->right);
+
+        result.nodeNum = left.nodeNum + right.nodeNum + 1;
+        result.sum = left.sum + right.sum + root->val;
+
+        if (result.sum/result.nodeNum > maxAverage) {
+            resultRoot = root;
+        }
+        
+        return result;
+    }
+};
 
 
 /*
