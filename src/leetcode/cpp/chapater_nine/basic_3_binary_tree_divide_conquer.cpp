@@ -393,13 +393,130 @@ public:
  * 定义： 左子树小于根；右子树不小于根；
  *
  * 判断一棵树，是否为BST？
- *
- * 思路：
- * 左子树是bst && 右子树是bst && 左子树最大节点值< root->value <= 右子树最小节点值
- *
- *
- */
+* leetcode: 98 : https://leetcode.cn/problems/validate-binary-search-tree/
+* lintcode: 95 : https://www.lintcode.com/problem/95/?utm_source=sc-v2ex-thx0322
 
+* 给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。
+* 有效 二叉搜索树定义如下：
+* 节点的左子树只包含 小于 当前节点的数。
+* 节点的右子树只包含 大于 当前节点的数。
+* 所有左子树和右子树自身必须也是二叉搜索树。
+
+思路： 
+1. 左子树是bst
+2. 右子树是bst
+3. 左子树最大节点值小于root，右子树的最小节点值大于root
+*/
+
+class Solution3 {
+// public:
+//     bool isValidBST(TreeNode* root) {
+
+//     }
+
+public:
+    /**
+     * @param root: The root of binary tree.
+     * @return: True if the binary tree is BST, or false
+     */
+    bool isValidBST(TreeNode *root) {
+        // write your code here
+
+        return helper(root).isBst;
+
+        // return helper(root, std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
+    }
+
+private:
+    struct RetType {
+        bool isBst;
+        int minVal;
+        int maxVal;
+        RetType(): isBst(true),minVal(std::numeric_limits<long>::max()),maxVal(std::numeric_limits<long>::min()){}
+    };
+
+private:
+
+    RetType helper(TreeNode* root) {
+
+        RetType result;
+
+        if (!root) {
+            return result;
+        }
+
+        if (!root->left && !root->right) {
+           result.isBst = true;
+           result.minVal = root->val;
+           result.maxVal = root->val;
+           return result;
+        }
+
+        RetType left = helper(root->left);
+        RetType right = helper(root->right);
+
+        if (!root->left) {
+            result.minVal = root->val;
+            result.maxVal = right.maxVal;
+            result.isBst = right.isBst && (root->val < right.minVal);
+        } else if (!root->right) {
+            result.minVal = left.minVal;
+            result.maxVal = root->val;
+            result.isBst = left.isBst && (left.maxVal < root->val);
+        } else {
+            result.minVal = left.minVal;
+            result.maxVal = right.maxVal;
+            result.isBst = left.isBst && right.isBst && (left.maxVal < root->val) && (root->val < right.minVal);
+        }
+        return result;
+    }
+
+// 参考：版本V2 更简洁
+private:
+    bool helper(TreeNode* root, long min, long max) {
+        // 返回是否为二叉搜索树
+        if (!root) {
+            return true;
+        }
+        if (root->val <= min || root->val >= max){
+            // 开区间，val肯定大于min且小于max的，不符合的情况下，肯定是false
+            return false;
+        }
+        // 满足val在(min, max) 之间， 有可能是二叉排序树;
+        bool left = helper(root->left, min, root->val); // 左子树肯定要在(min, val)之间
+        bool right = helper(root->right, root->val, max);
+        return left && right;
+    }
+
+
+
+// 参考：基于中序遍历来判断是否为二叉排序树  
+// 中序遍历序列是单调递增的序列
+public:
+    bool isValidBST2(TreeNode *root) {
+
+        TreeNode* ptr = root;
+        stack<TreeNode*> st;
+        long lastVisit = std::numeric_limits<long>::min();
+
+        while (ptr || !st.empty()) {
+            while (ptr) {
+                st.push(ptr);
+                ptr = ptr->left;
+            }
+            ptr = st.top();
+
+            if (lastVisit >= ptr->val) {
+                return false;
+            }
+
+            lastVisit = ptr->val;
+            st.pop();
+            ptr = ptr->right;
+        }
+        return true;
+    }
+};
 
 /*
  * flatten binary tree to fake "link list" in preorder traversal
