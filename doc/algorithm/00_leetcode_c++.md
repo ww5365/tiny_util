@@ -103,9 +103,9 @@ BFS:
 
 #### 2023.11.28   MS
 
-LC 236. 二叉树最近公共祖先的题
-LC 82. 删除排序链表中的重复元素 II
-LC 76. 最小覆盖子串
+* LC 236. 二叉树最近公共祖先的题
+* LC 82. 删除排序链表中的重复元素 II
+* LC 76. 最小覆盖子串
 
 边界
 Codeshare 上写代码
@@ -113,7 +113,8 @@ https://codetop.cc/home  题目分类
 参考：https://zhuanlan.zhihu.com/p/394958018
 
 
-
+ms job describe:
+https://jobs.careers.microsoft.com/global/en/job/1664067/Senior-Software-Development-Engineer
 
 
 
