@@ -1570,6 +1570,7 @@ ElasticSearch相比标准Okapi BM25，不同的地方在于$TF(q_i)$中$k_1+1$�
 
 ![image](https://github.com/ww5365/tiny_util/assets/15375027/b93431e2-debe-45ad-836a-c7a6182100dc)
 
+参考：https://zhuanlan.zhihu.com/p/157753976
 
 进一步，大多数语句具有boost参数：
 
