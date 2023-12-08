@@ -697,6 +697,56 @@ void stl_use::priority_queue_use(){
         std::cout << "priority que3: " << que3.top() << std::endl;//大顶堆，队头最大；
         que3.pop();
     }
-
 }
+
+void TestDelete() {
+
+    /* vector的删除 :
+     * 删除vector中值为2的所有元素
+     * 注意：需要保证当前的迭代器是有效的
+     */
+
+    vector<int> vec1 = {1,2,3,4,2,5};
+    vector<int> vec2 = {1,2,3,4,2,5};
+
+    // 方式1 ： 手动循环  顺序容器：vector deque 必须用此方法；链式：set map list也可用；
+    auto iter1 = vec1.begin();
+    while (iter1 != vec1.end()) {
+
+        if (*iter1 == 2) {
+            iter1 = vec1.erase(iter1); // 保证iter还有效，指向删除元素的下一个元素
+        } else  {
+            ++iter1;
+        }
+    }
+
+    std::copy(vec1.begin(), vec1.end(), std::ostream_iterator<int>(std::cout, ","));
+    std::cout << std::endl << "vec1 size: " << vec1.size() << std::endl;
+
+    // 方式2 ：  stl 提供的remove能力 针对vector
+    auto iter2 = std::remove(vec2.begin(), vec2.end(), 2);  // 1,3,4,5,2,5 remove不会改变size大小；返回指向2的iter
+    std::copy(vec2.begin(), vec2.end(), std::ostream_iterator<int>(std::cout, ","));
+    std::cout << std::endl << "vec2 size: " << vec2.size() << std::endl;
+    vec2.erase(iter2, vec2.end());  // 再用1个erese整理空间,删除垃圾数据
+    
+    std::copy(vec2.begin(), vec2.end(), std::ostream_iterator<int>(std::cout, ","));
+    std::cout << std::endl << "vec2 size: " << vec2.size() << std::endl;
+
+    // 方法3： 只针对链式容器删除元素  map set list
+
+    list<int> li1 = {1,2,3,4,5,2};
+    auto iter = li1.begin();
+    while (iter != li1.end()) {
+        if (*iter == 2){
+            li1.erase(iter++); //erease内部：缓存iter的备份；执行iter+1移动，iter指向下一个有效元素；使用iter备份删除数据；
+        } else {
+            ++iter;
+        }
+    }
+    
+    std::copy(li1.begin(), li1.end(), std::ostream_iterator<int>(std::cout, ","));
+    std::cout << std::endl << "li1 size: " << li1.size() << std::endl;
+}
+
+
 
