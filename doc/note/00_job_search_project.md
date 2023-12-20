@@ -39,16 +39,20 @@ word2vec专题：
   deep_learning/20200620_word_vec/skip-gram/word2vec中的数学.pdf  ：  这个github的仓(tanxin)可以合并到python的仓中，进行整理整合
    
 
-
-
 leetcode:
 
   http://3ms.xxx.com/km/blogs/details/14249309?l=zh-cn  大家有空就看看练练。
   https://labuladong.gitee.io/algo/home/
   
-  高频即可
+  高频即可: 算法通关手册66页.pdf 后面git上提交下这个文件
 
+面经：
+1. 字节跳动广告搜索面试：
+https://maimai.cn/web/gossip_detail/33038722?egid=cd781662ab1b473cbab7325e2cd8a979&gid=33038722&operation_id=f54954f7-45c0-467f-8830-b767d2bd2bfc&share_channel=2&share_euid=uOT1tw07Tx7QzfY9xV4GtUrQANFlsVE04jOqLU6YQniVr_I9jdTFZhd_c5NR-lKs
+  
+  
 
+  
 ## 2023.9.1
 
 一定要形成积累，材料及相关的参考(博客，视频，文档，一定要记录)
