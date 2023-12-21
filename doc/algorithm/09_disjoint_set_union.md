@@ -1094,6 +1094,7 @@ lintcode: 431
 2) 对每条边进行归并，形成每个连通分量的代表元的root数组
 3) 统计root数组中：i == find(i) 的个数，有多少个，就有多少个连通分量。
 
+参考：https://blog.csdn.net/qq_21201267/article/details/107123017
 
 
 
