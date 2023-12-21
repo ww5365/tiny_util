@@ -16,7 +16,7 @@ x_parent = Find(parent, x)
 y_parent = Find(parent, y)
 
 if (x_parent != y_parent) {
-	root[x_parent] = y_parent; // 把x元素的父节点(代表元)挂到y元素的父节点上
+	parent[x_parent] = y_parent; // 把x元素的父节点(代表元)挂到y元素的父节点上
 }
 ```
 
