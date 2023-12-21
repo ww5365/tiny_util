@@ -91,6 +91,57 @@ private:
 
 };
 
+// 2023.12.21  比较正常：查找和归并的写法
+
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+
+        parent.resize(edges.size() + 1);
+        for (int i = 1; i <= edges.size(); ++i) {
+            parent[i] = i;
+        }
+
+        for (int i = 0; i < edges.size(); ++i) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+
+            int pu = findParent(u);
+            int pv = findParent(v);
+
+            if (pu == pv) {
+                return vector<int>{u, v};
+            } else {
+                merge(u, v);
+            }
+        }
+
+        return vector<int>{1,1};
+    }
+
+private:
+
+    vector<int> parent;
+
+private:
+
+    int findParent(int u) {
+        int tmp = u;
+        while (u != parent[u]) {
+            u = parent[u];
+        }
+        parent[tmp] = u;
+        return u;
+    }
+
+    void merge(int u, int v) {
+        int up = findParent(u);
+        int vp = findParent(v);
+        parent[up] = vp;
+    }
+};
+
+
 void TestRedundantConnections()
 {
     Solution s;
