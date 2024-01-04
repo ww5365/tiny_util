@@ -4,6 +4,11 @@
 ## project 准备进展
 
 
+## 2023.1.4
+1. hadoop/spark 使用，indexfeature项目中处理代码，整理
+2. nebulagrahp 使用
+3. 深挖知识图谱构建项目...
+
 
 ## 2023.9.8
 
