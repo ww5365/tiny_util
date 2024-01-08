@@ -34,6 +34,7 @@
   积分：\int_1^n  \\
   lim_{x \to \infty}  \\
   \frac{3}{5} \\
+  \widehat{f} \\
   $$
   
 * 常用公式
