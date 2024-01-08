@@ -16,3 +16,18 @@ mean Reciprocal Ranking
 
 
 
+## HITS@K
+
+
+
+
+
+参考：
+
+1. [知识图谱常用评价指标](https://blog.csdn.net/l8947943/article/details/127842338)
+2. [MRR vs MAP vs NDCG：具有排序意义的度量指标的可视化解释及使用场景分析](https://www.6aiq.com/article/1593872372312)
+
+
+
+
+
