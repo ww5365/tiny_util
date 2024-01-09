@@ -3,10 +3,11 @@ LSTM + CRF 命名体识别
 
 
 
-[条件随机场CRF](https://zhuanlan.zhihu.com/p/29989121)
-1. [LSTM+CRF序列标注](https://www.mindspore.cn/tutorials/application/zh-CN/master/nlp/sequence_labeling.html)
-2. [基于Bi-LSTM与CRF实现中文命名实体识别任务](https://developer.aliyun.com/article/1144569)
+1. [条件随机场CRF](https://zhuanlan.zhihu.com/p/29989121) ： 文中1.6节的实例计算，特征函数是假设已知的
+2. [CRF条件随机场的原理、例子、公式推导和应用](https://zhuanlan.zhihu.com/p/148813079)
+3. [LSTM+CRF序列标注](https://www.mindspore.cn/tutorials/application/zh-CN/master/nlp/sequence_labeling.html)
+4. [基于Bi-LSTM与CRF实现中文命名实体识别任务](https://developer.aliyun.com/article/1144569)
 
-3. [基于Pytorch的命名实体识别框架: github上的项目](https://github.com/wzzzd/lm_ner)
+5. [基于Pytorch的命名实体识别框架: github上的项目](https://github.com/wzzzd/lm_ner)
 
 
