@@ -10,6 +10,11 @@
 3. 深挖知识图谱构建项目...
 
 4. 走通bert + llm技术栈
+   Pytorch => 向量化模型：all-MiniLM-L6-v2 => bert => 大模型：langchain ? =》 模型加速  实际工程化
+
+5. 看看别人写的blog，他山之石
+   https://www.cnblogs.com/pinard/
+
 
 
 ## 2023.9.8
