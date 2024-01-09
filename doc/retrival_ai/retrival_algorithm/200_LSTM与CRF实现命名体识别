@@ -3,6 +3,7 @@ LSTM + CRF 命名体识别
 
 
 
+[条件随机场CRF](https://zhuanlan.zhihu.com/p/29989121)
 1. [LSTM+CRF序列标注](https://www.mindspore.cn/tutorials/application/zh-CN/master/nlp/sequence_labeling.html)
 2. [基于Bi-LSTM与CRF实现中文命名实体识别任务](https://developer.aliyun.com/article/1144569)
 
