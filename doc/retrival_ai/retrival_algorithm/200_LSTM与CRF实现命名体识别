@@ -11,7 +11,9 @@ LSTM + CRF 命名体识别
 
 5. [基于Pytorch的命名实体识别框架: github上的项目](https://github.com/wzzzd/lm_ner)
 
-6. [BiLSTM模型中CRF层的运行原理](https://lonepatient.top/2018/07/06/CRF-Layer-on-the-Top-of-BiLSTM%20--1.html) :  重点参考这个博文系列来理解cer
+6. [BiLSTM模型中CRF层的运行原理](https://lonepatient.top/2018/07/06/CRF-Layer-on-the-Top-of-BiLSTM%20--1.html) :  这个博文系列举例能让人，理解基本的识别原理
+
+7. [PyTorch Bi-LSTM+CRF NER标注代码精读](https://zhuanlan.zhihu.com/p/140479197)  :  pytorch官方实现lstm+crf解读
 
 
 
