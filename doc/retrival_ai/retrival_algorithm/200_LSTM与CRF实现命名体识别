@@ -29,6 +29,8 @@ LSTM + CRF 命名体识别
 
 篱笆网络图的最短路径问题的求解，是一种动态规划算法
 
+2. [HMM模型和Viterbi算法](https://bbs.huaweicloud.com/blogs/322757) : 这里面有个实际计算示例，可以参考，github上类似此示例的vetibi实现算法：https://github.com/shawroad/Algorithm/blob/master/0014-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0.py
+
 
 
 
