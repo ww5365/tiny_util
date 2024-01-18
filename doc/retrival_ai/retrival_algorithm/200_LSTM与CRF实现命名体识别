@@ -2,6 +2,7 @@ LSTM + CRF 命名体识别
 
 
 
+参考:
 
 1. [条件随机场CRF](https://zhuanlan.zhihu.com/p/29989121) ： 文中1.6节的实例计算，特征函数是假设已知的
 2. [CRF条件随机场的原理、例子、公式推导和应用](https://zhuanlan.zhihu.com/p/148813079)
@@ -28,11 +29,19 @@ LSTM + CRF 命名体识别
 1. (如何通俗地讲解 viterbi 算法？)[https://www.zhihu.com/question/20136144] : 路生,石溪  主要看了这两个答主的答案
 
 篱笆网络图的最短路径问题的求解，是一种动态规划算法
-
 2. [HMM模型和Viterbi算法](https://bbs.huaweicloud.com/blogs/322757) : 这里面有个实际计算示例，可以参考，github上类似此示例的viterbi实现算法：https://github.com/shawroad/Algorithm/blob/master/0014-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0.py
 
+* LSTM ： long short term memory
 
-* LSTM
+1. [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)  : lstm 基础讲解，比较经典的，其它blog好多都是基于此写的，如：https://zhuanlan.zhihu.com/p/42717426
+2. (长短时记忆网络 LSTM)[https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html] : paddle的wiki，写的比较好，重点参考之一
+
+
+
+
+
+
+
 
 
 
