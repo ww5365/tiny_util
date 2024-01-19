@@ -36,7 +36,8 @@ LSTM + CRF 命名体识别
 1. [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)  : lstm 基础讲解，比较经典的，其它blog好多都是基于此写的，如：https://zhuanlan.zhihu.com/p/42717426
 2. (长短时记忆网络 LSTM)[https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html] : paddle的wiki，写的很基础，参考之一， 基础入门
 3. (LSTM公式的按元素乘)[https://blog.csdn.net/qq_42251308/article/details/106765750] ： lstm公式中，星号运算符或圆圈中点 运算符 的含义，按位乘， element-wise multiplication 
-4. ()[]
+4. (人人都能看懂的LSTM介绍及反向传播算法推导（非常详细）)[https://zhuanlan.zhihu.com/p/83496936] : 
+   * 这篇博文中，引用了：反向传播，backpropagation,计算，https://zhuanlan.zhihu.com/p/79657669， 这里我们比较容易理解是，dJ/dw 计算反向传播的梯度时，多个样本而言，w和b是共享的，也就是说，dw影响每个样本，都有可能导致dJ损失，所以我们看到dJ/dw的计算中，包含了多个样本的影响的相加
 3. ()[]
 3. ()[]
 
