@@ -39,8 +39,10 @@ LSTM + CRF 命名体识别
 4. (人人都能看懂的LSTM介绍及反向传播算法推导（非常详细）)[https://zhuanlan.zhihu.com/p/83496936] : 
    * 这篇博文中，引用了：反向传播，backpropagation,计算，https://zhuanlan.zhihu.com/p/79657669， 这里我们比较容易理解是，dJ/dw 计算反向传播的梯度时，多个样本而言，w和b是共享的，也就是说，dw影响每个样本，都有可能导致dJ损失，所以我们看到dJ/dw的计算中，包含了多个样本的影响的相加
    *  推动了，lstm和gru的正向和反向传播 
-3. (Deriving LSTM Gradient for Backpropagation)[https://agustinus.kristia.de/techblog/2016/08/12/lstm-backprop/] ： 英文blog，推导lstm的反向传播，并用代码实例，演示
-3. ()[]
+5. (Deriving LSTM Gradient for Backpropagation)[https://agustinus.kristia.de/techblog/2016/08/12/lstm-backprop/] ： 英文blog，推导lstm的反向传播，并用代码实例，演示
+6. (手推LSTM和GRU全解(包括反向传播))[手推LSTM和GRU全解(包括反向传播)] ： 手工记录了lstm的推导，解释了为什么lstm比rnn可以缓解梯度消失问题
+
+
 
 
 
