@@ -42,6 +42,14 @@ LSTM + CRF 命名体识别
 5. (Deriving LSTM Gradient for Backpropagation)[https://agustinus.kristia.de/techblog/2016/08/12/lstm-backprop/] ： 英文blog，推导lstm的反向传播，并用代码实例，演示
 6. (手推LSTM和GRU全解(包括反向传播))[手推LSTM和GRU全解(包括反向传播)] ： 手工记录了lstm的推导，解释了为什么lstm比rnn可以缓解梯度消失问题
 
+7.()[]
+
+8.()[] 
+
+
+
+
+
 
 
 
