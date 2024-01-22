@@ -44,7 +44,7 @@ LSTM + CRF 命名体识别
 
 7.(神经网络的梯度推导与代码验证》之LSTM的前向传播和反向梯度推导 )[https://www.cnblogs.com/sumwailiu/p/13623985.html] ： 这篇博文，比较详尽的推导了lstm的反向传播公式，里面引用了rnn和bp，矩阵求导的内容（迹函数，矩阵求导及法则），有点难以理解。还有不少疑问？？
 
-8.()[] 
+8.(【重温经典】大白话讲解LSTM长短期记忆网络 如何缓解梯度消失，手把手公式推导反向传播)[https://www.bilibili.com/video/BV1qM4y1M7Nv?p=1&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6] ： 这个视频也是参考了4: https://zhuanlan.zhihu.com/p/83496936, 详细讲解了lstm
 
 
 
