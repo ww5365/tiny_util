@@ -46,6 +46,8 @@ LSTM + CRF 命名体识别
 
 8.(【重温经典】大白话讲解LSTM长短期记忆网络 如何缓解梯度消失，手把手公式推导反向传播)[https://www.bilibili.com/video/BV1qM4y1M7Nv?p=1&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6] ： 这个视频也是参考了4: https://zhuanlan.zhihu.com/p/83496936, 详细讲解了lstm
 
+9. (Simple LSTM)[https://nicodjimenez.github.io/2014/08/08/lstm.html] : 2014年blog，配合github上实现的代码理解：https://github.com/nicodjimenez/lstm/tree/master  感觉比较经典
+
 
 
 
