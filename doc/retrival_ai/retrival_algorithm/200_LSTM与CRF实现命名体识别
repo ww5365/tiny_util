@@ -46,7 +46,16 @@ LSTM + CRF 命名体识别
 
 8.(【重温经典】大白话讲解LSTM长短期记忆网络 如何缓解梯度消失，手把手公式推导反向传播)[https://www.bilibili.com/video/BV1qM4y1M7Nv?p=1&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6] ： 这个视频也是参考了4: https://zhuanlan.zhihu.com/p/83496936, 详细讲解了lstm
 
-9. (Simple LSTM)[https://nicodjimenez.github.io/2014/08/08/lstm.html] : 2014年blog，配合github上实现的代码理解：https://github.com/nicodjimenez/lstm/tree/master  感觉比较经典
+9. (Simple LSTM)[https://nicodjimenez.github.io/2014/08/08/lstm.html] : 2014年blog，配合github上实现的代码理解：https://github.com/nicodjimenez/lstm/tree/master  感觉比较经典。
+   有一个中文版本的blog：https://www.cnblogs.com/liujshi/p/6159007.html
+   扩展版本的lstm代码： https://github.com/fmscole/backpropagation/tree/master/LSTM
+
+
+10.(浅谈交叉熵及其求导过程)[ https://zhuanlan.zhihu.com/p/99923080]: 我脑残的又补了下softmax的求导
+
+11. (LSTM反向传播详解Part1)[https://blog.csdn.net/csuyhb/article/details/99546576] ： 这个手推lstm的反向传播，也可以，可以和参考8，b站的结合起来看，配套的代码，没有下载到源码：
+
+12. https://github.com/zenny-chen/Machine-Learning-resource-collection/tree/master?tab=readme-ov-file
 
 
 
