@@ -57,6 +57,26 @@ LSTM + CRF 命名体识别
 
 12. https://github.com/zenny-chen/Machine-Learning-resource-collection/tree/master?tab=readme-ov-file
 
+13. (RNN、LSTM反向传播推导详解)[https://blog.csdn.net/qq_29762941/article/details/89294252] : 吴恩达的深度学习作业时，进行rnn和lstm反向传播的求导。
+
+向量/向量：求导， 雅克比矩阵， 可参考：https://www.cnblogs.com/sumwailiu/p/13398121.html#chain
+Y=AX+b Z=f(Y)  Y对A：向量对矩阵求导？: https://www.cnblogs.com/crazypigf/p/17286929.html
+
+克罗内克积： 圆圈中叉， https://blog.csdn.net/qq_38406029/article/details/115752582     
+哈达玛积： 圆圈中点 
+
+
+吴恩达的深度学习课程， 黄海广的整理 ， (吴恩达deeplearning.ai)[https://zhuanlan.zhihu.com/p/41161643] ： 主要是学习笔记，有163的公开课连接，五门课程介绍非常清晰。 
+https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个参考文档，第1个参考文档中有课程练习代码。
+
+吴恩达的course上的三门大课： 
+2022年最新版本的ML课程
+深度学习课程
+生成式AI课程
+
+13()[]
+13()[]
+
 
 
 
