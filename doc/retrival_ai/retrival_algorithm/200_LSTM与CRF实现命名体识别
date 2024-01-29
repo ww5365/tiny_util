@@ -82,13 +82,24 @@ https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个�
 
 1. 关键词提取（Keyword extraction）、关键短语提取（Keyphrase extraction）工具yake ： https://codenews.cc/view/370
    Keyphrase Extraction 一个快速从中文里抽取关键短语的工具 ： https://cloud.tencent.com/developer/article/1957803
+
 2. 基于TextRank提取关键词、关键短语、摘要 ： https://www.cnblogs.com/bymo/p/8462120.html
+
+3. 关键词提取和摘要算法TextRank详解与实战 ： https://zhuanlan.zhihu.com/p/126733456
+4。 使用 jieba 实现关键词提取 ： https://aistudio.baidu.com/projectdetail/2210377?channelType=0&channel=0  ： 这个是paddle的公开项目的参考文章 
+
+其中3.4结合起来看，能基本理解了pagerank和TextRank的算法原理，
+
+
 3. 分词： 
 spacy 
 stanza   
 Polyglot 
 
 4. keyBERT：    https://blog.csdn.net/mingzai624/article/details/129012015    这个里面是关键词提取的各个方法的综述
+
+
+
 
 
 
