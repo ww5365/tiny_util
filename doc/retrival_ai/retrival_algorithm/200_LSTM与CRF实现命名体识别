@@ -91,9 +91,9 @@ https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个�
 
 3. 关键词提取和摘要算法TextRank详解与实战 ： https://zhuanlan.zhihu.com/p/126733456
 4. 使用 jieba 实现关键词提取 ： https://aistudio.baidu.com/projectdetail/2210377?channelType=0&channel=0  ： 这个是paddle的公开项目的参考文章 
-5. Python使用TextRank算法提取关键词 : https://www.leyeah.com/article/python-uses-textrank-algorithm-extract-keywords-720739
+5. * Python使用TextRank算法提取关键词 : https://www.leyeah.com/article/python-uses-textrank-algorithm-extract-keywords-720739 * 
 
-其中3.4结合起来看，能基本理解了pagerank和TextRank的算法原理，5有部分示例和代码的理解，这个不错。
+其中3.4结合起来看，能基本理解了pagerank和TextRank的算法原理，5有部分示例和代码的理解，这个不错，示例代码使用spaCy来实现。
 
 
 3. 分词： 
