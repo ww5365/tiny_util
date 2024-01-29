@@ -83,8 +83,8 @@ https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个�
 1. 关键词提取（Keyword extraction）、关键短语提取（Keyphrase extraction）工具yake ： https://codenews.cc/view/370
    Keyphrase Extraction 一个快速从中文里抽取关键短语的工具 ： https://cloud.tencent.com/developer/article/1957803
 
-   Rake、Yake、Keybert 和 Textrank
-
+   Rake、Yake、Keybert 和 Textrank  
+   iac
 
 
 2. 基于TextRank提取关键词、关键短语、摘要 ： https://www.cnblogs.com/bymo/p/8462120.html
@@ -96,10 +96,11 @@ https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个�
 其中3.4结合起来看，能基本理解了pagerank和TextRank的算法原理，5有部分示例和代码的理解，这个不错，示例代码使用spaCy来实现。
 
 
-6. 分词： 
-spacy 
+6. 实现工具： 
+spacy ： 可能要选择用的实现框架
 stanza   
 Polyglot 
+iac ： 百度的实现，中文支持，好像支持的语言较多
 
 7. keyBERT：    https://blog.csdn.net/mingzai624/article/details/129012015    这个里面是关键词提取的各个方法的综述
 
