@@ -53,7 +53,7 @@ LSTM + CRF 命名体识别
 
 10.(浅谈交叉熵及其求导过程)[ https://zhuanlan.zhihu.com/p/99923080]: 我脑残的又补了下softmax的求导
 
-11. (LSTM反向传播详解Part1)[https://blog.csdn.net/csuyhb/article/details/99546576] ： 这个手推lstm的反向传播，也可以，可以和参考8，b站的结合起来看，配套的代码，没有下载到源码：
+11. (LSTM反向传播详解Part1)[https://blog.csdn.net/csuyhb/article/details/99546576] ： 这个手推lstm的反向传播，也可以，可以和参考8，b站的结合起来看，配套的代码，没有下载到源码 (Part3源码下载地址)[https://download.csdn.net/download/csuyhb/11645281?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ECTRLIST%7EPaid-1-11645281-blog-123267676.235%5Ev43%5Epc_blog_bottom_relevance_base4&depth_1-utm_source=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ECTRLIST%7EPaid-1-11645281-blog-123267676.235%5Ev43%5Epc_blog_bottom_relevance_base4&utm_relevant_index=1]
 
 12. https://github.com/zenny-chen/Machine-Learning-resource-collection/tree/master?tab=readme-ov-file
 
@@ -75,7 +75,12 @@ https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个�
 生成式AI课程
 
 
-13()[]
+14(LSTM内部结构及前向传播原理——LSTM从零实现系列(1))[https://forecast.blog.csdn.net/article/details/127958263?spm=1001.2014.3001.5502&ydreferer=aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmd3b2hlbm1haTEvYXJ0aWNsZS9kZXRhaWxzLzEyODE5NDcyOA%3D%3D]
+这个也是一个系列
+
+源码：？  博主没提供github
+
+参考了这个吗？ LSTM无框架源码实现 ： https://github.com/ww5365/LSTM/tree/master/LSTM%E6%97%A0%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0
 
 
 ## 关键词/关键短语提取
@@ -108,6 +113,10 @@ iac ： 百度的实现，中文支持，好像支持的语言较多
 
 
 
+
+## interview较好的项目资料
+
+(ML-NLP)[https://github.com/NLP-LOVE/ML-NLP]
 
 
 
