@@ -55,6 +55,9 @@ LSTM + CRF 命名体识别
 
 11. (LSTM反向传播详解Part1)[https://blog.csdn.net/csuyhb/article/details/99546576] ： 这个手推lstm的反向传播，也可以，可以和参考8，b站的结合起来看，配套的代码，没有下载到源码 (Part3源码下载地址)[https://download.csdn.net/download/csuyhb/11645281?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ECTRLIST%7EPaid-1-11645281-blog-123267676.235%5Ev43%5Epc_blog_bottom_relevance_base4&depth_1-utm_source=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ECTRLIST%7EPaid-1-11645281-blog-123267676.235%5Ev43%5Epc_blog_bottom_relevance_base4&utm_relevant_index=1]
 
+
+
+
 12. https://github.com/zenny-chen/Machine-Learning-resource-collection/tree/master?tab=readme-ov-file
 
 13. (RNN、LSTM反向传播推导详解)[https://blog.csdn.net/qq_29762941/article/details/89294252] : 吴恩达的深度学习作业时，进行rnn和lstm反向传播的求导。
