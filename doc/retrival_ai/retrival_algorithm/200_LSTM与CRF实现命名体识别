@@ -98,7 +98,16 @@ https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个�
 
 2. 基于TextRank提取关键词、关键短语、摘要 ： https://www.cnblogs.com/bymo/p/8462120.html
 
-3. 关键词提取和摘要算法TextRank详解与实战 ： https://zhuanlan.zhihu.com/p/126733456
+3. 关键词提取和摘要算法TextRank详解与实战 ： https://zhuanlan.zhihu.com/p/126733456   ： * 重点参考这篇文章 *
+
+ * ？ 为什么要加入d这个阻尼系数  ：   新网站的网页没有被投票，这样多轮迭代计算后，价值s，可能是0， 不符合我们预期
+
+*  状态转移矩阵
+
+
+
+
+
 4. 使用 jieba 实现关键词提取 ： https://aistudio.baidu.com/projectdetail/2210377?channelType=0&channel=0  ： 这个是paddle的公开项目的参考文章 
 5. * Python使用TextRank算法提取关键词 : https://www.leyeah.com/article/python-uses-textrank-algorithm-extract-keywords-720739 * 
 
