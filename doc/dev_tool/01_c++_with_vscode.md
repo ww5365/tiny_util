@@ -427,3 +427,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     设置→用户→拓展→WeCode C/C++→Codebase › Generator: Search Paths 包含头文件路径列表，可以是src根目录
 包含头文件找到include路径：
     Ctrl + Shift + P执行命令→wecode c++: generate compile_commands.json file→弹窗让选择文件夹
+
+
+
+
+#### trust 插件使用
+
+https:../km/blogs/details/12410891
