@@ -142,19 +142,14 @@ $$
 
 
 
-
-
-
-
-
-
-
-
-
 ###  参考
 
 1. [Typora markdown 博客小助手](http://3ms.huawei.com/km/blogs/details/10209767)
 2. [LaTex 插入数据公式](https://blog.csdn.net/happyday_d/article/details/83715440)
+
+
+## mermaid的使用
+
 
 
 
