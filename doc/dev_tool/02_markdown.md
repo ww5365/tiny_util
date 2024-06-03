@@ -151,6 +151,43 @@ $$
 ## mermaid的使用
 
 
+```mermaid
+sequenceDiagram
+actor A as <ACTOR><br>ACTOR_TODO
+participant B as <DOMAIN SERVICE><br>ITactiesDomainService
+participant C as <DOMAIN SERVICE><br>TactiesDomainService
+participant D as <DOMAIN SERVICE><br>IWorkFlowDomainService
+participant E as <PUBLIC SERVICE> <br> 公服
+
+
+A ->> + B:  驳回申请修改 <br>rejectModification
+B ->> + C: TODO<br>getUserByrole
+C -->> - B: TODO<br>List<UserVO>
+B ->> + D: TODO<br>completeTaskAndCurrentUser
+D ->> + D: TODO<br>completeTask
+D -->> - D: TODO<br>void
+D ->> + D: TODO<br>getInstanceDetails
+D -->> - D: TODO<br>List<BpmTaskDetailVo>
+D -->> - B: TODO<br>void
+
+loop 循环处理
+    D ->> +E : TODO<br> 查询
+    E -->>-D : TODO<br> 解析编码
+end
+    
+opt 选择    
+B ->> + C: TODO<br>getUserByrole
+C -->> - B: TODO<br>List<UserVO>
+end
+
+alt 两路选择
+B -->> - A: TODO<br>String
+else
+B -->> B: TODO<br>String
+end
+
+```
+
 
 
 
