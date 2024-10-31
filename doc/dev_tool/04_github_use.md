@@ -14,7 +14,7 @@ git clone或push时报错， currently recommended modes of authentication.需�
 
 git remote set-url origin  https://【你的token】@github.com/ww5365/tiny_util.git
 
-
+![参考](https://blog.csdn.net/leviopku/article/details/126727575)
 
 ## 
 
