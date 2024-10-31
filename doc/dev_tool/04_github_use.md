@@ -1,6 +1,23 @@
 # git 使用
 
 
+## 连接和认证
+
+
+### 认证问题
+
+1. Git私有仓库时报错Authentication failed
+
+git clone或push时报错， currently recommended modes of authentication.需要重新设置token
+
+设置命令如下：
+
+git remote set-url origin  https://【你的token】@github.com/ww5365/tiny_util.git
+
+
+
+## 
+
 -- 一
 git stash: 暂时贮存本地文件/某个特定文件
 
