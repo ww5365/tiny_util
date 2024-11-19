@@ -16,6 +16,8 @@
 ctrl + v  ： 列模式和复制粘贴冲突 ？
 
 
+ctrl + ，-》 vim -》Vim: Use Ctrl Keys 选择 启用vim的ctrl键
+重新设置vim的ctrl键绑定：ctrl + k ctrl + s  -》 vim -》把原来的ctrl + v 改成 ctrl + alt + v
 
 
 ## Idea中的快捷键
