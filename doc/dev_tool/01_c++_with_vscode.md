@@ -414,7 +414,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ```shell
 1,$s#/usr/local/bin/g++#g++#g
-1,$s#/opt/huawei/wangwei/GeoCodingRankEngine_dev#D:/workspace/my_codehub/MapGeoCodingRankEngine_dev#g
+1,$s#/opt/***/wangwei/GeoCodingRankEngine_dev#D:/workspace/my_codehub/MapGeoCodingRankEngine_dev#g
 
 ```
 
