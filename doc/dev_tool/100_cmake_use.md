@@ -226,6 +226,8 @@ set_target_properties(libthulac PROPERTIES
         IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/knowledgegraph/include/libthulac.so)
 # libthulac 静态库的位置在 src/knowledgegraph/include/libthulac.so PROPERTIES 是用于设置一系列属性的关键词。IMPORTED_LOCATION 是属性名，用于指定库的实际文件路径。
 
+# 尽管 .so 通常表示动态库，但在某些情况下（例如工具链的特殊规则或特定的伪静态库），可以通过 add_library(... STATIC IMPORTED) 和 IMPORTED_LOCATION 设置，将其作为静态库使用。然而，这种用法需要开发者对链接目标的性质非常了解，并确认其适用性.
+
 ```
 
 * 补充add_library使用
