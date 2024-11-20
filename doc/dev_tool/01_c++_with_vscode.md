@@ -21,6 +21,11 @@
 - Visual Studio IntelliCode
   是一组AI辅助功能，可通过上下文智能感知，参数完成，代码格式和样式规则推断等功能提高开发人员的工作效率。
 - code runer
+
+- vs中vim
+ctrl + v ： 列模式和复制粘贴冲突 ？怎么解决：
+1). ctrl + ，-》 vim -》Vim: Use Ctrl Keys 选择 启用vim的ctrl键
+2). 重新设置vim的ctrl键绑定：ctrl + k ctrl + s -》 vim -》把原来的ctrl + v 改成 ctrl + alt + v
   
   
 ## 3.vscode 配置
