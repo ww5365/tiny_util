@@ -219,6 +219,13 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)  # 动态库
 add_executable(demo demo.cpp) # demo为要生成的可执行文件名字，demo.cpp是要编译的文件
 add_library(hello SHARED ${SOURCE_1}) #生成一个动态链接库libhello.so, 使用#{SOURCE_1}中的代码
 add_library(common STATIC util.cpp) # 生成静态库，libcommon.a为名字 默认状态生成静态库
+
+
+add_library(libthulac STATIC IMPORTED )  # IMPORTED 表明这是一个外部库，不会参与当前项目的编译，只用于链接已有的库文件。
+set_target_properties(libthulac PROPERTIES
+        IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/knowledgegraph/include/libthulac.so)
+# libthulac 静态库的位置在 src/knowledgegraph/include/libthulac.so PROPERTIES 是用于设置一系列属性的关键词。IMPORTED_LOCATION 是属性名，用于指定库的实际文件路径。
+
 ```
 
 * 补充add_library使用
