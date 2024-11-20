@@ -393,9 +393,11 @@ cmd.exe /d /c "C:\\mingw64\\bin\\g++.exe -g D:\\Wecode-Tutorial\\tutorial\\main.
 
 ### 5.1 最常用的快捷键（持续补充）
 
-ctrl+shift+p：命令面板，所有的操作都列在里面
-ctrl+p： 全局查找文件
-ctrl+t： 全局查找符号，包括函数等
+- ctrl+shift+p：命令面板，所有的操作都列在里面
+- ctrl+p： 全局查找文件
+- ctrl+t： 全局查找符号，包括函数等
+
+更多可参考：https://github.com/ww5365/tiny_util/blob/master/doc/dev_tool/02_short_key.md
 
 ### 5.2 关于跳转
 
