@@ -138,6 +138,7 @@ make  //根据生成makefile文件，编译程序。
   ```
   
 ## 4 CMakeList.txt使用示例
+
 ### 4.1 项目使用cmake生成配置
 
 ``` shell
@@ -161,9 +162,9 @@ cmake --build . --target  rankengine_all   # 编译生成目标
 
 
 
-###  1.4.2 cmakelist.txt 的语法 
+## 5 cmakelist.txt 的语法 
 
-#### 1.4.2.1 常用变量
+### 5.1 常用变量
 ##### 预定义变量
 
 ```cmake
@@ -196,7 +197,7 @@ ${A} # ${A}使用变量A,如上面${PROJECT_NAME}
 message(STATUS ${A}) #输出消息 内容为变量A的值
 ```
 
-#### 1.4.2.2 常用命令
+### 5.2 常用命令
 
 * Minimum version of CMake required to build this project
 cmake_minimum_required(VERSION 3.0.0)
@@ -456,7 +457,7 @@ include(CPack)
 
 
 
-#### 1.4.2.3 简单的示例
+### 5.3 简单的示例
 
 * 生成一个动态库并链接到main的可执行文件
 
