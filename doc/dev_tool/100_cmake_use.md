@@ -1,6 +1,6 @@
 # cmake 使用介绍
 
-## 1.1 cmake介绍
+## 1 cmake介绍
 CMake主要是编写CMakeLists.txt文件，然后用cmake命令将CMakeLists.txt文件转化为make所需要的makefile文件，最后用make命令编译源码生成可执行程序或共享库（so(shared object)）。
 
 cmake  指向CMakeLists.txt所在的目录，例如cmake .. 表示CMakeLists.txt在当前目录的上一级目录。
@@ -15,18 +15,16 @@ make  //根据生成makefile文件，编译程序。
 
 
 
-## 1.2 安装cmake及vs中插件
+## 2 安装cmake及vs中插件
 
-### 1.2.1 win64 安装
+### 2.1 win64 安装
 
 * 下载地址： [cmake下载地址](https://cmake.org/download/)
 * win64 下载： cmake-3.21.2-windows-x86_64.msi
 * 安装完成后，设置下安装路径到系统环境变量中
 * camke -version   //查看安装是否成功
 
-### 1.2.2 vs插件的安装和配置cmake
-
-
+### 2.2 vs插件的安装和配置cmake
 
 1. vscode的应用市场安装如下插件：
 
@@ -45,11 +43,7 @@ make  //根据生成makefile文件，编译程序。
    ctrl + shift + p -> cmake -> edit cmake cache 可以修改camke的路径，camke编译产出中间文件放在build目录下。
    文件>首选项>设置>搜索cmake: generator： 设置Makefile类型，设置为”MinGw Makefiles”或者” Unix Makefiles”，这相当于运行cmake –G “MinGw Makefiles” 
 
-   
-
-
-
-## 1.3 cmake编译
+## 2.3 cmake编译
 
 * vs插件中快捷按钮
 
@@ -143,8 +137,8 @@ make  //根据生成makefile文件，编译程序。
   }
   ```
   
-## 1.4 CMakeList.txt使用
-### 1.4.1 项目使用cmake生成配置
+## 4 CMakeList.txt使用示例
+### 4.1 项目使用cmake生成配置
 
 ``` shell
 # configure the project and generate a native build system: 
