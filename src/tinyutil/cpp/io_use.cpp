@@ -103,6 +103,7 @@ void cin_input_use() {
     /*
     1、它string库函数下，而非前面的istream流，所有调用前要在前面加入#include<string>
     2、方法也不是遇到空白字符(tab, space, enter(当结束符不是默认enter时))就结束输入的，且会丢弃最后一个换行符
+        3. 输入流对象，例如 std::cin, std::ifstream, 或 std::istringstream。
     */
 
     cout <<"input string : abcde " <<endl;
@@ -114,12 +115,16 @@ void cin_input_use() {
     cout << "getline str result: " << str2 <<endl;  // 输出abc
     cout << "getline str ch7 : " << ch7 <<endl; // 输出：e  说明d 已经被抛弃了
 
+    
+    // 将字符串反序列化成vector
+    std::string input = "Apple,Orange,Banana";
+    std::istringstream iss(input);
+    std::string fruit;
 
+    while (std::getline(iss, fruit, ',')) {
+        std::cout << fruit << std::endl;
+    }
 }
-
-
-
-
 
 
 
