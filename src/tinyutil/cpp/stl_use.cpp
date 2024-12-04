@@ -12,7 +12,10 @@
 #include <vector>
 #include <deque>
 #include <algorithm>
+#include <sstream>
+#include <iterator>
 #include "../inc/stl_use.h"
+
 using namespace std;
 
 /*
@@ -332,13 +335,17 @@ void stl_use::map_use() {
     pair<int, string> pc;
     pc = make_pair(4, "ni");  //使用make_pair初始化:pair
     pc.first = 3;
+    pair<int, string> pd (4, "aa");
 
     map<int, string> ma;
     ma.insert(pa);
     ma.insert(pb);
     ma.insert(pc);
+    // 插入重复的key值，会怎么样？ 覆盖? 未报错，未覆盖，保留pd的值
+    ma.insert(pd);
     ma.insert(make_pair(4, "hao"));
 
+    cout << "construct map: " << endl;
     for (auto e : ma) {
         cout << e.first << ":" << e.second << endl;
     }
