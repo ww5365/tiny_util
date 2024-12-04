@@ -8,14 +8,13 @@
  */
 
 #include "../inc/com_use.h"
-#include "../inc/time_cal.h"
+#include "../inc/time_use.h"
 #include <ctime>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 #include <sys/time.h>
 #include <unistd.h>
-
 #include <chrono>
 
 using std::cout;
@@ -38,8 +37,10 @@ void time_use_test(){
     utc_to_localtime();
     accurate_time();
     Timer timer;
+    Timer2 timer2;
     sleep_time();
     cout << "the program run time: " << timer.elapse() << " us "<<std::endl;
+       cout << "the program run time timer2: " << timer2.elapse() << " ms "<<std::endl;
 }
 
 void chrono_use() {
@@ -286,7 +287,7 @@ void sleep_time(){
     tp.tv_nsec =  1000; //1000ns
 
     cout << "I will sleep 2s!!" << std::endl;
-    nanosleep(&tp, nullptr);
+    // nanosleep(&tp, nullptr);
     cout << "nanosleep over!!" << std::endl;
 
 }
