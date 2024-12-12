@@ -16,7 +16,36 @@
 #include <iterator>
 #include "../inc/stl_use.h"
 
+#include <functional>
+
 using namespace std;
+
+
+/*
+* hash 使用  顺序容器
+*/
+void stl_use::hash_use() {
+
+    std::string str = "example_string";
+
+    // 使用 std::hash 计算哈希值
+    std::hash<std::string> hashFn;
+    std::size_t hash_value = hashFn(str);
+
+    // 输出结果
+    std::cout << "Hash value for \"" << str << "\": " << hash_value << std::endl;
+
+    size_t sizeValue = 18446744073709551615ULL; // 示例：超出 int64_t 的值，强转后存入int64_t，再读取后强转成size_t。
+    int64_t intValue = (int64_t)sizeValue; // 模拟存入图数据库
+    size_t  sizeValue2 = (size_t) intValue; // 模拟从图数据读取后，再强转为size_t
+    std::cout << "Hash value: " << sizeValue << " qiangzhuan: "  << intValue << " read qiangzhuan: "<< sizeValue2 << std::endl;
+
+
+    std::cout << "max int64: " << std::numeric_limits<int64_t>::max() << std::endl;
+    std::cout << "max int64: " << std::numeric_limits<uint64_t>::max() << std::endl;
+}
+
+
 
 /*
  * @brief 定义结构体，测试set用法
