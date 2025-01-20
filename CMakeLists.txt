@@ -11,7 +11,7 @@ project(mytest)
 project(tinyUtil VERSION 0.1.0)
 message(STATUS, "project name:${PROJECT_NAME}, source_dir:${PROJECT_SOURCE_DIR}, binary_dir: ${tinyUtil_BINARY_DIR}")
 
-message(STATUS, "project current source dir:${CMAKE_CURRENT_SOURCE_DIR}")  #这个是和CMakeList.txt同层的目录
+message(STATUS, "project current source dir:${CMAKE_CURRENT_SOURCE_DIR}")  #这个是和CMakeList.txt同层的目录, 进入到子目录的cmakeList后，这个值更新为子目录的路径
 
 include(CTest)
 enable_testing()
@@ -37,7 +37,8 @@ include_directories(${PROJECT_SOURCE_DIR}/src/primer/inc)
 ## 只需要下载git上下载nlohmann库,把头文件加载cmakelist就可以使用
 include_directories(${PROJECT_SOURCE_DIR}/third-party/json/single_include)
 
-## 扫描 ./src/cpp 下的所有源文件，并将文件名存入DIR_SRCS中
+## 扫描 ./src/cpp 下的所有源文件，并将文件名存入DIR_SRCS中, 不会递归包含子目录下的源文件
+## aux_source_directory用于搜集在指定目录下所有的源文件的文件名（不包括头文件），将输出结果列表储存在指定的变量中。
 aux_source_directory(./src/tinyUtil/cpp DIR_SRCS)
 
 #aux_source_directory(./src/leetcode/cpp LEETCODE_DIR_SRCS)
