@@ -35,7 +35,14 @@ include_directories(${PROJECT_SOURCE_DIR}/src/leetcode/inc)
 include_directories(${PROJECT_SOURCE_DIR}/src/primer/inc)
 
 ## 只需要下载git上下载nlohmann库,把头文件加载cmakelist就可以使用
-include_directories(${PROJECT_SOURCE_DIR}/third-party/json/single_include)
+include(FetchContent)  
+FetchContent_Declare(json  
+        URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
+FetchContent_MakeAvailable(json)  
+
+message(STATUS "nlohmann_json path2: " ${nlohmann_json_SOURCE_DIR})
+  
+# include_directories(${nlohmann_json_SOURCE_DIR}/include)  # 通过target_link_libraries来保证头文件库的路径正确
 
 ## 扫描 ./src/cpp 下的所有源文件，并将文件名存入DIR_SRCS中, 不会递归包含子目录下的源文件
 ## aux_source_directory用于搜集在指定目录下所有的源文件的文件名（不包括头文件），将输出结果列表储存在指定的变量中。
@@ -58,7 +65,7 @@ add_executable(${PROJECT_NAME} ./src/tinyUtil.cpp ${DIR_SRCS})
 # 配置了子目录，子目录中的文件打成了库文件 子目录leetcode中代码都打包到库：libLeetCode.a 中
 
 ##############
-target_link_libraries(${PROJECT_NAME} LeetCode Primer)
+target_link_libraries(${PROJECT_NAME} LeetCode Primer nlohmann_json::nlohmann_json) # nlohmann_json仅是个头文件库不会有so或.a，这里实际上只是确保头文件路径正确
 
 
 message(STATUS "STD_LIBRARY: ${STD_LIBRARY}")
