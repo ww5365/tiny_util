@@ -817,6 +817,34 @@ TARGET_LINK_LIBRARIES(deep_matcher catboostmodel)
 
 ```
 
+### 快速引入json库：nlohmann_json
+
+``` cmake
+include(FetchContent)  
+FetchContent_Declare(json  
+        URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)  
+FetchContent_MakeAvailable(json)  
+
+# 头文件 ： ${nlohmann_json_SOURCE_DIR} 工具FetchContent下载tar.xz包后，加压的路径
+target_include_directories(json_demo PUBLIC
+  ${nlohmann_json_SOURCE_DIR}/include)
+
+# 链接库  
+target_link_libraries(json_demo PRIVATE nlohmann_json::nlohmann_json)
+
+```
+
+使用FetchContent下载的压缩包存放路径：${nlohmann_json_SOURCE_DIR}
+
+nlohmann_json::nlohmann_json 不是静态库或动态库，而是一个*头文件库（Header-Only Library）*
+
+它的所有功能都通过头文件实现，无需编译为静态库（.a）或动态库（.so/.dll）。
+使用时，CMake 通过 target_link_libraries 的形式链接到目标项目中，但实际上只是确保头文件路径正确。
+
+存放路径：默认为 <CMAKE_BINARY_DIR>/_deps/nlohmann_json-src/，主头文件路径是 include/nlohmann/json.hpp。
+
+
+
 
 
 
