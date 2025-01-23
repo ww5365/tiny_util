@@ -37,7 +37,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/primer/inc)
 ## 只需要下载git上下载nlohmann库,把头文件加载cmakelist就可以使用
 include(FetchContent)  
 FetchContent_Declare(json  
-        URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
+        URL https://cmc-hgh-artifactory.cmc.tools.huawei.com/artifactory/opensource_general/JSON-for-Modern-C++/3.10.1/package/json-3.10.1.zip)
 FetchContent_MakeAvailable(json)  
 
 message(STATUS "nlohmann_json path2: " ${nlohmann_json_SOURCE_DIR})
