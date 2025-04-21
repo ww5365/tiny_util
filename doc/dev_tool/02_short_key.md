@@ -13,7 +13,7 @@
 |ctrl +  windows + pagedown | 将当前编辑器移动下下一个编辑器组 | 自定义的，ctrl+k s 搜vim 来配置的|
 
 
-## vs中vim的快捷键
+## 1.2 vs中vim的快捷键
 ctrl + v  ： 列模式和复制粘贴冲突 ？
 
 
@@ -21,10 +21,15 @@ ctrl + ，-》 vim -》Vim: Use Ctrl Keys 选择 启用vim的ctrl键
 重新设置vim的ctrl键绑定：ctrl + k ctrl + s  -》 vim -》把原来的ctrl + v 改成 ctrl + alt + v
 
 
-## Idea中的快捷键
+## 1.3 Idea中的快捷键
 
 ctrl + alt + <-  :  上次查看代码的位置
 Ctrl+E: 最近打开的文件列表
+
+
+
+## 1.4 Clion中的快捷键
+
 
 
 
