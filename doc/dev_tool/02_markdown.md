@@ -22,6 +22,36 @@
 * 常用希腊字母表
 
  
+字母	Markdown/LaTeX	显示结果
+Γ	$\Gamma$	$\Gamma$
+Δ	$\Delta$	$\Delta$
+Θ	$\Theta$	$\Theta$
+Λ	$\Lambda$	$\Lambda$
+Ξ	$\Xi$	$\Xi$
+Π	$\Pi$	$\Pi$
+Σ	$\Sigma$	$\Sigma$
+Φ	$\Phi$	$\Phi$
+Ψ	$\Psi$	$\Psi$
+α	$\alpha$	$\alpha$
+β	$\beta$	$\beta$
+γ	$\gamma$	$\gamma$
+δ	$\delta$	$\delta$
+ε	$\epsilon$	$\epsilon$
+ζ	$\zeta$	$\zeta$
+η	$\eta$	$\eta$
+θ	$\theta$	$\theta$
+λ	$\lambda$	$\lambda$
+μ	$\mu$	$\mu$
+ξ	$\xi$	$\xi$
+π	$\pi$	$\pi$
+ρ	$\rho$	$\rho$
+σ	$\sigma$	$\sigma$
+τ	$\tau$	$\tau$
+φ	$\phi$	$\phi$
+χ	$\chi$	$\chi$
+ψ	$\psi$	$\psi$
+ω	$\omega$	$\omega$
+
 
 * 基本公式
   $$
